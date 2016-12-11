@@ -1,0 +1,27 @@
+main: com.andrei1058.ageofempire.Main
+name: Age-Of-Empire
+version: 1.0
+author: andrei1058
+description: parkergames
+website: http://andrei1058.com
+
+commands:
+  setup:
+    description: Main setup command
+    permission: aoe.setup
+    aliases: [s]
+  leave:
+    description: Leave the game
+    permission: aoe.leave
+  build:
+    description: Builds settings
+    permission: aoe.setup
+
+
+permissions:
+  aoe.setup:
+    default: op
+    description: Allows to use setup commands
+  aoe.leave:
+    default: true
+    description: Allows to leave the game
