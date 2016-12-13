@@ -1,7 +1,10 @@
 package com.andrei1058.ageofempire.commands;
 
+import com.andrei1058.ageofempire.configuration.Building;
+import com.andrei1058.ageofempire.locations.Cuboid;
 import com.andrei1058.ageofempire.locations.StructureBuilder;
 import org.bukkit.Bukkit;
+import org.bukkit.Location;
 import org.bukkit.WorldCreator;
 import org.bukkit.block.Block;
 import org.bukkit.command.Command;
@@ -13,8 +16,8 @@ import org.bukkit.entity.Player;
 import static com.andrei1058.ageofempire.Main.SETUP;
 
 public class Builds implements CommandExecutor {
-    public static Block loc1 = null;
-    public static Block loc2 = null;
+    public static Location loc1 = null;
+    public static Location loc2 = null;
     @Override
     public boolean onCommand(CommandSender s, Command c, String st, String[] args) {
         if (s instanceof ConsoleCommandSender) return true;
@@ -30,7 +33,7 @@ public class Builds implements CommandExecutor {
             } else if (args.length==1){
                 switch (args[0].toLowerCase()){
                     case "pos1":
-                        loc1 = p.getLocation().getBlock();
+                        loc1 = p.getLocation();
                         p.sendMessage("Pos selected!");
                         if (loc2 != null){
                             p.sendMessage("§eSave your building with /build save <name>");
@@ -39,7 +42,7 @@ public class Builds implements CommandExecutor {
                         break;
                     case "pos2":
                         p.sendMessage("Pos selected!");
-                        loc2 = p.getLocation().getBlock();
+                        loc2 = p.getLocation();
                         if (loc1 != null){
                             p.sendMessage("§eSave your building with /build save <name>");
                             p.sendMessage("§cP.s. Stay on the middle of the building when you do it!");
@@ -61,8 +64,10 @@ public class Builds implements CommandExecutor {
                         if (loc1 == null && loc2 == null){
                             p.sendMessage("§ePlease select pos1 and pos2 first!");
                         } else {
-                            StructureBuilder bu = new StructureBuilder();
-                            bu.save(args[1], bu.getStructure(loc1, loc2));
+                            //StructureBuilder bu = new StructureBuilder();
+                            //Building.save(args[1], bu.getStructure(loc1, loc2));
+                            Cuboid cub = new Cuboid(loc1, loc2);
+                            Building.save(args[1], cub.getBlocks());
                             p.sendMessage(args[1]+" saved!");
                             loc1 = null;
                             loc2 = null;

@@ -65,6 +65,7 @@ public class Main extends JavaPlugin {
     public static int yellow_age = 1;
     public static int red_age = 1;
     public static long pvp_assault = 0;
+
     @Override
     public void onEnable() {
         plugin = this;
@@ -89,6 +90,7 @@ public class Main extends JavaPlugin {
         pm.registerEvents(new PlayerQuitListener(), this);
         pm.registerEvents(new BlockPlaceListener(), this);
         pm.registerEvents(new ItemConsumeListener(), this);
+        pm.registerEvents(new PlayerInteractEntityListener(), this);
         plugin.getServer().getMessenger().registerOutgoingPluginChannel(plugin, "BungeeCord");
     }
 }

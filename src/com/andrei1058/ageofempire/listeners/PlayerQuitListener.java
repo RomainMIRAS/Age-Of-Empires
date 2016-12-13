@@ -37,7 +37,7 @@ public class PlayerQuitListener implements Listener {
         } else if (redPlayers.contains(p.getUniqueId())){
             redPlayers.remove(p.getUniqueId());
         }
-
+        checkWinner();
     }
 
     public static void checkWinner(){

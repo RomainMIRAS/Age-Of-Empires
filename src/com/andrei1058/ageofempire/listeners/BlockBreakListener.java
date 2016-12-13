@@ -12,9 +12,6 @@ import java.util.UUID;
 import static com.andrei1058.ageofempire.Main.*;
 import static com.andrei1058.ageofempire.configuration.Messages.getMsg;
 
-/**
- * Created by andrei1058 on 05/12/2016.
- */
 public class BlockBreakListener implements Listener {
 
     private static ArrayList<UUID> woodAnnounced = new ArrayList();
