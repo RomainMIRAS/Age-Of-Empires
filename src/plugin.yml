@@ -13,10 +13,6 @@ commands:
   leave:
     description: Leave the game
     permission: aoe.leave
-  build:
-    description: Builds settings
-    permission: aoe.setup
-
 
 permissions:
   aoe.setup:

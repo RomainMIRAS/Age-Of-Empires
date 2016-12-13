@@ -1,6 +1,5 @@
 package com.andrei1058.ageofempire;
 
-import com.andrei1058.ageofempire.commands.Builds;
 import com.andrei1058.ageofempire.commands.Setup;
 import com.andrei1058.ageofempire.configuration.Leave;
 import com.andrei1058.ageofempire.game.Status;
@@ -75,7 +74,6 @@ public class Main extends JavaPlugin {
         setupSettings();
         getCommand("setup").setExecutor(new Setup());
         getCommand("leave").setExecutor(new Leave());
-        getCommand("build").setExecutor(new Builds());
         PluginManager pm = Bukkit.getPluginManager();
         pm.registerEvents(new PlayerJoinListener(), this);
         pm.registerEvents(new PlayerInteractListener(), this);
