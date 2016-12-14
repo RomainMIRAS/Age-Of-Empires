@@ -2,7 +2,9 @@ package com.andrei1058.ageofempire.runnables;
 
 import com.andrei1058.ageofempire.configuration.Settings;
 import com.andrei1058.ageofempire.game.Scoreboard;
+import com.andrei1058.ageofempire.game.Vote;
 import org.bukkit.Bukkit;
+import org.bukkit.Sound;
 import org.bukkit.scheduler.BukkitRunnable;
 
 import java.util.UUID;
@@ -16,8 +18,10 @@ public class Game extends BukkitRunnable {
     public void run() {
         secPlayed++;
         pvp_assault-=1000;
-        if (secPlayed == 10){
+        if (secPlayed == 2){
             for (UUID u : help){
+                Bukkit.getPlayer(u).sendMessage(getMsg("help.start-guide"));
+                Bukkit.getPlayer(u).sendMessage(getMsg("help.start-buildings"));
                 Bukkit.getPlayer(u).sendMessage(getMsg("help.start-resources"));
             }
         }
@@ -26,6 +30,9 @@ public class Game extends BukkitRunnable {
                 Bukkit.broadcastMessage(getMsg("pvp-on"));
                 pvp = true;
                 pvp_assault = 60000* Settings.load().getInt("countdowns.assault");
+                for (UUID u : players){
+                    Bukkit.getPlayer(u).playSound(Bukkit.getPlayer(u).getLocation(), Sound.WOLF_BARK, 1, 1);
+                }
             } else {
                 if (!assualt){
                     assualt = true;
@@ -34,5 +41,7 @@ public class Game extends BukkitRunnable {
             }
         }
         Scoreboard.Refresh();
+
+        Vote.votes.forEach(Vote::stuff);
     }
 }

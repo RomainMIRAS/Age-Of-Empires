@@ -13,10 +13,12 @@ import org.bukkit.GameMode;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
-import org.bukkit.inventory.meta.LeatherArmorMeta;
 import org.bukkit.scheduler.BukkitRunnable;
 
 import static com.andrei1058.ageofempire.Main.*;
+import static com.andrei1058.ageofempire.Misc.forumPaper;
+import static com.andrei1058.ageofempire.Misc.leatherArmor;
+import static com.andrei1058.ageofempire.Misc.slotlocked;
 import static com.andrei1058.ageofempire.configuration.Messages.getMsg;
 
 public class PreGame extends BukkitRunnable {
@@ -103,6 +105,9 @@ public class PreGame extends BukkitRunnable {
                 }
                 p.getInventory().addItem(new ItemStack(Material.STONE_PICKAXE));
                 p.getInventory().addItem(new ItemStack(Material.STONE_AXE));
+                p.getInventory().setItem(8, slotlocked());
+                p.getInventory().setItem(7, slotlocked());
+                p.getInventory().setItem(6, forumPaper());
             }
             STATUS = Status.PLAYING;
             new Game().runTaskTimer(plugin, 0, 20);
@@ -121,13 +126,5 @@ public class PreGame extends BukkitRunnable {
             }
             Main.pvp_assault = 60000*Settings.load().getInt("countdowns.pvp");
         }
-    }
-
-    public static ItemStack leatherArmor(Material material, Color color){
-        ItemStack i = new ItemStack(material);
-        LeatherArmorMeta meta = (LeatherArmorMeta) i.getItemMeta();
-        meta.setColor(color);
-        i.setItemMeta(meta);
-        return i;
     }
 }

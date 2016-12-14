@@ -68,6 +68,7 @@ public class BlockBreakListener implements Listener {
             if (e.getBlock().getType() == Material.MELON_BLOCK){
                 return;
             }
+            e.getPlayer().sendMessage(getMsg("cant-break"));
             e.setCancelled(true);
         }
     }

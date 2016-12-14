@@ -1,5 +1,6 @@
-package com.andrei1058.ageofempire.configuration;
+package com.andrei1058.ageofempire.commands;
 
+import com.andrei1058.ageofempire.configuration.Settings;
 import com.google.common.io.ByteArrayDataOutput;
 import com.google.common.io.ByteStreams;
 import org.bukkit.command.Command;

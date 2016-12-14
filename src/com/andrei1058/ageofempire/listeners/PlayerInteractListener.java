@@ -2,8 +2,10 @@ package com.andrei1058.ageofempire.listeners;
 
 import com.andrei1058.ageofempire.configuration.Settings;
 import com.andrei1058.ageofempire.game.Status;
+import com.andrei1058.ageofempire.game.Vote;
 import com.google.common.io.ByteArrayDataOutput;
 import com.google.common.io.ByteStreams;
+import com.sun.org.apache.bcel.internal.generic.IF_ACMPEQ;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
@@ -14,11 +16,10 @@ import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
-import java.util.ArrayList;
-import java.util.UUID;
-
 import static com.andrei1058.ageofempire.Main.*;
+import static com.andrei1058.ageofempire.Misc.slotlocked;
 import static com.andrei1058.ageofempire.configuration.Messages.getMsg;
+import static com.andrei1058.ageofempire.game.Buildings.vote_in_progress;
 
 public class PlayerInteractListener implements Listener {
     @EventHandler
@@ -195,6 +196,48 @@ public class PlayerInteractListener implements Listener {
                             }
                         } else {
                             e.getPlayer().sendMessage(getMsg("team-choosing.unbalanced-teams"));
+                        }
+                    }
+                }
+            }
+        } else if (STATUS == Status.PLAYING){
+            if ((e.getAction() == Action.RIGHT_CLICK_AIR) || (e.getAction() == Action.RIGHT_CLICK_BLOCK)){
+                if (e.getPlayer().getItemInHand().getType() == Material.PAPER){
+                    if (e.getPlayer().getItemInHand().getItemMeta().getDisplayName() != null){
+                        if (e.getPlayer().getItemInHand().getItemMeta().getDisplayName().equalsIgnoreCase(getMsg("forum-paper"))){
+                            if (bluePlayers.contains(e.getPlayer().getUniqueId())){
+                                e.getPlayer().openInventory(PlayerInteractEntityListener.forum(blue_team));
+                            } else if (greenPlayers.contains(e.getPlayer().getUniqueId())){
+                                e.getPlayer().openInventory(PlayerInteractEntityListener.forum(green_team));
+                            } else if (yellowPlayers.contains(e.getPlayer().getUniqueId())){
+                                e.getPlayer().openInventory(PlayerInteractEntityListener.forum(yellow_team));
+                            } else if (redPlayers.contains(e.getPlayer().getUniqueId())){
+                                e.getPlayer().openInventory(PlayerInteractEntityListener.forum(red_team));
+                            }
+                        }
+                    }
+                } else if (e.getPlayer().getItemInHand().getType() == Material.SLIME_BALL){
+                    if (e.getPlayer().getItemInHand().getItemMeta().getDisplayName().equalsIgnoreCase(getMsg("validate-vote"))) {
+                        if (bluePlayers.contains(e.getPlayer().getUniqueId())){
+                            if (vote_in_progress.contains(blue_team)){
+                                Vote.byTeam(blue_team).addVote();
+                                e.getPlayer().getInventory().setItem(8, slotlocked());
+                            }
+                        } else if (greenPlayers.contains(e.getPlayer().getUniqueId())){
+                            if (vote_in_progress.contains(green_team)){
+                                Vote.byTeam(green_team).addVote();
+                                e.getPlayer().getInventory().setItem(8, slotlocked());
+                            }
+                        } else if (yellowPlayers.contains(e.getPlayer().getUniqueId())){
+                            if (vote_in_progress.contains(yellow_team)){
+                                Vote.byTeam(yellow_team).addVote();
+                                e.getPlayer().getInventory().setItem(8, slotlocked());
+                            }
+                        } else if (redPlayers.contains(e.getPlayer().getUniqueId())){
+                            if (vote_in_progress.contains(red_team)){
+                                Vote.byTeam(red_team).addVote();
+                                e.getPlayer().getInventory().setItem(8, slotlocked());
+                            }
                         }
                     }
                 }

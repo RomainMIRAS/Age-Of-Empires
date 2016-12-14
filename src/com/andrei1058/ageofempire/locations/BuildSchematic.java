@@ -10,11 +10,54 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.*;
 
+import static com.andrei1058.ageofempire.Main.choosenMap;
 import static com.andrei1058.ageofempire.Main.plugin;
+import static com.andrei1058.ageofempire.configuration.Messages.getMsg;
 
-public class SchematicMethods {
+public class BuildSchematic {
 
-    public static void pasteSchematic(World world, Location loc, Schematic schematic) {
+    public UUID player;
+    public String team;
+    public String chat_build_name;
+    public String build_cfg_name;
+    public World world = Bukkit.getWorld(choosenMap);
+    private static HashMap<UUID, BuildSchematic> buildSchematicHashMap = new HashMap<>();
+    public static ArrayList<UUID> teaamarray;
+
+    public BuildSchematic(UUID Player, String team, String chat_build_name, String build_cfg_name, ArrayList<UUID> teamarray){
+        this.player = Player;
+        this.team = team;
+        this.chat_build_name = chat_build_name;
+        this.build_cfg_name = build_cfg_name;
+        this.teaamarray = teamarray;
+        buildSchematicHashMap.put(Player, this);
+    }
+
+    public void placed(Location loc) {
+        //verifica daca regiunea e buna
+        //daca da anunta teammate si incepe build
+        for (Region r : Region.getList()) {
+            if (r.check()) {
+                for (UUID u : teaamarray) {
+                    Bukkit.getPlayer(u).sendMessage(getMsg("build-started").replace("{player}", Bukkit.getPlayer(player).getName()).replace("{building}", chat_build_name));
+                }
+                try {
+                    pasteSchematic(loc, loadSchematic(new File("plugins/Age-Of-Empire/schematics/test.schematic")));
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            } else {
+                //you can't place it right here
+            }
+
+        }
+    }
+
+    public static HashMap<UUID, BuildSchematic> getUUID(){
+        return buildSchematicHashMap;
+    }
+
+    public void pasteSchematic(Location loc, Schematic schematic) {
         short[] blocks = schematic.getBlocks();
         byte[] blockData = schematic.getData();
 

@@ -1,7 +1,7 @@
 package com.andrei1058.ageofempire;
 
 import com.andrei1058.ageofempire.commands.Setup;
-import com.andrei1058.ageofempire.configuration.Leave;
+import com.andrei1058.ageofempire.commands.Leave;
 import com.andrei1058.ageofempire.game.Status;
 import com.andrei1058.ageofempire.listeners.*;
 import org.bukkit.Bukkit;
@@ -27,43 +27,19 @@ public class Main extends JavaPlugin {
     public static ArrayList<UUID> players = new ArrayList<>();
     public static String choosenMap = "";
     public static boolean SETUP = false;
-    public static Status STATUS = Status.LOBBY;
-    public static boolean pvp = false;
-    public static boolean assualt = false;
-    public static int max_in_team = 6;
-    public static int min_players = 6;
-    public static int lobby_time = 60;
-    public static int restart_time = 11;
-    public static int pregame_time = 20;
-    public static int blue_gold = 100;
-    public static int green_gold = 100;
-    public static int yellow_gold = 100;
-    public static int red_gold = 100;
-    public static int blue_wood = 150;
-    public static int green_wood = 150;
-    public static int yellow_wood = 150;
-    public static int red_wood = 150;
-    public static int blue_stone = 200;
-    public static int green_stone = 200;
-    public static int yellow_stone = 200;
-    public static int red_stone = 200;
-    public static int blue_small_plots = 5;
-    public static int green_small_plots = 5;
-    public static int yellow_small_plots = 5;
-    public static int red_small_plots = 5;
-    public static int blue_medium_plots = 3;
-    public static int green_medium_plots = 3;
-    public static int yellow_medium_plots = 3;
-    public static int red_medium_plots = 3;
-    public static int blue_large_plots = 2;
-    public static int green_large_plots = 2;
-    public static int yellow_large_plots = 2;
-    public static int red_large_plots = 2;
-    public static int blue_age = 1;
-    public static int green_age = 1;
-    public static int yellow_age = 1;
-    public static int red_age = 1;
+    public static Status STATUS = Status.RESTARTING;
+    public static boolean pvp = false, assualt = false;
+    public static int max_in_team = 6, min_players = 6;
+    public static int lobby_time = 60, restart_time = 11, pregame_time = 20;
+    public static int blue_gold = 100, green_gold = 100, yellow_gold = 100, red_gold = 100;
+    public static int blue_wood = 100, green_wood = 100, yellow_wood = 100, red_wood = 100;
+    public static int blue_stone = 100, green_stone = 100, yellow_stone = 100, red_stone = 100;
+    public static int blue_small_plots = 5, green_small_plots = 5, yellow_small_plots = 5, red_small_plots = 5;
+    public static int blue_medium_plots = 3, green_medium_plots = 3, yellow_medium_plots = 3, red_medium_plots = 3;
+    public static int blue_large_plots = 2, green_large_plots = 2, yellow_large_plots = 2, red_large_plots = 2;
+    public static int blue_age = 1, green_age = 1, yellow_age = 1, red_age = 1;
     public static long pvp_assault = 0;
+    public static String blue_team = "Blue", green_team = "Green", yellow_team = "Yellow", red_team = "Red";
 
     @Override
     public void onEnable() {
@@ -89,6 +65,7 @@ public class Main extends JavaPlugin {
         pm.registerEvents(new BlockPlaceListener(), this);
         pm.registerEvents(new ItemConsumeListener(), this);
         pm.registerEvents(new PlayerInteractEntityListener(), this);
+        pm.registerEvents(new ChatListener(), this);
         plugin.getServer().getMessenger().registerOutgoingPluginChannel(plugin, "BungeeCord");
     }
 }

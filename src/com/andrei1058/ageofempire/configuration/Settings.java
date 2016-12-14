@@ -1,5 +1,6 @@
 package com.andrei1058.ageofempire.configuration;
 
+import com.andrei1058.ageofempire.game.Status;
 import com.andrei1058.ageofempire.locations.Locations;
 import com.andrei1058.ageofempire.nms.RegisterNMS;
 import com.andrei1058.ageofempire.nms.VillagerNMS;
@@ -98,6 +99,7 @@ public class Settings {
                 plugin.getLogger().warning("There is a problem with your plots :(");
             }
         }
+        STATUS = Status.LOBBY;
     }
 
     public static void addMap(String name){

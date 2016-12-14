@@ -1,20 +1,13 @@
 package com.andrei1058.ageofempire.listeners;
 
-import com.andrei1058.ageofempire.locations.Locations;
-import com.andrei1058.ageofempire.locations.Schematic;
-import com.andrei1058.ageofempire.locations.SchematicMethods;
-import org.bukkit.Bukkit;
-import org.bukkit.Location;
+import com.andrei1058.ageofempire.locations.BuildSchematic;
 import org.bukkit.Material;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.BlockPlaceEvent;
 
-import java.io.File;
-import java.io.IOException;
-
-import static com.andrei1058.ageofempire.Main.SETUP;
-import static com.andrei1058.ageofempire.Main.choosenMap;
+import static com.andrei1058.ageofempire.Main.*;
+import static com.andrei1058.ageofempire.game.Buildings.construct_in_inv;
 
 public class BlockPlaceListener implements Listener {
 
@@ -23,14 +16,19 @@ public class BlockPlaceListener implements Listener {
         if (SETUP) return;
         //momentan asa, dupa sunt si cuburi de la shop de aprobat
         if (e.getBlock().getType() == Material.SPRUCE_DOOR){
-            Schematic schematic = null;
+            if (construct_in_inv.containsKey(e.getPlayer().getUniqueId())){
+                if (BuildSchematic.getUUID().containsKey(e.getPlayer().getUniqueId())){
+                    BuildSchematic.getUUID().get(e.getPlayer().getUniqueId()).placed(e.getBlock().getLocation());
+                }
+            }
+            /*Schematic schematic = null;
             try {
-                schematic = SchematicMethods.loadSchematic(new File("plugins/Age-Of-Empire/schematics/test.schematic"));
+                schematic = BuildSchematic.loadSchematic(new File("plugins/Age-Of-Empire/schematics/test.schematic"));
             } catch (IOException e1) {
                 e1.printStackTrace();
             }
             Location loc = Locations.getLoc("Plots."+choosenMap+".Blue.Small.1");
-            SchematicMethods.pasteSchematic(Bukkit.getWorld(choosenMap), loc.add(-8, -1, -8), schematic);
+            BuildSchematic.pasteSchematic(Bukkit.getWorld(choosenMap), loc.add(-8, -1, -8), schematic);*/
         }
         e.setCancelled(true);
     }
