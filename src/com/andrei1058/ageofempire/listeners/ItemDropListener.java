@@ -23,7 +23,7 @@ public class ItemDropListener implements Listener {
         if (STATUS != Status.PLAYING){
             e.setCancelled(true);
         }
-        if (e.getItemDrop().getItemStack().getType() == Material.SPRUCE_DOOR){
+        if (e.getItemDrop().getItemStack().getType() == Material.SPRUCE_DOOR_ITEM){
             if (construct_in_inv.containsKey(e.getPlayer().getUniqueId())){
                 switch (construct_in_inv.get(e.getPlayer().getUniqueId())){
                     case forge:
@@ -45,7 +45,9 @@ public class ItemDropListener implements Listener {
                             }
                         }
                         construct_in_inv.remove(e.getPlayer().getUniqueId());
-                        BuildSchematic.getUUID().remove(e.getPlayer().getUniqueId());
+                        if (BuildSchematic.getUUID(e.getPlayer().getUniqueId()) != null) {
+                            BuildSchematic.getUUID(e.getPlayer().getUniqueId()).end();
+                        }
                         break;
                 }
             }

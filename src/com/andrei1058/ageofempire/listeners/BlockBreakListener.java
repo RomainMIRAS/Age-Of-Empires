@@ -21,7 +21,7 @@ public class BlockBreakListener implements Listener {
     @EventHandler
     public void b(BlockBreakEvent e){
         if (SETUP) return;
-        if (e.getBlock().getType() == Material.WOOD || e.getBlock().getData() == 1){
+        if (e.getBlock().getType() == Material.LOG && e.getBlock().getData() == 13 || e.getBlock().getType() == Material.LOG_2 && e.getBlock().getData() == 13){ //6
             e.setCancelled(true);
             e.getBlock().setType(Material.AIR);
             if (help.contains(e.getPlayer().getUniqueId())){

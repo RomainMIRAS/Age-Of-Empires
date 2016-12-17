@@ -5,13 +5,16 @@ import com.andrei1058.ageofempire.configuration.Settings;
 import com.andrei1058.ageofempire.game.Action;
 import com.andrei1058.ageofempire.game.Scoreboard;
 import com.andrei1058.ageofempire.game.Status;
+import com.andrei1058.ageofempire.locations.Hologram;
 import com.andrei1058.ageofempire.locations.Locations;
 import com.andrei1058.ageofempire.nms.VillagerNMS;
 import org.bukkit.Bukkit;
 import org.bukkit.Color;
 import org.bukkit.GameMode;
 import org.bukkit.Material;
+import org.bukkit.entity.ArmorStand;
 import org.bukkit.entity.Player;
+import org.bukkit.entity.Villager;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.scheduler.BukkitRunnable;
 
@@ -113,16 +116,24 @@ public class PreGame extends BukkitRunnable {
             new Game().runTaskTimer(plugin, 0, 20);
             Scoreboard.register();
             if (!bluePlayers.isEmpty()){
-                VillagerNMS.spawnVillager(Locations.getLoc("Forums."+choosenMap+".Blue"), getMsg("villagers.forum"), 5000f);
+                blue_villager = VillagerNMS.spawnVillager(Locations.getLoc("Forums."+choosenMap+".Blue"), 2000);
+                new Hologram(Locations.getLoc("Forums."+choosenMap+".Blue").clone().add(0,+1,0), getMsg("villagers.forum"));
+                new Hologram(Locations.getLoc("Forums."+choosenMap+".Blue").clone(), "§b§lBuy buildings for your kingdom");
             }
             if (!greenPlayers.isEmpty()){
-                VillagerNMS.spawnVillager(Locations.getLoc("Forums."+choosenMap+".Green"), getMsg("villagers.forum"), 5000f);
+                green_villager = VillagerNMS.spawnVillager(Locations.getLoc("Forums."+choosenMap+".Green"), 2000);
+                new Hologram(Locations.getLoc("Forums."+choosenMap+".Green").clone().add(0,+1,0), getMsg("villagers.forum"));
+                new Hologram(Locations.getLoc("Forums."+choosenMap+".Green").clone(), "§b§lBuy buildings for your kingdom");
             }
             if (!yellowPlayers.isEmpty()){
-                VillagerNMS.spawnVillager(Locations.getLoc("Forums."+choosenMap+".Yellow"), getMsg("villagers.forum"), 5000f);
+                yellow_villager = VillagerNMS.spawnVillager(Locations.getLoc("Forums."+choosenMap+".Yellow"), 2000);
+                new Hologram(Locations.getLoc("Forums."+choosenMap+".Yellow").clone().add(0,+1,0), getMsg("villagers.forum"));
+                new Hologram(Locations.getLoc("Forums."+choosenMap+".Yellow").clone(), "§b§lBuy buildings for your kingdom");
             }
             if (!redPlayers.isEmpty()){
-                VillagerNMS.spawnVillager(Locations.getLoc("Forums."+choosenMap+".Red"), getMsg("villagers.forum"), 5000f);
+                red_villager = VillagerNMS.spawnVillager(Locations.getLoc("Forums."+choosenMap+".Red"), 2000);
+                new Hologram(Locations.getLoc("Forums."+choosenMap+".Red").clone().add(0,+1,0), getMsg("villagers.forum"));
+                new Hologram(Locations.getLoc("Forums."+choosenMap+".Red").clone(), "§b§lBuy buildings for your kingdom");
             }
             Main.pvp_assault = 60000*Settings.load().getInt("countdowns.pvp");
         }

@@ -38,9 +38,9 @@ public class Vote {
         this.wood = wood;
         this.stone = stone;
         this.BUILD_NAME = BUILD_NAME;
-        this.votes.add(this);
+        votes.add(this);
         this.teamname = teamname;
-        this.votes_by_team.put(teamname, this);
+        votes_by_team.put(teamname, this);
         vote_in_progress.add(teamname);
         for (UUID u : team){
             if (help.contains(u)){
@@ -74,6 +74,7 @@ public class Vote {
                 switch (build){
                     case age_string:
                         //wait 1 until change age
+                        //arraylist cu teamname age_change ca sa nu poata vota iar age in timpul minutului de countdown
                         break;
                     default:
                         construct_in_inv.put(requester, BUILD_NAME);
@@ -88,7 +89,7 @@ public class Vote {
                 }
             }
             votes_by_team.remove(teamname, this);
-            this.votes.remove(this);
+            votes.remove(this);
             vote_in_progress.remove(teamname);
             return;
         }

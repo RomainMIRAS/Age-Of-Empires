@@ -1,7 +1,9 @@
 package com.andrei1058.ageofempire.locations;
 
+import com.andrei1058.ageofempire.nms.VillagerNMS;
 import org.bukkit.*;
 import org.bukkit.block.Block;
+import org.bukkit.entity.Villager;
 import org.bukkit.scheduler.BukkitRunnable;
 import org.jnbt.*;
 
@@ -13,6 +15,8 @@ import java.util.*;
 import static com.andrei1058.ageofempire.Main.choosenMap;
 import static com.andrei1058.ageofempire.Main.plugin;
 import static com.andrei1058.ageofempire.configuration.Messages.getMsg;
+import static com.andrei1058.ageofempire.game.Buildings.addBuild;
+import static com.andrei1058.ageofempire.game.Buildings.construct_in_inv;
 
 public class BuildSchematic {
 
@@ -23,8 +27,9 @@ public class BuildSchematic {
     public World world = Bukkit.getWorld(choosenMap);
     private static HashMap<UUID, BuildSchematic> buildSchematicHashMap = new HashMap<>();
     public static ArrayList<UUID> teaamarray;
+    public Location villager;
 
-    public BuildSchematic(UUID Player, String team, String chat_build_name, String build_cfg_name, ArrayList<UUID> teamarray){
+    public BuildSchematic(UUID Player, String team, String chat_build_name, String build_cfg_name, ArrayList<UUID> teamarray) {
         this.player = Player;
         this.team = team;
         this.chat_build_name = chat_build_name;
@@ -33,28 +38,27 @@ public class BuildSchematic {
         buildSchematicHashMap.put(Player, this);
     }
 
-    public void placed(Location loc) {
-        //verifica daca regiunea e buna
-        //daca da anunta teammate si incepe build
-        for (Region r : Region.getList()) {
-            if (r.check()) {
-                for (UUID u : teaamarray) {
-                    Bukkit.getPlayer(u).sendMessage(getMsg("build-started").replace("{player}", Bukkit.getPlayer(player).getName()).replace("{building}", chat_build_name));
-                }
-                try {
-                    pasteSchematic(loc, loadSchematic(new File("plugins/Age-Of-Empire/schematics/test.schematic")));
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            } else {
-                //you can't place it right here
-            }
-
+    public void ok(Location center) {
+        if (!construct_in_inv.containsKey(player)) return;
+        addBuild(build_cfg_name, team);
+        for (UUID u : teaamarray) {
+            Bukkit.getPlayer(u).sendMessage(getMsg("build-started").replace("{player}", Bukkit.getPlayer(player).getName()).replace("{building}", chat_build_name));
+        }
+        try {
+            pasteSchematic(center, loadSchematic(new File("plugins/Age-Of-Empire/schematics/" + construct_in_inv.get(player) + ".schematic")));
+            end();
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 
-    public static HashMap<UUID, BuildSchematic> getUUID(){
-        return buildSchematicHashMap;
+    public void end() {
+        buildSchematicHashMap.remove(player, this);
+        construct_in_inv.remove(player);
+    }
+
+    public static BuildSchematic getUUID(UUID player) {
+        return buildSchematicHashMap.get(player);
     }
 
     public void pasteSchematic(Location loc, Schematic schematic) {
@@ -77,6 +81,7 @@ public class BuildSchematic {
                         Location l = new Location(world, x + loc.getX(), y + loc.getY(), z + loc.getZ());
                         locatii.add(l);
                         iduri.put(l, blocks[index]);
+                        if(blocks[index] == 169){ villager = l.clone().add(0, +1, 0); }
                         data.put(l, blockData[index]);
                     }
                 }
@@ -93,39 +98,38 @@ public class BuildSchematic {
                 return Double.compare(block1.getY(), block2.getY());
             }
         });
+        final int size = locatii.size();
+        final int blocksPerTime = 1;
+        final long delay = 0L;
 
-        Bukkit.getScheduler().runTaskLater(plugin, new Runnable() {
-            @Override
-            public void run() {
-                final int size = locatii.size();
-                final int blocksPerTime = 1;
-                final long delay = 0L;
-
-                if (size > 0) {
-                    new BukkitRunnable() {
-                        int index = 0;
-
-                        @Override
-                        public void run() {
-                            for (int i = 0; i < blocksPerTime; i++) {
-                                if (index < size) {
-                                    Location loc = orderedLocation.get(index);
-                                    Block block = loc.getBlock();
-                                    block.setType(Material.getMaterial(iduri.get(loc)));
-                                    block.setData(data.get(loc));
-                                    block.getState().update(true);
-                                    block.getWorld().playEffect(block.getLocation(), Effect.STEP_SOUND, block.getTypeId());
-                                    index += 1;
-                                } else {
-                                    this.cancel();
-                                    return;
-                                }
+        if (size > 0) {
+            new BukkitRunnable() {
+                int index = 0;
+                @Override
+                public void run() {
+                    for (int i = 0; i < blocksPerTime; i++) {
+                        if (index < size) {
+                            Location loc = orderedLocation.get(index);
+                            Block block = loc.getBlock();
+                            block.setType(Material.getMaterial(iduri.get(loc)));
+                            block.setData(data.get(loc));
+                            block.getState().update(true);
+                            block.getWorld().playEffect(block.getLocation(), Effect.STEP_SOUND, block.getTypeId());
+                            index += 1;
+                        } else {
+                            this.cancel();
+                            for (UUID u : teaamarray){
+                                Bukkit.getPlayer(u).sendMessage(getMsg("built-success").replace("{building}", chat_build_name));
                             }
+                            Villager v = VillagerNMS.spawnVillager(villager, 500);
+                            v.setMaxHealth(500);
+                            v.setHealth(500);
+                            return;
                         }
-                    }.runTaskTimer(plugin, 0, delay);
+                    }
                 }
-            }
-        }, 100L);
+            }.runTaskTimer(plugin, 0, delay);
+        }
     }
 
     public static Schematic loadSchematic(File file) throws IOException {

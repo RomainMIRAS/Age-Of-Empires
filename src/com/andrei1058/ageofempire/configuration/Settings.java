@@ -1,7 +1,7 @@
 package com.andrei1058.ageofempire.configuration;
-
 import com.andrei1058.ageofempire.game.Status;
 import com.andrei1058.ageofempire.locations.Locations;
+import com.andrei1058.ageofempire.locations.Region;
 import com.andrei1058.ageofempire.nms.RegisterNMS;
 import com.andrei1058.ageofempire.nms.VillagerNMS;
 import net.minecraft.server.v1_8_R3.EntityVillager;
@@ -42,9 +42,9 @@ public class Settings {
         yml.addDefault("countdowns.pvp", 14);
         yml.addDefault("countdowns.assault", 12);
         yml.addDefault("restart-cmd", "restart");
-        yml.addDefault("plot-radius.small", 8);
-        yml.addDefault("plot-radius.medium", 11);
-        yml.addDefault("plot-radius.large", 15);
+        yml.addDefault("plot-radius.small", 9);
+        yml.addDefault("plot-radius.medium", 12);
+        yml.addDefault("plot-radius.large", 16);
         yml.addDefault("Arenas", list);
         yml.options().copyDefaults(true);
         try {
@@ -68,12 +68,8 @@ public class Settings {
             Bukkit.getScheduler().runTaskLater(plugin, new Runnable() {
                 @Override
                 public void run() {
-                    for (Entity e : Locations.getLoc("Spawns.Lobby").getWorld().getEntities()){
-                        e.remove();
-                    }
-                    for (Entity e : Bukkit.getWorld(choosenMap).getEntities()){
-                        e.remove();
-                    }
+                    Locations.getLoc("Spawns.Lobby").getWorld().getEntities().forEach(Entity::remove);
+                    Bukkit.getWorld(choosenMap).getEntities().forEach(Entity::remove);
                     Bukkit.getWorld(choosenMap).setGameRuleValue("keepInventory", "false");
                     Bukkit.getWorld(choosenMap).setAutoSave(false);
                 }
@@ -100,6 +96,12 @@ public class Settings {
             }
         }
         STATUS = Status.LOBBY;
+        Bukkit.getScheduler().runTaskLater(plugin, new Runnable() {
+            @Override
+            public void run() {
+                Region.loadRegions();
+            }
+        }, 200);
     }
 
     public static void addMap(String name){

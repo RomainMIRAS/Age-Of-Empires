@@ -4,17 +4,59 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.UUID;
 
+import static com.andrei1058.ageofempire.Main.*;
+
 public class Buildings {
     public static ArrayList<String> vote_in_progress = new ArrayList<>();
-    public static ArrayList<String> built_forge = new ArrayList<>();
     public static HashMap<UUID, String> construct_in_inv = new HashMap<>();
-    public static final String forge = "FORGE", mill = "MILL", stone_mine = "STONE_MINE", gold_mine = "GOLDMINE", sawmill = "SAWMILL",
-    workshop = "workshop", market = "MARKET", kennel = "KENNEL", sabotage = "SABOTAGE", age_string = "age";
+    public static ArrayList blue_built = new ArrayList();
+    public static ArrayList green_built = new ArrayList();
+    public static ArrayList yellow_built = new ArrayList();
+    public static ArrayList red_built = new ArrayList();
 
-    public static boolean hasBuild(ArrayList<String> build, String team){
-        if (build.contains(team)){
-            return true;
+    public static final String forge = "FORGE", mill = "MILL", stone_mine = "STONE_MINE", gold_mine = "GOLD_MINE", sawmill = "SAWMILL",
+    workshop = "WORKSHOP", market = "MARKET", kennel = "KENNEL", sabotage = "SABOTAGE_WORKSHOP", age_string = "age";
+
+    public static boolean hasBuild(String build, String team){
+        switch (team){
+            case blue_team:
+                if (blue_built.contains(build)){
+                    return true;
+                }
+                break;
+            case green_team:
+                if (green_built.contains(build)){
+                    return true;
+                }
+                break;
+            case yellow_team:
+                if (yellow_built.contains(build)){
+                    return true;
+                }
+                break;
+            case red_team:
+                if (red_built.contains(build)){
+                    return true;
+                }
+                break;
         }
         return false;
+    }
+
+    public static void addBuild(String build, String team){
+        switch (team){
+            case blue_team:
+                blue_built.add(build);
+                break;
+            case green_team:
+                green_built.add(build);
+                break;
+            case yellow_team:
+                yellow_built.add(build);
+                break;
+            case red_team:
+                red_built.add(build);
+                break;
+        }
     }
 }

@@ -5,6 +5,7 @@ import com.andrei1058.ageofempire.commands.Leave;
 import com.andrei1058.ageofempire.game.Status;
 import com.andrei1058.ageofempire.listeners.*;
 import org.bukkit.Bukkit;
+import org.bukkit.entity.Villager;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -34,12 +35,13 @@ public class Main extends JavaPlugin {
     public static int blue_gold = 100, green_gold = 100, yellow_gold = 100, red_gold = 100;
     public static int blue_wood = 100, green_wood = 100, yellow_wood = 100, red_wood = 100;
     public static int blue_stone = 100, green_stone = 100, yellow_stone = 100, red_stone = 100;
-    public static int blue_small_plots = 5, green_small_plots = 5, yellow_small_plots = 5, red_small_plots = 5;
-    public static int blue_medium_plots = 3, green_medium_plots = 3, yellow_medium_plots = 3, red_medium_plots = 3;
-    public static int blue_large_plots = 2, green_large_plots = 2, yellow_large_plots = 2, red_large_plots = 2;
+    public static int blue_small_plots = 0, green_small_plots = 0, yellow_small_plots = 0, red_small_plots = 0;
+    public static int blue_medium_plots = 0, green_medium_plots = 0, yellow_medium_plots = 0, red_medium_plots = 0;
+    public static int blue_large_plots = 0, green_large_plots = 0, yellow_large_plots = 0, red_large_plots = 0;
     public static int blue_age = 1, green_age = 1, yellow_age = 1, red_age = 1;
     public static long pvp_assault = 0;
-    public static String blue_team = "Blue", green_team = "Green", yellow_team = "Yellow", red_team = "Red";
+    public static final String blue_team = "Blue", green_team = "Green", yellow_team = "Yellow", red_team = "Red";
+    public static Villager blue_villager, green_villager, yellow_villager, red_villager;
 
     @Override
     public void onEnable() {
@@ -66,6 +68,7 @@ public class Main extends JavaPlugin {
         pm.registerEvents(new ItemConsumeListener(), this);
         pm.registerEvents(new PlayerInteractEntityListener(), this);
         pm.registerEvents(new ChatListener(), this);
+        pm.registerEvents(new PlayerArmorStandManipulateListener(), this);
         plugin.getServer().getMessenger().registerOutgoingPluginChannel(plugin, "BungeeCord");
     }
 }

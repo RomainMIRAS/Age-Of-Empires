@@ -10,6 +10,7 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerQuitEvent;
 
 import static com.andrei1058.ageofempire.Main.*;
+import static com.andrei1058.ageofempire.game.Buildings.construct_in_inv;
 
 public class PlayerQuitListener implements Listener {
 
@@ -37,6 +38,7 @@ public class PlayerQuitListener implements Listener {
         } else if (redPlayers.contains(p.getUniqueId())){
             redPlayers.remove(p.getUniqueId());
         }
+        construct_in_inv.remove(p.getUniqueId());
         checkWinner();
     }
 

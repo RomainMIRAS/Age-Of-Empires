@@ -1,13 +1,14 @@
 package com.andrei1058.ageofempire.listeners;
 
 import com.andrei1058.ageofempire.game.Status;
-import com.andrei1058.ageofempire.locations.Locations;
 import org.bukkit.entity.EntityType;
+import org.bukkit.entity.Villager;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 
 import static com.andrei1058.ageofempire.Main.*;
+import static com.andrei1058.ageofempire.configuration.Messages.getMsg;
 
 public class EntityDamageByEntityListener implements Listener {
 
@@ -21,34 +22,39 @@ public class EntityDamageByEntityListener implements Listener {
             e.setCancelled(true);
         }
         if (e.getEntity().getType() == EntityType.VILLAGER && e.getDamager().getType() == EntityType.PLAYER){
+            Villager v = (Villager) e.getEntity();
             if (!assualt){
                 e.setCancelled(true);
                 return;
             }
-            if (e.getEntity().getLocation() == Locations.getLoc("Forum."+choosenMap+".Yellow")){
+            if (v == yellow_villager){
                 if (yellowPlayers.contains(e.getDamager().getUniqueId())){
                     e.setCancelled(true);
-                    //trimite mesaj
+                    e.getDamager().sendMessage(getMsg("forum.violence"));
                     return;
                 }
-            } else if (e.getEntity().getLocation() == Locations.getLoc("Forum."+choosenMap+".Blue")){
+                v.setCustomName("§9"+v.getHealth());
+            } else if (v == blue_villager){
                 if (bluePlayers.contains(e.getDamager().getUniqueId())){
                     e.setCancelled(true);
-                    //send message
+                    e.getDamager().sendMessage(getMsg("forum.violence"));
                     return;
                 }
-            } else if (e.getEntity().getLocation() == Locations.getLoc("Forum."+choosenMap+".Green")){
+                v.setCustomName("§9"+v.getHealth());
+            } else if (v == green_villager){
                 if (greenPlayers.contains(e.getDamager().getUniqueId())){
                     e.setCancelled(true);
-                    //send message
+                    e.getDamager().sendMessage(getMsg("forum.violence"));
                     return;
                 }
-            } else if (e.getEntity().getLocation() == Locations.getLoc("Forun."+choosenMap+".Red")){
+                v.setCustomName("§9"+v.getHealth());
+            } else if (v == red_villager){
                 if (redPlayers.contains(e.getDamager().getUniqueId())){
                     e.setCancelled(true);
-                    //send message
+                    e.getDamager().sendMessage(getMsg("forum.violence"));
                     return;
                 }
+                v.setCustomName("§9"+v.getHealth());
             }
         }
     }

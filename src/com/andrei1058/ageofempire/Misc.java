@@ -72,7 +72,7 @@ public class Misc {
         return i;
     }
     public static ItemStack constructor(){
-        ItemStack i = new ItemStack(Material.SPRUCE_DOOR);
+        ItemStack i = new ItemStack(Material.SPRUCE_DOOR_ITEM);
         ItemMeta im = i.getItemMeta();
         im.setDisplayName(getMsg("constructor.displayname"));
         im.setLore(getArray("constructor.lore").stream().map(s -> s.replace('&', '§')).collect(Collectors.toCollection(ArrayList::new)));

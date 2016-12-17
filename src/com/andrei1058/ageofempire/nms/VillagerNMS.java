@@ -51,14 +51,14 @@ public class VillagerNMS extends EntityVillager {
     public void g(double d0, double d1, double d2) {
     }
 
-    public static Villager spawnVillager(Location loc, String name, float health){
+    public static Villager spawnVillager(Location loc, Integer health){
         World mcWorld = ((CraftWorld) loc.getWorld()).getHandle();
         final VillagerNMS customEnt = new VillagerNMS(mcWorld);
         customEnt.setLocation(loc.getX(), loc.getY(), loc.getZ(), loc.getYaw(), loc.getPitch());
         ((CraftLivingEntity) customEnt.getBukkitEntity()).setRemoveWhenFarAway(false);
-        customEnt.setCustomName(name);
-        customEnt.setHealth(health);
+        customEnt.setCustomName("§9"+health);
         customEnt.setCustomNameVisible(true);
+        customEnt.getAttributeInstance(GenericAttributes.maxHealth).setValue((double)health);
         mcWorld.addEntity(customEnt, CreatureSpawnEvent.SpawnReason.CUSTOM);
         return (org.bukkit.entity.Villager) customEnt.getBukkitEntity();
     }

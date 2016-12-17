@@ -1,14 +1,11 @@
 package com.andrei1058.ageofempire.listeners;
 
-import com.andrei1058.ageofempire.Main;
 import com.andrei1058.ageofempire.Misc;
 import com.andrei1058.ageofempire.game.Status;
-import com.andrei1058.ageofempire.locations.Locations;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.EntityType;
-import org.bukkit.entity.Player;
 import org.bukkit.entity.Villager;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -23,9 +20,7 @@ import java.util.ArrayList;
 import static com.andrei1058.ageofempire.Main.*;
 import static com.andrei1058.ageofempire.configuration.Messages.getArray;
 import static com.andrei1058.ageofempire.configuration.Messages.getMsg;
-import static com.andrei1058.ageofempire.game.Buildings.built_forge;
-import static com.andrei1058.ageofempire.game.Buildings.forge;
-import static com.andrei1058.ageofempire.game.Buildings.hasBuild;
+import static com.andrei1058.ageofempire.game.Buildings.*;
 
 public class PlayerInteractEntityListener implements Listener {
 
@@ -37,40 +32,35 @@ public class PlayerInteractEntityListener implements Listener {
                 Villager v = (Villager) e.getRightClicked();
                 if (v.getCustomName() == null) return;
                 e.setCancelled(true);
-                if (v.getCustomName().equalsIgnoreCase(getMsg("villagers.forum"))) {
-                    if (v.getLocation().getBlockX() == Locations.getLoc("Forums." + choosenMap + ".Blue").getBlockX() && v.getLocation().getBlockY() == Locations.getLoc("Forums." + choosenMap + ".Blue").getBlockY()) {
+                    if (v == blue_villager) {
                         if (bluePlayers.contains(e.getPlayer().getUniqueId())){
-                            //open inventory
                             e.getPlayer().openInventory(forum(blue_team));
                         } else {
                             //can't open this inventory
                         }
-                    } else if (v.getLocation().getBlockX() == Locations.getLoc("Forums." + choosenMap + ".Yellow").getBlockX() && v.getLocation().getBlockZ() == Locations.getLoc("Forums." + choosenMap + ".Yellow").getBlockZ()) {
+                    } else if (v == yellow_villager) {
                         e.setCancelled(true);
                         if (yellowPlayers.contains(e.getPlayer().getUniqueId())){
-                            //open inventory
                             e.getPlayer().openInventory(forum(yellow_team));
                         } else {
                             //can't open this inventory
                         }
-                    } else if (v.getLocation().getBlockX() == Locations.getLoc("Forums." + choosenMap + ".Green").getBlockX() && v.getLocation().getBlockZ() == Locations.getLoc("Forums." + choosenMap + ".Green").getBlockZ()) {
+                    } else if (v == green_villager) {
                         e.setCancelled(true);
                         if (greenPlayers.contains(e.getPlayer().getUniqueId())){
-                            //open inventory
                             e.getPlayer().openInventory(forum(green_team));
                         } else {
                             //can't open this inventory
                         }
-                    } else if (v.getLocation().getBlockX() == Locations.getLoc("Forums." + choosenMap + ".Red").getBlockX() && v.getLocation().getBlockZ() == Locations.getLoc("Forums." + choosenMap + ".Red").getBlockZ()) {
+                    } else if (v == red_villager) {
                         e.setCancelled(true);
                         if (redPlayers.contains(e.getPlayer().getUniqueId())){
-                            //open inventory
                             e.getPlayer().openInventory(forum(red_team));
                         } else {
                             //can't open this inventory
                         }
                     }
-                }
+
             }
         }
     }
@@ -79,7 +69,15 @@ public class PlayerInteractEntityListener implements Listener {
         Inventory inv = Bukkit.createInventory(null, 54, "Forum");
         inv.setItem(0, Misc.getSkull("http://textures.minecraft.net/texture/71bc2bcfb2bd3759e6b1e86fc7a79585e1127dd357fc202893f9de241bc9e530", getMsg("forum.age1")));
         inv.setItem(1, Misc.getSkull("http://textures.minecraft.net/texture/1a4f68c8fb279e50ab786f9fa54c88ca4ecfe1eb5fd5f0c38c54c9b1c7203d7a", getMsg("forum.age-buldings")));
-        inv.setItem(2, item(Material.ANVIL, (short) 0, getMsg("forum.forge.displayname"), getArray("forum.forge.lore"), true, hasBuild(built_forge, team)));
+        inv.setItem(2, item(Material.ANVIL, (short) 0, getMsg("forum."+forge+".displayname"), getArray("forum."+forge+".lore"), true, hasBuild(forge, team)));
+        inv.setItem(3, item(Material.WHEAT, (short) 0, getMsg("forum."+mill+".displayname"), getArray("forum."+mill+".lore"), true, hasBuild(mill, team)));
+        inv.setItem(4, item(Material.DIAMOND_PICKAXE, (short) 0, getMsg("forum."+stone_mine+".displayname"), getArray("forum."+stone_mine+".lore"), true, hasBuild(stone_mine, team)));
+        inv.setItem(5, item(Material.GOLD_ORE, (short) 0, getMsg("forum."+gold_mine+".displayname"), getArray("forum."+gold_mine+".lore"), true, hasBuild(gold_mine, team)));
+        inv.setItem(6, item(Material.DIAMOND_AXE, (short) 0, getMsg("forum."+sawmill+".displayname"), getArray("forum."+sawmill+".lore"), true, hasBuild(sawmill, team)));
+        inv.setItem(7, item(Material.WORKBENCH, (short) 0, getMsg("forum."+workshop+".displayname"), getArray("forum."+workshop+".lore"), true, hasBuild(workshop, team)));
+        inv.setItem(8, item(Material.EMERALD, (short) 0, getMsg("forum."+market+".displayname"), getArray("forum."+market+".lore"), true, hasBuild(market, team)));
+        inv.setItem(9, item(Material.BONE, (short) 0, getMsg("forum."+kennel+".displayname"), getArray("forum."+kennel+".lore"), true, hasBuild(kennel, team)));
+        inv.setItem(10, item(Material.TNT, (short) 0, getMsg("forum."+sabotage+".displayname"), getArray("forum."+sabotage+".lore"), true, hasBuild(sabotage, team)));
         return inv;
     }
     private static ItemStack item(Material material, short sh, String name, ArrayList<String> lore, boolean enchant, boolean built){

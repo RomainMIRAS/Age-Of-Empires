@@ -58,6 +58,7 @@ public class PlayerJoinListener implements Listener {
         bedmeta.setDisplayName(getMsg("leave-item"));
         bed.setItemMeta(bedmeta);
         p.getInventory().setItem(8, bed);
+        p.sendMessage(getMsg("help.ison"));
         plugin.help.add(p.getUniqueId());
     }
 }
