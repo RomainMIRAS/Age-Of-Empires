@@ -1,7 +1,5 @@
 package com.andrei1058.ageofempire.game;
 
-import com.andrei1058.ageofempire.Misc;
-import com.andrei1058.ageofempire.locations.BuildSchematic;
 import org.bukkit.Bukkit;
 
 import java.util.ArrayList;

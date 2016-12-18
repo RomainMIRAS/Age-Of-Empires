@@ -1,9 +1,9 @@
-package com.andrei1058.ageofempire.locations;
+package com.andrei1058.ageofempire.game;
 
+import com.andrei1058.ageofempire.locations.Schematic;
 import com.andrei1058.ageofempire.nms.VillagerNMS;
 import org.bukkit.*;
 import org.bukkit.block.Block;
-import org.bukkit.entity.Villager;
 import org.bukkit.scheduler.BukkitRunnable;
 import org.jnbt.*;
 
@@ -12,11 +12,9 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.*;
 
-import static com.andrei1058.ageofempire.Main.choosenMap;
-import static com.andrei1058.ageofempire.Main.plugin;
+import static com.andrei1058.ageofempire.Main.*;
 import static com.andrei1058.ageofempire.configuration.Messages.getMsg;
-import static com.andrei1058.ageofempire.game.Buildings.addBuild;
-import static com.andrei1058.ageofempire.game.Buildings.construct_in_inv;
+import static com.andrei1058.ageofempire.game.Buildings.*;
 
 public class BuildSchematic {
 
@@ -118,12 +116,56 @@ public class BuildSchematic {
                             index += 1;
                         } else {
                             this.cancel();
-                            for (UUID u : teaamarray){
+                            for (UUID u : teaamarray) {
                                 Bukkit.getPlayer(u).sendMessage(getMsg("built-success").replace("{building}", chat_build_name));
                             }
-                            Villager v = VillagerNMS.spawnVillager(villager, 500);
-                            v.setMaxHealth(500);
-                            v.setHealth(500);
+                            VillagerNMS.spawnVillager(villager, 500);
+                            boolean x = false, y = false, z = false;
+                            switch (build_cfg_name) {
+                                case stone_mine:
+                                    x = true;
+                                    break;
+                                case gold_mine:
+                                    y = true;
+                                    break;
+                                case sawmill:
+                                    z = true;
+                                    break;
+                            }
+                            switch (team) {
+                                case blue_team:
+                                    if (x)
+                                        blue_stonemine = true;
+                                    if (y)
+                                        blue_goldmine = true;
+                                    if (z)
+                                        blue_sawmill = true;
+                                    break;
+                                case green_team:
+                                    if (x)
+                                        green_stonemine = true;
+                                    if (y)
+                                        green_goldmine = true;
+                                    if (z)
+                                        green_sawmill = true;
+                                    break;
+                                case yellow_team:
+                                    if (x)
+                                        yellow_stonemine = true;
+                                    if (y)
+                                        yellow_goldmine = true;
+                                    if (z)
+                                        yellow_sawmill = true;
+                                    break;
+                                case red_team:
+                                    if (x)
+                                        red_stonemine = true;
+                                    if (y)
+                                        red_goldmine = true;
+                                    if (z)
+                                        red_sawmill = true;
+                                    break;
+                            }
                             return;
                         }
                     }

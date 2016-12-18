@@ -1,7 +1,7 @@
 package com.andrei1058.ageofempire.listeners;
 
 import com.andrei1058.ageofempire.game.Status;
-import com.andrei1058.ageofempire.locations.BuildSchematic;
+import com.andrei1058.ageofempire.game.BuildSchematic;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.event.EventHandler;

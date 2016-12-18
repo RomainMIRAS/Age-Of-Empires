@@ -63,6 +63,7 @@ public class Messages {
         yml.addDefault("scoreboard.2", "§4");
         yml.addDefault("scoreboard.1", "&6mc.parkergames.it");
         yml.addDefault("villagers.forum", "&c&lForum");
+        yml.addDefault("villagers.buy-buildings", "&b&lBuy buildings for your kingdom");
         yml.addDefault("pvp-on", "{prefix} &6Pvp On, rare ores have appeared in the middle of the map.");
         yml.addDefault("assaults-on", "{prefix} &6Assaults on.");
         yml.addDefault("chat.game", "(Team) {player} &f: {message}");
@@ -75,6 +76,7 @@ public class Messages {
         yml.addDefault("forum.age-buldings", "&6Buildings for this age ➤");
         yml.addDefault("forum.to-build", "&a&lTo build");
         yml.addDefault("forum.built", "&6&lAlready built");
+        yml.addDefault("villager.forum-attacked", "&e&lForum Attacked");
 
         yml.addDefault("forum."+forge+".displayname", "&e&lForge");
         yml.addDefault("forum.violence", "{prefix} &eOuch! You need to right click to open my menu... &cThere's no need for violence! :C");
@@ -180,6 +182,18 @@ public class Messages {
         yml.addDefault("motd.starting", "&eStarting");
         yml.addDefault("motd.playing", "&cPlaying");
         yml.addDefault("motd.restarting", "&4Restarting");
+        yml.addDefault("new-kill", "{prefix} {player} &awas killed by {killer}");
+        yml.addDefault("victory.green", "&aGreen's Victory");
+        yml.addDefault("victory.blue", "&9Blue's Victory");
+        yml.addDefault("vicotry.red", "&cRed's Vicotory");
+        yml.addDefault("victory.yellow", "&eYellow's Victory");
+        yml.addDefault("base-destroyed.blue", "{prefix} &eThe &9Blue team's Base &2has been destroyed by the {team}");
+        yml.addDefault("base-destroyed.green", "{prefix} &eThe &aGreen team's Base &2has been destroyed by the {team}");
+        yml.addDefault("base-destroyed.yellow", "{prefix} &eThe Yellow team's Base &2has been destroyed by the {team}");
+        yml.addDefault("base-destroyed.red", "{prefix} &eThe &cRed team's Base &2has been destroyed by the {team}");
+        yml.addDefault("holo.gold", "&eGold &a+{amount}");
+        yml.addDefault("holo.stone", "&eStone &a+{amount}");
+        yml.addDefault("holo.wood", "&eWood &a+{amount}");
         yml.options().copyDefaults(true);
         try {
             yml.save(file);

@@ -4,7 +4,6 @@ import com.andrei1058.ageofempire.configuration.Settings;
 import com.andrei1058.ageofempire.game.Status;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
-import org.bukkit.Sound;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
@@ -20,10 +19,11 @@ public class Lobby extends BukkitRunnable {
         if (lobby_time != 0){
             lobby_time--;
         }
-        if (Bukkit.getOnlinePlayers().size() < min_players){
-            cancel();
+        if (min_players >= Bukkit.getOnlinePlayers().size()){
+            this.cancel();
             STATUS = Status.LOBBY;
             lobby_time = Settings.load().getInt("countdowns.lobby");
+            return;
         }
         if (lobby_time != 0 && (last == lobby_time || lobby_time == last-10 || lobby_time < 6)){
             last-=10;

@@ -85,9 +85,9 @@ public class Scoreboard {
             objective.getScore(getMsg("scoreboard.4")).setScore(4);
 
             pvp_assault = board.registerNewTeam("pvp_assault");
-            pvp_assault.addEntry(getMsg("scoreboard.3"));
-            pvp_assault.setPrefix(ChatColor.MAGIC.toString());
-            objective.getScore(getMsg("scoreboard.3")).setScore(3);
+            pvp_assault.addEntry(ChatColor.MAGIC.toString()+ChatColor.RESET.toString());
+            pvp_assault.setPrefix(getMsg("scoreboard.3"));
+            objective.getScore(ChatColor.MAGIC.toString()+ChatColor.RESET.toString()).setScore(3);
 
             objective.getScore(getMsg("scoreboard.2")).setScore(2);
             objective.getScore(getMsg("scoreboard.1")).setScore(1);
@@ -98,10 +98,10 @@ public class Scoreboard {
             for (UUID green2 : greenPlayers) {
                 green.addEntry(Bukkit.getPlayer(green2).getName());
             }
-            for (UUID yellow2 : bluePlayers) {
+            for (UUID yellow2 : yellowPlayers) {
                 yellow.addEntry(Bukkit.getPlayer(yellow2).getName());
             }
-            for (UUID red2 : greenPlayers) {
+            for (UUID red2 : redPlayers) {
                 red.addEntry(Bukkit.getPlayer(red2).getName());
             }
             Bukkit.getPlayer(u).setScoreboard(board);

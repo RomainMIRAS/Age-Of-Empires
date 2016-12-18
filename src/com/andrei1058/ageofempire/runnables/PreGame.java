@@ -5,7 +5,7 @@ import com.andrei1058.ageofempire.configuration.Settings;
 import com.andrei1058.ageofempire.game.Action;
 import com.andrei1058.ageofempire.game.Scoreboard;
 import com.andrei1058.ageofempire.game.Status;
-import com.andrei1058.ageofempire.locations.Hologram;
+import com.andrei1058.ageofempire.game.Hologram;
 import com.andrei1058.ageofempire.locations.Locations;
 import com.andrei1058.ageofempire.nms.VillagerNMS;
 import org.bukkit.Bukkit;
@@ -28,8 +28,8 @@ public class PreGame extends BukkitRunnable {
         if (pregame_time != 0){
             pregame_time--;
         }
-        if (Bukkit.getOnlinePlayers().size() < min_players){
-            cancel();
+        if (min_players >= Bukkit.getOnlinePlayers().size()){
+            this.cancel();
             new Restart().runTaskTimer(plugin, 0, 20);
             STATUS = Status.RESTARTING;
         }
@@ -47,7 +47,7 @@ public class PreGame extends BukkitRunnable {
                         } else if (redPlayers.size() < max_in_team) {
                             redPlayers.add(p.getUniqueId());
                         } else {
-                            p.kickPlayer("Teams ar full");
+                            p.kickPlayer("Teams are full");
                         }
                     } else if (Bukkit.getOnlinePlayers().size() >= max_in_team * 2) {
                         if (bluePlayers.size() < max_in_team) {
@@ -57,7 +57,7 @@ public class PreGame extends BukkitRunnable {
                         } else if (yellowPlayers.size() < max_in_team) {
                             yellowPlayers.add(p.getUniqueId());
                         } else {
-                            p.kickPlayer("Teams ar full");
+                            p.kickPlayer("Teams are full");
                         }
                     } else if (Bukkit.getOnlinePlayers().size() >= max_in_team) {
                         if (bluePlayers.size() < max_in_team) {
@@ -65,7 +65,7 @@ public class PreGame extends BukkitRunnable {
                         } else if (greenPlayers.size() < max_in_team) {
                             greenPlayers.add(p.getUniqueId());
                         } else {
-                            p.kickPlayer("Teams ar full");
+                            p.kickPlayer("Teams are full");
                         }
                     }
                 }
@@ -90,24 +90,28 @@ public class PreGame extends BukkitRunnable {
                     p.getInventory().setChestplate(leatherArmor(Material.LEATHER_CHESTPLATE, Color.BLUE));
                     p.getInventory().setBoots(leatherArmor(Material.LEATHER_BOOTS, Color.BLUE));
                     p.getInventory().setLeggings(leatherArmor(Material.LEATHER_LEGGINGS, Color.BLUE));
+                    p.setDisplayName("§9"+p.getName());
                 } else if (greenPlayers.contains(p.getUniqueId())){
                     p.teleport(Locations.getLoc("Spawns."+choosenMap+".Green"));
                     p.getInventory().setHelmet(leatherArmor(Material.LEATHER_HELMET, Color.GREEN));
                     p.getInventory().setChestplate(leatherArmor(Material.LEATHER_CHESTPLATE, Color.GREEN));
                     p.getInventory().setBoots(leatherArmor(Material.LEATHER_BOOTS, Color.GREEN));
                     p.getInventory().setLeggings(leatherArmor(Material.LEATHER_LEGGINGS, Color.GREEN));
+                    p.setDisplayName("§a"+p.getDisplayName());
                 } else if (yellowPlayers.contains(p.getUniqueId())){
                     p.teleport(Locations.getLoc("Spawns."+choosenMap+".Yellow"));
                     p.getInventory().setHelmet(leatherArmor(Material.LEATHER_HELMET, Color.YELLOW));
                     p.getInventory().setChestplate(leatherArmor(Material.LEATHER_CHESTPLATE, Color.YELLOW));
                     p.getInventory().setBoots(leatherArmor(Material.LEATHER_BOOTS, Color.YELLOW));
                     p.getInventory().setLeggings(leatherArmor(Material.LEATHER_LEGGINGS, Color.YELLOW));
+                    p.setDisplayName("§e"+p.getName());
                 } else if (redPlayers.contains(p.getUniqueId())){
                     p.teleport(Locations.getLoc("Spawns."+choosenMap+".Red"));
                     p.getInventory().setHelmet(leatherArmor(Material.LEATHER_HELMET, Color.RED));
                     p.getInventory().setChestplate(leatherArmor(Material.LEATHER_CHESTPLATE, Color.RED));
                     p.getInventory().setBoots(leatherArmor(Material.LEATHER_BOOTS, Color.RED));
                     p.getInventory().setLeggings(leatherArmor(Material.LEATHER_LEGGINGS, Color.RED));
+                    p.setDisplayName("§c"+p.getName());
                 }
                 p.getInventory().addItem(new ItemStack(Material.STONE_PICKAXE));
                 p.getInventory().addItem(new ItemStack(Material.STONE_AXE));
@@ -120,23 +124,27 @@ public class PreGame extends BukkitRunnable {
             Scoreboard.register();
             if (!bluePlayers.isEmpty()){
                 blue_villager = VillagerNMS.spawnVillager(Locations.getLoc("Forums."+choosenMap+".Blue"), 5000);
-                new Hologram(Locations.getLoc("Forums."+choosenMap+".Blue").clone().add(0,+1,0), getMsg("villagers.forum"));
-                new Hologram(Locations.getLoc("Forums."+choosenMap+".Blue").clone(), "§b§lBuy buildings for your kingdom");
+                new Hologram(Locations.getLoc("Forums."+choosenMap+".Blue").clone().add(0,+1.2,0),
+                        Locations.getLoc("Forums."+choosenMap+".Blue").clone(),
+                        getMsg("villagers.forum"), getMsg("villagers.buy-buildings"), blue_villager);
             }
             if (!greenPlayers.isEmpty()){
                 green_villager = VillagerNMS.spawnVillager(Locations.getLoc("Forums."+choosenMap+".Green"), 5000);
-                new Hologram(Locations.getLoc("Forums."+choosenMap+".Green").clone().add(0,+1,0), getMsg("villagers.forum"));
-                new Hologram(Locations.getLoc("Forums."+choosenMap+".Green").clone(), "§b§lBuy buildings for your kingdom");
+                new Hologram(Locations.getLoc("Forums."+choosenMap+".Green").clone().add(0,+1.2,0),
+                        Locations.getLoc("Forums."+choosenMap+".Green").clone(),
+                        getMsg("villagers.forum"), getMsg("villagers.buy-buildings"), green_villager);
             }
             if (!yellowPlayers.isEmpty()){
                 yellow_villager = VillagerNMS.spawnVillager(Locations.getLoc("Forums."+choosenMap+".Yellow"), 5000);
-                new Hologram(Locations.getLoc("Forums."+choosenMap+".Yellow").clone().add(0,+1,0), getMsg("villagers.forum"));
-                new Hologram(Locations.getLoc("Forums."+choosenMap+".Yellow").clone(), "§b§lBuy buildings for your kingdom");
+                new Hologram(Locations.getLoc("Forums."+choosenMap+".Yellow").clone().add(0,+1.2,0),
+                        Locations.getLoc("Forums."+choosenMap+".Yellow").clone(),
+                        getMsg("villagers.forum"), getMsg("villagers.buy-buildings"), yellow_villager);
             }
             if (!redPlayers.isEmpty()){
                 red_villager = VillagerNMS.spawnVillager(Locations.getLoc("Forums."+choosenMap+".Red"), 5000);
-                new Hologram(Locations.getLoc("Forums."+choosenMap+".Red").clone().add(0,+1,0), getMsg("villagers.forum"));
-                new Hologram(Locations.getLoc("Forums."+choosenMap+".Red").clone(), "§b§lBuy buildings for your kingdom");
+                new Hologram(Locations.getLoc("Forums."+choosenMap+".Red").clone().add(0,+1.2,0),
+                        Locations.getLoc("Forums."+choosenMap+".Red").clone(),
+                        getMsg("villagers.forum"), getMsg("villagers.buy-buildings"), red_villager);
             }
             Main.pvp_assault = 60000*Settings.load().getInt("countdowns.pvp");
         }

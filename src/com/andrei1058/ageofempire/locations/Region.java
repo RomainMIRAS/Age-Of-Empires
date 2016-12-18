@@ -1,6 +1,7 @@
 package com.andrei1058.ageofempire.locations;
 
 import com.andrei1058.ageofempire.configuration.Settings;
+import com.andrei1058.ageofempire.game.BuildSchematic;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 

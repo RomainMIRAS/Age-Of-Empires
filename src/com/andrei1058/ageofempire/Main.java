@@ -42,6 +42,9 @@ public class Main extends JavaPlugin {
     public static long pvp_assault = 0;
     public static final String blue_team = "Blue", green_team = "Green", yellow_team = "Yellow", red_team = "Red";
     public static Villager blue_villager, green_villager, yellow_villager, red_villager;
+    public static boolean blue_stonemine=false, green_stonemine=false, yellow_stonemine =false, red_stonemine=false;
+    public static boolean blue_goldmine=false, green_goldmine=false, yellow_goldmine=false, red_goldmine=false;
+    public static boolean blue_sawmill=false, green_sawmill=false, yellow_sawmill=false, red_sawmill=false;
 
     @Override
     public void onEnable() {
@@ -70,6 +73,9 @@ public class Main extends JavaPlugin {
         pm.registerEvents(new ChatListener(), this);
         pm.registerEvents(new PlayerArmorStandManipulateListener(), this);
         pm.registerEvents(new ServerPingListener(), this);
+        pm.registerEvents(new EntityDeathListener(), this);
+        pm.registerEvents(new PlayerDeathListener(), this);
+        pm.registerEvents(new PlayerRespawnListener(), this);
         plugin.getServer().getMessenger().registerOutgoingPluginChannel(plugin, "BungeeCord");
     }
 }
