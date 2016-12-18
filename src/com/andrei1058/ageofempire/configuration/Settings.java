@@ -94,8 +94,13 @@ public class Settings {
             } catch (NullPointerException e){
                 plugin.getLogger().warning("There is a problem with your plots :(");
             }
+            Bukkit.getScheduler().runTaskLater(plugin, new Runnable() {
+                @Override
+                public void run() {
+                    STATUS = Status.LOBBY;
+                }
+            }, 30L);
         }
-        STATUS = Status.LOBBY;
         Bukkit.getScheduler().runTaskLater(plugin, new Runnable() {
             @Override
             public void run() {

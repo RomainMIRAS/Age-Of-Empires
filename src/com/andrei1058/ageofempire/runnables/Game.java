@@ -3,19 +3,20 @@ package com.andrei1058.ageofempire.runnables;
 import com.andrei1058.ageofempire.configuration.Settings;
 import com.andrei1058.ageofempire.game.Scoreboard;
 import com.andrei1058.ageofempire.game.Vote;
+import com.andrei1058.ageofempire.locations.Hologram;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Sound;
 import org.bukkit.scheduler.BukkitRunnable;
 
 import java.util.UUID;
-import java.util.concurrent.ExecutionException;
 
 import static com.andrei1058.ageofempire.Main.*;
 import static com.andrei1058.ageofempire.configuration.Messages.getMsg;
 
 public class Game extends BukkitRunnable {
     public static int secPlayed = 0;
+    private static long holo = secPlayed;
     @Override
     public void run() {
         secPlayed++;
@@ -51,6 +52,10 @@ public class Game extends BukkitRunnable {
         Scoreboard.Refresh();
         try {
             Vote.votes.stream().forEach(Vote::stuff);
+            if (secPlayed == holo){
+                holo = secPlayed+30;
+                Hologram.list().stream().forEach(Hologram::stuff);
+            }
         } catch (Exception e){
         }
     }

@@ -19,13 +19,6 @@ public class PlayerQuitListener implements Listener {
         Player p = e.getPlayer();
         if (SETUP) return;
         e.setQuitMessage(null);
-        if (STATUS == Status.STARTING){
-            if (Bukkit.getOnlinePlayers().size() < min_players){
-                Bukkit.getScheduler().cancelAllTasks();
-                STATUS = Status.LOBBY;
-                lobby_time = Settings.load().getInt("countdowns.lobby");
-            }
-        }
         if (players.contains(p.getUniqueId())){
             players.remove(p.getUniqueId());
         }
@@ -43,20 +36,27 @@ public class PlayerQuitListener implements Listener {
     }
 
     public static void checkWinner(){
-        boolean win = false;
         if (!bluePlayers.isEmpty() && greenPlayers.isEmpty() && bluePlayers.isEmpty() && yellowPlayers.isEmpty()){
             //blue win
+            stopserver();
             STATUS = Status.RESTARTING;
         } else if (bluePlayers.isEmpty() && !greenPlayers.isEmpty() && bluePlayers.isEmpty() && yellowPlayers.isEmpty()) {
             //green win
+            stopserver();
         } else if (bluePlayers.isEmpty() && greenPlayers.isEmpty() && !redPlayers.isEmpty() && yellowPlayers.isEmpty()) {
             //red win
+            stopserver();
         } else if (bluePlayers.isEmpty() && greenPlayers.isEmpty() && redPlayers.isEmpty() && !yellowPlayers.isEmpty()) {
             //yellow win
+            stopserver();
+        } else if (Bukkit.getOnlinePlayers().isEmpty()){
+            if (STATUS == Status.LOBBY || STATUS == Status.STARTING) return;
+            stopserver();
         }
-        if (win){
-            STATUS = Status.RESTARTING;
-            new Restart().runTaskTimer(plugin, 0, 20);
-        }
+    }
+
+    private static void stopserver(){
+        new Restart().runTaskTimer(plugin, 0, 20);
+        STATUS = Status.RESTARTING;
     }
 }

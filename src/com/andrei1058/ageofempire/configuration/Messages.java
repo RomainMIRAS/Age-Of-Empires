@@ -176,6 +176,10 @@ public class Messages {
         yml.addDefault("cant-construct-size", "&cYou must be in the right size plot to build this structure.");
         yml.addDefault("cant-vote-full", "&cYou can't vote for this building because you don't have any free plot of this type");
         yml.addDefault("built-success", "{prefix} &e&l{building} &abuilt successfully.");
+        yml.addDefault("motd.lobby", "&aLobby");
+        yml.addDefault("motd.starting", "&eStarting");
+        yml.addDefault("motd.playing", "&cPlaying");
+        yml.addDefault("motd.restarting", "&4Restarting");
         yml.options().copyDefaults(true);
         try {
             yml.save(file);

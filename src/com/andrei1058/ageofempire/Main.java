@@ -69,6 +69,7 @@ public class Main extends JavaPlugin {
         pm.registerEvents(new PlayerInteractEntityListener(), this);
         pm.registerEvents(new ChatListener(), this);
         pm.registerEvents(new PlayerArmorStandManipulateListener(), this);
+        pm.registerEvents(new ServerPingListener(), this);
         plugin.getServer().getMessenger().registerOutgoingPluginChannel(plugin, "BungeeCord");
     }
 }

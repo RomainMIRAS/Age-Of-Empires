@@ -10,6 +10,7 @@ public class Hologram {
 
     private static ArrayList<Hologram> holograms = new ArrayList<>();
     ArmorStand as;
+    public boolean shown = false;
 
     public Hologram(Location location, String text){
         ArmorStand as = (ArmorStand) location.getWorld().spawnEntity(location, EntityType.ARMOR_STAND);
@@ -32,6 +33,14 @@ public class Hologram {
 
     public void show(){
         this.as.setVisible(true);
+    }
+
+    public void stuff(){
+        if (shown){
+            hide();
+        } else {
+            show();
+        }
     }
 
     public static ArrayList<Hologram> list(){

@@ -1,5 +1,6 @@
 package com.andrei1058.ageofempire.runnables;
 
+import com.andrei1058.ageofempire.configuration.Settings;
 import com.andrei1058.ageofempire.game.Status;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
@@ -18,6 +19,11 @@ public class Lobby extends BukkitRunnable {
     public void run() {
         if (lobby_time != 0){
             lobby_time--;
+        }
+        if (Bukkit.getOnlinePlayers().size() < min_players){
+            cancel();
+            STATUS = Status.LOBBY;
+            lobby_time = Settings.load().getInt("countdowns.lobby");
         }
         if (lobby_time != 0 && (last == lobby_time || lobby_time == last-10 || lobby_time < 6)){
             last-=10;
