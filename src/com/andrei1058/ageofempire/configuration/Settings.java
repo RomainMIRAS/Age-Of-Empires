@@ -104,6 +104,7 @@ public class Settings {
         Bukkit.getScheduler().runTaskLater(plugin, new Runnable() {
             @Override
             public void run() {
+                if (!SETUP)
                 Region.loadRegions();
             }
         }, 200);

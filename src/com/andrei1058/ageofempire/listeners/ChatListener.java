@@ -35,6 +35,8 @@ public class ChatListener implements Listener{
                     Bukkit.getPlayer(u).sendMessage(getMsg("chat.game").replace("{player}", "§c"+e.getPlayer().getName()).replace("{message}", e.getMessage()));
                 }
             }
+        } else if (STATUS == Status.LOBBY || STATUS == Status.STARTING || STATUS == Status.PRE_GAME || STATUS == Status.RESTARTING){
+            Bukkit.broadcastMessage(getMsg("chat.lobby").replace("{player}", e.getPlayer().getName()).replace("{message}", e.getMessage()));
         }
     }
 }

@@ -4,6 +4,7 @@ import com.andrei1058.ageofempire.commands.Setup;
 import com.andrei1058.ageofempire.commands.Leave;
 import com.andrei1058.ageofempire.game.Status;
 import com.andrei1058.ageofempire.listeners.*;
+import net.minecraft.server.v1_8_R3.Village;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Villager;
 import org.bukkit.plugin.PluginManager;
@@ -45,6 +46,10 @@ public class Main extends JavaPlugin {
     public static boolean blue_stonemine=false, green_stonemine=false, yellow_stonemine =false, red_stonemine=false;
     public static boolean blue_goldmine=false, green_goldmine=false, yellow_goldmine=false, red_goldmine=false;
     public static boolean blue_sawmill=false, green_sawmill=false, yellow_sawmill=false, red_sawmill=false;
+    public static Villager blue_forge, green_forge, yellow_forge, red_forge;
+    public static Villager blue_smine, green_smine, yellow_smine, red_smine;
+    public static Villager blue_gmine, green_gmine, yellow_gmine, red_gmine;
+    public static Villager blue_smill, green_smill, yellow_smill, red_smill;
 
     @Override
     public void onEnable() {
@@ -76,6 +81,8 @@ public class Main extends JavaPlugin {
         pm.registerEvents(new EntityDeathListener(), this);
         pm.registerEvents(new PlayerDeathListener(), this);
         pm.registerEvents(new PlayerRespawnListener(), this);
+        pm.registerEvents(new CreatureSpawnListener(), this);
+        pm.registerEvents(new PlayerMoveListener(), this);
         plugin.getServer().getMessenger().registerOutgoingPluginChannel(plugin, "BungeeCord");
     }
 }

@@ -4,6 +4,7 @@ import com.andrei1058.ageofempire.locations.Schematic;
 import com.andrei1058.ageofempire.nms.VillagerNMS;
 import org.bukkit.*;
 import org.bukkit.block.Block;
+import org.bukkit.entity.Villager;
 import org.bukkit.scheduler.BukkitRunnable;
 import org.jnbt.*;
 
@@ -97,7 +98,7 @@ public class BuildSchematic {
             }
         });
         final int size = locatii.size();
-        final int blocksPerTime = 1;
+        final int blocksPerTime = 2;
         final long delay = 0L;
 
         if (size > 0) {
@@ -119,51 +120,104 @@ public class BuildSchematic {
                             for (UUID u : teaamarray) {
                                 Bukkit.getPlayer(u).sendMessage(getMsg("built-success").replace("{building}", chat_build_name));
                             }
-                            VillagerNMS.spawnVillager(villager, 500);
-                            boolean x = false, y = false, z = false;
+                            Villager v = VillagerNMS.spawnVillager(villager, 500);
                             switch (build_cfg_name) {
+                                case forge:
+                                    new Hologram(v.getLocation(), getMsg("forum."+forge+".displayname"), getMsg("forum."+forge+".holo"), v);
+                                    switch (team) {
+                                        case blue_team:
+                                            blue_forge = v;
+                                            break;
+                                        case green_team:
+                                            green_forge = v;
+                                            break;
+                                        case yellow_team:
+                                            yellow_forge = v;
+                                            break;
+                                        case red_team:
+                                            red_forge = v;
+                                            break;
+                                    }
+                                    break;
                                 case stone_mine:
-                                    x = true;
+                                    new Hologram(v.getLocation(), getMsg("forum."+stone_mine+".displayname"), getMsg("forum."+stone_mine+".holo"), v);
+                                    switch (team) {
+                                        case blue_team:
+                                            blue_stonemine = true;
+                                            blue_smine = v;
+                                            break;
+                                        case green_team:
+                                            green_stonemine = true;
+                                            green_smine = v;
+                                            break;
+                                        case yellow_team:
+                                            yellow_stonemine = true;
+                                            yellow_smine = v;
+                                            break;
+                                        case red_team:
+                                            red_stonemine = true;
+                                            red_smine = v;
+                                            break;
+                                    }
                                     break;
                                 case gold_mine:
-                                    y = true;
+                                    new Hologram(v.getLocation(), getMsg("forum."+gold_mine+".displayname"), getMsg("forum."+gold_mine+".holo"), v);
+                                    switch (team) {
+                                        case blue_team:
+                                            blue_goldmine = true;
+                                            blue_gmine = v;
+                                            break;
+                                        case green_team:
+                                            green_goldmine = true;
+                                            green_gmine = v;
+                                            break;
+                                        case yellow_team:
+                                            yellow_goldmine = true;
+                                            yellow_gmine = v;
+                                            break;
+                                        case red_team:
+                                            red_goldmine = true;
+                                            red_gmine = v;
+                                            break;
+                                    }
                                     break;
                                 case sawmill:
-                                    z = true;
+                                    new Hologram(v.getLocation(), getMsg("forum."+sawmill+".displayname"), getMsg("forum."+sawmill+".holo"), v);
+                                    switch (team) {
+                                        case blue_team:
+                                            blue_sawmill = true;
+                                            blue_smill = v;
+                                            break;
+                                        case green_team:
+                                            green_sawmill = true;
+                                            green_smill = v;
+                                            break;
+                                        case yellow_team:
+                                            yellow_sawmill = true;
+                                            yellow_smill = v;
+                                            break;
+                                        case red_team:
+                                            red_sawmill = true;
+                                            red_smill = v;
+                                            break;
+                                    }
                                     break;
-                            }
-                            switch (team) {
-                                case blue_team:
-                                    if (x)
-                                        blue_stonemine = true;
-                                    if (y)
-                                        blue_goldmine = true;
-                                    if (z)
-                                        blue_sawmill = true;
-                                    break;
-                                case green_team:
-                                    if (x)
-                                        green_stonemine = true;
-                                    if (y)
-                                        green_goldmine = true;
-                                    if (z)
-                                        green_sawmill = true;
-                                    break;
-                                case yellow_team:
-                                    if (x)
-                                        yellow_stonemine = true;
-                                    if (y)
-                                        yellow_goldmine = true;
-                                    if (z)
-                                        yellow_sawmill = true;
-                                    break;
-                                case red_team:
-                                    if (x)
-                                        red_stonemine = true;
-                                    if (y)
-                                        red_goldmine = true;
-                                    if (z)
-                                        red_sawmill = true;
+                                case mill:
+                                    new Hologram(v.getLocation(), getMsg("forum."+mill+".displayname"), getMsg("forum."+mill+".holo"), v);
+                                    switch (team) {
+                                        case blue_team:
+                                            blue_smill = v;
+                                            break;
+                                        case green_team:
+                                            green_smill = v;
+                                            break;
+                                        case yellow_team:
+                                            yellow_smill = v;
+                                            break;
+                                        case red_team:
+                                            red_smill = v;
+                                            break;
+                                    }
                                     break;
                             }
                             return;

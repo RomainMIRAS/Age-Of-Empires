@@ -4,6 +4,8 @@ import com.andrei1058.ageofempire.configuration.Settings;
 import com.andrei1058.ageofempire.game.BuildSchematic;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
+import org.bukkit.entity.ArmorStand;
+import org.bukkit.entity.EntityType;
 
 import java.util.*;
 
@@ -21,23 +23,39 @@ public class Region {
     private boolean medium;
     private boolean large;
     private String name;
+    ArmorStand as;
 
     public Region(Location center, boolean small, boolean medium, boolean large, String name) {
         this.small = small;
         this.medium = medium;
         this.large = large;
         this.name = name;
+        String string = null;
         if (this.small) {
             this.loc1 = center.clone().add(-Settings.load().getInt("plot-radius.small"), -2, -Settings.load().getInt("plot-radius.small"));
             this.loc2 = center.clone().add(+Settings.load().getInt("plot-radius.small"), +1, +Settings.load().getInt("plot-radius.small"));
-        } else if (this.medium){
+            string = getMsg("plot.small");
+        } else if (medium){
             this.loc1 = center.clone().add(-Settings.load().getInt("plot-radius.medium"), -2, -Settings.load().getInt("plot-radius.medium"));
             this.loc2 = center.clone().add(+Settings.load().getInt("plot-radius.medium"), +1, +Settings.load().getInt("plot-radius.medium"));
-        } else if (this.large){
+            string = getMsg("plot.medium");
+        } else if (large){
             this.loc1 = center.clone().add(-Settings.load().getInt("plot-radius.large"), -2, -Settings.load().getInt("plot-radius.large"));
             this.loc2 = center.clone().add(+Settings.load().getInt("plot-radius.large"), +1, +Settings.load().getInt("plot-radius.large"));
+            string = getMsg("plot.large");
         }
+        as = (ArmorStand) center.getWorld().spawnEntity(center.clone().add(0, +7, +0), EntityType.ARMOR_STAND);
+        as.setGravity(false);
+        as.setCanPickupItems(false);
+        as.setCustomName(string);
+        as.setCustomNameVisible(true);
+        as.setVisible(false);
+        as.setSmall(false);
         regions.add(this);
+    }
+
+    public void removeHologram(){
+        as.remove();
     }
 
     public boolean isInRegion(Location loc) {
@@ -122,7 +140,9 @@ public class Region {
                         if (blue_small_plots > 0){
                             Bukkit.getPlayer(player).getInventory().setItem(7, slotlocked());
                             BuildSchematic.getUUID(player).ok(loc1);
+                            removeHologram();
                             blue_small_plots--;
+                            regions.remove(this);
                         } else {
                             //not available small plots
                         }
@@ -130,7 +150,9 @@ public class Region {
                         if (green_small_plots > 0){
                             Bukkit.getPlayer(player).getInventory().setItem(7, slotlocked());
                             BuildSchematic.getUUID(player).ok(loc1);
+                            removeHologram();
                             green_small_plots--;
+                            regions.remove(this);
                         } else {
                             //not available small plots
                         }
@@ -138,7 +160,9 @@ public class Region {
                         if (yellow_small_plots > 0){
                             Bukkit.getPlayer(player).getInventory().setItem(7, slotlocked());
                             BuildSchematic.getUUID(player).ok(loc1);
+                            removeHologram();
                             yellow_small_plots--;
+                            regions.remove(this);
                         } else {
                             //not available small plots
                         }
@@ -146,7 +170,9 @@ public class Region {
                         if (red_small_plots > 0){
                             Bukkit.getPlayer(player).getInventory().setItem(7, slotlocked());
                             BuildSchematic.getUUID(player).ok(loc1);
+                            removeHologram();
                             red_small_plots--;
+                            regions.remove(this);
                         } else {
                             //not available small plots
                         }
@@ -161,7 +187,6 @@ public class Region {
     public static void loadRegions(){
         List<String> teams = Arrays.asList(blue_team, green_team, yellow_team, red_team);
         for (String s : teams){
-            //de setat marimea fiecarui plot
             for (String key : Locations.load().getConfigurationSection("Plots."+choosenMap+"."+s+".Small").getKeys(false)) {
                 new Region(Locations.getLoc("Plots." + choosenMap + "." + s + ".Small." + key), true, false, false, s);
             }

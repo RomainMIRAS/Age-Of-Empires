@@ -12,13 +12,12 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.entity.PlayerDeathEvent;
 import org.bukkit.inventory.ItemStack;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.ListIterator;
 
 import static com.andrei1058.ageofempire.Main.*;
-import static com.andrei1058.ageofempire.Misc.forumPaper;
-import static com.andrei1058.ageofempire.Misc.leatherArmor;
-import static com.andrei1058.ageofempire.Misc.slotlocked;
+import static com.andrei1058.ageofempire.Misc.*;
 import static com.andrei1058.ageofempire.configuration.Messages.getMsg;
 import static com.andrei1058.ageofempire.listeners.PlayerQuitListener.checkWinner;
 
@@ -30,6 +29,7 @@ public class PlayerDeathListener implements Listener {
         Player p = e.getEntity();
         List<ItemStack> drops = e.getDrops();
         ListIterator<ItemStack> litr = drops.listIterator();
+        ArrayList<Player> constructor = new ArrayList<>();
         while( litr.hasNext() ) {
             ItemStack stack = litr.next();
             if (stack.getType().equals(Material.PAPER) || stack.getType().equals(Material.MOB_SPAWNER)
@@ -37,6 +37,9 @@ public class PlayerDeathListener implements Listener {
                     || stack.getType() == Material.LEATHER_BOOTS || stack.getType() == Material.LEATHER_CHESTPLATE
                     || stack.getType() == Material.LEATHER_HELMET || stack.getType() == Material.LEATHER_LEGGINGS) {
                 litr.remove();
+            }
+            if (stack.getType() == Material.SPRUCE_DOOR_ITEM){
+                constructor.add(p);
             }
         }
         if (e.getEntity().getKiller() instanceof Player) {
@@ -60,7 +63,12 @@ public class PlayerDeathListener implements Listener {
                     p.getInventory().addItem(new ItemStack(Material.STONE_PICKAXE));
                     p.getInventory().addItem(new ItemStack(Material.STONE_AXE));
                     p.getInventory().setItem(8, slotlocked());
-                    p.getInventory().setItem(7, slotlocked());
+                    if (constructor.contains(p)){
+                        constructor.remove(p);
+                        p.getInventory().setItem(7, constructor());
+                    } else {
+                        p.getInventory().setItem(7, slotlocked());
+                    }
                     p.getInventory().setItem(6, forumPaper());
                 } else if (greenPlayers.contains(p.getUniqueId())){
                     p.teleport(Locations.getLoc("Spawns."+choosenMap+".Green"));
@@ -72,7 +80,12 @@ public class PlayerDeathListener implements Listener {
                     p.getInventory().addItem(new ItemStack(Material.STONE_PICKAXE));
                     p.getInventory().addItem(new ItemStack(Material.STONE_AXE));
                     p.getInventory().setItem(8, slotlocked());
-                    p.getInventory().setItem(7, slotlocked());
+                    if (constructor.contains(p)){
+                        constructor.remove(p);
+                        p.getInventory().setItem(7, constructor());
+                    } else {
+                        p.getInventory().setItem(7, slotlocked());
+                    }
                     p.getInventory().setItem(6, forumPaper());
                 } else if (yellowPlayers.contains(p.getUniqueId())){
                     p.teleport(Locations.getLoc("Spawns."+choosenMap+".Yellow"));
@@ -84,7 +97,12 @@ public class PlayerDeathListener implements Listener {
                     p.getInventory().addItem(new ItemStack(Material.STONE_PICKAXE));
                     p.getInventory().addItem(new ItemStack(Material.STONE_AXE));
                     p.getInventory().setItem(8, slotlocked());
-                    p.getInventory().setItem(7, slotlocked());
+                    if (constructor.contains(p)){
+                        constructor.remove(p);
+                        p.getInventory().setItem(7, constructor());
+                    } else {
+                        p.getInventory().setItem(7, slotlocked());
+                    }
                     p.getInventory().setItem(6, forumPaper());
                 } else if (redPlayers.contains(p.getUniqueId())){
                     p.teleport(Locations.getLoc("Spawns."+choosenMap+".Red"));
@@ -96,7 +114,12 @@ public class PlayerDeathListener implements Listener {
                     p.getInventory().addItem(new ItemStack(Material.STONE_PICKAXE));
                     p.getInventory().addItem(new ItemStack(Material.STONE_AXE));
                     p.getInventory().setItem(8, slotlocked());
-                    p.getInventory().setItem(7, slotlocked());
+                    if (constructor.contains(p)){
+                        constructor.remove(p);
+                        p.getInventory().setItem(7, constructor());
+                    } else {
+                        p.getInventory().setItem(7, slotlocked());
+                    }
                     p.getInventory().setItem(6, forumPaper());
                 } else {
                     players.remove(p.getUniqueId());

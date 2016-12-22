@@ -24,6 +24,8 @@ public class Messages {
         }
         yml.addDefault("prefix", "&9[&7AOE&9]");
         yml.addDefault("player-join", "{prefix} &7%player% has joined the game!");
+        yml.addDefault("action-player-join", "&e{player} &7has joined the game!");
+        yml.addDefault("action-player-left", "&e{player} &7has left the game!");
         yml.addDefault("help-item-on", "&aHelp On");
         yml.addDefault("help-item-off", "&cHelp Off");
         yml.addDefault("leave-item", "&aBack to Hub");
@@ -41,7 +43,7 @@ public class Messages {
         yml.addDefault("help.cutting-wood", "{prefix} &9[&eHelp&9] &aCutting &2Wood &ayields resources for you and your base.");
         yml.addDefault("help.gold-stuff", "{prefix} &9[&eHelp&9] &2Gold &ais used to buy equipment in the buildings. You earn gold by collecting resources or by killing players.");
         yml.addDefault("help.stone", "{prefix} &9[&eHelp&9] &aMining &2Stone (Andesite) &ayields resources for you and your base.");
-        yml.addDefault("help.start-guide", "{prefix} &9[&eHelp&9] &aWelcome to Age of Empire. This game consists of collecting ressources for you and your kingdom. These ressources will allow you to construct buildings");
+        yml.addDefault("help.start-guide", "{prefix} &9[&eHelp&9] &aWelcome to Age of Empire. This game consists of collecting resources for you and your kingdom. These resources will allow you to construct buildings");
         yml.addDefault("help.start-buildings", "{prefix} &9[&eHelp&9] &aThese buildings are used to develop your kingdom and allow you to buy various different items (weapons, food etc.).");
         yml.addDefault("help.start-resources", "{prefix} &9[&eHelp&9] &aTo start, go mine some Stone (Andesite) and Wood.");
         yml.addDefault("help.enough-res-forum", "{prefix} &9[&eHelp&9] &aYour Kingdom has enough resources for you to buy a building. Go back to your &2Forum&a, click on the NPC and select a building. Why not start with the &2Forge&a?");
@@ -67,6 +69,7 @@ public class Messages {
         yml.addDefault("pvp-on", "{prefix} &6Pvp On, rare ores have appeared in the middle of the map.");
         yml.addDefault("assaults-on", "{prefix} &6Assaults on.");
         yml.addDefault("chat.game", "(Team) {player} &f: {message}");
+        yml.addDefault("chat.lobby", "(All) {player} : {message}");
         yml.addDefault("cant-break", "{prefix} &cYou can't break this block in a kingdom");
         yml.addDefault("cant-vote", "{prefix} &cYou can't vote at the moment (a vote is already in progress)");
         yml.addDefault("forum.age1", "&cAge 1");
@@ -77,6 +80,7 @@ public class Messages {
         yml.addDefault("forum.to-build", "&a&lTo build");
         yml.addDefault("forum.built", "&6&lAlready built");
         yml.addDefault("villager.forum-attacked", "&e&lForum Attacked");
+        yml.addDefault("villager.cant-open", "{prefix} &6You can't open this menu.");
 
         yml.addDefault("forum."+forge+".displayname", "&e&lForge");
         yml.addDefault("forum.violence", "{prefix} &eOuch! You need to right click to open my menu... &cThere's no need for violence! :C");
@@ -86,6 +90,7 @@ public class Messages {
         forge_lore.add("&3Plot: &fSmall");
         forge_lore.add("&3Description: &bBuy hand-to-hand weapons.");
         yml.addDefault("forum."+forge+".lore", forge_lore);
+        yml.addDefault("forum."+forge+".holo", "&bBuy hand-to-hand weapons");
 
         yml.addDefault("forum."+mill+".displayname", "&e&lMill");
         ArrayList mill_lore = new ArrayList();
@@ -94,6 +99,7 @@ public class Messages {
         mill_lore.add("&3Plot: &fSmall");
         mill_lore.add("&3Description: &bBuy food.");
         yml.addDefault("forum."+mill+".lore", mill_lore);
+        yml.addDefault("forum."+mill+".holo", "&bBuy food");
 
         yml.addDefault("forum."+stone_mine+".displayname", "&e&lStone Mine");
         ArrayList stone_lore = new ArrayList();
@@ -102,6 +108,7 @@ public class Messages {
         stone_lore.add("&3Plot: &fSmall");
         stone_lore.add("&3Description: &bYields Stone automatically.");
         yml.addDefault("forum."+stone_mine+".lore", stone_lore);
+        yml.addDefault("forum."+stone_mine+".holo", "&bYields Stone automatically");
 
         yml.addDefault("forum."+gold_mine+".displayname", "&e&lGold Mine");
         ArrayList gold_lore = new ArrayList();
@@ -110,6 +117,7 @@ public class Messages {
         gold_lore.add("&3Plot: &fSmall");
         gold_lore.add("&3Description: &bYields Gold automatically.");
         yml.addDefault("forum."+gold_mine+".lore", gold_lore);
+        yml.addDefault("forum."+gold_mine+".holo", "&bYields Gold automatically");
 
         yml.addDefault("forum."+sawmill+".displayname", "&e&lSawmill");
         ArrayList sawmill_lore = new ArrayList();
@@ -118,6 +126,7 @@ public class Messages {
         sawmill_lore.add("&3Plot: &fSmall");
         sawmill_lore.add("&3Description: &bYields Wood automatically.");
         yml.addDefault("forum."+sawmill+".lore", sawmill_lore);
+        yml.addDefault("forum."+sawmill+".holo", "&bYields Wood automatically");
 
         yml.addDefault("forum."+market+".displayname", "&e&lMarket");
         ArrayList market_lore = new ArrayList();
@@ -126,6 +135,7 @@ public class Messages {
         market_lore.add("&3Plot: &fSmall");
         market_lore.add("&3Description: &bBuy various different items.");
         yml.addDefault("forum."+market+".lore", market_lore);
+        yml.addDefault("forum."+market+".holo", "&bBuy various different items");
 
         yml.addDefault("forum."+kennel+".displayname", "&e&lKennel");
         ArrayList kennel_lore = new ArrayList();
@@ -134,6 +144,7 @@ public class Messages {
         kennel_lore.add("&3Plot: &fSmall");
         kennel_lore.add("&3Description: &bBuy dogs.");
         yml.addDefault("forum."+kennel+".lore", kennel_lore);
+        yml.addDefault("forum."+kennel+".holo", "&bBuy dogs");
 
         yml.addDefault("forum."+sabotage+".displayname", "&e&lSabotage Workshop");
         ArrayList sabotagew_lore = new ArrayList();
@@ -142,6 +153,7 @@ public class Messages {
         sabotagew_lore.add("&3Plot: &fSmall");
         sabotagew_lore.add("&3Description: &bBuy destructive items.");
         yml.addDefault("forum."+sabotage+".lore", sabotagew_lore);
+        yml.addDefault("forum."+sabotage+".holo", "&bBuy destructive items");
 
         yml.addDefault("forum."+workshop+".displayname", "&e&lWorkshop");
         ArrayList workshop_lore = new ArrayList();
@@ -150,11 +162,12 @@ public class Messages {
         workshop_lore.add("&3Plot: &fSmall");
         workshop_lore.add("&3Description: &bBuy various blocks.");
         yml.addDefault("forum."+workshop+".lore", workshop_lore);
+        yml.addDefault("forum."+workshop+".holo", "&bBuy various blocks");
 
         yml.addDefault("new-vote", "&9{player} &1would like to create a/an {building} &f. &2{votes}&f/&4{team}");
         yml.addDefault("vote-denied", "&c{player}&4's vote has been denied.");
         yml.addDefault("vote-accepted", "&2{player}&a's vote has been accepted.");
-        yml.addDefault("insufficient-resources", "{prefix} &cYour team doesn't have enough &eressources &c{&6Wood missing&e: &f{wood}&6: Stones missing&e: &f{stone}&6).");
+        yml.addDefault("insufficient-resources", "{prefix} &cYour team doesn't have enough &eresources &c{&6Wood missing&e: &f{wood}&6: Stones missing&e: &f{stone}&6).");
         yml.addDefault("locked-slot", "&cSlot Locked");
         yml.addDefault("forum-paper", "Forum");
         yml.addDefault("validate-vote", "&aValidate your Vote");
@@ -194,6 +207,64 @@ public class Messages {
         yml.addDefault("holo.gold", "&eGold &a+{amount}");
         yml.addDefault("holo.stone", "&eStone &a+{amount}");
         yml.addDefault("holo.wood", "&eWood &a+{amount}");
+        yml.addDefault("plot.small", "&2Small Plot");
+        yml.addDefault("plot.medium", "&2Medium Plot");
+        yml.addDefault("plot.large", "&2Large Plot");
+
+        yml.addDefault("forge.stonepickaxe.displayname", "&7Stone Pickaxe");
+        ArrayList<String> stonepickaxe = new ArrayList<>();
+        stonepickaxe.add("&6Gold: &f1");
+        stonepickaxe.add("&2Quantity: &f1");
+        yml.addDefault("forge.stonepickaxe.lore", stonepickaxe);
+
+        yml.addDefault("forge.stonesword.displayname", "&7Stone Sword");
+        ArrayList<String> stonesword = new ArrayList<>();
+        stonesword.add("&6Gold: &f10");
+        stonesword.add("&2Quantity: &f1");
+        yml.addDefault("forge.stonesword.lore", stonesword);
+
+        yml.addDefault("forge.ironsword.displayname", "&fIron Sword");
+        ArrayList<String> ironsword = new ArrayList<>();
+        ironsword.add("&6Gold: &f30");
+        ironsword.add("&2Quantity: &f1");
+        yml.addDefault("forge.ironsword.lore", ironsword);
+
+        yml.addDefault("forge.stoneaxe.displayname", "&7Stone Axe");
+        ArrayList<String> stoneaxe = new ArrayList<>();
+        stoneaxe.add("&6Gold: &f5");
+        stoneaxe.add("&2Quantity: &f1");
+        yml.addDefault("forge.stoneaxe.lore", stoneaxe);
+
+        yml.addDefault("forge.ironaxe.displayname", "&fIron Axe");
+        ArrayList<String> ironaxe = new ArrayList<>();
+        ironaxe.add("&6Gold: &f15");
+        ironaxe.add("&2Quantity: &f1");
+        yml.addDefault("forge.ironaxe.lore", ironaxe);
+
+        yml.addDefault("mill.bread.displayname", "&7Bread");
+        ArrayList<String> breadlore = new ArrayList<>();
+        breadlore.add("&6Gold: &f10");
+        breadlore.add("&2Quantity: &f5");
+        yml.addDefault("mill.bread.lore", breadlore);
+
+        yml.addDefault("mill.steak.displayname", "&7Steak");
+        ArrayList<String> steak = new ArrayList<>();
+        steak.add("&6Gold: &f22");
+        steak.add("&2Quantity: &f5");
+        yml.addDefault("mill.steak.lore", steak);
+
+        yml.addDefault("mill.chicken.displayname", "&7Chicken");
+        ArrayList<String> chicken = new ArrayList<>();
+        chicken.add("&6Gold: &f20");
+        chicken.add("&2Quantity: &f5");
+        yml.addDefault("mill.chicken.lore", chicken);
+
+        yml.addDefault("mill.potato.displayname", "&7Potato");
+        ArrayList<String> potato = new ArrayList<>();
+        potato.add("&6Gold: &f15");
+        potato.add("&2Quantity: &f5");
+        yml.addDefault("mill.potato.lore", potato);
+
         yml.options().copyDefaults(true);
         try {
             yml.save(file);

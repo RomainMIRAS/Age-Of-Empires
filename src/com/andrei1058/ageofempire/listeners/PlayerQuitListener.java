@@ -1,6 +1,7 @@
 package com.andrei1058.ageofempire.listeners;
 
 import com.andrei1058.ageofempire.configuration.Settings;
+import com.andrei1058.ageofempire.game.Action;
 import com.andrei1058.ageofempire.game.Status;
 import com.andrei1058.ageofempire.game.Titles;
 import com.andrei1058.ageofempire.runnables.Restart;
@@ -19,6 +20,11 @@ public class PlayerQuitListener implements Listener {
 
     @EventHandler
     public void q(PlayerQuitEvent e){
+        if (STATUS == Status.LOBBY || STATUS == Status.STARTING){
+            for (Player p2 : Bukkit.getOnlinePlayers()){
+                Action.actionMsg(p2, getMsg("action-player-left").replace("{player}", e.getPlayer().getName()));
+            }
+        }
         Player p = e.getPlayer();
         if (SETUP) return;
         e.setQuitMessage(null);

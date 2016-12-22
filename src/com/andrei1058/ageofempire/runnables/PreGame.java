@@ -8,10 +8,7 @@ import com.andrei1058.ageofempire.game.Status;
 import com.andrei1058.ageofempire.game.Hologram;
 import com.andrei1058.ageofempire.locations.Locations;
 import com.andrei1058.ageofempire.nms.VillagerNMS;
-import org.bukkit.Bukkit;
-import org.bukkit.Color;
-import org.bukkit.GameMode;
-import org.bukkit.Material;
+import org.bukkit.*;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.scheduler.BukkitRunnable;
@@ -33,11 +30,11 @@ public class PreGame extends BukkitRunnable {
             new Restart().runTaskTimer(plugin, 0, 20);
             STATUS = Status.RESTARTING;
         }
-        if (pregame_time == 1){
+        if (pregame_time == 2){
             for (Player p : Bukkit.getOnlinePlayers()) {
                 if (!greenPlayers.contains(p.getUniqueId()) && !redPlayers.contains(p.getUniqueId()) &&
-                        !greenPlayers.contains(p.getUniqueId()) && !bluePlayers.contains(p.getUniqueId())) {
-                    if (Bukkit.getOnlinePlayers().size() >= max_in_team * 3) {
+                        !yellowPlayers.contains(p.getUniqueId()) && !bluePlayers.contains(p.getUniqueId())) {
+                    if (Bukkit.getOnlinePlayers().size() > max_in_team * 3) {
                         if (bluePlayers.size() < max_in_team) {
                             bluePlayers.add(p.getUniqueId());
                         } else if (greenPlayers.size() < max_in_team) {
@@ -49,7 +46,7 @@ public class PreGame extends BukkitRunnable {
                         } else {
                             p.kickPlayer("Teams are full");
                         }
-                    } else if (Bukkit.getOnlinePlayers().size() >= max_in_team * 2) {
+                    } else if (Bukkit.getOnlinePlayers().size() > max_in_team * 2) {
                         if (bluePlayers.size() < max_in_team) {
                             bluePlayers.add(p.getUniqueId());
                         } else if (greenPlayers.size() < max_in_team) {
@@ -74,10 +71,12 @@ public class PreGame extends BukkitRunnable {
         if (pregame_time > 0){
             for (Player p : Bukkit.getOnlinePlayers()){
                 Action.actionMsg(p, getMsg("game-start").replace("{time}", String.valueOf(pregame_time)));
+                p.getWorld().playSound(p.getLocation(), Sound.CLICK, 1, 1);
             }
         }
         if (pregame_time == 0){
             cancel();
+            STATUS = Status.PLAYING;
             for (Player p : Bukkit.getOnlinePlayers()) {
                 players.add(p.getUniqueId());
                 p.getInventory().clear();
@@ -119,34 +118,38 @@ public class PreGame extends BukkitRunnable {
                 p.getInventory().setItem(7, slotlocked());
                 p.getInventory().setItem(6, forumPaper());
             }
-            STATUS = Status.PLAYING;
-            new Game().runTaskTimer(plugin, 0, 20);
             Scoreboard.register();
-            if (!bluePlayers.isEmpty()){
-                blue_villager = VillagerNMS.spawnVillager(Locations.getLoc("Forums."+choosenMap+".Blue"), 5000);
-                new Hologram(Locations.getLoc("Forums."+choosenMap+".Blue").clone().add(0,+1.2,0),
-                        Locations.getLoc("Forums."+choosenMap+".Blue").clone(),
-                        getMsg("villagers.forum"), getMsg("villagers.buy-buildings"), blue_villager);
-            }
-            if (!greenPlayers.isEmpty()){
-                green_villager = VillagerNMS.spawnVillager(Locations.getLoc("Forums."+choosenMap+".Green"), 5000);
-                new Hologram(Locations.getLoc("Forums."+choosenMap+".Green").clone().add(0,+1.2,0),
-                        Locations.getLoc("Forums."+choosenMap+".Green").clone(),
-                        getMsg("villagers.forum"), getMsg("villagers.buy-buildings"), green_villager);
-            }
-            if (!yellowPlayers.isEmpty()){
-                yellow_villager = VillagerNMS.spawnVillager(Locations.getLoc("Forums."+choosenMap+".Yellow"), 5000);
-                new Hologram(Locations.getLoc("Forums."+choosenMap+".Yellow").clone().add(0,+1.2,0),
-                        Locations.getLoc("Forums."+choosenMap+".Yellow").clone(),
-                        getMsg("villagers.forum"), getMsg("villagers.buy-buildings"), yellow_villager);
-            }
-            if (!redPlayers.isEmpty()){
-                red_villager = VillagerNMS.spawnVillager(Locations.getLoc("Forums."+choosenMap+".Red"), 5000);
-                new Hologram(Locations.getLoc("Forums."+choosenMap+".Red").clone().add(0,+1.2,0),
-                        Locations.getLoc("Forums."+choosenMap+".Red").clone(),
-                        getMsg("villagers.forum"), getMsg("villagers.buy-buildings"), red_villager);
-            }
+            Bukkit.getScheduler().runTaskLater(plugin, new Runnable() {
+                @Override
+                public void run() {
+                    try {
+                        if (!bluePlayers.isEmpty()){
+                            blue_villager = VillagerNMS.spawnVillager(Locations.getLoc("Forums."+choosenMap+".Blue"), 5000);
+                            new Hologram(Locations.getLoc("Forums."+choosenMap+".Blue").clone(),
+                                    getMsg("villagers.forum"), getMsg("villagers.buy-buildings"), blue_villager);
+                        }
+                        if (!greenPlayers.isEmpty()){
+                            green_villager = VillagerNMS.spawnVillager(Locations.getLoc("Forums."+choosenMap+".Green"), 5000);
+                            new Hologram(Locations.getLoc("Forums."+choosenMap+".Green").clone(),
+                                    getMsg("villagers.forum"), getMsg("villagers.buy-buildings"), green_villager);
+                        }
+                        if (!yellowPlayers.isEmpty()){
+                            yellow_villager = VillagerNMS.spawnVillager(Locations.getLoc("Forums."+choosenMap+".Yellow"), 5000);
+                            new Hologram(Locations.getLoc("Forums."+choosenMap+".Yellow").clone(),
+                                    getMsg("villagers.forum"), getMsg("villagers.buy-buildings"), yellow_villager);
+                        }
+                        if (!redPlayers.isEmpty()){
+                            red_villager = VillagerNMS.spawnVillager(Locations.getLoc("Forums."+choosenMap+".Red"), 5000);
+                            new Hologram(Locations.getLoc("Forums."+choosenMap+".Red").clone(),
+                                    getMsg("villagers.forum"), getMsg("villagers.buy-buildings"), red_villager);
+                        }
+                    } catch (Exception e){
+                        e.printStackTrace();
+                    }
+                }
+            }, 10L);
             Main.pvp_assault = 60000*Settings.load().getInt("countdowns.pvp");
+            new Game().runTaskTimer(plugin, 0, 20);
         }
     }
 }

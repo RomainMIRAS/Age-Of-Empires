@@ -4,6 +4,7 @@ import com.andrei1058.ageofempire.configuration.Settings;
 import com.andrei1058.ageofempire.game.Status;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
+import org.bukkit.Sound;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
@@ -28,11 +29,13 @@ public class Lobby extends BukkitRunnable {
         if (lobby_time != 0 && (last == lobby_time || lobby_time == last-10 || lobby_time < 6)){
             last-=10;
             Bukkit.broadcastMessage(getMsg("game-start").replace("{time}", String.valueOf(lobby_time)));
+            for (Player p : Bukkit.getOnlinePlayers()){
+                p.getWorld().playSound(p.getLocation(), Sound.CLICK, 1, 1);
+            }
         }
         if (lobby_time == 0){
             cancel();
             STATUS = Status.PRE_GAME;
-            new PreGame().runTaskTimer(plugin, 0, 20);
 
             ItemStack blue = new ItemStack(Material.STAINED_GLASS_PANE, 1, (short) 11);
             ItemMeta bluemeta = blue.getItemMeta();
@@ -70,6 +73,7 @@ public class Lobby extends BukkitRunnable {
                     p.getInventory().setItem(1, green);
                 }
             }
+            new PreGame().runTaskTimer(plugin, 0, 20);
         }
     }
 }

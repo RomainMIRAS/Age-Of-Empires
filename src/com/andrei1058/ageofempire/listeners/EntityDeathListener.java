@@ -32,7 +32,6 @@ public class EntityDeathListener implements Listener {
                 team = "§cRed";
             }
             if (v == blue_villager){
-                Hologram.get(v).remove();
                 for (UUID u : bluePlayers){
                     players.remove(u);
                     bluePlayers.remove(u);
@@ -40,6 +39,7 @@ public class EntityDeathListener implements Listener {
                     Bukkit.getPlayer(u).setGameMode(GameMode.SPECTATOR);
                 }
                 Bukkit.broadcastMessage(getMsg("base-destroyed.blue").replace("{team}", team));
+                checkWinner();
             } else if (v == green_villager){
                 for (UUID u : greenPlayers){
                     players.remove(u);

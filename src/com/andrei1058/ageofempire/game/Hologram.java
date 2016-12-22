@@ -16,8 +16,8 @@ public class Hologram {
     ArmorStand as2;
     public boolean shown = false;
 
-    public Hologram(Location location, Location location2, String text, String text2, Villager villager){
-        ArmorStand as = (ArmorStand) location.getWorld().spawnEntity(location, EntityType.ARMOR_STAND);
+    public Hologram(Location location2, String text, String text2, Villager villager){
+        ArmorStand as = (ArmorStand) location2.getWorld().spawnEntity(location2.clone().add(0, 0.2, 0), EntityType.ARMOR_STAND);
         as.setGravity(false);
         as.setCanPickupItems(false);
         as.setCustomName(text);
@@ -26,7 +26,7 @@ public class Hologram {
         as.setSmall(true);
         this.as = as;
 
-        ArmorStand as2 = (ArmorStand) location.getWorld().spawnEntity(location2, EntityType.ARMOR_STAND);
+        ArmorStand as2 = (ArmorStand) location2.getWorld().spawnEntity(location2, EntityType.ARMOR_STAND);
         as2.setGravity(false);
         as2.setCanPickupItems(false);
         as2.setCustomName(text2);
@@ -36,10 +36,6 @@ public class Hologram {
 
         holograms.add(this);
         hash.put(villager, this);
-    }
-
-    public Hologram(Location loc, String text, String txt){
-
     }
 
     public void remove(){

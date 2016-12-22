@@ -1,7 +1,9 @@
 package com.andrei1058.ageofempire.listeners;
 
 import com.andrei1058.ageofempire.game.OreHologram;
+import com.andrei1058.ageofempire.game.Status;
 import org.bukkit.Material;
+import org.bukkit.Sound;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.BlockBreakEvent;
@@ -23,6 +25,11 @@ public class BlockBreakListener implements Listener {
     @EventHandler
     public void b(BlockBreakEvent e){
         if (SETUP) return;
+        if (STATUS == Status.PLAYING){
+            if (e.getBlock().getType() == Material.LEAVES || e.getBlock().getType() == Material.LEAVES_2){
+                return;
+            }
+        }
         if (e.getBlock().getType() == Material.LOG && e.getBlock().getData() == 13 || e.getBlock().getType() == Material.LOG_2 && e.getBlock().getData() == 13){ //6
             e.setCancelled(true);
             e.getBlock().setType(Material.AIR);
@@ -53,6 +60,7 @@ public class BlockBreakListener implements Listener {
                 red_wood += 5;
                 red_gold += gold;
             }
+            e.getPlayer().getWorld().playSound(e.getPlayer().getLocation(), Sound.LEVEL_UP, 1,1);
         } else if (e.getBlock().getType() == Material.STONE && e.getBlock().getData() == 5){
             if (help.contains(e.getPlayer().getUniqueId())){
                 if (!stoneAnnounced.contains(e.getPlayer().getUniqueId())){
@@ -82,6 +90,7 @@ public class BlockBreakListener implements Listener {
                 red_stone += 3;
                 red_gold += gold;
             }
+            e.getPlayer().getWorld().playSound(e.getPlayer().getLocation(), Sound.LEVEL_UP, 1,1);
         } else {
             if (e.getBlock().getType() == Material.MELON_BLOCK){
                 return;
