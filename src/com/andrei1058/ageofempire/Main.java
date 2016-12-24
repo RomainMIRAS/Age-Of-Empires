@@ -6,6 +6,7 @@ import com.andrei1058.ageofempire.game.Status;
 import com.andrei1058.ageofempire.listeners.*;
 import net.minecraft.server.v1_8_R3.Village;
 import org.bukkit.Bukkit;
+import org.bukkit.Location;
 import org.bukkit.entity.Villager;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -27,6 +28,7 @@ public class Main extends JavaPlugin {
     public static ArrayList<UUID> redPlayers = new ArrayList<>();
     public static ArrayList<UUID> help = new ArrayList<>();
     public static ArrayList<UUID> players = new ArrayList<>();
+    public static ArrayList<Location> xp = new ArrayList<>();
     public static String choosenMap = "";
     public static boolean SETUP = false;
     public static Status STATUS = Status.RESTARTING;
@@ -49,7 +51,12 @@ public class Main extends JavaPlugin {
     public static Villager blue_forge, green_forge, yellow_forge, red_forge;
     public static Villager blue_smine, green_smine, yellow_smine, red_smine;
     public static Villager blue_gmine, green_gmine, yellow_gmine, red_gmine;
-    public static Villager blue_smill, green_smill, yellow_smill, red_smill;
+    public static Villager blue_mill, green_mill, yellow_mill, red_mill;
+    public static Villager blue_vsawmill, green_vsawmill, yellow_vsawmill, red_vsawmill;
+    public static Villager blue_workshop, green_workshop, yellow_workshop, red_workshop;
+    public static Villager blue_market, green_market, yellow_market, red_market;
+    public static Villager blue_sabotage, green_sabotage, yellow_sabotage, red_sabotage;
+    public static Villager blue_kennel, green_kennel, yellow_kennel, red_kennel;
 
     @Override
     public void onEnable() {
@@ -83,6 +90,7 @@ public class Main extends JavaPlugin {
         pm.registerEvents(new PlayerRespawnListener(), this);
         pm.registerEvents(new CreatureSpawnListener(), this);
         pm.registerEvents(new PlayerMoveListener(), this);
+        pm.registerEvents(new PlayerLoginListener(), this);
         plugin.getServer().getMessenger().registerOutgoingPluginChannel(plugin, "BungeeCord");
     }
 }

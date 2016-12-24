@@ -18,7 +18,9 @@ public class ChatListener implements Listener{
         if (SETUP) return;
         e.setCancelled(true);
         if (STATUS == Status.PLAYING) {
-            if (bluePlayers.contains(e.getPlayer().getUniqueId())) {
+            if (e.getMessage().startsWith("!")){
+                Bukkit.broadcastMessage(getMsg("chat.lobby").replace("{player}", e.getPlayer().getDisplayName()).replace("{message}", e.getMessage().replaceFirst("!", "")));
+            } else if (bluePlayers.contains(e.getPlayer().getUniqueId())) {
                 for (UUID u : bluePlayers) {
                     Bukkit.getPlayer(u).sendMessage(getMsg("chat.game").replace("{player}", "§9"+e.getPlayer().getName()).replace("{message}", e.getMessage()));
                 }
@@ -35,7 +37,7 @@ public class ChatListener implements Listener{
                     Bukkit.getPlayer(u).sendMessage(getMsg("chat.game").replace("{player}", "§c"+e.getPlayer().getName()).replace("{message}", e.getMessage()));
                 }
             }
-        } else if (STATUS == Status.LOBBY || STATUS == Status.STARTING || STATUS == Status.PRE_GAME || STATUS == Status.RESTARTING){
+        } else {
             Bukkit.broadcastMessage(getMsg("chat.lobby").replace("{player}", e.getPlayer().getName()).replace("{message}", e.getMessage()));
         }
     }

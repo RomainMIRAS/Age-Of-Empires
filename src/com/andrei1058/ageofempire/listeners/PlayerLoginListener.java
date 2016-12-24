@@ -7,14 +7,13 @@ import org.bukkit.event.player.PlayerLoginEvent;
 
 import static com.andrei1058.ageofempire.Main.SETUP;
 import static com.andrei1058.ageofempire.Main.STATUS;
-import static com.andrei1058.ageofempire.configuration.Messages.getMsg;
 
 public class PlayerLoginListener implements Listener{
     @EventHandler
     public void l(PlayerLoginEvent e){
         if (SETUP) return;
-        if (STATUS != Status.LOBBY || STATUS != Status.STARTING){
-            e.disallow(PlayerLoginEvent.Result.KICK_OTHER, getMsg("motd.playing"));
+        if (!(STATUS == Status.LOBBY || STATUS == Status.STARTING)){
+            e.disallow(PlayerLoginEvent.Result.KICK_OTHER, "You can't join right now!");
         }
     }
 }

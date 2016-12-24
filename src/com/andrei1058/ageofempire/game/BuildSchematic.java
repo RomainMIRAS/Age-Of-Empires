@@ -186,19 +186,19 @@ public class BuildSchematic {
                                     switch (team) {
                                         case blue_team:
                                             blue_sawmill = true;
-                                            blue_smill = v;
+                                            blue_vsawmill = v;
                                             break;
                                         case green_team:
                                             green_sawmill = true;
-                                            green_smill = v;
+                                            green_vsawmill = v;
                                             break;
                                         case yellow_team:
                                             yellow_sawmill = true;
-                                            yellow_smill = v;
+                                            yellow_vsawmill = v;
                                             break;
                                         case red_team:
                                             red_sawmill = true;
-                                            red_smill = v;
+                                            red_vsawmill = v;
                                             break;
                                     }
                                     break;
@@ -206,19 +206,88 @@ public class BuildSchematic {
                                     new Hologram(v.getLocation(), getMsg("forum."+mill+".displayname"), getMsg("forum."+mill+".holo"), v);
                                     switch (team) {
                                         case blue_team:
-                                            blue_smill = v;
+                                            blue_mill = v;
                                             break;
                                         case green_team:
-                                            green_smill = v;
+                                            green_mill = v;
                                             break;
                                         case yellow_team:
-                                            yellow_smill = v;
+                                            yellow_mill = v;
                                             break;
                                         case red_team:
-                                            red_smill = v;
+                                            red_mill = v;
                                             break;
                                     }
                                     break;
+                                case workshop:
+                                    new Hologram(v.getLocation(), getMsg("forum."+workshop+".displayname"), getMsg("forum."+workshop+".holo"), v);
+                                    switch (team) {
+                                        case blue_team:
+                                            blue_workshop = v;
+                                            break;
+                                        case green_team:
+                                            green_workshop = v;
+                                            break;
+                                        case yellow_team:
+                                            yellow_workshop = v;
+                                            break;
+                                        case red_team:
+                                            red_workshop = v;
+                                            break;
+                                    }
+                                    break;
+                                case market:
+                                    new Hologram(v.getLocation(), getMsg("forum."+market+".displayname"), getMsg("forum."+market+".holo"), v);
+                                    switch (team) {
+                                        case blue_team:
+                                            blue_market = v;
+                                            break;
+                                        case green_team:
+                                            green_market = v;
+                                            break;
+                                        case yellow_team:
+                                            yellow_market = v;
+                                            break;
+                                        case red_team:
+                                            red_market = v;
+                                            break;
+                                    }
+                                    break;
+                                case sabotage:
+                                    new Hologram(v.getLocation(), getMsg("forum."+sabotage+".displayname"), getMsg("forum."+sabotage+".holo"), v);
+                                    switch (team) {
+                                        case blue_team:
+                                            blue_sabotage = v;
+                                            break;
+                                        case green_team:
+                                            green_sabotage = v;
+                                            break;
+                                        case yellow_team:
+                                            yellow_sabotage = v;
+                                            break;
+                                        case red_team:
+                                            red_sabotage = v;
+                                            break;
+                                    }
+                                    break;
+                                case kennel:
+                                    new Hologram(v.getLocation(), getMsg("forum."+kennel+".displayname"), getMsg("forum."+kennel+".holo"), v);
+                                    switch (team) {
+                                        case blue_team:
+                                            blue_kennel = v;
+                                            break;
+                                        case green_team:
+                                            green_kennel = v;
+                                            break;
+                                        case yellow_team:
+                                            yellow_kennel = v;
+                                            break;
+                                        case red_team:
+                                            red_kennel = v;
+                                            break;
+                                    }
+                                    break;
+
                             }
                             return;
                         }

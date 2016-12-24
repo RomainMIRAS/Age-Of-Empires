@@ -124,22 +124,22 @@ public class PreGame extends BukkitRunnable {
                 public void run() {
                     try {
                         if (!bluePlayers.isEmpty()){
-                            blue_villager = VillagerNMS.spawnVillager(Locations.getLoc("Forums."+choosenMap+".Blue"), 5000);
+                            blue_villager = VillagerNMS.spawnVillager(Locations.getLoc("Forums."+choosenMap+".Blue"), 3500);
                             new Hologram(Locations.getLoc("Forums."+choosenMap+".Blue").clone(),
                                     getMsg("villagers.forum"), getMsg("villagers.buy-buildings"), blue_villager);
                         }
                         if (!greenPlayers.isEmpty()){
-                            green_villager = VillagerNMS.spawnVillager(Locations.getLoc("Forums."+choosenMap+".Green"), 5000);
+                            green_villager = VillagerNMS.spawnVillager(Locations.getLoc("Forums."+choosenMap+".Green"), 3500);
                             new Hologram(Locations.getLoc("Forums."+choosenMap+".Green").clone(),
                                     getMsg("villagers.forum"), getMsg("villagers.buy-buildings"), green_villager);
                         }
                         if (!yellowPlayers.isEmpty()){
-                            yellow_villager = VillagerNMS.spawnVillager(Locations.getLoc("Forums."+choosenMap+".Yellow"), 5000);
+                            yellow_villager = VillagerNMS.spawnVillager(Locations.getLoc("Forums."+choosenMap+".Yellow"), 3500);
                             new Hologram(Locations.getLoc("Forums."+choosenMap+".Yellow").clone(),
                                     getMsg("villagers.forum"), getMsg("villagers.buy-buildings"), yellow_villager);
                         }
                         if (!redPlayers.isEmpty()){
-                            red_villager = VillagerNMS.spawnVillager(Locations.getLoc("Forums."+choosenMap+".Red"), 5000);
+                            red_villager = VillagerNMS.spawnVillager(Locations.getLoc("Forums."+choosenMap+".Red"), 3500);
                             new Hologram(Locations.getLoc("Forums."+choosenMap+".Red").clone(),
                                     getMsg("villagers.forum"), getMsg("villagers.buy-buildings"), red_villager);
                         }

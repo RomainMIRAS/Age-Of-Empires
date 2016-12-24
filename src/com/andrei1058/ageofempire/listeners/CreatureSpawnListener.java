@@ -5,12 +5,15 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.entity.CreatureSpawnEvent;
 
 import static com.andrei1058.ageofempire.Main.STATUS;
+import static com.andrei1058.ageofempire.locations.Locations.getLoc;
 
 public class CreatureSpawnListener implements Listener {
     public void s(CreatureSpawnEvent e){
-        if (STATUS != Status.PLAYING || e.getSpawnReason() == e.getSpawnReason().CUSTOM){
+        if (STATUS != Status.PLAYING){
             return;
         }
-        e.setCancelled(true);
+        if (e.getLocation().getWorld() == getLoc("Spawns.Lobby").getWorld()) {
+            e.setCancelled(true);
+        }
     }
 }

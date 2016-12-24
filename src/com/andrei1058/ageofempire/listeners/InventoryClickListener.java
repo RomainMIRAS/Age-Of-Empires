@@ -3,9 +3,9 @@ package com.andrei1058.ageofempire.listeners;
 import com.andrei1058.ageofempire.game.Status;
 import com.andrei1058.ageofempire.game.Vote;
 
+import org.bukkit.DyeColor;
 import org.bukkit.Material;
-import org.bukkit.entity.HumanEntity;
-import org.bukkit.entity.Player;
+import org.bukkit.entity.*;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.inventory.InventoryClickEvent;
@@ -81,7 +81,11 @@ public class InventoryClickListener implements Listener {
                     break;
                 case TNT:
                     e.setCancelled(true);
-                    stuff(e.getWhoClicked(), sabotage, 100, 50);
+                    if (e.getInventory().getName().equalsIgnoreCase("Forum")){
+                        stuff(e.getWhoClicked(), sabotage, 100, 50);
+                    } else {
+                        buy(p, Material.TNT, 1, (short) 0, 5);
+                    }
                     break;
                 case STONE_PICKAXE:
                     e.setCancelled(true);
@@ -157,254 +161,165 @@ public class InventoryClickListener implements Listener {
                     break;
                 case STONE_AXE:
                     e.setCancelled(true);
-                    if (bluePlayers.contains(p.getUniqueId())){
-                        if (blue_gold >= 5){
-                            blue_gold-=5;
-                            p.getInventory().addItem(new ItemStack(Material.STONE_AXE));
-                        }
-                    } else if (greenPlayers.contains(p.getUniqueId())){
-                        if (green_gold >= 5){
-                            green_gold-=5;
-                            p.getInventory().addItem(new ItemStack(Material.STONE_AXE));
-                        }
-                    } else if (redPlayers.contains(p.getUniqueId())){
-                        if (red_gold >= 5){
-                            red_gold-=5;
-                            p.getInventory().addItem(new ItemStack(Material.STONE_AXE));
-                        }
-                    } else if (yellowPlayers.contains(p.getUniqueId())){
-                        if (yellow_gold >= 5){
-                            yellow_gold-=5;
-                            p.getInventory().addItem(new ItemStack(Material.STONE_AXE));
-                        }
-                    }
+                    buy(p, Material.STONE_AXE, 1, (short) 0, 5);
                     break;
                 case IRON_AXE:
                     e.setCancelled(true);
-                    if (bluePlayers.contains(p.getUniqueId())){
-                        if (blue_gold >= 15){
-                            blue_gold-=15;
-                            p.getInventory().addItem(new ItemStack(Material.IRON_AXE));
-                        }
-                    } else if (greenPlayers.contains(p.getUniqueId())){
-                        if (green_gold >= 15){
-                            green_gold-=15;
-                            p.getInventory().addItem(new ItemStack(Material.IRON_AXE));
-                        }
-                    } else if (redPlayers.contains(p.getUniqueId())){
-                        if (red_gold >= 15){
-                            red_gold-=15;
-                            p.getInventory().addItem(new ItemStack(Material.IRON_AXE));
-                        }
-                    } else if (yellowPlayers.contains(p.getUniqueId())){
-                        if (yellow_gold >= 15){
-                            yellow_gold-=15;
-                            p.getInventory().addItem(new ItemStack(Material.IRON_AXE));
-                        }
-                    }
+                    buy(p, Material.IRON_AXE, 1, (short) 0, 15);
                     break;
                 case BREAD:
                     e.setCancelled(true);
-                    if (bluePlayers.contains(p.getUniqueId())){
-                        if (blue_gold >= 10){
-                            blue_gold-=10;
-                            p.getInventory().addItem(new ItemStack(Material.BREAD, 5));
-                        }
-                    } else if (greenPlayers.contains(p.getUniqueId())){
-                        if (green_gold >= 10){
-                            green_gold-=10;
-                            p.getInventory().addItem(new ItemStack(Material.BREAD, 5));
-                        }
-                    } else if (redPlayers.contains(p.getUniqueId())){
-                        if (red_gold >= 10){
-                            red_gold-=10;
-                            p.getInventory().addItem(new ItemStack(Material.BREAD, 5));
-                        }
-                    } else if (yellowPlayers.contains(p.getUniqueId())){
-                        if (yellow_gold >= 10){
-                            yellow_gold-=10;
-                            p.getInventory().addItem(new ItemStack(Material.BREAD, 5));
-                        }
-                    }
+                    buy(p, Material.BREAD, 5, (short) 0, 10);
                     break;
                 case POTATO:
                     e.setCancelled(true);
-                    if (bluePlayers.contains(p.getUniqueId())){
-                        if (blue_gold >= 15){
-                            blue_gold-=15;
-                            p.getInventory().addItem(new ItemStack(Material.POTATO, 5));
-                        }
-                    } else if (greenPlayers.contains(p.getUniqueId())){
-                        if (green_gold >= 15){
-                            green_gold-=15;
-                            p.getInventory().addItem(new ItemStack(Material.POTATO, 5));
-                        }
-                    } else if (redPlayers.contains(p.getUniqueId())){
-                        if (red_gold >= 15){
-                            red_gold-=15;
-                            p.getInventory().addItem(new ItemStack(Material.POTATO, 5));
-                        }
-                    } else if (yellowPlayers.contains(p.getUniqueId())){
-                        if (yellow_gold >= 15){
-                            yellow_gold-=15;
-                            p.getInventory().addItem(new ItemStack(Material.POTATO, 5));
-                        }
-                    }
+                    buy(p, Material.POTATO, 5, (short) 0, 15);
                     break;
                 case COOKED_BEEF:
                     e.setCancelled(true);
-                    if (bluePlayers.contains(p.getUniqueId())){
-                        if (blue_gold >= 22){
-                            blue_gold-=22;
-                            p.getInventory().addItem(new ItemStack(Material.COOKED_BEEF, 5));
-                        }
-                    } else if (greenPlayers.contains(p.getUniqueId())){
-                        if (green_gold >= 22){
-                            green_gold-=22;
-                            p.getInventory().addItem(new ItemStack(Material.COOKED_BEEF, 5));
-                        }
-                    } else if (redPlayers.contains(p.getUniqueId())){
-                        if (red_gold >= 22){
-                            red_gold-=22;
-                            p.getInventory().addItem(new ItemStack(Material.COOKED_BEEF, 5));
-                        }
-                    } else if (yellowPlayers.contains(p.getUniqueId())){
-                        if (yellow_gold >= 22){
-                            yellow_gold-=22;
-                            p.getInventory().addItem(new ItemStack(Material.COOKED_BEEF, 5));
-                        }
-                    }
+                    buy(p, Material.COOKED_BEEF, 5, (short) 0, 22);
                     break;
                 case COOKED_CHICKEN:
                     e.setCancelled(true);
+                    buy(p, Material.COOKED_CHICKEN, 5, (short) 0, 20);
+                    break;
+                case GRASS:
+                    e.setCancelled(true);
+                    buy(p, Material.GRASS, 10, (short) 0, 10);
+                    break;
+                case DIRT:
+                    e.setCancelled(true);
+                    buy(p, Material.DIRT, 10, (short) 0, 10);
+                    break;
+                case WOOD_DOUBLE_STEP:
+                    e.setCancelled(true);
+                    buy(p, Material.WOOD_DOUBLE_STEP, 5, (short) 0, 10);
+                    break;
+                case SAND:
+                    e.setCancelled(true);
+                    buy(p, Material.SAND, 10, (short) 0, 10);
+                    break;
+                case WOOL:
+                    e.setCancelled(true);
+                        buy(p, Material.WOOL, 10, (short) e.getCurrentItem().getData().getData(), 10);
+                    break;
+                case BRICK:
+                    e.setCancelled(true);
+                    buy(p, Material.BRICK, 10, (short) 0, 15);
+                    break;
+                case LEAVES:
+                    e.setCancelled(true);
+                    buy(p, Material.LEAVES, 10, (short) 0, 10);
+                    break;
+                case MOSSY_COBBLESTONE:
+                    e.setCancelled(true);
+                    buy(p, Material.MOSSY_COBBLESTONE, 10, (short) 0, 15);
+                    break;
+                case GRAVEL:
+                    e.setCancelled(true);
+                    buy(p, Material.GRAVEL, 5, (short) 0, 10);
+                    break;
+                case GLASS:
+                    e.setCancelled(true);
+                    buy(p, Material.GRAVEL, 10, (short) 0, 10);
+                    break;
+                case LAPIS_BLOCK:
+                    e.setCancelled(true);
+                    buy(p, Material.LAPIS_BLOCK, 5, (short) 0, 26);
+                    break;
+                case FLINT_AND_STEEL:
+                    e.setCancelled(true);
+                    buy(p, Material.FLINT_AND_STEEL, 1, (short) 0, 5);
+                    break;
+                case WEB:
+                    e.setCancelled(true);
+                    buy(p, Material.WEB, 5, (short) 0, 5);
+                    break;
+                case TORCH:
+                    e.setCancelled(true);
+                    buy(p, Material.TORCH, 12, (short) 0, 5);
+                    break;
+                case BOAT:
+                    e.setCancelled(true);
+                    buy(p, Material.BOAT, 1, (short) 0, 2);
+                    break;
+                case MONSTER_EGG:
+                    e.setCancelled(true);
                     if (bluePlayers.contains(p.getUniqueId())){
-                        if (blue_gold >= 20){
-                            blue_gold-=20;
-                            p.getInventory().addItem(new ItemStack(Material.COOKED_CHICKEN, 5));
+                        if (blue_gold >= 50){
+                            blue_gold-=50;
+                            Wolf w = (Wolf) p.getWorld().spawnEntity(p.getLocation(), EntityType.WOLF);
+                            w.setOwner(p);
+                            w.setCollarColor(DyeColor.BLUE);
+                        } else {
+                            p.sendMessage(getMsg("insufficient-gold"));
                         }
                     } else if (greenPlayers.contains(p.getUniqueId())){
-                        if (green_gold >= 20){
-                            green_gold-=20;
-                            p.getInventory().addItem(new ItemStack(Material.COOKED_CHICKEN, 5));
-                        }
-                    } else if (redPlayers.contains(p.getUniqueId())){
-                        if (red_gold >= 20){
-                            red_gold-=20;
-                            p.getInventory().addItem(new ItemStack(Material.COOKED_CHICKEN, 5));
+                        if (green_gold >= 50){
+                            green_gold-=50;
+                            Wolf w = (Wolf) p.getWorld().spawnEntity(p.getLocation(), EntityType.WOLF);
+                            w.setOwner(p);
+                            w.setCollarColor(DyeColor.GREEN);
+                        } else {
+                            p.sendMessage(getMsg("insufficient-gold"));
                         }
                     } else if (yellowPlayers.contains(p.getUniqueId())){
-                        if (yellow_gold >= 20){
-                            yellow_gold-=20;
-                            p.getInventory().addItem(new ItemStack(Material.COOKED_CHICKEN, 5));
+                        if (yellow_gold >= 50){
+                            yellow_gold-=50;
+                            Wolf w = (Wolf) p.getWorld().spawnEntity(p.getLocation(), EntityType.WOLF);
+                            w.setOwner(p);
+                            w.setCollarColor(DyeColor.YELLOW);
+                        } else {
+                            p.sendMessage(getMsg("insufficient-gold"));
+                        }
+                    } else if (redPlayers.contains(p.getUniqueId())){
+                        if (red_gold >= 50){
+                            red_gold-=50;
+                            Wolf w = (Wolf) p.getWorld().spawnEntity(p.getLocation(), EntityType.WOLF);
+                            w.setOwner(p);
+                            w.setCollarColor(DyeColor.RED);
+                        } else {
+                            p.sendMessage(getMsg("insufficient-gold"));
                         }
                     }
                     break;
-
                 default:
                     e.setCancelled(true);
                     break;
             }
         }
-        /*if (e.getCurrentItem().getType() == ANVIL){
-            e.setCancelled(true);
-            if (construct_in_inv.containsKey(e.getWhoClicked().getUniqueId())){
-                e.getWhoClicked().sendMessage(getMsg("having-construct"));
-                return;
-            }
-            if (bluePlayers.contains(p.getUniqueId())){
-                if (blue_built.contains(forge)){
-                    p.sendMessage(getMsg("already-built"));
-                    return;
-                }
-                if (vote_in_progress.contains(blue_team)){
-                    p.sendMessage(getMsg("cant-vote"));
-                    return;
-                }
-                if (blue_small_plots == 0){
-                    p.sendMessage(getMsg("cant-vote-full"));
-                    return;
-                }
-                if (blue_wood >= 150 && blue_stone >= 75 ){
-                    new Vote(bluePlayers, getMsg("forum.forge.displayname"), p.getUniqueId(), blue_team, 150, 75, forge);
-                } else {
-                    p.sendMessage(getMsg("insufficient-resources").replace("{wood}", String.valueOf(blue_wood-150)).replace("{stone}", String.valueOf(blue_stone-75)));
-                }
-            } else if (greenPlayers.contains(p.getUniqueId())){
-                if (green_built.contains(forge)){
-                    p.sendMessage(getMsg("already-built"));
-                    return;
-                }
-                if (vote_in_progress.contains(green_team)){
-                    p.sendMessage(getMsg("cant-vote"));
-                    return;
-                }
-                if (green_small_plots == 0){
-                    p.sendMessage(getMsg("cant-vote-full"));
-                    return;
-                }
-                if (green_wood >= 150 && green_stone >= 75 ){
-                    new Vote(greenPlayers, getMsg("forum.forge.displayname"), p.getUniqueId(), green_team, 150, 75, forge);
-                } else {
-                    p.sendMessage(getMsg("insufficient-resources").replace("{wood}", String.valueOf(green_wood-150)).replace("{stone}", String.valueOf(green_stone-75)));
-                }
-            } else if (yellowPlayers.contains(p.getUniqueId())){
-                if (yellow_built.contains(forge)){
-                    p.sendMessage(getMsg("already-built"));
-                    return;
-                }
-                if (vote_in_progress.contains(yellow_team)){
-                    p.sendMessage(getMsg("cant-vote"));
-                    return;
-                }
-                if (yellow_small_plots == 0){
-                    p.sendMessage(getMsg("cant-vote-full"));
-                    return;
-                }
-                if (yellow_wood >= 150 && yellow_stone >= 75 ){
-                    new Vote(yellowPlayers, getMsg("forum.forge.displayname"), p.getUniqueId(), yellow_team, 150, 75, forge);
-                } else {
-                    p.sendMessage(getMsg("insufficient-resources").replace("{wood}", String.valueOf(yellow_wood-150)).replace("{stone}", String.valueOf(yellow_stone-75)));
-                }
-            } else if (redPlayers.contains(p.getUniqueId())){
-                if (red_built.contains(forge)){
-                    p.sendMessage(getMsg("already-built"));
-                    return;
-                }
-                if (vote_in_progress.contains(red_team)){
-                    p.sendMessage(getMsg("cant-vote"));
-                    return;
-                }
-                if (red_small_plots == 0){
-                    p.sendMessage(getMsg("cant-vote-full"));
-                    return;
-                }
-                if (red_wood >= 150 && red_stone >= 75 ){
-                    new Vote(redPlayers, getMsg("forum.forge.displayname"), p.getUniqueId(), red_team, 150, 75, forge);
-                } else {
-                    p.sendMessage(getMsg("insufficient-resources").replace("{wood}", String.valueOf(red_wood-150)).replace("{stone}", String.valueOf(red_stone-75)));
-                }
-            }
-        }*/
+    }
 
-        /*if (e.getCurrentItem().getType() == MOB_SPAWNER){
-            if (e.getCurrentItem().getItemMeta().getDisplayName() == null) return;
-            if (e.getCurrentItem().getItemMeta().getDisplayName().equalsIgnoreCase(getMsg("locked-slot"))){
-                e.setCancelled(true);
+    private static void buy(Player p, Material material, Integer cantitate, Short sh, Integer price){
+        if (bluePlayers.contains(p.getUniqueId())){
+            if (blue_gold >= price){
+                blue_gold-=price;
+                p.getInventory().addItem(new ItemStack(material, cantitate, sh));
+            } else {
+                p.sendMessage(getMsg("insufficient-gold"));
+            }
+        } else if (greenPlayers.contains(p.getUniqueId())){
+            if (green_gold >= price){
+                green_gold-=price;
+                p.getInventory().addItem(new ItemStack(material, cantitate, sh));
+            } else {
+                p.sendMessage(getMsg("insufficient-gold"));
+            }
+        } else if (yellowPlayers.contains(p.getUniqueId())){
+            if (yellow_gold >= price){
+                yellow_gold-=price;
+                p.getInventory().addItem(new ItemStack(material, cantitate, sh));
+            } else {
+                p.sendMessage(getMsg("insufficient-gold"));
+            }
+        } else if (redPlayers.contains(p.getUniqueId())){
+            if (red_gold >= price){
+                red_gold-=price;
+                p.getInventory().addItem(new ItemStack(material, cantitate, sh));
+            } else {
+                p.sendMessage(getMsg("insufficient-gold"));
             }
         }
-        if (e.getCurrentItem().getType() == PAPER){
-            if (e.getCurrentItem().getItemMeta().getDisplayName() == null) return;
-            if (e.getCurrentItem().getItemMeta().getDisplayName().equalsIgnoreCase(getMsg("forum-paper"))){
-                e.setCancelled(true);
-            }
-        }
-        if (e.getCurrentItem().getType() == SLIME_BALL){
-            if (e.getCurrentItem().getItemMeta().getDisplayName() != null){
-                if (e.getCurrentItem().getItemMeta().getDisplayName().equalsIgnoreCase(getMsg("validate-vote"))){
-                    e.setCancelled(true);
-                }
-            }
-        }*/
     }
 
     private static void stuff(HumanEntity p, String building, Integer wood, Integer stone) {

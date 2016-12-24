@@ -7,9 +7,6 @@ import org.bukkit.event.entity.EntityDamageEvent;
 
 import static com.andrei1058.ageofempire.Main.STATUS;
 
-/**
- * Created by andrei1058 on 05/12/2016.
- */
 public class EntityDamageListener implements Listener {
 
     @EventHandler

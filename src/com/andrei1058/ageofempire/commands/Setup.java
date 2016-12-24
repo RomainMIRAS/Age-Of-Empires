@@ -42,6 +42,7 @@ public class Setup implements CommandExecutor {
                     p.sendMessage("§7/s addMediumPlot <team> <1/2>");
                     p.sendMessage("§7/s addLargePlot <team> <1/2>");
                     p.sendMessage("§7/s setForum <Blue/Red/Green/Yellow>");
+                    p.sendMessage("§7/s addXp");
                     p.sendMessage("§e/s saveMap");
                 } else {
                     //daca nu este in setup trimite astea
@@ -101,6 +102,9 @@ public class Setup implements CommandExecutor {
                         }
                         else if (args[0].equalsIgnoreCase("setforum")){
                             p.sendMessage("§cUsage: §7/s setForum <Blue/Red/Yellow/Green>");
+                        }
+                        else if (args[0].equalsIgnoreCase("addxp")){
+                            p.sendMessage("§cUsage: §7/s addxp <number>");
                         }
                     }
                 } else if (args.length == 2) {
@@ -198,6 +202,10 @@ public class Setup implements CommandExecutor {
                                     p.sendMessage("§7Green forum set!");
                                     break;
                             }
+                        }
+                        else if (args[0].equalsIgnoreCase("addxp")){
+                            p.sendMessage("§eXp "+args[1]+" lantern set!");
+                            Locations.saveLoc(p.getLocation().add(0, -1, 0), "xp."+p.getWorld().getName()+"."+args[1]);
                         }
                     }
                 }

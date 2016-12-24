@@ -1,7 +1,6 @@
 package com.andrei1058.ageofempire.listeners;
 
 import com.andrei1058.ageofempire.Misc;
-import com.andrei1058.ageofempire.configuration.Messages;
 import com.andrei1058.ageofempire.game.Status;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
@@ -68,21 +67,85 @@ public class PlayerInteractEntityListener implements Listener {
                     if (redPlayers.contains(p.getUniqueId())) {
                         p.openInventory(forge());
                     }
-                } else if (v == blue_smill){
+                } else if (v == blue_mill){
                     if (bluePlayers.contains(p.getUniqueId())){
                         p.openInventory(mill());
                     }
-                } else if (v == green_smill){
+                } else if (v == green_mill){
                     if (greenPlayers.contains(p.getUniqueId())){
                         p.openInventory(mill());
                     }
-                } else if (v == yellow_smill){
+                } else if (v == yellow_mill){
                     if (yellowPlayers.contains(p.getUniqueId())){
                         p.openInventory(mill());
                     }
-                } else if (v == red_smill){
+                } else if (v == red_mill){
                     if (redPlayers.contains(p.getUniqueId())){
                         p.openInventory(mill());
+                    }
+                } else if (v == blue_workshop){
+                    if (bluePlayers.contains(p.getUniqueId())){
+                        p.openInventory(workshop());
+                    }
+                } else if (v == green_workshop){
+                    if (greenPlayers.contains(p.getUniqueId())){
+                        p.openInventory(workshop());
+                    }
+                } else if (v == yellow_workshop){
+                    if (yellowPlayers.contains(p.getUniqueId())){
+                        p.openInventory(workshop());
+                    }
+                } else if (v == red_workshop){
+                    if (redPlayers.contains(p.getUniqueId())){
+                        p.openInventory(workshop());
+                    }
+                } else if (v == blue_market){
+                    if (bluePlayers.contains(p.getUniqueId())){
+                        p.openInventory(market());
+                    }
+                } else if (v == green_market){
+                    if (greenPlayers.contains(p.getUniqueId())){
+                        p.openInventory(market());
+                    }
+                } else if (v == yellow_market){
+                    if (yellowPlayers.contains(p.getUniqueId())){
+                        p.openInventory(market());
+                    }
+                } else if (v == red_market){
+                    if (redPlayers.contains(p.getUniqueId())){
+                        p.openInventory(market());
+                    }
+                } else if (v == blue_sabotage){
+                    if (bluePlayers.contains(p.getUniqueId())){
+                        p.openInventory(sabotage());
+                    }
+                } else if (v == green_sabotage){
+                    if (greenPlayers.contains(p.getUniqueId())){
+                        p.openInventory(sabotage());
+                    }
+                } else if (v == yellow_sabotage){
+                    if (yellowPlayers.contains(p.getUniqueId())){
+                        p.openInventory(sabotage());
+                    }
+                } else if (v == red_sabotage){
+                    if (redPlayers.contains(p.getUniqueId())){
+                        p.openInventory(sabotage());
+                    }
+                } else if (v == blue_kennel){
+                    if (bluePlayers.contains(p.getUniqueId())){
+                        p.openInventory(kennel());
+                    }
+                } else if (v == green_kennel){
+                    if (greenPlayers.contains(p.getUniqueId())){
+                        p.openInventory(kennel());
+                    }
+                } else if (v == yellow_kennel){
+                    if (yellowPlayers.contains(p.getUniqueId())){
+                        p.openInventory(kennel());
+                    }
+                } else if (v == red_kennel){
+                    if (redPlayers.contains(p.getUniqueId())){
+                        p.openInventory(kennel());
                     }
                 } else {
                     e.setCancelled(true);
@@ -148,8 +211,70 @@ public class PlayerInteractEntityListener implements Listener {
         return inv;
     }
 
+    public static Inventory sabotage(){
+        Inventory inv = Bukkit.createInventory(null, 54, "Sabotage");
+        inv.addItem(forgeItem(Material.TNT, getMsg("sabotage.tnt.displayname"), getArray("sabotage.tnt.lore")));
+        return inv;
+    }
+
+    public static Inventory kennel(){
+        Inventory inv = Bukkit.createInventory(null, 54, "Kennel");
+        inv.addItem(forgeItem(Material.MONSTER_EGG, getMsg("kennel.dog.displayname"), getArray("kennel.dog.lore")));
+        return inv;
+    }
+
+    public static Inventory market(){
+        Inventory inv = Bukkit.createInventory(null, 54, "Market");
+        inv.addItem(forgeItem(Material.FLINT_AND_STEEL, getMsg("market.flintandsteel.displayname"), getArray("market.flintandsteel.lore")));
+        inv.addItem(forgeItem(Material.WEB, getMsg("market.cobweb.displayname"), getArray("market.cobweb.lore")));
+        inv.addItem(forgeItem(Material.TORCH, getMsg("market.torches.displayname"), getArray("market.torches.lore")));
+        inv.addItem(forgeItem(Material.BOAT, getMsg("market.boat.displayname"), getArray("market.boat.lore")));
+        return inv;
+    }
+
+    public static Inventory workshop(){
+        Inventory inv = Bukkit.createInventory(null, 54, "Workshop");
+        inv.addItem(forgeItem(Material.GRASS, getMsg("workshop.grass.displayname"), getArray("workshop.grass.lore")));
+        inv.addItem(forgeItem(Material.DIRT, getMsg("workshop.dirt.displayname"), getArray("workshop.dirt.lore")));
+        inv.addItem(forgeItem(Material.WOOD_DOUBLE_STEP, getMsg("workshop.plank.displayname"), getArray("workshop.plank.lore")));
+        inv.addItem(forgeItem(Material.SAND, getMsg("workshop.sand.displayname"), getArray("workshop.sand.lore")));
+        inv.addItem(forgeItem(Material.GRAVEL, getMsg("workshop.gravel.displayname"), getArray("workshop.gravel.lore")));
+        inv.addItem(forgeItem(Material.SPONGE, getMsg("workshop.sponge.displayname"), getArray("workshop.sponge.lore")));
+        inv.addItem(forgeItem(Material.GLASS, getMsg("workshop.glass.displayname"), getArray("workshop.glass.lore")));
+        inv.addItem(forgeItem(Material.LAPIS_BLOCK, getMsg("workshop.lapis.displayname"), getArray("workshop.lapis.lore")));
+        inv.addItem(WOOLItem((short) 0, getMsg("workshop.whitewool.displayname"), getArray("workshop.whitewool.lore")));
+        inv.addItem(WOOLItem((short) 1, getMsg("workshop.orangewool.displayname"), getArray("workshop.orangewool.lore")));
+        inv.addItem(WOOLItem((short) 2, getMsg("workshop.magentawool.displayname"), getArray("workshop.magentawool.lore")));
+        inv.addItem(WOOLItem((short) 3, getMsg("workshop.lightbluewool.displayname"), getArray("workshop.lightbluewool.lore")));
+        inv.addItem(WOOLItem((short) 4, getMsg("workshop.yellowwool.displayname"), getArray("workshop.yellowwool.lore")));
+        inv.addItem(WOOLItem((short) 5, getMsg("workshop.lightgreenwool.displayname"), getArray("workshop.lightgreenwool.lore")));
+        inv.addItem(WOOLItem((short) 6, getMsg("workshop.pinkwool.displayname"), getArray("workshop.pinkwool.lore")));
+        inv.addItem(WOOLItem((short) 7, getMsg("workshop.graywool.displayname"), getArray("workshop.graywool.lore")));
+        inv.addItem(WOOLItem((short) 9, getMsg("workshop.cyanwool.displayname"), getArray("workshop.cyanwool.lore")));
+        inv.addItem(WOOLItem((short) 10, getMsg("workshop.purplewool.displayname"), getArray("workshop.purplewool.lore")));
+        inv.addItem(WOOLItem((short) 11, getMsg("workshop.bluewool.displayname"), getArray("workshop.bluewool.lore")));
+        inv.addItem(WOOLItem((short) 15, getMsg("workshop.blackwool.displayname"), getArray("workshop.blackwool.lore")));
+        inv.addItem(WOOLItem((short) 13, getMsg("workshop.greenwool.displayname"), getArray("workshop.greenwool.lore")));
+        inv.addItem(WOOLItem((short) 14, getMsg("workshop.redwool.displayname"), getArray("workshop.redwool.lore")));
+        inv.addItem(WOOLItem((short) 12, getMsg("workshop.brownwool.displayname"), getArray("workshop.brownwool.lore")));
+        inv.addItem(forgeItem(Material.BRICK, getMsg("workshop.bricks.displayname"), getArray("workshop.bricks.lore")));
+        inv.addItem(forgeItem(Material.MOSSY_COBBLESTONE, getMsg("workshop.mossstone.displayname"), getArray("workshop.mossstone.lore")));
+        inv.addItem(forgeItem(Material.LEAVES, getMsg("workshop.leaves.displayname"), getArray("workshop.leaves.lore")));
+        return inv;
+    }
+
     private static ItemStack forgeItem(Material material, String name, ArrayList<String> lore){
         ItemStack i = new ItemStack(material);
+        ItemMeta im = i.getItemMeta();
+        im.setDisplayName(name);
+        ArrayList<String> list = lore.stream().map(s -> s.replace('&', '§')).collect(Collectors.toCollection(ArrayList::new));
+        im.setLore(list);
+        i.setItemMeta(im);
+        return i;
+    }
+
+    private static ItemStack WOOLItem(short sh, String name, ArrayList<String> lore){
+        ItemStack i = new ItemStack(Material.WOOL, 1, sh);
         ItemMeta im = i.getItemMeta();
         im.setDisplayName(name);
         ArrayList<String> list = lore.stream().map(s -> s.replace('&', '§')).collect(Collectors.toCollection(ArrayList::new));

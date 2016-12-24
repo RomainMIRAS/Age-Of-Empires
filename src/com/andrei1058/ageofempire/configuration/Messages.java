@@ -26,6 +26,7 @@ public class Messages {
         yml.addDefault("player-join", "{prefix} &7%player% has joined the game!");
         yml.addDefault("action-player-join", "&e{player} &7has joined the game!");
         yml.addDefault("action-player-left", "&e{player} &7has left the game!");
+        yml.addDefault("player-died", "{player} &adied!");
         yml.addDefault("help-item-on", "&aHelp On");
         yml.addDefault("help-item-off", "&cHelp Off");
         yml.addDefault("leave-item", "&aBack to Hub");
@@ -69,7 +70,7 @@ public class Messages {
         yml.addDefault("pvp-on", "{prefix} &6Pvp On, rare ores have appeared in the middle of the map.");
         yml.addDefault("assaults-on", "{prefix} &6Assaults on.");
         yml.addDefault("chat.game", "(Team) {player} &f: {message}");
-        yml.addDefault("chat.lobby", "(All) {player} : {message}");
+        yml.addDefault("chat.lobby", "(All) {player} &f: {message}");
         yml.addDefault("cant-break", "{prefix} &cYou can't break this block in a kingdom");
         yml.addDefault("cant-vote", "{prefix} &cYou can't vote at the moment (a vote is already in progress)");
         yml.addDefault("forum.age1", "&cAge 1");
@@ -168,6 +169,7 @@ public class Messages {
         yml.addDefault("vote-denied", "&c{player}&4's vote has been denied.");
         yml.addDefault("vote-accepted", "&2{player}&a's vote has been accepted.");
         yml.addDefault("insufficient-resources", "{prefix} &cYour team doesn't have enough &eresources &c{&6Wood missing&e: &f{wood}&6: Stones missing&e: &f{stone}&6).");
+        yml.addDefault("insufficient-gold", "{prefix} &cInsufficient gold!");
         yml.addDefault("locked-slot", "&cSlot Locked");
         yml.addDefault("forum-paper", "Forum");
         yml.addDefault("validate-vote", "&aValidate your Vote");
@@ -264,6 +266,207 @@ public class Messages {
         potato.add("&6Gold: &f15");
         potato.add("&2Quantity: &f5");
         yml.addDefault("mill.potato.lore", potato);
+
+        //workshop
+        yml.addDefault("workshop.grass.displayname", "&7Grass");
+        ArrayList<String> grass = new ArrayList<>();
+        grass.add("&6Gold: &f10");
+        grass.add("&2Quantity: &f10");
+        yml.addDefault("workshop.grass.lore", grass);
+
+        yml.addDefault("workshop.dirt.displayname", "&7Dirt");
+        ArrayList<String> dirt = new ArrayList<>();
+        dirt.add("&6Gold: &f10");
+        dirt.add("&2Quantity: &f10");
+        yml.addDefault("workshop.dirt.lore", dirt);
+
+        yml.addDefault("workshop.plank.displayname", "&7Plank");
+        ArrayList<String> plank = new ArrayList<>();
+        plank.add("&6Gold: &f10");
+        plank.add("&2Quantity: &f5");
+        yml.addDefault("workshop.plank.lore", plank);
+
+        yml.addDefault("workshop.sand.displayname", "&7Sand");
+        ArrayList<String> sand = new ArrayList<>();
+        sand.add("&6Gold: &f10");
+        sand.add("&2Quantity: &f5");
+        yml.addDefault("workshop.sand.lore", sand);
+
+        yml.addDefault("workshop.gravel.displayname", "&7Gravel");
+        ArrayList<String> gravel = new ArrayList<>();
+        gravel.add("&6Gold: &f10");
+        gravel.add("&2Quantity: &f5");
+        yml.addDefault("workshop.gravel.lore", gravel);
+
+        yml.addDefault("workshop.sponge.displayname", "&7Sponge");
+        ArrayList<String> sponge = new ArrayList<>();
+        sponge.add("&6Gold: &f20");
+        sponge.add("&2Quantity: &f5");
+        yml.addDefault("workshop.sponge.lore", sponge);
+
+        yml.addDefault("workshop.glass.displayname", "&7Glass");
+        ArrayList<String> glass = new ArrayList<>();
+        glass.add("&6Gold: &f15");
+        glass.add("&2Quantity: &f10");
+        yml.addDefault("workshop.glass.lore", glass);
+
+        yml.addDefault("workshop.lapis.displayname", "&7Lapis Block");
+        ArrayList<String> lapis = new ArrayList<>();
+        lapis.add("&6Gold: &f25");
+        lapis.add("&2Quantity: &f5");
+        yml.addDefault("workshop.lapis.lore", lapis);
+
+        yml.addDefault("workshop.whitewool.displayname", "&7White Wool");
+        ArrayList<String> whitewool = new ArrayList<>();
+        whitewool.add("&6Gold: &f10");
+        whitewool.add("&2Quantity: &f10");
+        yml.addDefault("workshop.whitewool.lore", whitewool);
+
+        yml.addDefault("workshop.orangewool.displayname", "&7Orange Wool");
+        ArrayList<String> orangewool = new ArrayList<>();
+        orangewool.add("&6Gold: &f10");
+        orangewool.add("&2Quantity: &f10");
+        yml.addDefault("workshop.orangewool.lore", orangewool);
+
+        yml.addDefault("workshop.magentawool.displayname", "&7Magenta Wool");
+        ArrayList<String> magentawool = new ArrayList<>();
+        magentawool.add("&6Gold: &f10");
+        magentawool.add("&2Quantity: &f10");
+        yml.addDefault("workshop.magentawool.lore", magentawool);
+
+        yml.addDefault("workshop.lightbluewool.displayname", "&7Light Blue Wool");
+        ArrayList<String> lightbluewool = new ArrayList<>();
+        lightbluewool.add("&6Gold: &f10");
+        lightbluewool.add("&2Quantity: &f10");
+        yml.addDefault("workshop.lightbluewool.lore", lightbluewool);
+
+        yml.addDefault("workshop.yellowwool.displayname", "&7Yellow Wool");
+        ArrayList<String> yellowwool = new ArrayList<>();
+        yellowwool.add("&6Gold: &f10");
+        yellowwool.add("&2Quantity: &f10");
+        yml.addDefault("workshop.yellowwool.lore", yellowwool);
+
+        yml.addDefault("workshop.lightgreenwool.displayname", "&7Light Green Wool");
+        ArrayList<String> lightgreenwool = new ArrayList<>();
+        lightgreenwool.add("&6Gold: &f10");
+        lightgreenwool.add("&2Quantity: &f10");
+        yml.addDefault("workshop.lightgreenwool.lore", yellowwool);
+
+        yml.addDefault("workshop.pinkwool.displayname", "&7Pink Wool");
+        ArrayList<String> pinkwool = new ArrayList<>();
+        pinkwool.add("&6Gold: &f10");
+        pinkwool.add("&2Quantity: &f10");
+        yml.addDefault("workshop.pinkwool.lore", pinkwool);
+
+        yml.addDefault("workshop.graywool.displayname", "&7Gray Wool");
+        ArrayList<String> graywool = new ArrayList<>();
+        graywool.add("&6Gold: &f10");
+        graywool.add("&2Quantity: &f10");
+        yml.addDefault("workshop.graywool.lore", graywool);
+
+        yml.addDefault("workshop.cyanwool.displayname", "&7Cyan Wool");
+        ArrayList<String> cyanwool = new ArrayList<>();
+        cyanwool.add("&6Gold: &f10");
+        cyanwool.add("&2Quantity: &f10");
+        yml.addDefault("workshop.cyanwool.lore", cyanwool);
+
+        yml.addDefault("workshop.purplewool.displayname", "&7Purple Wool");
+        ArrayList<String> purplewool = new ArrayList<>();
+        purplewool.add("&6Gold: &f10");
+        purplewool.add("&2Quantity: &f10");
+        yml.addDefault("workshop.purplewool.lore", purplewool);
+
+        yml.addDefault("workshop.bluewool.displayname", "&7Blue Wool");
+        ArrayList<String> bluewool = new ArrayList<>();
+        bluewool.add("&6Gold: &f10");
+        bluewool.add("&2Quantity: &f10");
+        yml.addDefault("workshop.bluewool.lore", bluewool);
+
+        yml.addDefault("workshop.blackwool.displayname", "&7Back Wool");
+        ArrayList<String> blackwool = new ArrayList<>();
+        blackwool.add("&6Gold: &f10");
+        blackwool.add("&2Quantity: &f10");
+        yml.addDefault("workshop.blackwool.lore", blackwool);
+
+        yml.addDefault("workshop.greenwool.displayname", "&7Green Wool");
+        ArrayList<String> greenwool = new ArrayList<>();
+        greenwool.add("&6Gold: &f10");
+        greenwool.add("&2Quantity: &f10");
+        yml.addDefault("workshop.greenwool.lore", greenwool);
+
+        yml.addDefault("workshop.redwool.displayname", "&7Red Wool");
+        ArrayList<String> redwool = new ArrayList<>();
+        redwool.add("&6Gold: &f10");
+        redwool.add("&2Quantity: &f10");
+        yml.addDefault("workshop.redwool.lore", redwool);
+
+        yml.addDefault("workshop.brownwool.displayname", "&7Brown Wool");
+        ArrayList<String> brownwool = new ArrayList<>();
+        brownwool.add("&6Gold: &f10");
+        brownwool.add("&2Quantity: &f10");
+        yml.addDefault("workshop.brownwool.lore", brownwool);
+
+        yml.addDefault("workshop.bricks.displayname", "&7Bricks");
+        ArrayList<String> bricks = new ArrayList<>();
+        bricks.add("&6Gold: &f15");
+        bricks.add("&2Quantity: &f10");
+        yml.addDefault("workshop.bricks.lore", bricks);
+
+        yml.addDefault("workshop.mossstone.displayname", "&7Moss Stone");
+        ArrayList<String> mossstone = new ArrayList<>();
+        mossstone.add("&6Gold: &f15");
+        mossstone.add("&2Quantity: &f10");
+        yml.addDefault("workshop.mossstone.lore", mossstone);
+
+        yml.addDefault("workshop.leaves.displayname", "&7Leaves");
+        ArrayList<String> leaves = new ArrayList<>();
+        leaves.add("&6Gold: &f15");
+        leaves.add("&2Quantity: &f10");
+        yml.addDefault("workshop.leaves.lore", leaves);
+
+        //market
+        yml.addDefault("market.flintandsteel.displayname", "&eFlint and Steel");
+        ArrayList<String> flintandsteel = new ArrayList<>();
+        flintandsteel.add("&6Gold: &f5");
+        flintandsteel.add("&2Quantity: &f1");
+        yml.addDefault("workshop.flintandsteel.lore", flintandsteel);
+
+        yml.addDefault("market.cobweb.displayname", "&eCobweb");
+        ArrayList<String> cobweb = new ArrayList<>();
+        cobweb.add("&6Gold: &f5");
+        cobweb.add("&2Quantity: &f5");
+        yml.addDefault("workshop.cobweb.lore", cobweb);
+
+        yml.addDefault("market.torches.displayname", "&eTorches");
+        ArrayList<String> torches = new ArrayList<>();
+        torches.add("&6Gold: &f5");
+        torches.add("&2Quantity: &f12");
+        yml.addDefault("workshop.torches.lore", torches);
+
+        yml.addDefault("market.boat.displayname", "&eBoat");
+        ArrayList<String> boat = new ArrayList<>();
+        boat.add("&6Gold: &f2");
+        boat.add("&2Quantity: &f1");
+        yml.addDefault("workshop.boat.lore", boat);
+
+        yml.addDefault("sabotage.tnt.displayname", "&cTNT");
+        ArrayList<String> tnt = new ArrayList<>();
+        tnt.add("&6Gold: &f5");
+        tnt.add("&2Quantity: &f1");
+        yml.addDefault("sabotage.tnt.lore", tnt);
+
+        yml.addDefault("kennel.dog.displayname", "&cDog");
+        ArrayList<String> dog = new ArrayList<>();
+        dog.add("&6Gold: &f50");
+        dog.add("&2Quantity: &f1");
+        yml.addDefault("kennel.dog.lore", dog);
+
+        yml.addDefault("pvp-disabled", "{prefix} &eP'rhaps wait for the PvP, get me? &a:p");
+        yml.addDefault("x-attacked", "&e&l{villager} Attacked");
+        yml.addDefault("yellow-building-explode", "{prefix} &eThe Yellow Team's {building} &6will explode in 15 seconds!");
+        yml.addDefault("blue-building-explode", "{prefix} &eThe &9Blue Team's {building} &6will explode in 15 seconds!");
+        yml.addDefault("green-building-explode", "{prefix} &eThe &aGreen Team's {building} &6will explode in 15 seconds!");
+        yml.addDefault("red-building-explode", "{prefix} &eThe &cRed Team's {building} &6will explode in 15 seconds!");
 
         yml.options().copyDefaults(true);
         try {

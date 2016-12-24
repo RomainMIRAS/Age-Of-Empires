@@ -5,9 +5,9 @@ import com.andrei1058.ageofempire.game.OreHologram;
 import com.andrei1058.ageofempire.game.Scoreboard;
 import com.andrei1058.ageofempire.game.Vote;
 import com.andrei1058.ageofempire.game.Hologram;
-import org.bukkit.Bukkit;
-import org.bukkit.ChatColor;
-import org.bukkit.Sound;
+import com.andrei1058.ageofempire.locations.Locations;
+import org.bukkit.*;
+import org.bukkit.block.Block;
 import org.bukkit.scheduler.BukkitRunnable;
 
 import java.util.UUID;
@@ -77,6 +77,11 @@ public class Game extends BukkitRunnable {
                     for (UUID u : players) {
                         Bukkit.getPlayer(u).playSound(Bukkit.getPlayer(u).getLocation(), Sound.WOLF_DEATH, 1, 1);
                         Bukkit.getPlayer(u).getScoreboard().getTeam("pvp_assault").setPrefix(getMsg("scoreboard.3_2"));
+                    }
+                    for (String st : Locations.load().getConfigurationSection("xp."+choosenMap).getKeys(false)){
+                        Block b = Bukkit.getWorld(choosenMap).getBlockAt(Locations.getLoc("xp."+choosenMap+"."+st));
+                        b.setType(Material.SEA_LANTERN);
+                        xp.add(new Location(Bukkit.getWorld(choosenMap), b.getLocation().getBlockX(), b.getLocation().getBlockY(), b.getLocation().getBlockZ()));
                     }
                 } else {
                     if (!assualt) {
