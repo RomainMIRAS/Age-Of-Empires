@@ -9,6 +9,7 @@ import java.util.List;
 
 import static com.andrei1058.ageofempire.Main.PREFIX;
 import static com.andrei1058.ageofempire.game.Buildings.*;
+import static com.andrei1058.ageofempire.game.Buildings.archery;
 
 public class Messages {
     private static File file = new File("plugins/Age-Of-Empire/messages.yml");
@@ -165,6 +166,69 @@ public class Messages {
         yml.addDefault("forum."+workshop+".lore", workshop_lore);
         yml.addDefault("forum."+workshop+".holo", "&bBuy various blocks");
 
+        yml.addDefault("forum."+archery+".displayname", "&e&lArchery Store");
+        ArrayList archeryl = new ArrayList();
+        archeryl.add("&3Wood: &f300");
+        archeryl.add("&3Stone: &f150");
+        archeryl.add("&3Plot: &fMedium");
+        archeryl.add("&3Description: &bBuy ranged weapons.");
+        yml.addDefault("forum."+archery+".lore", archeryl);
+        yml.addDefault("forum."+archery+".holo", "&bBuy ranged weapons");
+
+        yml.addDefault("forum."+trifarrow+".displayname", "&e&lTrifArrow");
+        ArrayList trifarrow_lore = new ArrayList();
+        trifarrow_lore.add("&3Wood: &f375");
+        trifarrow_lore.add("&3Stone: &f175");
+        trifarrow_lore.add("&3Plot: &fMedium");
+        trifarrow_lore.add("&3Description: &bBuy various different arrows.");
+        yml.addDefault("forum."+trifarrow+".lore", trifarrow_lore);
+        yml.addDefault("forum."+trifarrow+".holo", "&bBuy various different arrows");
+
+        yml.addDefault("forum."+stable+".displayname", "&e&lStable");
+        ArrayList stable_lore = new ArrayList();
+        stable_lore.add("&3Wood: &f200");
+        stable_lore.add("&3Stone: &f100");
+        stable_lore.add("&3Plot: &fMedium");
+        stable_lore.add("&3Description: &bBuy horses.");
+        yml.addDefault("forum."+stable+".lore", stable_lore);
+        yml.addDefault("forum."+stable+".holo", "&bBuy horses");
+
+        yml.addDefault("forum."+armory+".displayname", "&e&lArmory");
+        ArrayList armory_lore = new ArrayList();
+        armory_lore.add("&3Wood: &f300");
+        armory_lore.add("&3Stone: &f150");
+        armory_lore.add("&3Plot: &fMedium");
+        armory_lore.add("&3Description: &bBuy armor.");
+        yml.addDefault("forum."+armory+".lore", stable_lore);
+        yml.addDefault("forum."+armory+".holo", "&bBuy armory_lore");
+
+        yml.addDefault("forum."+laboratory+".displayname", "&e&lLaboratory");
+        ArrayList laboratory_lore = new ArrayList();
+        laboratory_lore.add("&3Wood: &f300");
+        laboratory_lore.add("&3Stone: &f150");
+        laboratory_lore.add("&3Plot: &fMedium");
+        laboratory_lore.add("&3Description: &bBuy potions.");
+        yml.addDefault("forum."+laboratory+".lore", laboratory_lore);
+        yml.addDefault("forum."+laboratory+".holo", "&bBuy potions");
+
+        yml.addDefault("forum."+guild+".displayname", "&e&lGuild");
+        ArrayList guild_lore = new ArrayList();
+        guild_lore.add("&3Wood: &f600");
+        guild_lore.add("&3Stone: &f300");
+        guild_lore.add("&3Plot: &fLarge");
+        guild_lore.add("&3Description: &bBuy enchantments.");
+        yml.addDefault("forum."+guild+".lore", guild_lore);
+        yml.addDefault("forum."+guild+".holo", "&bBuy enchantments");
+
+        yml.addDefault("forum."+training_center+".displayname", "&e&lTraining Center");
+        ArrayList training_center_lore = new ArrayList();
+        training_center_lore.add("&3Wood: &f500");
+        training_center_lore.add("&3Stone: &f250");
+        training_center_lore.add("&3Plot: &fLarge");
+        training_center_lore.add("&3Description: &bYields XP automatically.");
+        yml.addDefault("forum."+training_center+".lore", training_center_lore);
+        yml.addDefault("forum."+training_center+".holo", "&bYields XP automatically");
+
         yml.addDefault("new-vote", "&9{player} &1would like to create a/an {building} &f. &2{votes}&f/&4{team}");
         yml.addDefault("vote-denied", "&c{player}&4's vote has been denied.");
         yml.addDefault("vote-accepted", "&2{player}&a's vote has been accepted.");
@@ -188,6 +252,10 @@ public class Messages {
         yml.addDefault("build-started", "{prefix} &2{player} has just started building {building}");
         yml.addDefault("already-built", "&c&lYou already built this!");
         yml.addDefault("vote-age", "&9{player} &1would like to change Age &f. &2{votes}&f/&4{team}");
+        yml.addDefault("blue-changed-age", "{prefix} &fThe &9Blue &fteam has just changed to Age &e{age}");
+        yml.addDefault("green-changed-age", "{prefix} &fThe &aGreen &fteam has just changed to Age &e{age}");
+        yml.addDefault("yellow-changed-age", "{prefix} &fThe &eYellow &fteam has just changed to Age &e{age}");
+        yml.addDefault("red-changed-age", "{prefix} &fThe &cRed &fteam has just changed to Age &e{age}");
         yml.addDefault("cant-construct-outside", "&cYou can't construct buildings outside your base.");
         yml.addDefault("cant-construct-here", "&cYou can't construct buildings right here.");
         yml.addDefault("cant-construct-size", "&cYou must be in the right size plot to build this structure.");
@@ -242,6 +310,18 @@ public class Messages {
         ironaxe.add("&6Gold: &f15");
         ironaxe.add("&2Quantity: &f1");
         yml.addDefault("forge.ironaxe.lore", ironaxe);
+
+        yml.addDefault("forge.diamondsowrd.displayname", "&9Diamond Sword");
+        ArrayList<String> diamondsowrd_l = new ArrayList<>();
+        diamondsowrd_l.add("&6Gold: &f50");
+        diamondsowrd_l.add("&2Quantity: &f1");
+        yml.addDefault("forge.diamondsowrd.lore", diamondsowrd_l);
+
+        yml.addDefault("forge.diamondaxe.displayname", "&9Diamond Axe");
+        ArrayList<String> diamondaxe_l = new ArrayList<>();
+        diamondaxe_l.add("&6Gold: &f25");
+        diamondaxe_l.add("&2Quantity: &f1");
+        yml.addDefault("forge.diamondaxe.lore", diamondaxe_l);
 
         yml.addDefault("mill.bread.displayname", "&7Bread");
         ArrayList<String> breadlore = new ArrayList<>();
@@ -467,6 +547,54 @@ public class Messages {
         yml.addDefault("blue-building-explode", "{prefix} &eThe &9Blue Team's {building} &6will explode in 15 seconds!");
         yml.addDefault("green-building-explode", "{prefix} &eThe &aGreen Team's {building} &6will explode in 15 seconds!");
         yml.addDefault("red-building-explode", "{prefix} &eThe &cRed Team's {building} &6will explode in 15 seconds!");
+
+        ArrayList age2_lore = new ArrayList();
+        age2_lore.add("&eChange to Age 2");
+        age2_lore.add("&3Wood: &f1250");
+        age2_lore.add("&3Stone: &f750");
+        yml.addDefault("change.age2-lore", age2_lore);
+
+        ArrayList age3_lore = new ArrayList();
+        age3_lore.add("&eChange to Age 3");
+        age3_lore.add("&3Wood: &f2250");
+        age3_lore.add("&3Stone: &f1250");
+        yml.addDefault("change.age3-lore", age3_lore);
+
+        ArrayList age4_lore = new ArrayList();
+        age4_lore.add("&eChange to Age 4");
+        age4_lore.add("&3Wood: &f4250");
+        age4_lore.add("&3Stone: &f3150");
+        yml.addDefault("change.age4-lore", age4_lore);
+
+        yml.addDefault("archery.bow.displayname", "&8Bow");
+        ArrayList<String> bow_lore = new ArrayList<>();
+        bow_lore.add("&6Gold: &f30");
+        bow_lore.add("&2Quantity: &f1");
+        yml.addDefault("archery.bow.lore", bow_lore);
+
+        yml.addDefault("archery.arrows5.displayname", "&8Arrows");
+        ArrayList<String> a5_lore = new ArrayList<>();
+        a5_lore.add("&6Gold: &f5");
+        a5_lore.add("&2Quantity: &f5");
+        yml.addDefault("archery.arrows5.lore", a5_lore);
+
+        yml.addDefault("archery.arrows10.displayname", "&8Arrows");
+        ArrayList<String> a10_lore = new ArrayList<>();
+        a10_lore.add("&6Gold: &f7");
+        a10_lore.add("&2Quantity: &f10");
+        yml.addDefault("archery.arrows10.lore", a10_lore);
+
+        yml.addDefault("stable.horse.displayname", "&8Horse");
+        ArrayList<String> horse_lore = new ArrayList<>();
+        horse_lore.add("&6Gold: &f30");
+        horse_lore.add("&2Quantity: &f1");
+        yml.addDefault("stable.horse.lore", horse_lore);
+
+        yml.addDefault("trifarrow.arrow.displayname", "&8Exploding Arrows");
+        ArrayList<String> arrow_explode = new ArrayList<>();
+        arrow_explode.add("&6Gold: &f20");
+        arrow_explode.add("&2Quantity: &f1");
+        yml.addDefault("trifarrow.arrow.lore", arrow_explode);
 
         yml.options().copyDefaults(true);
         try {

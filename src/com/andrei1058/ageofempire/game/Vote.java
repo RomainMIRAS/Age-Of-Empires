@@ -14,6 +14,8 @@ import static com.andrei1058.ageofempire.configuration.Messages.getMsg;
 import static com.andrei1058.ageofempire.game.Buildings.age_string;
 import static com.andrei1058.ageofempire.game.Buildings.construct_in_inv;
 import static com.andrei1058.ageofempire.game.Buildings.vote_in_progress;
+import static com.andrei1058.ageofempire.game.Scoreboard.*;
+import static com.andrei1058.ageofempire.runnables.Game.*;
 
 public class Vote {
 
@@ -71,8 +73,24 @@ public class Vote {
                 }
                 switch (build){
                     case age_string:
-                        //wait 1 until change age
-                        //arraylist cu teamname age_change ca sa nu poata vota iar age in timpul minutului de countdown
+                        switch (teamname){
+                            case blue_team:
+                                blue_change_age = true;
+                                blue_age_long = 60000;
+                                break;
+                            case green_team:
+                                green_change_age = true;
+                                green_age_long = 60000;
+                                break;
+                            case yellow_team:
+                                yellow_change_age = true;
+                                yellow_age_long = 60000;
+                                break;
+                            case red_team:
+                                red_change_age = true;
+                                red_age_long = 60000;
+                                break;
+                        }
                         break;
                     default:
                         construct_in_inv.put(requester, BUILD_NAME);

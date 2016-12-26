@@ -19,6 +19,10 @@ public class Game extends BukkitRunnable {
     public static int secPlayed = 0;
     private static int stonecheck = 3;
     private static int holo = 30;
+    public static boolean blue_change_age = false;
+    public static boolean green_change_age = false;
+    public static boolean yellow_change_age = false;
+    public static boolean red_change_age = false;
     @Override
     public void run() {
         secPlayed++;

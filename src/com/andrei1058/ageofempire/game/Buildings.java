@@ -15,7 +15,9 @@ public class Buildings {
     public static ArrayList red_built = new ArrayList();
 
     public static final String forge = "FORGE", mill = "MILL", stone_mine = "STONE_MINE", gold_mine = "GOLD_MINE", sawmill = "SAWMILL",
-    workshop = "WORKSHOP", market = "MARKET", kennel = "KENNEL", sabotage = "SABOTAGE_WORKSHOP", age_string = "age";
+    workshop = "WORKSHOP", market = "MARKET", kennel = "KENNEL", sabotage = "SABOTAGE_WORKSHOP", age_string = "age",
+            archery = "ARCHERY_STORE", trifarrow = "TRIFARROW", stable = "STABLE", armory = "ARMORY", laboratory = "LABORATORY",
+    guild = "GUILD", training_center = "TRAINING_CENTER";
 
     public static boolean hasBuild(String build, String team){
         switch (team){

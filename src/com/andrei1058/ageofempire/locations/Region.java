@@ -144,7 +144,8 @@ public class Region {
                             blue_small_plots--;
                             regions.remove(this);
                         } else {
-                            //not available small plots
+                            Bukkit.getPlayer(player).getInventory().setItem(7, slotlocked());
+                            BuildSchematic.getUUID(player).end();
                         }
                     } else if (greenPlayers.contains(player)){
                         if (green_small_plots > 0){
@@ -154,7 +155,8 @@ public class Region {
                             green_small_plots--;
                             regions.remove(this);
                         } else {
-                            //not available small plots
+                            Bukkit.getPlayer(player).getInventory().setItem(7, slotlocked());
+                            BuildSchematic.getUUID(player).end();
                         }
                     } else if (yellowPlayers.contains(player)){
                         if (yellow_small_plots > 0){
@@ -164,7 +166,8 @@ public class Region {
                             yellow_small_plots--;
                             regions.remove(this);
                         } else {
-                            //not available small plots
+                            Bukkit.getPlayer(player).getInventory().setItem(7, slotlocked());
+                            BuildSchematic.getUUID(player).end();
                         }
                     } else if (redPlayers.contains(player)){
                         if (red_small_plots > 0){
@@ -174,7 +177,115 @@ public class Region {
                             red_small_plots--;
                             regions.remove(this);
                         } else {
-                            //not available small plots
+                            Bukkit.getPlayer(player).getInventory().setItem(7, slotlocked());
+                            BuildSchematic.getUUID(player).end();
+                        }
+                    }
+                } else {
+                    Bukkit.getPlayer(player).sendMessage(getMsg("cant-construct-size"));
+                }
+                break;
+            case archery:
+            case trifarrow:
+            case stable:
+            case armory:
+            case laboratory:
+                if (isMedium()){
+                    if (bluePlayers.contains(player)){
+                        if (blue_medium_plots > 0){
+                            Bukkit.getPlayer(player).getInventory().setItem(7, slotlocked());
+                            BuildSchematic.getUUID(player).ok(loc1);
+                            removeHologram();
+                            blue_medium_plots--;
+                            regions.remove(this);
+                        } else {
+                            Bukkit.getPlayer(player).getInventory().setItem(7, slotlocked());
+                            BuildSchematic.getUUID(player).end();
+                        }
+                    } else if (greenPlayers.contains(player)){
+                        if (green_medium_plots > 0){
+                            Bukkit.getPlayer(player).getInventory().setItem(7, slotlocked());
+                            BuildSchematic.getUUID(player).ok(loc1);
+                            removeHologram();
+                            green_medium_plots--;
+                            regions.remove(this);
+                        } else {
+                            Bukkit.getPlayer(player).getInventory().setItem(7, slotlocked());
+                            BuildSchematic.getUUID(player).end();
+                        }
+                    } else if (yellowPlayers.contains(player)){
+                        if (yellow_medium_plots > 0){
+                            Bukkit.getPlayer(player).getInventory().setItem(7, slotlocked());
+                            BuildSchematic.getUUID(player).ok(loc1);
+                            removeHologram();
+                            yellow_medium_plots--;
+                            regions.remove(this);
+                        } else {
+                            Bukkit.getPlayer(player).getInventory().setItem(7, slotlocked());
+                            BuildSchematic.getUUID(player).end();
+                        }
+                    } else if (redPlayers.contains(player)){
+                        if (red_medium_plots > 0){
+                            Bukkit.getPlayer(player).getInventory().setItem(7, slotlocked());
+                            BuildSchematic.getUUID(player).ok(loc1);
+                            removeHologram();
+                            red_medium_plots--;
+                            regions.remove(this);
+                        } else {
+                            Bukkit.getPlayer(player).getInventory().setItem(7, slotlocked());
+                            BuildSchematic.getUUID(player).end();
+                        }
+                    }
+                } else {
+                    Bukkit.getPlayer(player).sendMessage(getMsg("cant-construct-size"));
+                }
+                break;
+            case guild:
+            case training_center:
+                if (isLarge()){
+                    if (bluePlayers.contains(player)){
+                        if (blue_large_plots > 0){
+                            Bukkit.getPlayer(player).getInventory().setItem(7, slotlocked());
+                            BuildSchematic.getUUID(player).ok(loc1);
+                            removeHologram();
+                            blue_large_plots--;
+                            regions.remove(this);
+                        } else {
+                            Bukkit.getPlayer(player).getInventory().setItem(7, slotlocked());
+                            BuildSchematic.getUUID(player).end();
+                        }
+                    } else if (greenPlayers.contains(player)){
+                        if (green_large_plots > 0){
+                            Bukkit.getPlayer(player).getInventory().setItem(7, slotlocked());
+                            BuildSchematic.getUUID(player).ok(loc1);
+                            removeHologram();
+                            green_large_plots--;
+                            regions.remove(this);
+                        } else {
+                            Bukkit.getPlayer(player).getInventory().setItem(7, slotlocked());
+                            BuildSchematic.getUUID(player).end();
+                        }
+                    } else if (yellowPlayers.contains(player)){
+                        if (yellow_large_plots > 0){
+                            Bukkit.getPlayer(player).getInventory().setItem(7, slotlocked());
+                            BuildSchematic.getUUID(player).ok(loc1);
+                            removeHologram();
+                            yellow_large_plots--;
+                            regions.remove(this);
+                        } else {
+                            Bukkit.getPlayer(player).getInventory().setItem(7, slotlocked());
+                            BuildSchematic.getUUID(player).end();
+                        }
+                    } else if (redPlayers.contains(player)){
+                        if (red_large_plots > 0){
+                            Bukkit.getPlayer(player).getInventory().setItem(7, slotlocked());
+                            BuildSchematic.getUUID(player).ok(loc1);
+                            removeHologram();
+                            red_large_plots--;
+                            regions.remove(this);
+                        } else {
+                            Bukkit.getPlayer(player).getInventory().setItem(7, slotlocked());
+                            BuildSchematic.getUUID(player).end();
                         }
                     }
                 } else {
@@ -189,6 +300,12 @@ public class Region {
         for (String s : teams){
             for (String key : Locations.load().getConfigurationSection("Plots."+choosenMap+"."+s+".Small").getKeys(false)) {
                 new Region(Locations.getLoc("Plots." + choosenMap + "." + s + ".Small." + key), true, false, false, s);
+            }
+            for (String key : Locations.load().getConfigurationSection("Plots."+choosenMap+"."+s+".Medium").getKeys(false)) {
+                new Region(Locations.getLoc("Plots." + choosenMap + "." + s + ".Medium." + key), false, true, false, s);
+            }
+            for (String key : Locations.load().getConfigurationSection("Plots."+choosenMap+"."+s+".Large").getKeys(false)) {
+                new Region(Locations.getLoc("Plots." + choosenMap + "." + s + ".Large." + key), false, false, true, s);
             }
         }
     }

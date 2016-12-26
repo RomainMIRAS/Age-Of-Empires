@@ -147,7 +147,7 @@ public class PreGame extends BukkitRunnable {
                         e.printStackTrace();
                     }
                 }
-            }, 10L);
+            }, 30L);
             Main.pvp_assault = 60000*Settings.load().getInt("countdowns.pvp");
             new Game().runTaskTimer(plugin, 0, 20);
         }

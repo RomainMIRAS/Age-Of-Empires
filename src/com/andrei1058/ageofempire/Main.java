@@ -7,6 +7,7 @@ import com.andrei1058.ageofempire.listeners.*;
 import net.minecraft.server.v1_8_R3.Village;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
+import org.bukkit.entity.Entity;
 import org.bukkit.entity.Villager;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -36,8 +37,8 @@ public class Main extends JavaPlugin {
     public static int max_in_team = 6, min_players = 6;
     public static int lobby_time = 60, restart_time = 11, pregame_time = 20;
     public static int blue_gold = 100, green_gold = 100, yellow_gold = 100, red_gold = 100;
-    public static int blue_wood = 100, green_wood = 100, yellow_wood = 100, red_wood = 100;
-    public static int blue_stone = 100, green_stone = 100, yellow_stone = 100, red_stone = 100;
+    public static int blue_wood = 10000, green_wood = 10000, yellow_wood = 100, red_wood = 100;
+    public static int blue_stone = 10000, green_stone = 10000, yellow_stone = 100, red_stone = 100;
     public static int blue_small_plots = 0, green_small_plots = 0, yellow_small_plots = 0, red_small_plots = 0;
     public static int blue_medium_plots = 0, green_medium_plots = 0, yellow_medium_plots = 0, red_medium_plots = 0;
     public static int blue_large_plots = 0, green_large_plots = 0, yellow_large_plots = 0, red_large_plots = 0;
@@ -57,6 +58,17 @@ public class Main extends JavaPlugin {
     public static Villager blue_market, green_market, yellow_market, red_market;
     public static Villager blue_sabotage, green_sabotage, yellow_sabotage, red_sabotage;
     public static Villager blue_kennel, green_kennel, yellow_kennel, red_kennel;
+    //age 3
+    public static Villager blue_archery, green_archery, yellow_archery, red_archery;
+    public static Villager blue_trifarrow, green_trifarrow, yellow_trifarrow, red_trifarrow;
+    public static Villager blue_stable, green_stable, yellow_stable, red_stable;
+    public static Villager blue_armory, green_armory, yellow_armory, red_armory;
+    public static Villager blue_lab, green_lab, yellow_lab, red_lab;
+    //age 4
+    public static Villager blue_guild, green_guild, yellow_guild, red_guild;
+    public static Villager blue_tcenter, green_tcenter, yellow_tcenter, red_tcenter;
+
+    public static ArrayList<Entity> projectiles = new ArrayList<>();
 
     @Override
     public void onEnable() {
@@ -91,6 +103,8 @@ public class Main extends JavaPlugin {
         pm.registerEvents(new CreatureSpawnListener(), this);
         pm.registerEvents(new PlayerMoveListener(), this);
         pm.registerEvents(new PlayerLoginListener(), this);
+        pm.registerEvents(new ProjectileHitListener(), this);
+        pm.registerEvents(new EntityShootBowListener(), this);
         plugin.getServer().getMessenger().registerOutgoingPluginChannel(plugin, "BungeeCord");
     }
 }

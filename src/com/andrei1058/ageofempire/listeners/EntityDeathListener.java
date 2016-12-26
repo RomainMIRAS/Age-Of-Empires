@@ -3,7 +3,10 @@ package com.andrei1058.ageofempire.listeners;
 import com.andrei1058.ageofempire.game.Hologram;
 import org.bukkit.Bukkit;
 import org.bukkit.GameMode;
+import org.bukkit.entity.Player;
+import org.bukkit.entity.Projectile;
 import org.bukkit.entity.Villager;
+import org.bukkit.entity.Wolf;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDeathEvent;
@@ -23,15 +26,25 @@ public class EntityDeathListener implements Listener {
         if (e.getEntity() instanceof Villager){
             Villager v = (Villager) e.getEntity();
             String killer = "";
-            if (bluePlayers.contains(e.getEntity().getKiller().getUniqueId())){
-                killer = "§9Blue";
-            } else if (greenPlayers.contains(e.getEntity().getKiller().getUniqueId())){
-                killer = "§aGreen";
-            } else if (yellowPlayers.contains(e.getEntity().getKiller().getUniqueId())){
-                killer = "§eYellow";
-            } else if (redPlayers.contains(e.getEntity().getKiller().getUniqueId())){
-                killer = "§cRed";
+            Player p = null;
+            if (e.getEntity().getKiller() instanceof Player){
+                p = e.getEntity().getKiller();
+            } else if (e.getEntity().getKiller() instanceof Projectile){
+                Projectile proj = (Projectile) e.getEntity().getKiller();
+                p = (Player) proj.getShooter();
+            } else if (e.getEntity().getKiller() instanceof Wolf){
+                Wolf w = (Wolf) e.getEntity().getKiller();
+                p = (Player) w.getOwner();
             }
+                if (bluePlayers.contains(p.getUniqueId())) {
+                    killer = "§9Blue";
+                } else if (greenPlayers.contains(p.getUniqueId())) {
+                    killer = "§aGreen";
+                } else if (yellowPlayers.contains(p.getUniqueId())) {
+                    killer = "§eYellow";
+                } else if (redPlayers.contains(p.getUniqueId())) {
+                    killer = "§cRed";
+                }
             if (v == blue_villager){
                 try {
                     for (UUID u : bluePlayers){
@@ -157,13 +170,24 @@ public class EntityDeathListener implements Listener {
                     Bukkit.broadcastMessage(getMsg("yellow-building-explode").replace("{building}", getMsg("forum."+kennel+".displayname")));
                 } else if (v == red_kennel){
                     Bukkit.broadcastMessage(getMsg("red-building-explode").replace("{building}", getMsg("forum."+kennel+".displayname")));
+                } else if (v == blue_archery){
+                    Bukkit.broadcastMessage(getMsg("blue-building-explode").replace("{building}", getMsg("forum."+archery+".displayname")));
+                } else if (v == green_archery){
+                    Bukkit.broadcastMessage(getMsg("green-building-explode").replace("{building}", getMsg("forum."+archery+".displayname")));
+                } else if (v == red_archery){
+                    Bukkit.broadcastMessage(getMsg("red-building-explode").replace("{building}", getMsg("forum."+archery+".displayname")));
+                } else if (v == yellow_archery){
+                    Bukkit.broadcastMessage(getMsg("yellow-building-explode").replace("{building}", getMsg("forum."+archery+".displayname")));
+                } else if (v == blue_trifarrow){
+                    Bukkit.broadcastMessage(getMsg("blue-building-explode").replace("{building}", getMsg("forum."+trifarrow+".displayname")));
+                } else if (v == green_trifarrow){
+                    Bukkit.broadcastMessage(getMsg("green-building-explode").replace("{building}", getMsg("forum."+trifarrow+".displayname")));
+                } else if (v == yellow_trifarrow){
+                    Bukkit.broadcastMessage(getMsg("yellow-building-explode").replace("{building}", getMsg("forum."+trifarrow+".displayname")));
+                } else if (v == red_trifarrow){
+                    Bukkit.broadcastMessage(getMsg("red-building-explode").replace("{building}", getMsg("forum."+trifarrow+".displayname")));
                 }
-                Bukkit.getScheduler().runTaskLater(plugin, new Runnable() {
-                    @Override
-                    public void run() {
-                        Bukkit.getWorld(v.getWorld().getName()).createExplosion(v.getLocation(), 8);
-                    }
-                }, 20*15);
+                Bukkit.getScheduler().runTaskLater(plugin, () -> Bukkit.getWorld(v.getWorld().getName()).createExplosion(v.getLocation(), 8), 20*15);
             }
             try {
                 Hologram.get(v).remove();

@@ -65,14 +65,11 @@ public class Settings {
             int mapid = r.nextInt(a);
             choosenMap = yml.getStringList("Arenas").get(mapid);
             Bukkit.createWorld(new WorldCreator(choosenMap));
-            Bukkit.getScheduler().runTaskLater(plugin, new Runnable() {
-                @Override
-                public void run() {
-                    Locations.getLoc("Spawns.Lobby").getWorld().getEntities().forEach(Entity::remove);
-                    Bukkit.getWorld(choosenMap).getEntities().forEach(Entity::remove);
-                    Bukkit.getWorld(choosenMap).setGameRuleValue("keepInventory", "false");
-                    Bukkit.getWorld(choosenMap).setAutoSave(false);
-                }
+            Bukkit.getScheduler().runTaskLater(plugin, () -> {
+                Locations.getLoc("Spawns.Lobby").getWorld().getEntities().forEach(Entity::remove);
+                Bukkit.getWorld(choosenMap).getEntities().forEach(Entity::remove);
+                Bukkit.getWorld(choosenMap).setGameRuleValue("keepInventory", "false");
+                Bukkit.getWorld(choosenMap).setAutoSave(false);
             },100L);
             RegisterNMS.registerEntity("Villager", 120, EntityVillager.class, VillagerNMS.class);
             try {
@@ -94,19 +91,11 @@ public class Settings {
             } catch (NullPointerException e){
                 plugin.getLogger().warning("There is a problem with your plots :(");
             }
-            Bukkit.getScheduler().runTaskLater(plugin, new Runnable() {
-                @Override
-                public void run() {
-                    STATUS = Status.LOBBY;
-                }
-            }, 30L);
+            Bukkit.getScheduler().runTaskLater(plugin, () -> STATUS = Status.LOBBY, 30L);
         }
-        Bukkit.getScheduler().runTaskLater(plugin, new Runnable() {
-            @Override
-            public void run() {
-                if (!SETUP)
-                Region.loadRegions();
-            }
+        Bukkit.getScheduler().runTaskLater(plugin, () -> {
+            if (!SETUP)
+            Region.loadRegions();
         }, 200);
     }
 

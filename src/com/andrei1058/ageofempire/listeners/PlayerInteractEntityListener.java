@@ -2,6 +2,7 @@ package com.andrei1058.ageofempire.listeners;
 
 import com.andrei1058.ageofempire.Misc;
 import com.andrei1058.ageofempire.game.Status;
+import net.minecraft.server.v1_8_R3.Items;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.enchantments.Enchantment;
@@ -53,19 +54,19 @@ public class PlayerInteractEntityListener implements Listener {
                     }
                 } else if (blue_forge != null && v == blue_forge){
                     if (bluePlayers.contains(p.getUniqueId())) {
-                        p.openInventory(forge());
+                        p.openInventory(forge(p));
                     }
                 } else if (green_forge != null && v == green_forge){
                     if (greenPlayers.contains(p.getUniqueId())) {
-                        p.openInventory(forge());
+                        p.openInventory(forge(p));
                     }
                 } else if (yellow_forge != null && v == yellow_forge){
                     if (yellowPlayers.contains(p.getUniqueId())){
-                        p.openInventory(forge());
+                        p.openInventory(forge(p));
                     }
                 } else if (red_forge != null && v == red_forge) {
                     if (redPlayers.contains(p.getUniqueId())) {
-                        p.openInventory(forge());
+                        p.openInventory(forge(p));
                     }
                 } else if (v == blue_mill){
                     if (bluePlayers.contains(p.getUniqueId())){
@@ -147,6 +148,54 @@ public class PlayerInteractEntityListener implements Listener {
                     if (redPlayers.contains(p.getUniqueId())){
                         p.openInventory(kennel());
                     }
+                } else if (v == blue_archery){
+                    if (bluePlayers.contains(p.getUniqueId())){
+                        p.openInventory(archeryInv());
+                    }
+                } else if (v == green_archery){
+                    if (greenPlayers.contains(p.getUniqueId())){
+                        p.openInventory(archeryInv());
+                    }
+                } else if (v == yellow_archery){
+                    if (yellowPlayers.contains(p.getUniqueId())){
+                        p.openInventory(archeryInv());
+                    }
+                } else if (v == red_archery){
+                    if (redPlayers.contains(p.getUniqueId())){
+                        p.openInventory(archeryInv());
+                    }
+                } else if (v == blue_trifarrow){
+                    if (bluePlayers.contains(p.getUniqueId())){
+                        p.openInventory(trifarrowInv());
+                    }
+                } else if (v == green_trifarrow){
+                    if (greenPlayers.contains(p.getUniqueId())){
+                        p.openInventory(trifarrowInv());
+                    }
+                } else if (v == yellow_trifarrow){
+                    if (yellowPlayers.contains(p.getUniqueId())){
+                        p.openInventory(trifarrowInv());
+                    }
+                } else if (v == red_trifarrow){
+                    if (redPlayers.contains(p.getUniqueId())){
+                        p.openInventory(trifarrowInv());
+                    }
+                } else if (v == blue_stable){
+                    if (bluePlayers.contains(p.getUniqueId())){
+                        p.openInventory(stableInv());
+                    }
+                } else if (v == green_stable){
+                    if (greenPlayers.contains(p.getUniqueId())){
+                        p.openInventory(stableInv());
+                    }
+                } else if (v == yellow_stable){
+                    if (yellowPlayers.contains(p.getUniqueId())){
+                        p.openInventory(stableInv());
+                    }
+                } else if (v == red_stable){
+                    if (redPlayers.contains(p.getUniqueId())){
+                        p.openInventory(stableInv());
+                    }
                 } else {
                     e.setCancelled(true);
                     e.getPlayer().sendMessage(getMsg("villager.cant-open"));
@@ -155,7 +204,6 @@ public class PlayerInteractEntityListener implements Listener {
             }
         }
     }
-
     public static Inventory forum(String  team){
         Inventory inv = Bukkit.createInventory(null, 54, "Forum");
         inv.setItem(0, Misc.getSkull("http://textures.minecraft.net/texture/71bc2bcfb2bd3759e6b1e86fc7a79585e1127dd357fc202893f9de241bc9e530", getMsg("forum.age1")));
@@ -171,6 +219,19 @@ public class PlayerInteractEntityListener implements Listener {
         inv.setItem(10, item(Material.TNT, (short) 0, getMsg("forum."+sabotage+".displayname"), getArray("forum."+sabotage+".lore"), true, hasBuild(sabotage, team)));
         inv.setItem(18, Misc.getSkull("http://textures.minecraft.net/texture/4cd9eeee883468881d83848a46bf3012485c23f75753b8fbe8487341419847", getMsg("forum.age2")));
         inv.setItem(19, Misc.getSkull("http://textures.minecraft.net/texture/1a4f68c8fb279e50ab786f9fa54c88ca4ecfe1eb5fd5f0c38c54c9b1c7203d7a", getMsg("forum.age-buldings")));
+        inv.setItem(20, ageBuilding(team, Material.BOW, getMsg("forum."+archery+".displayname"), getArray("forum."+archery+".lore"), hasBuild(archery, team), true, 2));
+        inv.setItem(21, ageBuilding(team, Material.ARROW, getMsg("forum."+trifarrow+".displayname"), getArray("forum."+trifarrow+".lore"), hasBuild(trifarrow, team), true, 2));
+        inv.setItem(22, ageBuilding(team, Material.SADDLE, getMsg("forum."+stable+".displayname"), getArray("forum."+stable+".lore"), hasBuild(stable, team), true, 2));
+        inv.setItem(23, ageBuilding(team, Material.DIAMOND_CHESTPLATE, getMsg("forum."+armory+".displayname"), getArray("forum."+armory+".lore"), hasBuild(armory, team), true, 2));
+        inv.setItem(24, ageBuilding(team, Material.BREWING_STAND_ITEM, getMsg("forum."+laboratory+".displayname"), getArray("forum."+laboratory+".lore"), hasBuild(laboratory, team), true, 2));
+        inv.setItem(27, Misc.getSkull("http://textures.minecraft.net/texture/1d4eae13933860a6df5e8e955693b95a8c3b15c36b8b587532ac0996bc37e5", getMsg("forum.age3")));
+        inv.setItem(28, Misc.getSkull("http://textures.minecraft.net/texture/1a4f68c8fb279e50ab786f9fa54c88ca4ecfe1eb5fd5f0c38c54c9b1c7203d7a", getMsg("forum.age-buldings")));
+        inv.setItem(29, ageBuilding(team, Material.ENCHANTED_BOOK, getMsg("forum."+guild+".displayname"), getArray("forum."+guild+".lore"), hasBuild(guild, team), true, 3));
+        inv.setItem(30, ageBuilding(team, Material.EXP_BOTTLE, getMsg("forum."+training_center+".displayname"), getArray("forum."+training_center+".lore"), hasBuild(training_center, team), true, 3));
+
+        inv.setItem(48, Misc.getSkull("http://textures.minecraft.net/texture/1a4f68c8fb279e50ab786f9fa54c88ca4ecfe1eb5fd5f0c38c54c9b1c7203d7a", "->"));
+        inv.setItem(49, ageDoor(team));
+        inv.setItem(50, Misc.getSkull("http://textures.minecraft.net/texture/737648ae7a564a5287792b05fac79c6b6bd47f616a559ce8b543e6947235bce", "<-"));
         return inv;
     }
     private static ItemStack item(Material material, short sh, String name, ArrayList<String> lore, boolean enchant, boolean built){
@@ -192,13 +253,181 @@ public class PlayerInteractEntityListener implements Listener {
         return i;
     }
 
-    public static Inventory forge (){
+    public static ItemStack ageDoor(String team){
+        ItemStack i = new ItemStack(Material.BEDROCK);
+        ItemMeta im = i.getItemMeta();
+        switch (team){
+            case blue_team:
+                switch (blue_age){
+                    case 1:
+                        i = new ItemStack(Material.DARK_OAK_DOOR_ITEM);
+                        im.setDisplayName(getMsg("forum.age2"));
+                        im.setLore(getArray("change.age2-lore").stream().map(s -> s.replace('&', '§')).collect(Collectors.toCollection(ArrayList::new)));
+                        break;
+                    case 2:
+                        i = new ItemStack(Material.IRON_DOOR);
+                        im.setDisplayName(getMsg("forum.age3"));
+                        im.setLore(getArray("change.age3-lore").stream().map(s -> s.replace('&', '§')).collect(Collectors.toCollection(ArrayList::new)));
+                        break;
+                    case 3:
+                        i = new ItemStack(Material.DIAMOND);
+                        im.setDisplayName(getMsg("forum.age4"));
+                        im.setLore(getArray("change.age4-lore").stream().map(s -> s.replace('&', '§')).collect(Collectors.toCollection(ArrayList::new)));
+                        break;
+                    case 4:
+                        im.setDisplayName("-");
+                        break;
+                }
+                break;
+            case green_team:
+                switch (green_age){
+                    case 1:
+                        i = new ItemStack(Material.DARK_OAK_DOOR_ITEM);
+                        im.setDisplayName(getMsg("forum.age2"));
+                        im.setLore(getArray("change.age2-lore").stream().map(s -> s.replace('&', '§')).collect(Collectors.toCollection(ArrayList::new)));
+                        break;
+                    case 2:
+                        i = new ItemStack(Material.IRON_DOOR);
+                        im.setDisplayName(getMsg("forum.age3"));
+                        im.setLore(getArray("change.age3-lore").stream().map(s -> s.replace('&', '§')).collect(Collectors.toCollection(ArrayList::new)));
+                        break;
+                    case 3:
+                        i = new ItemStack(Material.DIAMOND);
+                        im.setDisplayName(getMsg("forum.age4"));
+                        im.setLore(getArray("change.age4-lore").stream().map(s -> s.replace('&', '§')).collect(Collectors.toCollection(ArrayList::new)));
+                        break;
+                    case 4:
+                        im.setDisplayName("-");
+                        break;
+                }
+                break;
+            case red_team:
+                switch (red_age){
+                    case 1:
+                        i = new ItemStack(Material.DARK_OAK_DOOR_ITEM);
+                        im.setDisplayName(getMsg("forum.age2"));
+                        im.setLore(getArray("change.age2-lore").stream().map(s -> s.replace('&', '§')).collect(Collectors.toCollection(ArrayList::new)));
+                        break;
+                    case 2:
+                        i = new ItemStack(Material.IRON_DOOR);
+                        im.setDisplayName(getMsg("forum.age3"));
+                        im.setLore(getArray("change.age3-lore").stream().map(s -> s.replace('&', '§')).collect(Collectors.toCollection(ArrayList::new)));
+                        break;
+                    case 3:
+                        i = new ItemStack(Material.DIAMOND);
+                        im.setDisplayName(getMsg("forum.age4"));
+                        im.setLore(getArray("change.age4-lore").stream().map(s -> s.replace('&', '§')).collect(Collectors.toCollection(ArrayList::new)));
+                        break;
+                    case 4:
+                        im.setDisplayName("-");
+                        break;
+                }
+                break;
+            case yellow_team:
+                switch (yellow_age){
+                    case 1:
+                        i = new ItemStack(Material.DARK_OAK_DOOR_ITEM);
+                        im.setDisplayName(getMsg("forum.age2"));
+                        im.setLore(getArray("change.age2-lore").stream().map(s -> s.replace('&', '§')).collect(Collectors.toCollection(ArrayList::new)));
+                        break;
+                    case 2:
+                        i = new ItemStack(Material.IRON_DOOR);
+                        im.setDisplayName(getMsg("forum.age3"));
+                        im.setLore(getArray("change.age3-lore").stream().map(s -> s.replace('&', '§')).collect(Collectors.toCollection(ArrayList::new)));
+                        break;
+                    case 3:
+                        i = new ItemStack(Material.DIAMOND);
+                        im.setDisplayName(getMsg("forum.age4"));
+                        im.setLore(getArray("change.age4-lore").stream().map(s -> s.replace('&', '§')).collect(Collectors.toCollection(ArrayList::new)));
+                        break;
+                    case 4:
+                        im.setDisplayName("-");
+                        break;
+                }
+                break;
+        }
+        i.setItemMeta(im);
+        return i;
+    }
+
+    public static ItemStack ageBuilding(String team, Material material, String name, ArrayList<String> lore, boolean built, boolean enchant, Integer age){
+
+        ItemStack i = new ItemStack(material);
+        ItemMeta im = i.getItemMeta();
+        im.setDisplayName(name);
+        ArrayList<String > l = lore.stream().map(s -> s.replace('&', '§')).collect(Collectors.toCollection(ArrayList::new));
+        if (built){
+            l.add(getMsg("forum.built"));
+        } else {
+            l.add(getMsg("forum.to-build"));
+        }
+        if (enchant) {
+            im.addEnchant(Enchantment.DURABILITY, 1, true);
+            im.addItemFlags(ItemFlag.HIDE_ENCHANTS);
+        }
+        im.setLore(l);
+        i.setItemMeta(im);
+
+        ItemStack i2 = new ItemStack(Material.BARRIER);
+        ItemMeta im2 = i2.getItemMeta();
+        im2.setDisplayName(name);
+        im2.setLore(l);
+        i2.setItemMeta(im2);
+
+        switch (team){
+            case blue_team:
+                if (blue_age >= age){
+                    return i;
+                }
+                break;
+            case green_team:
+                if (green_age >= age){
+                    return i;
+                }
+                break;
+            case yellow_team:
+                if (yellow_age >= age){
+                    return i;
+                }
+                break;
+            case red_team:
+                if (red_age >= age){
+                    return i;
+                }
+                break;
+        }
+        return i2;
+    }
+
+    public static Inventory forge (Player p){
         Inventory inv = Bukkit.createInventory(null, 54, "Forge");
         inv.addItem(forgeItem(Material.STONE_PICKAXE, getMsg("forge.stonepickaxe.displayname"), getArray("forge.stonepickaxe.lore")));
         inv.addItem(forgeItem(Material.STONE_SWORD, getMsg("forge.stonesword.displayname"), getArray("forge.stonesword.lore")));
         inv.addItem(forgeItem(Material.IRON_SWORD, getMsg("forge.ironsword.displayname"), getArray("forge.ironsword.lore")));
         inv.addItem(forgeItem(Material.STONE_AXE,getMsg("forge.stoneaxe.displayname"), getArray("forge.stoneaxe.lore")));
         inv.addItem(forgeItem(Material.IRON_AXE, getMsg("forge.ironaxe.displayname"), getArray("forge.ironaxe.lore")));
+        if (bluePlayers.contains(p.getUniqueId())){
+                if (blue_age > 2){
+                    inv.addItem(forgeItem(Material.DIAMOND_SWORD, getMsg("forge.diamondsword.displayname"), getArray("forge.diamondsword.lore")));
+                    inv.addItem(forgeItem(Material.DIAMOND_AXE, getMsg("forge.diamondaxe.displayname"), getArray("forge.diamondaxe.lore")));
+                }
+
+        } else if (greenPlayers.contains(p.getUniqueId())){
+            if (green_age > 2){
+                inv.addItem(forgeItem(Material.DIAMOND_SWORD, getMsg("forge.diamondsword.displayname"), getArray("forge.diamondsword.lore")));
+                inv.addItem(forgeItem(Material.DIAMOND_AXE, getMsg("forge.diamondaxe.displayname"), getArray("forge.diamondaxe.lore")));
+            }
+        } else if (yellowPlayers.contains(p.getUniqueId())){
+            if (yellow_age > 2){
+                inv.addItem(forgeItem(Material.DIAMOND_SWORD, getMsg("forge.diamondsword.displayname"), getArray("forge.diamondsword.lore")));
+                inv.addItem(forgeItem(Material.DIAMOND_AXE, getMsg("forge.diamondaxe.displayname"), getArray("forge.diamondaxe.lore")));
+            }
+        } else if (redPlayers.contains(p.getUniqueId())){
+            if (red_age > 2){
+                inv.addItem(forgeItem(Material.DIAMOND_SWORD, getMsg("forge.diamondsword.displayname"), getArray("forge.diamondsword.lore")));
+                inv.addItem(forgeItem(Material.DIAMOND_AXE, getMsg("forge.diamondaxe.displayname"), getArray("forge.diamondaxe.lore")));
+            }
+        }
         return inv;
     }
 
@@ -223,12 +452,35 @@ public class PlayerInteractEntityListener implements Listener {
         return inv;
     }
 
+    private static Inventory trifarrowInv(){
+        Inventory inv = Bukkit.createInventory(null, 54, "TrifArrow");
+        ItemStack i = new ItemStack(Material.ARROW);
+        ItemMeta im = i.getItemMeta();
+        im.setDisplayName(getMsg("trifarrow.arrow.displayname"));
+        im.setLore(getArray("trifarrow.arrow.lore").stream().map(s -> s.replace('&','§')).collect(Collectors.toCollection(ArrayList::new)));
+        i.setItemMeta(im);
+        inv.addItem(i);
+
+        return inv;
+    }
+
     public static Inventory market(){
         Inventory inv = Bukkit.createInventory(null, 54, "Market");
         inv.addItem(forgeItem(Material.FLINT_AND_STEEL, getMsg("market.flintandsteel.displayname"), getArray("market.flintandsteel.lore")));
         inv.addItem(forgeItem(Material.WEB, getMsg("market.cobweb.displayname"), getArray("market.cobweb.lore")));
         inv.addItem(forgeItem(Material.TORCH, getMsg("market.torches.displayname"), getArray("market.torches.lore")));
         inv.addItem(forgeItem(Material.BOAT, getMsg("market.boat.displayname"), getArray("market.boat.lore")));
+        return inv;
+    }
+
+    private static Inventory stableInv(){
+        Inventory inv = Bukkit.createInventory(null, 54, "Stable");
+        ItemStack i = new ItemStack(Material.MONSTER_EGG, 1, (short) 100);
+        ItemMeta im = i.getItemMeta();
+        im.setDisplayName(getMsg("stable.horse.displayname"));
+        im.setLore(getArray("stable.horse.lore").stream().map( s -> s.replace('&','§')).collect(Collectors.toCollection(ArrayList::new)));
+        i.setItemMeta(im);
+        inv.addItem(i);
         return inv;
     }
 
@@ -281,5 +533,32 @@ public class PlayerInteractEntityListener implements Listener {
         im.setLore(list);
         i.setItemMeta(im);
         return i;
+    }
+
+    private static Inventory archeryInv(){
+        Inventory inv = Bukkit.createInventory(null, 54, "Archery Store");
+
+        ItemStack bow = new ItemStack(Material.BOW);
+        ItemMeta bowMeta = bow.getItemMeta();
+        bowMeta.setDisplayName(getMsg("archery.bow.displayname"));
+        bowMeta.setLore(getArray("archery.bow.lore").stream().map(s -> s.replace('&', '§')).collect(Collectors.toCollection(ArrayList::new)));
+        bow.setItemMeta(bowMeta);
+        inv.addItem(bow);
+
+        ItemStack arrows5 = new ItemStack(Material.ARROW);
+        ItemMeta aroows5Meta = arrows5.getItemMeta();
+        aroows5Meta.setDisplayName(getMsg("archery.arrows5.displayname"));
+        aroows5Meta.setLore(getArray("archery.arrows5.lore").stream().map(s -> s.replace('&', '§')).collect(Collectors.toCollection(ArrayList::new)));
+        arrows5.setItemMeta(aroows5Meta);
+        inv.addItem(arrows5);
+
+        ItemStack a10 = new ItemStack(Material.ARROW);
+        ItemMeta aMeta = arrows5.getItemMeta();
+        aMeta.setDisplayName(getMsg("archery.arrows10.displayname"));
+        aMeta.setLore(getArray("archery.arrows10.lore").stream().map(s -> s.replace('&', '§')).collect(Collectors.toCollection(ArrayList::new)));
+        a10.setItemMeta(aMeta);
+        inv.addItem(a10);
+
+        return inv;
     }
 }

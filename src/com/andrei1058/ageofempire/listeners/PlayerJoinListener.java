@@ -45,27 +45,30 @@ public class PlayerJoinListener implements Listener {
     }
 
     public static void lobbyItems(Player p){
-        Bukkit.broadcastMessage(getMsg("player-join").replace("%player%", p.getName()));
-        p.teleport(Locations.getLoc("Spawns.Lobby"));
-        p.setHealthScale(20);
-        p.setHealth(20);
-        p.setFoodLevel(20);
-        p.setExp(0);
-        p.setLevel(0);
-        p.setGameMode(GameMode.ADVENTURE);
-        p.getInventory().clear();
-        p.getInventory().setArmorContents(null);
-        ItemStack help = new ItemStack(Material.STAINED_GLASS_PANE, 1, (short)5);
-        ItemMeta helpmeta = help.getItemMeta();
-        helpmeta.setDisplayName(getMsg("help-item-on"));
-        help.setItemMeta(helpmeta);
-        p.getInventory().setItem(4, help);
-        ItemStack bed = new ItemStack(Material.BED, 1);
-        ItemMeta bedmeta = bed.getItemMeta();
-        bedmeta.setDisplayName(getMsg("leave-item"));
-        bed.setItemMeta(bedmeta);
-        p.getInventory().setItem(8, bed);
-        p.sendMessage(getMsg("help.ison"));
-        plugin.help.add(p.getUniqueId());
+        Bukkit.getScheduler().runTaskLater(plugin, () -> {
+            p.teleport(Locations.getLoc("Spawns.Lobby"));
+            Bukkit.broadcastMessage(getMsg("player-join").replace("%player%", p.getName()));
+            p.setHealthScale(20);
+            p.setHealth(20);
+            p.setFoodLevel(20);
+            p.setExp(0);
+            p.setLevel(0);
+            p.setGameMode(GameMode.ADVENTURE);
+            p.getInventory().clear();
+            p.getInventory().setArmorContents(null);
+            ItemStack help1 = new ItemStack(Material.STAINED_GLASS_PANE, 1, (short)5);
+            ItemMeta helpmeta = help1.getItemMeta();
+            helpmeta.setDisplayName(getMsg("help-item-on"));
+            help1.setItemMeta(helpmeta);
+            p.getInventory().setItem(4, help1);
+            ItemStack bed = new ItemStack(Material.BED, 1);
+            ItemMeta bedmeta = bed.getItemMeta();
+            bedmeta.setDisplayName(getMsg("leave-item"));
+            bed.setItemMeta(bedmeta);
+            p.getInventory().setItem(8, bed);
+            p.sendMessage(getMsg("help.ison"));
+            plugin.help.add(p.getUniqueId());
+        }, 1L);
+
     }
 }

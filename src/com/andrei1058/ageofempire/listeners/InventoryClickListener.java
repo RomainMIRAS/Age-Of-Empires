@@ -10,10 +10,12 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.ItemMeta;
 
 import static com.andrei1058.ageofempire.Main.*;
 import static com.andrei1058.ageofempire.configuration.Messages.getMsg;
 import static com.andrei1058.ageofempire.game.Buildings.*;
+import static com.andrei1058.ageofempire.runnables.Game.*;
 
 public class InventoryClickListener implements Listener {
 
@@ -49,40 +51,40 @@ public class InventoryClickListener implements Listener {
                     break;
                 case ANVIL:
                     e.setCancelled(true);
-                       stuff(e.getWhoClicked(), forge, 150, 75);
+                       stuff(e.getWhoClicked(), forge, 150, 75, true, false, false);
                     break;
                 case WHEAT:
                     e.setCancelled(true);
-                    stuff(e.getWhoClicked(), mill, 150, 75);
+                    stuff(e.getWhoClicked(), mill, 150, 75, true, false, false);
                     break;
                 case DIAMOND_PICKAXE:
                     e.setCancelled(true);
-                    stuff(e.getWhoClicked(), stone_mine, 150, 75);
+                    stuff(e.getWhoClicked(), stone_mine, 150, 75, true, false, false);
                     break;
                 case GOLD_ORE:
                     e.setCancelled(true);
-                    stuff(e.getWhoClicked(), gold_mine, 150, 100);
+                    stuff(e.getWhoClicked(), gold_mine, 150, 100, true, false, false);
                     break;
                 case DIAMOND_AXE:
                     e.setCancelled(true);
-                    stuff(e.getWhoClicked(), sawmill, 150, 75);
+                    stuff(e.getWhoClicked(), sawmill, 150, 75, true, false, false);
                     break;
                 case WORKBENCH:
                     e.setCancelled(true);
-                    stuff(e.getWhoClicked(), workshop, 100, 50);
+                    stuff(e.getWhoClicked(), workshop, 100, 50, true, false, false);
                     break;
                 case EMERALD:
                     e.setCancelled(true);
-                    stuff(e.getWhoClicked(), market, 100, 50);
+                    stuff(e.getWhoClicked(), market, 100, 50, true, false, false);
                     break;
                 case BONE:
                     e.setCancelled(true);
-                    stuff(e.getWhoClicked(), kennel, 100, 50);
+                    stuff(e.getWhoClicked(), kennel, 100, 50, true, false, false);
                     break;
                 case TNT:
                     e.setCancelled(true);
                     if (e.getInventory().getName().equalsIgnoreCase("Forum")){
-                        stuff(e.getWhoClicked(), sabotage, 100, 50);
+                        stuff(e.getWhoClicked(), sabotage, 100, 50, true, false, false);
                     } else {
                         buy(p, Material.TNT, 1, (short) 0, 5);
                     }
@@ -245,46 +247,176 @@ public class InventoryClickListener implements Listener {
                     break;
                 case MONSTER_EGG:
                     e.setCancelled(true);
-                    if (bluePlayers.contains(p.getUniqueId())){
-                        if (blue_gold >= 50){
-                            blue_gold-=50;
-                            Wolf w = (Wolf) p.getWorld().spawnEntity(p.getLocation(), EntityType.WOLF);
-                            w.setOwner(p);
-                            w.setCollarColor(DyeColor.BLUE);
-                        } else {
-                            p.sendMessage(getMsg("insufficient-gold"));
+                    if (e.getInventory().getName().equalsIgnoreCase("Stable")) {
+                        if (bluePlayers.contains(p.getUniqueId())) {
+                            if (blue_gold >= 30) {
+                                blue_gold -= 30;
+                                Horse h = (Horse) p.getWorld().spawnEntity(p.getLocation(), EntityType.HORSE);
+                                h.setOwner(p);
+                                h.getInventory().setSaddle(new ItemStack(Material.SADDLE));
+                            } else {
+                                p.sendMessage(getMsg("insufficient-gold"));
+                            }
+                        } else if (greenPlayers.contains(p.getUniqueId())) {
+                            if (green_gold >= 30) {
+                                green_gold -= 30;
+                                Horse h = (Horse) p.getWorld().spawnEntity(p.getLocation(), EntityType.HORSE);
+                                h.setOwner(p);
+                                h.getInventory().setSaddle(new ItemStack(Material.SADDLE));
+                            } else {
+                                p.sendMessage(getMsg("insufficient-gold"));
+                            }
+                        } else if (yellowPlayers.contains(p.getUniqueId())) {
+                            if (yellow_gold >= 30) {
+                                yellow_gold -= 30;
+                                Horse h = (Horse) p.getWorld().spawnEntity(p.getLocation(), EntityType.HORSE);
+                                h.setOwner(p);
+                                h.getInventory().setSaddle(new ItemStack(Material.SADDLE));
+                            } else {
+                                p.sendMessage(getMsg("insufficient-gold"));
+                            }
+                        } else if (redPlayers.contains(p.getUniqueId())) {
+                            if (red_gold >= 30) {
+                                red_gold -= 30;
+                                Horse h = (Horse) p.getWorld().spawnEntity(p.getLocation(), EntityType.HORSE);
+                                h.setOwner(p);
+                                h.getInventory().setSaddle(new ItemStack(Material.SADDLE));
+                            } else {
+                                p.sendMessage(getMsg("insufficient-gold"));
+                            }
                         }
-                    } else if (greenPlayers.contains(p.getUniqueId())){
-                        if (green_gold >= 50){
-                            green_gold-=50;
-                            Wolf w = (Wolf) p.getWorld().spawnEntity(p.getLocation(), EntityType.WOLF);
-                            w.setOwner(p);
-                            w.setCollarColor(DyeColor.GREEN);
-                        } else {
-                            p.sendMessage(getMsg("insufficient-gold"));
-                        }
-                    } else if (yellowPlayers.contains(p.getUniqueId())){
-                        if (yellow_gold >= 50){
-                            yellow_gold-=50;
-                            Wolf w = (Wolf) p.getWorld().spawnEntity(p.getLocation(), EntityType.WOLF);
-                            w.setOwner(p);
-                            w.setCollarColor(DyeColor.YELLOW);
-                        } else {
-                            p.sendMessage(getMsg("insufficient-gold"));
-                        }
-                    } else if (redPlayers.contains(p.getUniqueId())){
-                        if (red_gold >= 50){
-                            red_gold-=50;
-                            Wolf w = (Wolf) p.getWorld().spawnEntity(p.getLocation(), EntityType.WOLF);
-                            w.setOwner(p);
-                            w.setCollarColor(DyeColor.RED);
-                        } else {
-                            p.sendMessage(getMsg("insufficient-gold"));
+                    } else {
+                        if (bluePlayers.contains(p.getUniqueId())) {
+                            if (blue_gold >= 50) {
+                                blue_gold -= 50;
+                                Wolf w = (Wolf) p.getWorld().spawnEntity(p.getLocation(), EntityType.WOLF);
+                                w.setOwner(p);
+                                w.setCollarColor(DyeColor.BLUE);
+                            } else {
+                                p.sendMessage(getMsg("insufficient-gold"));
+                            }
+                        } else if (greenPlayers.contains(p.getUniqueId())) {
+                            if (green_gold >= 50) {
+                                green_gold -= 50;
+                                Wolf w = (Wolf) p.getWorld().spawnEntity(p.getLocation(), EntityType.WOLF);
+                                w.setOwner(p);
+                                w.setCollarColor(DyeColor.GREEN);
+                            } else {
+                                p.sendMessage(getMsg("insufficient-gold"));
+                            }
+                        } else if (yellowPlayers.contains(p.getUniqueId())) {
+                            if (yellow_gold >= 50) {
+                                yellow_gold -= 50;
+                                Wolf w = (Wolf) p.getWorld().spawnEntity(p.getLocation(), EntityType.WOLF);
+                                w.setOwner(p);
+                                w.setCollarColor(DyeColor.YELLOW);
+                            } else {
+                                p.sendMessage(getMsg("insufficient-gold"));
+                            }
+                        } else if (redPlayers.contains(p.getUniqueId())) {
+                            if (red_gold >= 50) {
+                                red_gold -= 50;
+                                Wolf w = (Wolf) p.getWorld().spawnEntity(p.getLocation(), EntityType.WOLF);
+                                w.setOwner(p);
+                                w.setCollarColor(DyeColor.RED);
+                            } else {
+                                p.sendMessage(getMsg("insufficient-gold"));
+                            }
                         }
                     }
                     break;
+                case DARK_OAK_DOOR_ITEM:
+                    e.setCancelled(true);
+                    voteAge(p, 1250, 750, 2);
+                    break;
+                case IRON_DOOR:
+                    e.setCancelled(true);
+                    voteAge(p, 2250, 1250, 3);
+                    break;
+                case DIAMOND:
+                    e.setCancelled(true);
+                    voteAge(p, 4250, 3150, 4);
+                    break;
                 default:
                     e.setCancelled(true);
+                    break;
+                case BOW:
+                    e.setCancelled(true);
+                    if (e.getInventory().getName().equalsIgnoreCase("Forum")) {
+                        stuff(e.getWhoClicked(), archery, 300, 150, false, true, false);
+                    } else {
+                        buy(p, Material.BOW, 1, (short) 0, 30);
+                    }
+                    break;
+                case ARROW:
+                    if (e.getCurrentItem().getItemMeta().getDisplayName().equalsIgnoreCase("§cExplosive")){
+                        e.setCancelled(false);
+                        return;
+                    }
+                    e.setCancelled(true);
+                    if (e.getInventory().getName().equalsIgnoreCase("Forum")) {
+                        stuff(e.getWhoClicked(), trifarrow, 375, 175, false, true, false);
+                    } else if (e.getInventory().getName().equalsIgnoreCase("TrifArrow")) {
+                        ItemStack i = new ItemStack(Material.ARROW);
+                        ItemMeta im = i.getItemMeta();
+                        im.setDisplayName("§cExplosive");
+                        i.setItemMeta(im);
+                        if (bluePlayers.contains(p.getUniqueId())){
+                            if (blue_gold >= 20){
+                                blue_gold-=20;
+                                p.getInventory().addItem(i);
+                            } else {
+                                p.sendMessage(getMsg("insufficient-gold"));
+                            }
+                        } else if (greenPlayers.contains(p.getUniqueId())){
+                            if (green_gold >= 20){
+                                green_gold-=20;
+                                p.getInventory().addItem(i);
+                            } else {
+                                p.sendMessage(getMsg("insufficient-gold"));
+                            }
+                        } else if (yellowPlayers.contains(p.getUniqueId())){
+                            if (yellow_gold >= 20){
+                                yellow_gold-=20;
+                                p.getInventory().addItem(new ItemStack(i));
+                            } else {
+                                p.sendMessage(getMsg("insufficient-gold"));
+                            }
+                        } else if (redPlayers.contains(p.getUniqueId())){
+                            if (red_gold >= 20){
+                                red_gold-=20;
+                                p.getInventory().addItem(new ItemStack(i));
+                            } else {
+                                p.sendMessage(getMsg("insufficient-gold"));
+                            }
+                        }
+                    } else if (e.getInventory().getName().equalsIgnoreCase("Archery Store")){
+                        if (e.getSlot() == 1 && e.getCurrentItem().getType() == Material.ARROW){
+                            buy(p, Material.ARROW, 5, (short) 0, 5);
+                        } else if (e.getSlot() == 2 && e.getCurrentItem().getType() == Material.ARROW) {
+                            buy(p, Material.ARROW, 10, (short) 0, 7);
+                        }
+                    }
+                    break;
+                case SADDLE:
+                    e.setCancelled(true);
+                    stuff(e.getWhoClicked(), stable, 200, 100, false, true, false);
+                    break;
+                case DIAMOND_CHESTPLATE:
+                    e.setCancelled(true);
+                    stuff(e.getWhoClicked(), armory, 300, 150, false, true, false);
+                    break;
+                case BREWING_STAND_ITEM:
+                    e.setCancelled(true);
+                    stuff(e.getWhoClicked(), laboratory, 300, 150, false, true, false);
+                    break;
+                case ENCHANTED_BOOK:
+                    e.setCancelled(true);
+                    stuff(e.getWhoClicked(), guild, 600, 300, false, false, true);
+                    break;
+                case EXP_BOTTLE:
+                    e.setCancelled(true);
+                    stuff(e.getWhoClicked(), training_center, 500, 250, false, false, true);
                     break;
             }
         }
@@ -322,7 +454,88 @@ public class InventoryClickListener implements Listener {
         }
     }
 
-    private static void stuff(HumanEntity p, String building, Integer wood, Integer stone) {
+    private static void voteAge(HumanEntity p, Integer wood, Integer stone, Integer age){
+        if (age > 4) return;
+        if (bluePlayers.contains(p.getUniqueId())){
+            if (blue_change_age) return;
+            if (vote_in_progress.contains(blue_team)) {
+                p.sendMessage(getMsg("cant-vote"));
+                return;
+            }
+            if (blue_wood >= wood && blue_stone >= stone) {
+                new Vote(bluePlayers, age_string, p.getUniqueId(), blue_team, wood, stone, age_string);
+            } else {
+                String miss_wood = "0";
+                String miss_stone = "0";
+                if (wood - blue_wood > 0) {
+                    miss_wood = String.valueOf(wood - blue_wood);
+                }
+                if (stone - blue_stone > 0) {
+                    miss_stone = String.valueOf(stone - blue_stone);
+                }
+                p.sendMessage(getMsg("insufficient-resources").replace("{wood}", miss_wood).replace("{stone}", miss_stone));
+            }
+        } else if (greenPlayers.contains(p.getUniqueId())){
+            if (green_change_age) return;
+            if (vote_in_progress.contains(green_team)) {
+                p.sendMessage(getMsg("cant-vote"));
+                return;
+            }
+            if (green_wood >= wood && green_stone >= stone) {
+                new Vote(greenPlayers, age_string, p.getUniqueId(), green_team, wood, stone, age_string);
+            } else {
+                String miss_wood = "0";
+                String miss_stone = "0";
+                if (wood - green_wood > 0) {
+                    miss_wood = String.valueOf(wood - green_wood);
+                }
+                if (stone - green_stone > 0) {
+                    miss_stone = String.valueOf(stone - green_stone);
+                }
+                p.sendMessage(getMsg("insufficient-resources").replace("{wood}", miss_wood).replace("{stone}", miss_stone));
+            }
+        } else if (yellowPlayers.contains(p.getUniqueId())){
+            if (yellow_change_age) return;
+            if (vote_in_progress.contains(yellow_team)) {
+                p.sendMessage(getMsg("cant-vote"));
+                return;
+            }
+            if (yellow_wood >= wood && yellow_stone >= stone) {
+                new Vote(yellowPlayers, age_string, p.getUniqueId(), yellow_team, wood, stone, age_string);
+            } else {
+                String miss_wood = "0";
+                String miss_stone = "0";
+                if (wood - yellow_wood > 0) {
+                    miss_wood = String.valueOf(wood - yellow_wood);
+                }
+                if (stone - yellow_stone > 0) {
+                    miss_stone = String.valueOf(stone - yellow_stone);
+                }
+                p.sendMessage(getMsg("insufficient-resources").replace("{wood}", miss_wood).replace("{stone}", miss_stone));
+            }
+        } else if (redPlayers.contains(p.getUniqueId())){
+            if (red_change_age) return;
+            if (vote_in_progress.contains(red_team)) {
+                p.sendMessage(getMsg("cant-vote"));
+                return;
+            }
+            if (red_wood >= wood && red_stone >= stone) {
+                new Vote(redPlayers, age_string, p.getUniqueId(), red_team, wood, stone, age_string);
+            } else {
+                String miss_wood = "0";
+                String miss_stone = "0";
+                if (wood - red_wood > 0) {
+                    miss_wood = String.valueOf(wood - red_wood);
+                }
+                if (stone - red_stone > 0) {
+                    miss_stone = String.valueOf(stone - red_stone);
+                }
+                p.sendMessage(getMsg("insufficient-resources").replace("{wood}", miss_wood).replace("{stone}", miss_stone));
+            }
+        }
+    }
+
+    private static void stuff(HumanEntity p, String building, Integer wood, Integer stone, boolean small, boolean medium, boolean large) {
         if (construct_in_inv.containsKey(p.getUniqueId())) {
             p.sendMessage(getMsg("having-construct"));
             return;
@@ -336,7 +549,15 @@ public class InventoryClickListener implements Listener {
                 p.sendMessage(getMsg("cant-vote"));
                 return;
             }
-            if (blue_small_plots == 0) {
+            if (blue_small_plots == 0 && small) {
+                p.sendMessage(getMsg("cant-vote-full"));
+                return;
+            }
+            if (blue_medium_plots == 0 && medium) {
+                p.sendMessage(getMsg("cant-vote-full"));
+                return;
+            }
+            if (blue_large_plots == 0 && large) {
                 p.sendMessage(getMsg("cant-vote-full"));
                 return;
             }
@@ -362,7 +583,15 @@ public class InventoryClickListener implements Listener {
                 p.sendMessage(getMsg("cant-vote"));
                 return;
             }
-            if (green_small_plots == 0) {
+            if (green_small_plots == 0 && small) {
+                p.sendMessage(getMsg("cant-vote-full"));
+                return;
+            }
+            if (green_medium_plots == 0 && medium) {
+                p.sendMessage(getMsg("cant-vote-full"));
+                return;
+            }
+            if (green_large_plots == 0 && large) {
                 p.sendMessage(getMsg("cant-vote-full"));
                 return;
             }
@@ -388,7 +617,15 @@ public class InventoryClickListener implements Listener {
                 p.sendMessage(getMsg("cant-vote"));
                 return;
             }
-            if (yellow_small_plots == 0) {
+            if (yellow_small_plots == 0 && small) {
+                p.sendMessage(getMsg("cant-vote-full"));
+                return;
+            }
+            if (yellow_medium_plots == 0 && medium) {
+                p.sendMessage(getMsg("cant-vote-full"));
+                return;
+            }
+            if (yellow_large_plots == 0 && large) {
                 p.sendMessage(getMsg("cant-vote-full"));
                 return;
             }
@@ -414,7 +651,15 @@ public class InventoryClickListener implements Listener {
                 p.sendMessage(getMsg("cant-vote"));
                 return;
             }
-            if (red_small_plots == 0) {
+            if (red_small_plots == 0 && small) {
+                p.sendMessage(getMsg("cant-vote-full"));
+                return;
+            }
+            if (red_medium_plots == 0 && medium) {
+                p.sendMessage(getMsg("cant-vote-full"));
+                return;
+            }
+            if (red_large_plots == 0 && large) {
                 p.sendMessage(getMsg("cant-vote-full"));
                 return;
             }

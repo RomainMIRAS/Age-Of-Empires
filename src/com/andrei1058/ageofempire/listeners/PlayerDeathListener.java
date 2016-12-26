@@ -1,5 +1,6 @@
 package com.andrei1058.ageofempire.listeners;
 
+import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.entity.Projectile;
@@ -21,7 +22,6 @@ public class PlayerDeathListener implements Listener {
     @EventHandler
     public void d(PlayerDeathEvent e){
         if (SETUP) return;
-        e.getEntity().spigot().respawn();
         Player p = e.getEntity();
         List<ItemStack> drops = e.getDrops();
         ListIterator<ItemStack> litr = drops.listIterator();
@@ -39,12 +39,13 @@ public class PlayerDeathListener implements Listener {
         }
         if (e.getEntity().getKiller() instanceof Player) {
             e.setDeathMessage(getMsg("new-kill").replace("{player}", e.getEntity().getName()).replace("{killer}", e.getEntity().getKiller().getName()));
-        }else if (e.getEntity().getKiller() instanceof Projectile) {
+        } else if (e.getEntity().getKiller() instanceof Projectile) {
             Projectile proj = (Projectile) e.getEntity().getKiller();
             Player pl = (Player) proj.getShooter();
             e.setDeathMessage(getMsg("new-kill").replace("{player}", e.getEntity().getName()).replace("{killer}", pl.getName()));
         } else {
             e.setDeathMessage(getMsg("player-died").replace("{player}", e.getEntity().getDisplayName()));
         }
+        Bukkit.getScheduler().runTaskLater(plugin, () -> p.spigot().respawn(), 2L);
     }
 }

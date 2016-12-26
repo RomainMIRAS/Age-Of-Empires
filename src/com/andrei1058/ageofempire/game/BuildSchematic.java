@@ -25,7 +25,7 @@ public class BuildSchematic {
     public String build_cfg_name;
     public World world = Bukkit.getWorld(choosenMap);
     private static HashMap<UUID, BuildSchematic> buildSchematicHashMap = new HashMap<>();
-    public static ArrayList<UUID> teaamarray;
+    public ArrayList<UUID> teaamarray;
     public Location villager;
 
     public BuildSchematic(UUID Player, String team, String chat_build_name, String build_cfg_name, ArrayList<UUID> teamarray) {
@@ -91,12 +91,7 @@ public class BuildSchematic {
 
         orderedLocation.addAll(locatii);
 
-        Collections.sort(orderedLocation, new Comparator<Location>() {
-            @Override
-            public int compare(Location block1, Location block2) {
-                return Double.compare(block1.getY(), block2.getY());
-            }
-        });
+        Collections.sort(orderedLocation, (block1, block2) -> Double.compare(block1.getY(), block2.getY()));
         final int size = locatii.size();
         final int blocksPerTime = 2;
         final long delay = 0L;
@@ -287,7 +282,125 @@ public class BuildSchematic {
                                             break;
                                     }
                                     break;
-
+                                case archery:
+                                    new Hologram(v.getLocation(), getMsg("forum."+archery+".displayname"), getMsg("forum."+archery+".holo"), v);
+                                    switch (team) {
+                                        case blue_team:
+                                            blue_archery = v;
+                                            break;
+                                        case green_team:
+                                            green_archery = v;
+                                            break;
+                                        case yellow_team:
+                                            yellow_archery = v;
+                                            break;
+                                        case red_team:
+                                            red_archery = v;
+                                            break;
+                                    }
+                                    break;
+                                case trifarrow:
+                                    new Hologram(v.getLocation(), getMsg("forum."+trifarrow+".displayname"), getMsg("forum."+trifarrow+".holo"), v);
+                                    switch (team) {
+                                        case blue_team:
+                                            blue_trifarrow = v;
+                                            break;
+                                        case green_team:
+                                            green_trifarrow = v;
+                                            break;
+                                        case yellow_team:
+                                            yellow_trifarrow = v;
+                                            break;
+                                        case red_team:
+                                            red_trifarrow = v;
+                                            break;
+                                    }
+                                    break;
+                                case stable:
+                                    new Hologram(v.getLocation(), getMsg("forum."+stable+".displayname"), getMsg("forum."+stable+".holo"), v);
+                                    switch (team) {
+                                        case blue_team:
+                                            blue_stable = v;
+                                            break;
+                                        case green_team:
+                                            green_stable = v;
+                                            break;
+                                        case yellow_team:
+                                            yellow_stable = v;
+                                            break;
+                                        case red_team:
+                                            red_stable = v;
+                                            break;
+                                    }
+                                    break;
+                                case armory:
+                                    new Hologram(v.getLocation(), getMsg("forum."+armory+".displayname"), getMsg("forum."+armory+".holo"), v);
+                                    switch (team) {
+                                        case blue_team:
+                                            blue_armory = v;
+                                            break;
+                                        case green_team:
+                                            green_armory = v;
+                                            break;
+                                        case yellow_team:
+                                            yellow_armory = v;
+                                            break;
+                                        case red_team:
+                                            red_armory = v;
+                                            break;
+                                    }
+                                    break;
+                                case laboratory:
+                                    new Hologram(v.getLocation(), getMsg("forum."+laboratory+".displayname"), getMsg("forum."+laboratory+".holo"), v);
+                                    switch (team) {
+                                        case blue_team:
+                                            blue_lab = v;
+                                            break;
+                                        case green_team:
+                                            green_lab = v;
+                                            break;
+                                        case yellow_team:
+                                            yellow_lab = v;
+                                            break;
+                                        case red_team:
+                                            red_lab = v;
+                                            break;
+                                    }
+                                    break;
+                                case guild:
+                                    new Hologram(v.getLocation(), getMsg("forum."+guild+".displayname"), getMsg("forum."+guild+".holo"), v);
+                                    switch (team) {
+                                        case blue_team:
+                                            blue_guild = v;
+                                            break;
+                                        case green_team:
+                                            green_guild = v;
+                                            break;
+                                        case yellow_team:
+                                            yellow_guild = v;
+                                            break;
+                                        case red_team:
+                                            red_guild = v;
+                                            break;
+                                    }
+                                    break;
+                                case training_center:
+                                    new Hologram(v.getLocation(), getMsg("forum."+training_center+".displayname"), getMsg("forum."+training_center+".holo"), v);
+                                    switch (team) {
+                                        case blue_team:
+                                            blue_tcenter = v;
+                                            break;
+                                        case green_team:
+                                            green_tcenter = v;
+                                            break;
+                                        case yellow_team:
+                                            yellow_tcenter = v;
+                                            break;
+                                        case red_team:
+                                            red_tcenter = v;
+                                            break;
+                                    }
+                                    break;
                             }
                             return;
                         }
