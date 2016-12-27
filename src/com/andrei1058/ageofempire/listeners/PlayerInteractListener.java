@@ -5,10 +5,8 @@ import com.andrei1058.ageofempire.game.Status;
 import com.andrei1058.ageofempire.game.Vote;
 import com.google.common.io.ByteArrayDataOutput;
 import com.google.common.io.ByteStreams;
-import com.sun.org.apache.bcel.internal.generic.IF_ACMPEQ;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
-import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
@@ -53,8 +51,7 @@ public class PlayerInteractListener implements Listener {
                     e.getPlayer().sendPluginMessage(plugin, "BungeeCord", out.toByteArray());
                 }
             }
-        }
-        else if (STATUS == Status.PRE_GAME){
+        } else if (STATUS == Status.PRE_GAME){
             if (e.getAction() == Action.RIGHT_CLICK_BLOCK || e.getAction() == Action.RIGHT_CLICK_AIR) {
                 if (e.getPlayer().getItemInHand().getType() == Material.STAINED_GLASS_PANE){
                     if (e.getPlayer().getItemInHand().getItemMeta().getDisplayName().equalsIgnoreCase(getMsg("team-choosing.blue"))){

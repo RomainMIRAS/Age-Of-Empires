@@ -22,6 +22,7 @@ public class Region {
     private boolean small;
     private boolean medium;
     private boolean large;
+    private boolean used = false;
     private String name;
     ArmorStand as;
 
@@ -44,13 +45,16 @@ public class Region {
             this.loc2 = center.clone().add(+Settings.load().getInt("plot-radius.large"), +1, +Settings.load().getInt("plot-radius.large"));
             string = getMsg("plot.large");
         }
-        as = (ArmorStand) center.getWorld().spawnEntity(center.clone().add(0, +7, +0), EntityType.ARMOR_STAND);
-        as.setGravity(false);
-        as.setCanPickupItems(false);
-        as.setCustomName(string);
-        as.setCustomNameVisible(true);
-        as.setVisible(false);
-        as.setSmall(false);
+        String finalString = string;
+        Bukkit.getScheduler().runTaskLater(plugin, () -> {
+            as = (ArmorStand) center.getWorld().spawnEntity(center.add(0, +5, +0), EntityType.ARMOR_STAND);
+            as.setGravity(false);
+            as.setCanPickupItems(false);
+            as.setCustomName(finalString);
+            as.setCustomNameVisible(true);
+            as.setVisible(false);
+            as.setSmall(false);
+        }, 2L);
         regions.add(this);
     }
 
@@ -99,10 +103,21 @@ public class Region {
 
     public static void check(Location loc, UUID player) {
         if (getRegion(loc) != null) {
-            getRegion(loc).allowed(player);
+            if (!getRegion(loc).used) {
+                getRegion(loc).allowed(player);
+            } else {
+                Bukkit.getPlayer(player).sendMessage(getMsg("cant-construct-here"));
+            }
         } else {
             Bukkit.getPlayer(player).sendMessage(getMsg("cant-construct-here"));
         }
+    }
+
+    public static boolean place(Location loc){
+        if (getRegion(loc) == null){
+            return true;
+        }
+        return false;
     }
 
     private static Region getRegion(Location loc){
@@ -142,7 +157,7 @@ public class Region {
                             BuildSchematic.getUUID(player).ok(loc1);
                             removeHologram();
                             blue_small_plots--;
-                            regions.remove(this);
+                            this.used = true;
                         } else {
                             Bukkit.getPlayer(player).getInventory().setItem(7, slotlocked());
                             BuildSchematic.getUUID(player).end();
@@ -153,7 +168,7 @@ public class Region {
                             BuildSchematic.getUUID(player).ok(loc1);
                             removeHologram();
                             green_small_plots--;
-                            regions.remove(this);
+                            this.used = true;
                         } else {
                             Bukkit.getPlayer(player).getInventory().setItem(7, slotlocked());
                             BuildSchematic.getUUID(player).end();
@@ -164,7 +179,7 @@ public class Region {
                             BuildSchematic.getUUID(player).ok(loc1);
                             removeHologram();
                             yellow_small_plots--;
-                            regions.remove(this);
+                            this.used = true;
                         } else {
                             Bukkit.getPlayer(player).getInventory().setItem(7, slotlocked());
                             BuildSchematic.getUUID(player).end();
@@ -175,7 +190,7 @@ public class Region {
                             BuildSchematic.getUUID(player).ok(loc1);
                             removeHologram();
                             red_small_plots--;
-                            regions.remove(this);
+                            this.used = true;
                         } else {
                             Bukkit.getPlayer(player).getInventory().setItem(7, slotlocked());
                             BuildSchematic.getUUID(player).end();
@@ -197,7 +212,7 @@ public class Region {
                             BuildSchematic.getUUID(player).ok(loc1);
                             removeHologram();
                             blue_medium_plots--;
-                            regions.remove(this);
+                            this.used = true;
                         } else {
                             Bukkit.getPlayer(player).getInventory().setItem(7, slotlocked());
                             BuildSchematic.getUUID(player).end();
@@ -208,7 +223,7 @@ public class Region {
                             BuildSchematic.getUUID(player).ok(loc1);
                             removeHologram();
                             green_medium_plots--;
-                            regions.remove(this);
+                            this.used = true;
                         } else {
                             Bukkit.getPlayer(player).getInventory().setItem(7, slotlocked());
                             BuildSchematic.getUUID(player).end();
@@ -219,7 +234,7 @@ public class Region {
                             BuildSchematic.getUUID(player).ok(loc1);
                             removeHologram();
                             yellow_medium_plots--;
-                            regions.remove(this);
+                            this.used = true;
                         } else {
                             Bukkit.getPlayer(player).getInventory().setItem(7, slotlocked());
                             BuildSchematic.getUUID(player).end();
@@ -230,7 +245,7 @@ public class Region {
                             BuildSchematic.getUUID(player).ok(loc1);
                             removeHologram();
                             red_medium_plots--;
-                            regions.remove(this);
+                            this.used = true;
                         } else {
                             Bukkit.getPlayer(player).getInventory().setItem(7, slotlocked());
                             BuildSchematic.getUUID(player).end();
@@ -249,7 +264,7 @@ public class Region {
                             BuildSchematic.getUUID(player).ok(loc1);
                             removeHologram();
                             blue_large_plots--;
-                            regions.remove(this);
+                            this.used = true;
                         } else {
                             Bukkit.getPlayer(player).getInventory().setItem(7, slotlocked());
                             BuildSchematic.getUUID(player).end();
@@ -260,7 +275,7 @@ public class Region {
                             BuildSchematic.getUUID(player).ok(loc1);
                             removeHologram();
                             green_large_plots--;
-                            regions.remove(this);
+                            this.used = true;
                         } else {
                             Bukkit.getPlayer(player).getInventory().setItem(7, slotlocked());
                             BuildSchematic.getUUID(player).end();
@@ -271,7 +286,7 @@ public class Region {
                             BuildSchematic.getUUID(player).ok(loc1);
                             removeHologram();
                             yellow_large_plots--;
-                            regions.remove(this);
+                            this.used = true;
                         } else {
                             Bukkit.getPlayer(player).getInventory().setItem(7, slotlocked());
                             BuildSchematic.getUUID(player).end();
@@ -282,7 +297,7 @@ public class Region {
                             BuildSchematic.getUUID(player).ok(loc1);
                             removeHologram();
                             red_large_plots--;
-                            regions.remove(this);
+                            this.used = true;
                         } else {
                             Bukkit.getPlayer(player).getInventory().setItem(7, slotlocked());
                             BuildSchematic.getUUID(player).end();

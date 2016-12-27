@@ -186,6 +186,22 @@ public class EntityDeathListener implements Listener {
                     Bukkit.broadcastMessage(getMsg("yellow-building-explode").replace("{building}", getMsg("forum."+trifarrow+".displayname")));
                 } else if (v == red_trifarrow){
                     Bukkit.broadcastMessage(getMsg("red-building-explode").replace("{building}", getMsg("forum."+trifarrow+".displayname")));
+                } else if (v == blue_armory){
+                    Bukkit.broadcastMessage(getMsg("blue-building-explode").replace("{building}", getMsg("forum."+armory+".displayname")));
+                } else if (v == green_armory){
+                    Bukkit.broadcastMessage(getMsg("green-building-explode").replace("{building}", getMsg("forum."+armory+".displayname")));
+                } else if (v == yellow_armory){
+                    Bukkit.broadcastMessage(getMsg("yellow-building-explode").replace("{building}", getMsg("forum."+armory+".displayname")));
+                } else if (v == red_armory){
+                    Bukkit.broadcastMessage(getMsg("red-building-explode").replace("{building}", getMsg("forum."+armory+".displayname")));
+                } else if (v == blue_lab){
+                    Bukkit.broadcastMessage(getMsg("blue-building-explode").replace("{building}", getMsg("forum."+laboratory+".displayname")));
+                } else if (v == green_lab){
+                    Bukkit.broadcastMessage(getMsg("green-building-explode").replace("{building}", getMsg("forum."+laboratory+".displayname")));
+                } else if (v == yellow_lab){
+                    Bukkit.broadcastMessage(getMsg("yellow-building-explode").replace("{building}", getMsg("forum."+laboratory+".displayname")));
+                } else if (v == red_lab){
+                    Bukkit.broadcastMessage(getMsg("red-building-explode").replace("{building}", getMsg("forum."+laboratory+".displayname")));
                 }
                 Bukkit.getScheduler().runTaskLater(plugin, () -> Bukkit.getWorld(v.getWorld().getName()).createExplosion(v.getLocation(), 8), 20*15);
             }

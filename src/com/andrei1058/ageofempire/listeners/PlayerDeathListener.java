@@ -27,14 +27,15 @@ public class PlayerDeathListener implements Listener {
         ListIterator<ItemStack> litr = drops.listIterator();
         while( litr.hasNext() ) {
             ItemStack stack = litr.next();
+            if (stack.getType() == Material.SPRUCE_DOOR_ITEM){
+                constructor.add(p);
+            }
             if (stack.getType().equals(Material.PAPER) || stack.getType().equals(Material.MOB_SPAWNER)
                     || stack.getType() == Material.STONE_AXE || stack.getType() == Material.STONE_PICKAXE
                     || stack.getType() == Material.LEATHER_BOOTS || stack.getType() == Material.LEATHER_CHESTPLATE
-                    || stack.getType() == Material.LEATHER_HELMET || stack.getType() == Material.LEATHER_LEGGINGS) {
+                    || stack.getType() == Material.LEATHER_HELMET || stack.getType() == Material.LEATHER_LEGGINGS
+                    || stack.getType() == Material.SPRUCE_DOOR_ITEM) {
                 litr.remove();
-            }
-            if (stack.getType() == Material.SPRUCE_DOOR_ITEM){
-                constructor.add(p);
             }
         }
         if (e.getEntity().getKiller() instanceof Player) {

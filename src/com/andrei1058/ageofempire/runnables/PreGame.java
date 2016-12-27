@@ -11,6 +11,7 @@ import com.andrei1058.ageofempire.nms.VillagerNMS;
 import org.bukkit.*;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.scheduler.BukkitRunnable;
 
 import static com.andrei1058.ageofempire.Main.*;
@@ -112,40 +113,47 @@ public class PreGame extends BukkitRunnable {
                     p.getInventory().setLeggings(leatherArmor(Material.LEATHER_LEGGINGS, Color.RED));
                     p.setDisplayName("§c"+p.getName());
                 }
-                p.getInventory().addItem(new ItemStack(Material.STONE_PICKAXE));
-                p.getInventory().addItem(new ItemStack(Material.STONE_AXE));
+                ItemStack pick = new ItemStack(Material.STONE_PICKAXE);
+                ItemMeta pickMeta = pick.getItemMeta();
+                pickMeta.spigot().setUnbreakable(true);
+                pick.setItemMeta(pickMeta);
+
+                ItemStack axe = new ItemStack(Material.STONE_AXE);
+                ItemMeta axeMeta = axe.getItemMeta();
+                axeMeta.spigot().setUnbreakable(true);
+                axe.setItemMeta(axeMeta);
+
+                p.getInventory().addItem(pick);
+                p.getInventory().addItem(axe);
                 p.getInventory().setItem(8, slotlocked());
                 p.getInventory().setItem(7, slotlocked());
                 p.getInventory().setItem(6, forumPaper());
             }
             Scoreboard.register();
-            Bukkit.getScheduler().runTaskLater(plugin, new Runnable() {
-                @Override
-                public void run() {
-                    try {
-                        if (!bluePlayers.isEmpty()){
-                            blue_villager = VillagerNMS.spawnVillager(Locations.getLoc("Forums."+choosenMap+".Blue"), 3500);
-                            new Hologram(Locations.getLoc("Forums."+choosenMap+".Blue").clone(),
-                                    getMsg("villagers.forum"), getMsg("villagers.buy-buildings"), blue_villager);
-                        }
-                        if (!greenPlayers.isEmpty()){
-                            green_villager = VillagerNMS.spawnVillager(Locations.getLoc("Forums."+choosenMap+".Green"), 3500);
-                            new Hologram(Locations.getLoc("Forums."+choosenMap+".Green").clone(),
-                                    getMsg("villagers.forum"), getMsg("villagers.buy-buildings"), green_villager);
-                        }
-                        if (!yellowPlayers.isEmpty()){
-                            yellow_villager = VillagerNMS.spawnVillager(Locations.getLoc("Forums."+choosenMap+".Yellow"), 3500);
-                            new Hologram(Locations.getLoc("Forums."+choosenMap+".Yellow").clone(),
-                                    getMsg("villagers.forum"), getMsg("villagers.buy-buildings"), yellow_villager);
-                        }
-                        if (!redPlayers.isEmpty()){
-                            red_villager = VillagerNMS.spawnVillager(Locations.getLoc("Forums."+choosenMap+".Red"), 3500);
-                            new Hologram(Locations.getLoc("Forums."+choosenMap+".Red").clone(),
-                                    getMsg("villagers.forum"), getMsg("villagers.buy-buildings"), red_villager);
-                        }
-                    } catch (Exception e){
-                        e.printStackTrace();
+            Bukkit.getScheduler().runTaskLater(plugin, () -> {
+                try {
+                    if (!bluePlayers.isEmpty()){
+                        blue_villager = VillagerNMS.spawnVillager(Locations.getLoc("Forums."+choosenMap+".Blue"), 3500);
+                        new Hologram(Locations.getLoc("Forums."+choosenMap+".Blue").clone(),
+                                getMsg("villagers.forum"), getMsg("villagers.buy-buildings"), blue_villager);
                     }
+                    if (!greenPlayers.isEmpty()){
+                        green_villager = VillagerNMS.spawnVillager(Locations.getLoc("Forums."+choosenMap+".Green"), 3500);
+                        new Hologram(Locations.getLoc("Forums."+choosenMap+".Green").clone(),
+                                getMsg("villagers.forum"), getMsg("villagers.buy-buildings"), green_villager);
+                    }
+                    if (!yellowPlayers.isEmpty()){
+                        yellow_villager = VillagerNMS.spawnVillager(Locations.getLoc("Forums."+choosenMap+".Yellow"), 3500);
+                        new Hologram(Locations.getLoc("Forums."+choosenMap+".Yellow").clone(),
+                                getMsg("villagers.forum"), getMsg("villagers.buy-buildings"), yellow_villager);
+                    }
+                    if (!redPlayers.isEmpty()){
+                        red_villager = VillagerNMS.spawnVillager(Locations.getLoc("Forums."+choosenMap+".Red"), 3500);
+                        new Hologram(Locations.getLoc("Forums."+choosenMap+".Red").clone(),
+                                getMsg("villagers.forum"), getMsg("villagers.buy-buildings"), red_villager);
+                    }
+                } catch (Exception e){
+                    e.printStackTrace();
                 }
             }, 30L);
             Main.pvp_assault = 60000*Settings.load().getInt("countdowns.pvp");

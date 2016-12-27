@@ -18,7 +18,7 @@ public class OreHologram {
     public OreHologram(Location loc, Integer amount, boolean stone) {
         if (stone) {
             if (amount != 0) {
-                as = (ArmorStand) loc.getWorld().spawnEntity(loc.clone().add(0, +1.3, +0), EntityType.ARMOR_STAND);
+                as = (ArmorStand) loc.getWorld().spawnEntity(loc.clone().add(0, +0.9, +0), EntityType.ARMOR_STAND);
                 as.setGravity(false);
                 as.setCanPickupItems(false);
                 as.setCustomName(txt.replace("{amount}", String.valueOf(amount)));
@@ -27,7 +27,7 @@ public class OreHologram {
                 as.setSmall(true);
             }
 
-            as2 = (ArmorStand) loc.getWorld().spawnEntity(loc.add(0, +0.7, 0), EntityType.ARMOR_STAND);
+            as2 = (ArmorStand) loc.getWorld().spawnEntity(loc.add(0, +0.5, 0), EntityType.ARMOR_STAND);
             as2.setGravity(false);
             as2.setCanPickupItems(false);
             as2.setCustomName(txt2.replace("{amount}", "3"));
@@ -37,7 +37,7 @@ public class OreHologram {
             holos.add(this);
         } else {
             if (amount != 0) {
-                as = (ArmorStand) loc.getWorld().spawnEntity(loc.clone().add(0, +1.6, +0), EntityType.ARMOR_STAND);
+                as = (ArmorStand) loc.getWorld().spawnEntity(loc.clone().add(0, +0.9, +0), EntityType.ARMOR_STAND);
                 as.setGravity(false);
                 as.setCanPickupItems(false);
                 as.setCustomName(txt.replace("{amount}", String.valueOf(amount)));
@@ -45,7 +45,7 @@ public class OreHologram {
                 as.setVisible(false);
                 as.setSmall(true);
             }
-            as2 = (ArmorStand) loc.getWorld().spawnEntity(loc.add(0, +1, 0), EntityType.ARMOR_STAND);
+            as2 = (ArmorStand) loc.getWorld().spawnEntity(loc.add(0, 0.5, 0), EntityType.ARMOR_STAND);
             as2.setGravity(false);
             as2.setCanPickupItems(false);
             as2.setCustomName(txt3.replace("{amount}", "3"));

@@ -45,6 +45,8 @@ public class PlayerJoinListener implements Listener {
     }
 
     public static void lobbyItems(Player p){
+        p.getInventory().clear();
+        p.getInventory().setArmorContents(null);
         Bukkit.getScheduler().runTaskLater(plugin, () -> {
             p.teleport(Locations.getLoc("Spawns.Lobby"));
             Bukkit.broadcastMessage(getMsg("player-join").replace("%player%", p.getName()));
@@ -54,8 +56,6 @@ public class PlayerJoinListener implements Listener {
             p.setExp(0);
             p.setLevel(0);
             p.setGameMode(GameMode.ADVENTURE);
-            p.getInventory().clear();
-            p.getInventory().setArmorContents(null);
             ItemStack help1 = new ItemStack(Material.STAINED_GLASS_PANE, 1, (short)5);
             ItemMeta helpmeta = help1.getItemMeta();
             helpmeta.setDisplayName(getMsg("help-item-on"));

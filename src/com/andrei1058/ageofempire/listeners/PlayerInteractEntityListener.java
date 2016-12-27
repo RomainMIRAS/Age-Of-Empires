@@ -2,6 +2,7 @@ package com.andrei1058.ageofempire.listeners;
 
 import com.andrei1058.ageofempire.Misc;
 import com.andrei1058.ageofempire.game.Status;
+import com.sun.javafx.scene.control.skin.VirtualFlow;
 import net.minecraft.server.v1_8_R3.Items;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
@@ -16,8 +17,11 @@ import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
+import org.bukkit.potion.Potion;
+import org.bukkit.potion.PotionType;
 
 import java.util.ArrayList;
+import java.util.UUID;
 import java.util.stream.Collectors;
 
 import static com.andrei1058.ageofempire.Main.*;
@@ -134,19 +138,19 @@ public class PlayerInteractEntityListener implements Listener {
                     }
                 } else if (v == blue_kennel){
                     if (bluePlayers.contains(p.getUniqueId())){
-                        p.openInventory(kennel());
+                        p.openInventory(kennel(p.getUniqueId()));
                     }
                 } else if (v == green_kennel){
                     if (greenPlayers.contains(p.getUniqueId())){
-                        p.openInventory(kennel());
+                        p.openInventory(kennel(p.getUniqueId()));
                     }
                 } else if (v == yellow_kennel){
                     if (yellowPlayers.contains(p.getUniqueId())){
-                        p.openInventory(kennel());
+                        p.openInventory(kennel(p.getUniqueId()));
                     }
                 } else if (v == red_kennel){
                     if (redPlayers.contains(p.getUniqueId())){
-                        p.openInventory(kennel());
+                        p.openInventory(kennel(p.getUniqueId()));
                     }
                 } else if (v == blue_archery){
                     if (bluePlayers.contains(p.getUniqueId())){
@@ -196,11 +200,42 @@ public class PlayerInteractEntityListener implements Listener {
                     if (redPlayers.contains(p.getUniqueId())){
                         p.openInventory(stableInv());
                     }
+                } else if (v == blue_armory){
+                    if (bluePlayers.contains(p.getUniqueId())){
+                        p.openInventory(armoryInv(p.getUniqueId()));
+                    }
+                } else if (v == green_armory){
+                    if (greenPlayers.contains(p.getUniqueId())){
+                        p.openInventory(armoryInv(p.getUniqueId()));
+                    }
+                } else if (v == yellow_armory){
+                    if (yellowPlayers.contains(p.getUniqueId())){
+                        p.openInventory(armoryInv(p.getUniqueId()));
+                    }
+                } else if (v == red_armory){
+                    if (redPlayers.contains(p.getUniqueId())){
+                        p.openInventory(armoryInv(p.getUniqueId()));
+                    }
+                } else if (v == blue_lab){
+                    if (bluePlayers.contains(p.getUniqueId())){
+                        p.openInventory(lab());
+                    }
+                } else if (v == green_lab){
+                    if (greenPlayers.contains(p.getUniqueId())){
+                        p.openInventory(lab());
+                    }
+                } else if (v == yellow_lab){
+                    if (yellowPlayers.contains(p.getUniqueId())){
+                        p.openInventory(lab());
+                    }
+                } else if (v == red_lab){
+                    if (redPlayers.contains(p.getUniqueId())){
+                        p.openInventory(lab());
+                    }
                 } else {
                     e.setCancelled(true);
                     e.getPlayer().sendMessage(getMsg("villager.cant-open"));
                 }
-
             }
         }
     }
@@ -406,12 +441,11 @@ public class PlayerInteractEntityListener implements Listener {
         inv.addItem(forgeItem(Material.IRON_SWORD, getMsg("forge.ironsword.displayname"), getArray("forge.ironsword.lore")));
         inv.addItem(forgeItem(Material.STONE_AXE,getMsg("forge.stoneaxe.displayname"), getArray("forge.stoneaxe.lore")));
         inv.addItem(forgeItem(Material.IRON_AXE, getMsg("forge.ironaxe.displayname"), getArray("forge.ironaxe.lore")));
-        if (bluePlayers.contains(p.getUniqueId())){
-                if (blue_age > 2){
-                    inv.addItem(forgeItem(Material.DIAMOND_SWORD, getMsg("forge.diamondsword.displayname"), getArray("forge.diamondsword.lore")));
-                    inv.addItem(forgeItem(Material.DIAMOND_AXE, getMsg("forge.diamondaxe.displayname"), getArray("forge.diamondaxe.lore")));
-                }
-
+        if (bluePlayers.contains(p.getUniqueId())) {
+            if (blue_age > 2) {
+                inv.addItem(forgeItem(Material.DIAMOND_SWORD, getMsg("forge.diamondsword.displayname"), getArray("forge.diamondsword.lore")));
+                inv.addItem(forgeItem(Material.DIAMOND_AXE, getMsg("forge.diamondaxe.displayname"), getArray("forge.diamondaxe.lore")));
+            }
         } else if (greenPlayers.contains(p.getUniqueId())){
             if (green_age > 2){
                 inv.addItem(forgeItem(Material.DIAMOND_SWORD, getMsg("forge.diamondsword.displayname"), getArray("forge.diamondsword.lore")));
@@ -440,15 +474,74 @@ public class PlayerInteractEntityListener implements Listener {
         return inv;
     }
 
+    public static Inventory armoryInv(UUID u){
+        Inventory inv = Bukkit.createInventory(null, 54, "Armory");
+        ItemStack ia = new ItemStack(Material.IRON_CHESTPLATE);
+        ItemMeta iam = ia.getItemMeta();
+        iam.setDisplayName(getMsg("armory.ironarmor.displayname"));
+        iam.setLore(getArray("armory.ironarmor.lore").stream().map(s -> s.replace('&', '§')).collect(Collectors.toCollection(ArrayList::new)));
+        ia.setItemMeta(iam);
+        inv.addItem(ia);
+        ItemStack iha = new ItemStack(Material.IRON_BARDING);
+        ItemMeta iham = iha.getItemMeta();
+        iham.setDisplayName(getMsg("armory.ironhorsearmor.displayname"));
+        iham.setLore(getArray("armory.ironhorsearmor.lore").stream().map(s -> s.replace('&','§')).collect(Collectors.toCollection(ArrayList::new)));
+        iha.setItemMeta(iham);
+        inv.addItem(iha);
+        if (bluePlayers.contains(u)){
+            if (blue_age > 2) {
+                inv.addItem(forgeItem(Material.DIAMOND_CHESTPLATE, getMsg("armory.diamondarmor.displayname"), getArray("armory.diamondarmor.lore")));
+                inv.addItem(forgeItem(Material.DIAMOND_BARDING, getMsg("armory.diamondhorsearmor.displayname"), getArray("armory.diamondhorsearmor.lore")));
+            }
+        } else if (redPlayers.contains(u)){
+            if (red_age > 2) {
+                inv.addItem(forgeItem(Material.DIAMOND_CHESTPLATE, getMsg("armory.diamondarmor.displayname"), getArray("armory.diamondarmor.lore")));
+                inv.addItem(forgeItem(Material.DIAMOND_BARDING, getMsg("armory.diamondhorsearmor.displayname"), getArray("armory.diamondhorsearmor.lore")));
+            }
+        } else if (greenPlayers.contains(u)){
+            if (green_age > 2) {
+                inv.addItem(forgeItem(Material.DIAMOND_CHESTPLATE, getMsg("armory.diamondarmor.displayname"), getArray("armory.diamondarmor.lore")));
+                inv.addItem(forgeItem(Material.DIAMOND_BARDING, getMsg("armory.diamondhorsearmor.displayname"), getArray("armory.diamondhorsearmor.lore")));
+            }
+        } else if (yellowPlayers.contains(u)){
+            if (yellow_age > 2) {
+                inv.addItem(forgeItem(Material.DIAMOND_CHESTPLATE, getMsg("armory.diamondarmor.displayname"), getArray("armory.diamondarmor.lore")));
+                inv.addItem(forgeItem(Material.DIAMOND_BARDING, getMsg("armory.diamondhorsearmor.displayname"), getArray("armory.diamondhorsearmor.lore")));
+            }
+        }
+        return inv;
+    }
+
     public static Inventory sabotage(){
         Inventory inv = Bukkit.createInventory(null, 54, "Sabotage");
         inv.addItem(forgeItem(Material.TNT, getMsg("sabotage.tnt.displayname"), getArray("sabotage.tnt.lore")));
         return inv;
     }
 
-    public static Inventory kennel(){
+    public static Inventory kennel(UUID u){
         Inventory inv = Bukkit.createInventory(null, 54, "Kennel");
         inv.addItem(forgeItem(Material.MONSTER_EGG, getMsg("kennel.dog.displayname"), getArray("kennel.dog.lore")));
+        if (bluePlayers.contains(u)){
+            if (blue_age > 2){
+                inv.addItem(forgeItem(Material.MONSTER_EGG, getMsg("kennel.dog2.displayname"), getArray("kennel.dog2.lore")));
+                inv.addItem(forgeItem(Material.MONSTER_EGG, getMsg("kennel.dog3.displayname"), getArray("kennel.dog3.lore")));
+            }
+        } else if (greenPlayers.contains(u)){
+            if (green_age > 2){
+                inv.addItem(forgeItem(Material.MONSTER_EGG, getMsg("kennel.dog2.displayname"), getArray("kennel.dog2.lore")));
+                inv.addItem(forgeItem(Material.MONSTER_EGG, getMsg("kennel.dog3.displayname"), getArray("kennel.dog3.lore")));
+            }
+        } else if (yellowPlayers.contains(u)){
+            if (yellow_age > 2){
+                inv.addItem(forgeItem(Material.MONSTER_EGG, getMsg("kennel.dog2.displayname"), getArray("kennel.dog2.lore")));
+                inv.addItem(forgeItem(Material.MONSTER_EGG, getMsg("kennel.dog3.displayname"), getArray("kennel.dog3.lore")));
+            }
+        } else if (redPlayers.contains(u)){
+            if (red_age > 2){
+                inv.addItem(forgeItem(Material.MONSTER_EGG, getMsg("kennel.dog2.displayname"), getArray("kennel.dog2.lore")));
+                inv.addItem(forgeItem(Material.MONSTER_EGG, getMsg("kennel.dog3.displayname"), getArray("kennel.dog3.lore")));
+            }
+        }
         return inv;
     }
 
@@ -462,6 +555,31 @@ public class PlayerInteractEntityListener implements Listener {
         inv.addItem(i);
 
         return inv;
+    }
+
+    private static Inventory lab(){
+        Inventory inv = Bukkit.createInventory(null, 54, "Laboratory");
+        inv.addItem(labItem(PotionType.SPEED, "lab.swiftness.name", "lab.swiftness.lore", false));
+        inv.addItem(labItem(PotionType.FIRE_RESISTANCE, "lab.fireresistance.name", "lab.fireresistance.lore", false));
+        inv.addItem(labItem(PotionType.INSTANT_HEAL, "lab.healing.name", "lab.healing.lore", false));
+        inv.addItem(labItem(PotionType.NIGHT_VISION, "lab.nightvision.name", "lab.nightvision.lore", false));
+        inv.addItem(labItem(PotionType.JUMP, "lab.leaping.name", "lab.leaping.lore", false));
+        inv.addItem(labItem(PotionType.WATER_BREATHING, "lab.waterbreathing.name", "lab.waterbreathing.lore", false));
+        inv.addItem(labItem(PotionType.SPEED, "lab.splashswiftness.name", "lab.splashswiftness.lore", true));
+        inv.addItem(labItem(PotionType.REGEN, "lab.regeneration.name", "lab.regeneration.lore", false));
+        inv.addItem(labItem(PotionType.JUMP, "lab.splashleaping.name", "lab.splashleaping.lore", true));
+        return inv;
+    }
+
+    private static ItemStack labItem(PotionType potionType, String name, String lore, boolean splash){
+        Potion p = new Potion(potionType);
+        p.setSplash(splash);
+        ItemStack i = p.toItemStack(1);
+        ItemMeta itemMeta = i.getItemMeta();
+        itemMeta.setDisplayName(getMsg(name));
+        itemMeta.setLore(getArray(lore).stream().map(s -> s.replace('&', '§')).collect(Collectors.toCollection(ArrayList::new)));
+        i.setItemMeta(itemMeta);
+        return i;
     }
 
     public static Inventory market(){

@@ -199,7 +199,7 @@ public class Messages {
         armory_lore.add("&3Stone: &f150");
         armory_lore.add("&3Plot: &fMedium");
         armory_lore.add("&3Description: &bBuy armor.");
-        yml.addDefault("forum."+armory+".lore", stable_lore);
+        yml.addDefault("forum."+armory+".lore", armory_lore);
         yml.addDefault("forum."+armory+".holo", "&bBuy armory_lore");
 
         yml.addDefault("forum."+laboratory+".displayname", "&e&lLaboratory");
@@ -258,6 +258,7 @@ public class Messages {
         yml.addDefault("red-changed-age", "{prefix} &fThe &cRed &fteam has just changed to Age &e{age}");
         yml.addDefault("cant-construct-outside", "&cYou can't construct buildings outside your base.");
         yml.addDefault("cant-construct-here", "&cYou can't construct buildings right here.");
+        yml.addDefault("cant-place-here", "{prefix} &cYou can't place blocks right here!");
         yml.addDefault("cant-construct-size", "&cYou must be in the right size plot to build this structure.");
         yml.addDefault("cant-vote-full", "&cYou can't vote for this building because you don't have any free plot of this type");
         yml.addDefault("built-success", "{prefix} &e&l{building} &abuilt successfully.");
@@ -311,11 +312,11 @@ public class Messages {
         ironaxe.add("&2Quantity: &f1");
         yml.addDefault("forge.ironaxe.lore", ironaxe);
 
-        yml.addDefault("forge.diamondsowrd.displayname", "&9Diamond Sword");
+        yml.addDefault("forge.diamondsword.displayname", "&9Diamond Sword");
         ArrayList<String> diamondsowrd_l = new ArrayList<>();
         diamondsowrd_l.add("&6Gold: &f50");
         diamondsowrd_l.add("&2Quantity: &f1");
-        yml.addDefault("forge.diamondsowrd.lore", diamondsowrd_l);
+        yml.addDefault("forge.diamondsword.lore", diamondsowrd_l);
 
         yml.addDefault("forge.diamondaxe.displayname", "&9Diamond Axe");
         ArrayList<String> diamondaxe_l = new ArrayList<>();
@@ -541,6 +542,42 @@ public class Messages {
         dog.add("&2Quantity: &f1");
         yml.addDefault("kennel.dog.lore", dog);
 
+        yml.addDefault("kennel.dog2.displayname", "&cDogs");
+        ArrayList<String> dog2 = new ArrayList<>();
+        dog2.add("&6Gold: &f75");
+        dog2.add("&2Quantity: &f2");
+        yml.addDefault("kennel.dog2.lore", dog2);
+
+        yml.addDefault("kennel.dog3.displayname", "&cDogs");
+        ArrayList<String> dog3 = new ArrayList<>();
+        dog3.add("&6Gold: &f100");
+        dog3.add("&2Quantity: &f3");
+        yml.addDefault("kennel.dog3.lore", dog3);
+
+        yml.addDefault("armory.ironarmor.displayname", "&fIron Armor");
+        ArrayList iron_armor = new ArrayList();
+        iron_armor.add("&6Gold: &f40");
+        iron_armor.add("&2Quantity: &f1");
+        yml.addDefault("armory.ironarmor.lore", iron_armor);
+
+        yml.addDefault("armory.ironhorsearmor.displayname", "&fIron Horse Armor");
+        ArrayList ironhorsearmor = new ArrayList();
+        ironhorsearmor.add("&6Gold: &f80");
+        ironhorsearmor.add("&2Quantity: &f1");
+        yml.addDefault("armory.ironhorsearmor.lore", ironhorsearmor);
+
+        yml.addDefault("armory.diamondarmor.displayname", "&fDiamond Armor");
+        ArrayList diamondarmor = new ArrayList();
+        diamondarmor.add("&6Gold: &f80");
+        diamondarmor.add("&2Quantity: &f1");
+        yml.addDefault("armory.diamondarmor.lore", diamondarmor);
+
+        yml.addDefault("armory.diamondhorsearmor.displayname", "&fDiamond Horse Armor");
+        ArrayList diamondhorsearmor = new ArrayList();
+        diamondhorsearmor.add("&6Gold: &f80");
+        diamondhorsearmor.add("&2Quantity: &f1");
+        yml.addDefault("armory.diamondhorsearmor.lore", diamondhorsearmor);
+
         yml.addDefault("pvp-disabled", "{prefix} &eP'rhaps wait for the PvP, get me? &a:p");
         yml.addDefault("x-attacked", "&e&l{villager} Attacked");
         yml.addDefault("yellow-building-explode", "{prefix} &eThe Yellow Team's {building} &6will explode in 15 seconds!");
@@ -596,12 +633,39 @@ public class Messages {
         arrow_explode.add("&2Quantity: &f1");
         yml.addDefault("trifarrow.arrow.lore", arrow_explode);
 
+        //laboratory
+        yml.addDefault("lab.swiftness.name", "&dPotion of Swiftness");
+        yml.addDefault("lab.swiftness.lore", price(35, 1));
+        yml.addDefault("lab.fireresistance.name", "&dPotion of Fire Resistance");
+        yml.addDefault("lab.fireresistance.lore", price(35, 1));
+        yml.addDefault("lab.healing.name", "&dPotion of Healing");
+        yml.addDefault("lab.healing.lore",price(35, 1));
+        yml.addDefault("lab.nightvision.name", "&dPotion of Night Vision");
+        yml.addDefault("lab.nightvision.lore", price(35, 1));
+        yml.addDefault("lab.leaping.name", "&dPotion of Leaping");
+        yml.addDefault("lab.leaping.lore", price(35, 1));
+        yml.addDefault("lab.waterbreathing.name", "&dPotion of Water Breathing");
+        yml.addDefault("lab.waterbreathing.lore", price(35, 1));
+        yml.addDefault("lab.splashswiftness.name", "&dPotion of Swiftness");
+        yml.addDefault("lab.splashswiftness.lore", price(75, 1));
+        yml.addDefault("lab.regeneration.name", "&dPotion of Regeneration");
+        yml.addDefault("lab.regeneration.lore", price(50, 1));
+        yml.addDefault("lab.splashleaping.name", "&dPotion of Leaping");
+        yml.addDefault("lab.splashleaping.lore", price(75, 1));
+
         yml.options().copyDefaults(true);
         try {
             yml.save(file);
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    private static ArrayList<String> price(Integer price, Integer quantity){
+        ArrayList arrayList = new ArrayList();
+        arrayList.add("&6Gold: &f"+price);
+        arrayList.add("&2Quantity: &f"+quantity);
+        return arrayList;
     }
 
     public static String getMsg(String string){

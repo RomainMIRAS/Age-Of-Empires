@@ -35,7 +35,6 @@ public class EntityShootBowListener implements Listener {
                                 } else {
                                     i.setType(Material.AIR);
                                 }
-                                Bukkit.broadcastMessage("Am lansat sageata");
                                 Projectile proj = p.launchProjectile(Arrow.class, v);
                                 proj.setCustomName("§cExplosive");
                             } else {

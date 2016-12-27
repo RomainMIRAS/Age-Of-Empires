@@ -59,20 +59,18 @@ public class Settings {
         min_players = yml.getInt("min-players")-1;
         lobby_time = yml.getInt("countdowns.lobby");
         pregame_time = yml.getInt("countdowns.pregame");
-        if (yml.get("Arenas") != null && !SETUP){
-            Random r = new Random();
-            int a = yml.getStringList("Arenas").size();
-            int mapid = r.nextInt(a);
-            choosenMap = yml.getStringList("Arenas").get(mapid);
-            Bukkit.createWorld(new WorldCreator(choosenMap));
-            Bukkit.getScheduler().runTaskLater(plugin, () -> {
-                Locations.getLoc("Spawns.Lobby").getWorld().getEntities().forEach(Entity::remove);
-                Bukkit.getWorld(choosenMap).getEntities().forEach(Entity::remove);
-                Bukkit.getWorld(choosenMap).setGameRuleValue("keepInventory", "false");
-                Bukkit.getWorld(choosenMap).setAutoSave(false);
-            },100L);
+
+        if (Settings.load().get("Arenas") != null && !SETUP){
             RegisterNMS.registerEntity("Villager", 120, EntityVillager.class, VillagerNMS.class);
-            try {
+            Random r = new Random();
+            int a = Settings.load().getStringList("Arenas").size();
+            int mapid = r.nextInt(a);
+            choosenMap = Settings.load().getStringList("Arenas").get(mapid);
+            Bukkit.createWorld(new WorldCreator(choosenMap));
+            Locations.getLoc("Spawns.Lobby").getWorld().getEntities().forEach(Entity::remove);
+            Bukkit.getWorld(choosenMap).getEntities().forEach(Entity::remove);
+            Bukkit.getWorld(choosenMap).setGameRuleValue("keepInventory", "false");
+            Bukkit.getWorld(choosenMap).setAutoSave(false);
                 blue_large_plots = Locations.load().getConfigurationSection("Plots."+choosenMap+".Blue.Large").getKeys(false).size();
                 blue_medium_plots = Locations.load().getConfigurationSection("Plots."+choosenMap+".Blue.Medium").getKeys(false).size();
                 blue_small_plots = Locations.load().getConfigurationSection("Plots."+choosenMap+".Blue.Small").getKeys(false).size();
@@ -88,15 +86,8 @@ public class Settings {
                 yellow_large_plots = Locations.load().getConfigurationSection("Plots."+choosenMap+".Yellow.Large").getKeys(false).size();
                 yellow_medium_plots = Locations.load().getConfigurationSection("Plots."+choosenMap+".Yellow.Medium").getKeys(false).size();
                 yellow_small_plots = Locations.load().getConfigurationSection("Plots."+choosenMap+".Yellow.Small").getKeys(false).size();
-            } catch (NullPointerException e){
-                plugin.getLogger().warning("There is a problem with your plots :(");
-            }
-            Bukkit.getScheduler().runTaskLater(plugin, () -> STATUS = Status.LOBBY, 30L);
+                Region.loadRegions();
         }
-        Bukkit.getScheduler().runTaskLater(plugin, () -> {
-            if (!SETUP)
-            Region.loadRegions();
-        }, 200);
     }
 
     public static void addMap(String name){

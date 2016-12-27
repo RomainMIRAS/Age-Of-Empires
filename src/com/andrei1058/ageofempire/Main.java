@@ -4,10 +4,9 @@ import com.andrei1058.ageofempire.commands.Setup;
 import com.andrei1058.ageofempire.commands.Leave;
 import com.andrei1058.ageofempire.game.Status;
 import com.andrei1058.ageofempire.listeners.*;
-import net.minecraft.server.v1_8_R3.Village;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
-import org.bukkit.entity.Entity;
+import org.bukkit.block.Block;
 import org.bukkit.entity.Villager;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -32,7 +31,7 @@ public class Main extends JavaPlugin {
     public static ArrayList<Location> xp = new ArrayList<>();
     public static String choosenMap = "";
     public static boolean SETUP = false;
-    public static Status STATUS = Status.RESTARTING;
+    public static Status STATUS = Status.LOBBY;
     public static boolean pvp = false, assualt = false;
     public static int max_in_team = 6, min_players = 6;
     public static int lobby_time = 60, restart_time = 11, pregame_time = 20;
@@ -68,7 +67,7 @@ public class Main extends JavaPlugin {
     public static Villager blue_guild, green_guild, yellow_guild, red_guild;
     public static Villager blue_tcenter, green_tcenter, yellow_tcenter, red_tcenter;
 
-    public static ArrayList<Entity> projectiles = new ArrayList<>();
+    public static ArrayList<Block> placedBlocks = new ArrayList<>();
 
     @Override
     public void onEnable() {
@@ -92,7 +91,6 @@ public class Main extends JavaPlugin {
         pm.registerEvents(new BlockBreakListener(), this);
         pm.registerEvents(new PlayerQuitListener(), this);
         pm.registerEvents(new BlockPlaceListener(), this);
-        pm.registerEvents(new ItemConsumeListener(), this);
         pm.registerEvents(new PlayerInteractEntityListener(), this);
         pm.registerEvents(new ChatListener(), this);
         pm.registerEvents(new PlayerArmorStandManipulateListener(), this);
@@ -101,7 +99,6 @@ public class Main extends JavaPlugin {
         pm.registerEvents(new PlayerDeathListener(), this);
         pm.registerEvents(new PlayerRespawnListener(), this);
         pm.registerEvents(new CreatureSpawnListener(), this);
-        pm.registerEvents(new PlayerMoveListener(), this);
         pm.registerEvents(new PlayerLoginListener(), this);
         pm.registerEvents(new ProjectileHitListener(), this);
         pm.registerEvents(new EntityShootBowListener(), this);
