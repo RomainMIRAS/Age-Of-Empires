@@ -31,42 +31,44 @@ public class PreGame extends BukkitRunnable {
             new Restart().runTaskTimer(plugin, 0, 20);
             STATUS = Status.RESTARTING;
         }
-        if (pregame_time == 2){
+        if (pregame_time == 2) {
             for (Player p : Bukkit.getOnlinePlayers()) {
-                if (!greenPlayers.contains(p.getUniqueId()) && !redPlayers.contains(p.getUniqueId()) &&
-                        !yellowPlayers.contains(p.getUniqueId()) && !bluePlayers.contains(p.getUniqueId())) {
-                    if (Bukkit.getOnlinePlayers().size() > max_in_team * 3) {
-                        if (bluePlayers.size() < max_in_team) {
-                            bluePlayers.add(p.getUniqueId());
-                        } else if (greenPlayers.size() < max_in_team) {
-                            greenPlayers.add(p.getUniqueId());
-                        } else if (yellowPlayers.size() < max_in_team) {
-                            yellowPlayers.add(p.getUniqueId());
-                        } else if (redPlayers.size() < max_in_team) {
-                            redPlayers.add(p.getUniqueId());
-                        } else {
-                            p.kickPlayer("Teams are full");
-                        }
-                    } else if (Bukkit.getOnlinePlayers().size() > max_in_team * 2) {
-                        if (bluePlayers.size() < max_in_team) {
-                            bluePlayers.add(p.getUniqueId());
-                        } else if (greenPlayers.size() < max_in_team) {
-                            greenPlayers.add(p.getUniqueId());
-                        } else if (yellowPlayers.size() < max_in_team) {
-                            yellowPlayers.add(p.getUniqueId());
-                        } else {
-                            p.kickPlayer("Teams are full");
-                        }
-                    } else if (Bukkit.getOnlinePlayers().size() >= max_in_team) {
-                        if (bluePlayers.size() < max_in_team) {
-                            bluePlayers.add(p.getUniqueId());
-                        } else if (greenPlayers.size() < max_in_team) {
-                            greenPlayers.add(p.getUniqueId());
-                        } else {
-                            p.kickPlayer("Teams are full");
-                        }
-                    }
+                if (bluePlayers.contains(p.getUniqueId()) || yellowPlayers.contains(p.getUniqueId()) || redPlayers.contains(p.getUniqueId()) || greenPlayers.contains(p.getUniqueId())){
+                    continue;
                 }
+                if (Bukkit.getOnlinePlayers().size() > max_in_team * 3) {
+                    if (bluePlayers.size() <= max_in_team && bluePlayers.size() <= greenPlayers.size() && bluePlayers.size() <= yellowPlayers.size() && bluePlayers.size() <= redPlayers.size()) {
+                        bluePlayers.add(p.getUniqueId());
+                    } else if (greenPlayers.size() <= max_in_team && greenPlayers.size() < bluePlayers.size() && greenPlayers.size() < yellowPlayers.size() && greenPlayers.size() < redPlayers.size()) {
+                        greenPlayers.add(p.getUniqueId());
+                    } else if (yellowPlayers.size() <= max_in_team && yellowPlayers.size() <= bluePlayers.size() && yellowPlayers.size() <= greenPlayers.size() && yellowPlayers.size() <= redPlayers.size()) {
+                        yellowPlayers.add(p.getUniqueId());
+                    } else if (redPlayers.size() <= max_in_team && redPlayers.size() <= bluePlayers.size() && redPlayers.size() <= greenPlayers.size() && redPlayers.size() <= yellowPlayers.size()) {
+                        redPlayers.add(p.getUniqueId());
+                    } else {
+                        p.kickPlayer("Teams are full");
+                    }
+                } else if (Bukkit.getOnlinePlayers().size() > max_in_team * 2) {
+                    if (bluePlayers.size() <= max_in_team && bluePlayers.size() <= greenPlayers.size() && bluePlayers.size() <= yellowPlayers.size()) {
+                        bluePlayers.add(p.getUniqueId());
+                    } else if (greenPlayers.size() <= max_in_team && greenPlayers.size() <= bluePlayers.size() && greenPlayers.size() <= yellowPlayers.size()) {
+                        greenPlayers.add(p.getUniqueId());
+                    } else if (yellowPlayers.size() <= max_in_team && yellowPlayers.size() <= bluePlayers.size() && yellowPlayers.size() <= greenPlayers.size()) {
+                        yellowPlayers.add(p.getUniqueId());
+                    } else {
+                        p.kickPlayer("Teams are full");
+                    }
+                } else if (Bukkit.getOnlinePlayers().size() >= max_in_team) {
+                    if (bluePlayers.size() <= max_in_team && bluePlayers.size() <= greenPlayers.size()) {
+                        bluePlayers.add(p.getUniqueId());
+                    } else if (greenPlayers.size() <= max_in_team && greenPlayers.size() <= bluePlayers.size()) {
+                        greenPlayers.add(p.getUniqueId());
+                    } else {
+                        p.kickPlayer("Teams are full");
+                    }
+
+                }
+
             }
         }
         if (pregame_time > 0){
@@ -128,6 +130,7 @@ public class PreGame extends BukkitRunnable {
                 p.getInventory().setItem(8, slotlocked());
                 p.getInventory().setItem(7, slotlocked());
                 p.getInventory().setItem(6, forumPaper());
+                gold.put(p.getUniqueId(), 100);
             }
             Scoreboard.register();
             Bukkit.getScheduler().runTaskLater(plugin, () -> {

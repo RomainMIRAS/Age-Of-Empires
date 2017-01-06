@@ -54,16 +54,16 @@ public class BlockBreakListener implements Listener {
                         new OreHologram(e.getBlock().getLocation(), gold, false);
                         if (bluePlayers.contains(e.getPlayer().getUniqueId())){
                             blue_wood += 5;
-                            blue_gold += gold;
+                            plugin.gold.replace(e.getPlayer().getUniqueId(), plugin.gold.get(e.getPlayer().getUniqueId())+gold);
                         } else if (greenPlayers.contains(e.getPlayer().getUniqueId())){
                             green_wood += 5;
-                            green_gold += gold;
+                            plugin.gold.replace(e.getPlayer().getUniqueId(), plugin.gold.get(e.getPlayer().getUniqueId())+gold);
                         } else if (yellowPlayers.contains(e.getPlayer().getUniqueId())){
                             yellow_wood += 5;
-                            yellow_gold += gold;
+                            plugin.gold.replace(e.getPlayer().getUniqueId(), plugin.gold.get(e.getPlayer().getUniqueId())+gold);
                         } else if (redPlayers.contains(e.getPlayer().getUniqueId())){
                             red_wood += 5;
-                            red_gold += gold;
+                            plugin.gold.replace(e.getPlayer().getUniqueId(), plugin.gold.get(e.getPlayer().getUniqueId())+gold);
                         }
                         e.getPlayer().getWorld().playSound(e.getPlayer().getLocation(), Sound.LEVEL_UP, 1,1);
                     } else {
@@ -90,16 +90,16 @@ public class BlockBreakListener implements Listener {
                         new OreHologram(e.getBlock().getLocation(), gold, true);
                         if (bluePlayers.contains(e.getPlayer().getUniqueId())){
                             blue_stone += 3;
-                            blue_gold += gold;
+                            plugin.gold.replace(e.getPlayer().getUniqueId(), plugin.gold.get(e.getPlayer().getUniqueId())+gold);
                         } else if (greenPlayers.contains(e.getPlayer().getUniqueId())){
                             green_stone += 3;
-                            green_gold += gold;
+                            plugin.gold.replace(e.getPlayer().getUniqueId(), plugin.gold.get(e.getPlayer().getUniqueId())+gold);
                         } else if (yellowPlayers.contains(e.getPlayer().getUniqueId())){
                             yellow_stone += 3;
-                            yellow_gold += gold;
+                            plugin.gold.replace(e.getPlayer().getUniqueId(), plugin.gold.get(e.getPlayer().getUniqueId())+gold);
                         } else if (redPlayers.contains(e.getPlayer().getUniqueId())){
                             red_stone += 3;
-                            red_gold += gold;
+                            plugin.gold.replace(e.getPlayer().getUniqueId(), plugin.gold.get(e.getPlayer().getUniqueId())+gold);
                         }
                         e.getPlayer().getWorld().playSound(e.getPlayer().getLocation(), Sound.LEVEL_UP, 1,1);
                     } else {
@@ -114,19 +114,19 @@ public class BlockBreakListener implements Listener {
                         gold = r.nextInt(2);
                         if (bluePlayers.contains(e.getPlayer().getUniqueId())){
                             blue_stone += 3;
-                            blue_gold += gold;
+                            plugin.gold.replace(e.getPlayer().getUniqueId(), plugin.gold.get(e.getPlayer().getUniqueId())+gold);
                             blue_wood += 3;
                         } else if (greenPlayers.contains(e.getPlayer().getUniqueId())){
                             green_stone += 3;
-                            green_gold += gold;
+                            plugin.gold.replace(e.getPlayer().getUniqueId(), plugin.gold.get(e.getPlayer().getUniqueId())+gold);
                             green_wood += 3;
                         } else if (yellowPlayers.contains(e.getPlayer().getUniqueId())){
                             yellow_stone += 3;
-                            yellow_gold += gold;
+                            plugin.gold.replace(e.getPlayer().getUniqueId(), plugin.gold.get(e.getPlayer().getUniqueId())+gold);
                             yellow_wood += 3;
                         } else if (redPlayers.contains(e.getPlayer().getUniqueId())){
                             red_stone += 3;
-                            red_gold += gold;
+                            plugin.gold.replace(e.getPlayer().getUniqueId(), plugin.gold.get(e.getPlayer().getUniqueId())+gold);
                             red_wood += 3;
                         }
                         new OreHologram(e.getBlock().getLocation(), gold, true);

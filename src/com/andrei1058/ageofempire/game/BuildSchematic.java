@@ -389,15 +389,19 @@ public class BuildSchematic {
                                     switch (team) {
                                         case blue_team:
                                             blue_tcenter = v;
+                                            blue_xp = true;
                                             break;
                                         case green_team:
                                             green_tcenter = v;
+                                            green_xp = true;
                                             break;
                                         case yellow_team:
                                             yellow_tcenter = v;
+                                            yellow_xp = true;
                                             break;
                                         case red_team:
                                             red_tcenter = v;
+                                            red_xp = true;
                                             break;
                                     }
                                     break;

@@ -46,15 +46,12 @@ public class Region {
             string = getMsg("plot.large");
         }
         String finalString = string;
-        Bukkit.getScheduler().runTaskLater(plugin, () -> {
-            as = (ArmorStand) center.getWorld().spawnEntity(center.add(0, +5, +0), EntityType.ARMOR_STAND);
-            as.setGravity(false);
-            as.setCanPickupItems(false);
-            as.setCustomName(finalString);
-            as.setCustomNameVisible(true);
-            as.setVisible(false);
-            as.setSmall(false);
-        }, 2L);
+        as = (ArmorStand) center.clone().getWorld().spawnEntity(center.clone().add(0, +5, +0), EntityType.ARMOR_STAND);
+        as.setGravity(false);
+        as.setCanPickupItems(false);
+        as.setCustomName(finalString);
+        as.setCustomNameVisible(true);
+        as.setVisible(false);
         regions.add(this);
     }
 

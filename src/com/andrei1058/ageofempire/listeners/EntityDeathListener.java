@@ -35,6 +35,8 @@ public class EntityDeathListener implements Listener {
             } else if (e.getEntity().getKiller() instanceof Wolf){
                 Wolf w = (Wolf) e.getEntity().getKiller();
                 p = (Player) w.getOwner();
+            } else {
+                return;
             }
                 if (bluePlayers.contains(p.getUniqueId())) {
                     killer = "§9Blue";
@@ -202,6 +204,26 @@ public class EntityDeathListener implements Listener {
                     Bukkit.broadcastMessage(getMsg("yellow-building-explode").replace("{building}", getMsg("forum."+laboratory+".displayname")));
                 } else if (v == red_lab){
                     Bukkit.broadcastMessage(getMsg("red-building-explode").replace("{building}", getMsg("forum."+laboratory+".displayname")));
+                } else if (v == blue_guild){
+                    Bukkit.broadcastMessage(getMsg("blue-building-explode").replace("{building}", getMsg("forum."+guild+".displayname")));
+                } else if (v == green_guild){
+                    Bukkit.broadcastMessage(getMsg("green-building-explode").replace("{building}", getMsg("forum."+guild+".displayname")));
+                } else if (v == yellow_guild){
+                    Bukkit.broadcastMessage(getMsg("yellow-building-explode").replace("{building}", getMsg("forum."+guild+".displayname")));
+                } else if (v == red_guild){
+                    Bukkit.broadcastMessage(getMsg("red-building-explode").replace("{building}", getMsg("forum."+guild+".displayname")));
+                } else if (v == blue_tcenter){
+                    Bukkit.broadcastMessage(getMsg("blue-building-explode").replace("{building}", getMsg("forum."+training_center+".displayname")));
+                    blue_xp = false;
+                } else if (v == green_tcenter){
+                    Bukkit.broadcastMessage(getMsg("green-building-explode").replace("{building}", getMsg("forum."+training_center+".displayname")));
+                    green_xp = false;
+                } else if (v == yellow_tcenter){
+                    Bukkit.broadcastMessage(getMsg("yellow-building-explode").replace("{building}", getMsg("forum."+training_center+".displayname")));
+                    yellow_xp = false;
+                } else if (v == red_tcenter){
+                    Bukkit.broadcastMessage(getMsg("red-building-explode").replace("{building}", getMsg("forum."+training_center+".displayname")));
+                    red_xp = false;
                 }
                 Bukkit.getScheduler().runTaskLater(plugin, () -> Bukkit.getWorld(v.getWorld().getName()).createExplosion(v.getLocation(), 8), 20*15);
             }

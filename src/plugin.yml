@@ -1,6 +1,6 @@
 main: com.andrei1058.ageofempire.Main
 name: Age-Of-Empire
-version: 1.0
+version: v1.0b3
 author: andrei1058
 description: parkergames
 website: http://andrei1058.com
@@ -13,6 +13,9 @@ commands:
   leave:
     description: Leave the game
     permission: aoe.leave
+  help:
+    description: Enable/Disable the guide
+    aliases: [h]
 
 permissions:
   aoe.setup:

@@ -139,10 +139,11 @@ public class Scoreboard {
                 }
                 w.setSuffix(String.valueOf(blue_wood));
                 s.setSuffix(String.valueOf(blue_stone));
-                g.setSuffix(String.valueOf(blue_gold));
                 sm.setSuffix(String.valueOf(blue_small_plots));
                 m.setSuffix(String.valueOf(blue_medium_plots));
                 l.setSuffix(String.valueOf(blue_large_plots));
+                if (blue_xp)
+                    Bukkit.getPlayer(p).giveExp(1);
             } else if (greenPlayers.contains(p)){
                 if (green_change_age){
                     a.setSuffix(String.valueOf(df.format(new Date(green_age_long))));
@@ -160,10 +161,11 @@ public class Scoreboard {
                 }
                 w.setSuffix(String.valueOf(green_wood));
                 s.setSuffix(String.valueOf(green_stone));
-                g.setSuffix(String.valueOf(green_gold));
                 sm.setSuffix(String.valueOf(green_small_plots));
                 m.setSuffix(String.valueOf(green_medium_plots));
                 l.setSuffix(String.valueOf(green_large_plots));
+                if (green_xp)
+                    Bukkit.getPlayer(p).giveExp(1);
             } else if (yellowPlayers.contains(p)){
                 if (yellow_change_age){
                     a.setPrefix(String.valueOf(df.format(new Date(yellow_age_long))));
@@ -181,10 +183,11 @@ public class Scoreboard {
                 }
                 w.setSuffix(String.valueOf(yellow_wood));
                 s.setSuffix(String.valueOf(yellow_stone));
-                g.setSuffix(String.valueOf(yellow_gold));
                 sm.setSuffix(String.valueOf(yellow_small_plots));
                 m.setSuffix(String.valueOf(yellow_medium_plots));
                 l.setSuffix(String.valueOf(yellow_large_plots));
+                if (yellow_xp)
+                    Bukkit.getPlayer(p).giveExp(1);
             } else if (redPlayers.contains(p)){
                 if (red_change_age){
                     a.setPrefix(String.valueOf(df.format(new Date(red_age_long))));
@@ -202,12 +205,14 @@ public class Scoreboard {
                 }
                 w.setSuffix(String.valueOf(red_wood));
                 s.setSuffix(String.valueOf(red_stone));
-                g.setSuffix(String.valueOf(red_gold));
                 sm.setSuffix(String.valueOf(red_small_plots));
                 m.setSuffix(String.valueOf(red_medium_plots));
                 l.setSuffix(String.valueOf(red_large_plots));
+                if (red_xp)
+                    Bukkit.getPlayer(p).giveExp(1);
             }
             pvp.setSuffix(String.valueOf(df.format(new Date(Main.pvp_assault))));
+            g.setSuffix(String.valueOf(plugin.gold.get(p)));
         }
     }
 

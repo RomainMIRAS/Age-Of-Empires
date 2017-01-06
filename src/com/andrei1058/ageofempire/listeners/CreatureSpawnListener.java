@@ -12,7 +12,7 @@ public class CreatureSpawnListener implements Listener {
         if (STATUS != Status.PLAYING){
             return;
         }
-        if (e.getLocation().getWorld() == getLoc("Spawns.Lobby").getWorld()) {
+        if (e.getLocation().getWorld().equals(getLoc("Spawns.Lobby").getWorld())) {
             e.setCancelled(true);
         }
     }

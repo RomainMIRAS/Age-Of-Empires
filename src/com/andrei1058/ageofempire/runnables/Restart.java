@@ -13,7 +13,9 @@ import static com.andrei1058.ageofempire.Main.restart_time;
 public class Restart extends BukkitRunnable {
     @Override
     public void run() {
-        restart_time--;
+        if (restart_time != 0) {
+            restart_time--;
+        }
         if (restart_time == 3){
             for (Player p : Bukkit.getOnlinePlayers()){
                 ByteArrayDataOutput out = ByteStreams.newDataOutput();

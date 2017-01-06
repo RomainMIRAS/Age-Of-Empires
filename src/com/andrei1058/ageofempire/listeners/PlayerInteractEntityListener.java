@@ -16,6 +16,7 @@ import org.bukkit.event.player.PlayerInteractEntityEvent;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.EnchantmentStorageMeta;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.potion.Potion;
 import org.bukkit.potion.PotionType;
@@ -232,6 +233,22 @@ public class PlayerInteractEntityListener implements Listener {
                     if (redPlayers.contains(p.getUniqueId())){
                         p.openInventory(lab());
                     }
+                } else if (v == blue_guild){
+                    if (bluePlayers.contains(p.getUniqueId())){
+                        p.openInventory(guild());
+                    }
+                } else if (v == green_guild){
+                    if (greenPlayers.contains(p.getUniqueId())){
+                        p.openInventory(guild());
+                    }
+                } else if (v == yellow_guild){
+                    if (yellowPlayers.contains(p.getUniqueId())){
+                        p.openInventory(guild());
+                    }
+                } else if (v == red_guild){
+                    if (redPlayers.contains(p.getUniqueId())){
+                        p.openInventory(guild());
+                    }
                 } else {
                     e.setCancelled(true);
                     e.getPlayer().sendMessage(getMsg("villager.cant-open"));
@@ -239,6 +256,32 @@ public class PlayerInteractEntityListener implements Listener {
             }
         }
     }
+
+    private static Inventory guild(){
+        Inventory inv = Bukkit.createInventory(null, 54, "Guild");
+        inv.addItem(enchant(Enchantment.DAMAGE_ALL, "guild.sharpness.name", "guild.sharpness.lore"));
+        inv.addItem(enchant(Enchantment.KNOCKBACK, "guild.knockback.name", "guild.knockback.lore"));
+        inv.addItem(enchant(Enchantment.PROTECTION_ENVIRONMENTAL, "guild.protection.name", "guild.protection.lore"));
+        inv.addItem(enchant(Enchantment.THORNS, "guild.thorns.name", "guild.thorns.lore"));
+        inv.addItem(enchant(Enchantment.LURE, "guild.featherfalling.name", "guild.featherfalling.lore"));
+        inv.addItem(enchant(Enchantment.PROTECTION_PROJECTILE, "guild.projectileprotection.name", "guild.projectileprotection.lore"));
+        inv.addItem(enchant(Enchantment.PROTECTION_FIRE, "guild.fireprotection.name", "guild.fireprotection.lore"));
+        inv.addItem(enchant(Enchantment.ARROW_DAMAGE, "guild.power.name", "guild.power.lore"));
+        inv.addItem(enchant(Enchantment.ARROW_KNOCKBACK, "guild.punch.name", "guild.punch.lore"));
+        return inv;
+    }
+
+    private static ItemStack enchant(Enchantment enchantment, String name, String lore){
+
+        ItemStack i = new ItemStack(Material.ENCHANTED_BOOK);
+        EnchantmentStorageMeta m = (EnchantmentStorageMeta) i.getItemMeta();
+        m.setDisplayName(getMsg(name));
+        m.setLore(getArray(lore).stream().map(s -> s.replace('&', '§')).collect(Collectors.toCollection(ArrayList::new)));
+        m.addEnchant(enchantment,1,true);
+        i.setItemMeta(m);
+        return i;
+    }
+
     public static Inventory forum(String  team){
         Inventory inv = Bukkit.createInventory(null, 54, "Forum");
         inv.setItem(0, Misc.getSkull("http://textures.minecraft.net/texture/71bc2bcfb2bd3759e6b1e86fc7a79585e1127dd357fc202893f9de241bc9e530", getMsg("forum.age1")));

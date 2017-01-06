@@ -48,16 +48,24 @@ public class Game extends BukkitRunnable {
                 green_stone+=3;
 
             if (blue_goldmine)
-                blue_gold+=3;
+                for (UUID u : bluePlayers){
+                    gold.replace(u, gold.get(u)+3);
+                }
 
             if (yellow_goldmine)
-                yellow_gold+=3;
+                for (UUID u : yellowPlayers){
+                    gold.replace(u, gold.get(u)+3);
+                }
 
             if (green_goldmine)
-                green_gold+=3;
+                for (UUID u : greenPlayers){
+                    gold.replace(u, gold.get(u)+3);
+                }
 
             if (red_goldmine)
-                red_gold+=3;
+                for (UUID u : redPlayers){
+                    gold.replace(u, gold.get(u)+3);
+                }
 
             if (blue_sawmill)
                 blue_wood+=3;

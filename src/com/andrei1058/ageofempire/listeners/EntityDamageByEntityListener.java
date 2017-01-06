@@ -28,6 +28,17 @@ public class EntityDamageByEntityListener implements Listener {
             e.getDamager().sendMessage(getMsg("pvp-disabled"));
             return;
         }
+        if (e.getEntity() instanceof Player && e.getDamager() instanceof Player){
+            if (bluePlayers.contains(e.getEntity().getUniqueId()) && bluePlayers.contains(e.getDamager().getUniqueId())){
+                e.setCancelled(true);
+            } else if (greenPlayers.contains(e.getEntity().getUniqueId()) && greenPlayers.contains(e.getDamager().getUniqueId())){
+                e.setCancelled(true);
+            } else if (yellowPlayers.contains(e.getEntity().getUniqueId()) && yellowPlayers.contains(e.getDamager().getUniqueId())){
+                e.setCancelled(true);
+            } else if (redPlayers.contains(e.getEntity().getUniqueId()) && redPlayers.contains(e.getDamager().getUniqueId())){
+                e.setCancelled(true);
+            }
+        }
         if (e.getEntity().getType() == EntityType.VILLAGER){
             Player p = null;
             if (e.getDamager() instanceof Player){

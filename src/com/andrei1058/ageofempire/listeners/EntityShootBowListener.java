@@ -24,7 +24,6 @@ public class EntityShootBowListener implements Listener {
                 return;
             }
             e.setCancelled(true);
-            Bukkit.broadcastMessage("event anulat");
             for (ItemStack i : p.getInventory().getContents()) {
                 if (i != null)
                     if (i.hasItemMeta())

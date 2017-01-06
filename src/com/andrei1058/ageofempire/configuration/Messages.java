@@ -65,13 +65,13 @@ public class Messages {
         yml.addDefault("scoreboard.3", "&7PvP: &f");
         yml.addDefault("scoreboard.3_2", "&7Assault: &f");
         yml.addDefault("scoreboard.2", "§4");
-        yml.addDefault("scoreboard.1", "&6mc.parkergames.it");
+        yml.addDefault("scoreboard.1", "&7play&b.ultramc.&7eu");
         yml.addDefault("villagers.forum", "&c&lForum");
         yml.addDefault("villagers.buy-buildings", "&b&lBuy buildings for your kingdom");
         yml.addDefault("pvp-on", "{prefix} &6Pvp On, rare ores have appeared in the middle of the map.");
         yml.addDefault("assaults-on", "{prefix} &6Assaults on.");
-        yml.addDefault("chat.game", "(Team) {player} &f: {message}");
-        yml.addDefault("chat.lobby", "(All) {player} &f: {message}");
+        yml.addDefault("chat.game", "(Team) {v_prefix}&f{player} {v_suffix}&f{message}");
+        yml.addDefault("chat.lobby", "(All) {v_prefix}&f{player} {v_suffix}&f{message}");
         yml.addDefault("cant-break", "{prefix} &cYou can't break this block in a kingdom");
         yml.addDefault("cant-vote", "{prefix} &cYou can't vote at the moment (a vote is already in progress)");
         yml.addDefault("forum.age1", "&cAge 1");
@@ -652,6 +652,26 @@ public class Messages {
         yml.addDefault("lab.regeneration.lore", price(50, 1));
         yml.addDefault("lab.splashleaping.name", "&dPotion of Leaping");
         yml.addDefault("lab.splashleaping.lore", price(75, 1));
+
+        //guild
+        yml.addDefault("guild.sharpness.name", "&bSharpness 1");
+        yml.addDefault("guild.sharpness.lore", price(20, 1));
+        yml.addDefault("guild.knockback.name", "&bKnockback 1");
+        yml.addDefault("guild.knockback.lore", price(10, 1));
+        yml.addDefault("guild.protection.name", "&bProtection 1");
+        yml.addDefault("guild.protection.lore", price(20, 1));
+        yml.addDefault("guild.thorns.name", "&bThorns 1");
+        yml.addDefault("guild.thorns.lore", price(10, 1));
+        yml.addDefault("guild.featherfalling.name", "&bFeather Falling 1");
+        yml.addDefault("guild.featherfalling.lore", price(10, 1));
+        yml.addDefault("guild.projectileprotection.name", "&bProjectile Protection 1");
+        yml.addDefault("guild.projectileprotection.lore", price(10, 1));
+        yml.addDefault("guild.fireprotection.name", "&bFire Protection 1");
+        yml.addDefault("guild.fireprotection.lore", price(10, 1));
+        yml.addDefault("guild.power.name", "&bFire Protection 1");
+        yml.addDefault("guild.power.lore", price(20, 1));
+        yml.addDefault("guild.punch.name", "&bPunch 1");
+        yml.addDefault("guild.punch.lore", price(10, 1));
 
         yml.options().copyDefaults(true);
         try {

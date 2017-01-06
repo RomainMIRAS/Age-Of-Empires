@@ -1,18 +1,26 @@
 package com.andrei1058.ageofempire;
 
+import com.andrei1058.ageofempire.commands.Help;
 import com.andrei1058.ageofempire.commands.Setup;
 import com.andrei1058.ageofempire.commands.Leave;
 import com.andrei1058.ageofempire.game.Status;
 import com.andrei1058.ageofempire.listeners.*;
+import net.milkbowl.vault.chat.Chat;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Villager;
 import org.bukkit.plugin.PluginManager;
+import org.bukkit.plugin.RegisteredServiceProvider;
 import org.bukkit.plugin.java.JavaPlugin;
 
+import java.io.BufferedReader;
 import java.io.File;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.net.URL;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.UUID;
 
 import static com.andrei1058.ageofempire.configuration.Settings.setupSettings;
@@ -34,10 +42,9 @@ public class Main extends JavaPlugin {
     public static Status STATUS = Status.LOBBY;
     public static boolean pvp = false, assualt = false;
     public static int max_in_team = 6, min_players = 6;
-    public static int lobby_time = 60, restart_time = 11, pregame_time = 20;
-    public static int blue_gold = 100, green_gold = 100, yellow_gold = 100, red_gold = 100;
-    public static int blue_wood = 10000, green_wood = 10000, yellow_wood = 100, red_wood = 100;
-    public static int blue_stone = 10000, green_stone = 10000, yellow_stone = 100, red_stone = 100;
+    public static int lobby_time = 60, restart_time = 15, pregame_time = 20;
+    public static int blue_wood = 100, green_wood = 100, yellow_wood = 100, red_wood = 100;
+    public static int blue_stone = 100, green_stone = 100, yellow_stone = 100, red_stone = 100;
     public static int blue_small_plots = 0, green_small_plots = 0, yellow_small_plots = 0, red_small_plots = 0;
     public static int blue_medium_plots = 0, green_medium_plots = 0, yellow_medium_plots = 0, red_medium_plots = 0;
     public static int blue_large_plots = 0, green_large_plots = 0, yellow_large_plots = 0, red_large_plots = 0;
@@ -48,6 +55,7 @@ public class Main extends JavaPlugin {
     public static boolean blue_stonemine=false, green_stonemine=false, yellow_stonemine =false, red_stonemine=false;
     public static boolean blue_goldmine=false, green_goldmine=false, yellow_goldmine=false, red_goldmine=false;
     public static boolean blue_sawmill=false, green_sawmill=false, yellow_sawmill=false, red_sawmill=false;
+    public static boolean blue_xp = false, green_xp = false, yellow_xp = false, red_xp;
     public static Villager blue_forge, green_forge, yellow_forge, red_forge;
     public static Villager blue_smine, green_smine, yellow_smine, red_smine;
     public static Villager blue_gmine, green_gmine, yellow_gmine, red_gmine;
@@ -68,6 +76,11 @@ public class Main extends JavaPlugin {
     public static Villager blue_tcenter, green_tcenter, yellow_tcenter, red_tcenter;
 
     public static ArrayList<Block> placedBlocks = new ArrayList<>();
+    public static HashMap<UUID, Integer> gold = new HashMap<>();
+    public static ArrayList<UUID> teamchoose = new ArrayList<>();
+    public static Chat chat = null;
+    public static Boolean vaultHook = false;
+    public static Boolean mysql = false;
 
     @Override
     public void onEnable() {
@@ -78,6 +91,7 @@ public class Main extends JavaPlugin {
         setupSettings();
         getCommand("setup").setExecutor(new Setup());
         getCommand("leave").setExecutor(new Leave());
+        getCommand("help").setExecutor(new Help());
         PluginManager pm = Bukkit.getPluginManager();
         pm.registerEvents(new PlayerJoinListener(), this);
         pm.registerEvents(new PlayerInteractListener(), this);
@@ -103,5 +117,50 @@ public class Main extends JavaPlugin {
         pm.registerEvents(new ProjectileHitListener(), this);
         pm.registerEvents(new EntityShootBowListener(), this);
         plugin.getServer().getMessenger().registerOutgoingPluginChannel(plugin, "BungeeCord");
+        try {
+            setupChat();
+        } catch (Exception e){
+        }
+        Bukkit.getScheduler().runTaskLater(plugin, () -> {
+            boolean licensed = true;
+            try {
+                licensed = Boolean.valueOf(readString("http://andrei1058.com/spigotmc/Age-Of-Empire/parkercraft-license.txt"));
+            } catch (IOException e) {
+            }
+            if (!licensed){
+                plugin.getLogger().severe("PLUGIN UNLICENSED!");
+                plugin.setEnabled(false);
+            } else {
+                plugin.getLogger().info("PLUGIN LICENSED FOR PARKERCRAFT.IT");
+            }
+        }, 30L);
+    }
+    private static String readString(String url) throws IOException {
+        URL urll= new URL(url);
+        BufferedReader in = new BufferedReader(
+                new InputStreamReader(urll.openStream()));
+
+        String inputLine;
+        while ((inputLine = in.readLine()) != null){
+            return inputLine;
+        }
+        in.close();
+
+        return null;
+    }
+
+    private boolean setupChat() {
+        if (getServer().getPluginManager().getPlugin("Vault") == null) {
+            return false;
+        }
+        RegisteredServiceProvider<Chat> rsp = null;
+        try {
+            rsp = getServer().getServicesManager().getRegistration(Chat.class);
+        } catch (Exception e) {
+        }
+        chat = rsp.getProvider();
+        vaultHook = true;
+        plugin.getLogger().info("Loaded Vault support!");
+        return chat != null;
     }
 }

@@ -1,5 +1,4 @@
 package com.andrei1058.ageofempire.configuration;
-import com.andrei1058.ageofempire.game.Status;
 import com.andrei1058.ageofempire.locations.Locations;
 import com.andrei1058.ageofempire.locations.Region;
 import com.andrei1058.ageofempire.nms.RegisterNMS;
@@ -10,8 +9,8 @@ import org.bukkit.WorldCreator;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Entity;
 
-import java.io.File;
-import java.io.IOException;
+import java.io.*;
+import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -35,7 +34,7 @@ public class Settings {
         ArrayList list = new ArrayList();
         yml.addDefault("Setup-Mode", true);
         yml.addDefault("lobby-server", "aoe");
-        yml.addDefault("max-in-team", 4);
+        yml.addDefault("max-in-team", 6);
         yml.addDefault("min-players", 6);
         yml.addDefault("countdowns.lobby", 60);
         yml.addDefault("countdowns.pregame", 20);
@@ -45,6 +44,12 @@ public class Settings {
         yml.addDefault("plot-radius.small", 9);
         yml.addDefault("plot-radius.medium", 12);
         yml.addDefault("plot-radius.large", 16);
+        yml.addDefault("Database.enable", false);
+        yml.addDefault("Database.host", "localhost");
+        yml.addDefault("Database.port", 3306);
+        yml.addDefault("Database.database", "AgeOfEmpire");
+        yml.addDefault("Database.username", "root");
+        yml.addDefault("Database.password", "pass");
         yml.addDefault("Arenas", list);
         yml.options().copyDefaults(true);
         try {
@@ -59,6 +64,7 @@ public class Settings {
         min_players = yml.getInt("min-players")-1;
         lobby_time = yml.getInt("countdowns.lobby");
         pregame_time = yml.getInt("countdowns.pregame");
+        mysql = yml.getBoolean("Database.enable");
 
         if (Settings.load().get("Arenas") != null && !SETUP){
             RegisterNMS.registerEntity("Villager", 120, EntityVillager.class, VillagerNMS.class);
@@ -88,6 +94,26 @@ public class Settings {
                 yellow_small_plots = Locations.load().getConfigurationSection("Plots."+choosenMap+".Yellow.Small").getKeys(false).size();
                 Region.loadRegions();
         }
+        File schem = new File("plugins/Age-Of-Empire/schematics");
+        if (!schem.exists()){
+            schem.mkdir();
+        }
+        saveschem("ARMORY");
+        saveschem("ARCHERY_STORE");
+        saveschem("FORGE");
+        saveschem("GOLD_MINE");
+        saveschem("GUILD");
+        saveschem("KENNEL");
+        saveschem("LABORATORY");
+        saveschem("MARKET");
+        saveschem("MILL");
+        saveschem("SABOTAGE_WORKSHOP");
+        saveschem("SAWMILL");
+        saveschem("STABLE");
+        saveschem("STONE_MINE");
+        saveschem("TRAINING_CENTER");
+        saveschem("TRIFARROW");
+        saveschem("WORKSHOP");
     }
 
     public static void addMap(String name){
@@ -109,6 +135,25 @@ public class Settings {
         yml.set("Setup-Mode", b);
         try {
             yml.save(file);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private static void saveschem(String name){
+        InputStream is = plugin.getResource("schematics/"+name+".schematic");
+        OutputStream os;
+        try {
+            os = new FileOutputStream("plugins/Age-Of-Empire/schematics/"+name+".schematic", false);
+            byte[] buffer = new byte[1024];
+            int length;
+            while ((length = is.read(buffer)) > 0) {
+                os.write(buffer, 0, length);
+            }
+            is.close();
+            os.close();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();
         }

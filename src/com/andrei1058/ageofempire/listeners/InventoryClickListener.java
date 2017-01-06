@@ -3,18 +3,26 @@ package com.andrei1058.ageofempire.listeners;
 import com.andrei1058.ageofempire.game.Status;
 import com.andrei1058.ageofempire.game.Vote;
 
+import org.bukkit.Bukkit;
 import org.bukkit.DyeColor;
 import org.bukkit.Material;
+import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.*;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.EnchantmentStorageMeta;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.potion.Potion;
 import org.bukkit.potion.PotionType;
 
+import java.util.ArrayList;
+import java.util.UUID;
+import java.util.stream.Collectors;
+
 import static com.andrei1058.ageofempire.Main.*;
+import static com.andrei1058.ageofempire.configuration.Messages.getArray;
 import static com.andrei1058.ageofempire.configuration.Messages.getMsg;
 import static com.andrei1058.ageofempire.game.Buildings.*;
 import static com.andrei1058.ageofempire.runnables.Game.*;
@@ -101,75 +109,15 @@ public class InventoryClickListener implements Listener {
                     break;
                 case STONE_PICKAXE:
                     e.setCancelled(true);
-                    if (bluePlayers.contains(p.getUniqueId())){
-                       if (blue_gold >= 1){
-                           blue_gold-=1;
-                           p.getInventory().addItem(new ItemStack(Material.STONE_PICKAXE));
-                       }
-                    } else if (greenPlayers.contains(p.getUniqueId())){
-                        if (green_gold >= 1){
-                            green_gold-=1;
-                            p.getInventory().addItem(new ItemStack(Material.STONE_PICKAXE));
-                        }
-                    } else if (redPlayers.contains(p.getUniqueId())){
-                        if (red_gold >= 1){
-                            red_gold-=1;
-                            p.getInventory().addItem(new ItemStack(Material.STONE_PICKAXE));
-                        }
-                    } else if (yellowPlayers.contains(p.getUniqueId())){
-                        if (yellow_gold >= 1){
-                            yellow_gold-=1;
-                            p.getInventory().addItem(new ItemStack(Material.STONE_PICKAXE));
-                        }
-                    }
+                    buy(p, Material.STONE_PICKAXE, 1, (short) 0,1);
                     break;
                 case STONE_SWORD:
                     e.setCancelled(true);
-                    if (bluePlayers.contains(p.getUniqueId())){
-                        if (blue_gold >= 10){
-                            blue_gold-=10;
-                            p.getInventory().addItem(new ItemStack(Material.STONE_SWORD));
-                        }
-                    } else if (greenPlayers.contains(p.getUniqueId())){
-                        if (green_gold >= 10){
-                            green_gold-=10;
-                            p.getInventory().addItem(new ItemStack(Material.STONE_SWORD));
-                        }
-                    } else if (redPlayers.contains(p.getUniqueId())){
-                        if (red_gold >= 10){
-                            red_gold-=10;
-                            p.getInventory().addItem(new ItemStack(Material.STONE_SWORD));
-                        }
-                    } else if (yellowPlayers.contains(p.getUniqueId())){
-                        if (yellow_gold >= 10){
-                            yellow_gold-=10;
-                            p.getInventory().addItem(new ItemStack(Material.STONE_SWORD));
-                        }
-                    }
+                    buy(p, Material.STONE_SWORD, 1, (short) 0, 10);
                     break;
                 case IRON_SWORD:
                     e.setCancelled(true);
-                    if (bluePlayers.contains(p.getUniqueId())){
-                        if (blue_gold >= 30){
-                            blue_gold-=30;
-                            p.getInventory().addItem(new ItemStack(Material.IRON_SWORD));
-                        }
-                    } else if (greenPlayers.contains(p.getUniqueId())){
-                        if (green_gold >= 30){
-                            green_gold-=30;
-                            p.getInventory().addItem(new ItemStack(Material.IRON_SWORD));
-                        }
-                    } else if (redPlayers.contains(p.getUniqueId())){
-                        if (red_gold >= 30){
-                            red_gold-=30;
-                            p.getInventory().addItem(new ItemStack(Material.IRON_SWORD));
-                        }
-                    } else if (yellowPlayers.contains(p.getUniqueId())){
-                        if (yellow_gold >= 30){
-                            yellow_gold-=30;
-                            p.getInventory().addItem(new ItemStack(Material.IRON_SWORD));
-                        }
-                    }
+                    buy(p, Material.IRON_SWORD, 1, (short) 0, 30);
                     break;
                 case STONE_AXE:
                     e.setCancelled(true);
@@ -258,193 +206,50 @@ public class InventoryClickListener implements Listener {
                 case MONSTER_EGG:
                     e.setCancelled(true);
                     if (e.getInventory().getName().equalsIgnoreCase("Stable")) {
-                        if (bluePlayers.contains(p.getUniqueId())) {
-                            if (blue_gold >= 30) {
-                                blue_gold -= 30;
-                                Horse h = (Horse) p.getWorld().spawnEntity(p.getLocation(), EntityType.HORSE);
-                                h.setOwner(p);
-                                h.getInventory().setSaddle(new ItemStack(Material.SADDLE));
-                            } else {
-                                p.sendMessage(getMsg("insufficient-gold"));
-                            }
-                        } else if (greenPlayers.contains(p.getUniqueId())) {
-                            if (green_gold >= 30) {
-                                green_gold -= 30;
-                                Horse h = (Horse) p.getWorld().spawnEntity(p.getLocation(), EntityType.HORSE);
-                                h.setOwner(p);
-                                h.getInventory().setSaddle(new ItemStack(Material.SADDLE));
-                            } else {
-                                p.sendMessage(getMsg("insufficient-gold"));
-                            }
-                        } else if (yellowPlayers.contains(p.getUniqueId())) {
-                            if (yellow_gold >= 30) {
-                                yellow_gold -= 30;
-                                Horse h = (Horse) p.getWorld().spawnEntity(p.getLocation(), EntityType.HORSE);
-                                h.setOwner(p);
-                                h.getInventory().setSaddle(new ItemStack(Material.SADDLE));
-                            } else {
-                                p.sendMessage(getMsg("insufficient-gold"));
-                            }
-                        } else if (redPlayers.contains(p.getUniqueId())) {
-                            if (red_gold >= 30) {
-                                red_gold -= 30;
-                                Horse h = (Horse) p.getWorld().spawnEntity(p.getLocation(), EntityType.HORSE);
-                                h.setOwner(p);
-                                h.getInventory().setSaddle(new ItemStack(Material.SADDLE));
-                            } else {
-                                p.sendMessage(getMsg("insufficient-gold"));
-                            }
+                        if (gold.get(p.getUniqueId()) >= 30) {
+                            gold.replace(p.getUniqueId(), gold.get(p.getUniqueId()) - 30);
+                            Horse h = (Horse) p.getWorld().spawnEntity(p.getLocation(), EntityType.HORSE);
+                            h.setOwner(p);
+                            h.getInventory().setSaddle(new ItemStack(Material.SADDLE));
+                        } else {
+                            p.sendMessage(getMsg("insufficient-gold"));
                         }
                     } else {
-                        if (e.getSlot() == 0){
-                            if (bluePlayers.contains(p.getUniqueId())) {
-                                if (blue_gold >= 50) {
-                                    blue_gold -= 50;
-                                    Wolf w = (Wolf) p.getWorld().spawnEntity(p.getLocation(), EntityType.WOLF);
-                                    w.setOwner(p);
-                                    w.setCollarColor(DyeColor.BLUE);
-                                } else {
-                                    p.sendMessage(getMsg("insufficient-gold"));
-                                }
-                            } else if (greenPlayers.contains(p.getUniqueId())) {
-                                if (green_gold >= 50) {
-                                    green_gold -= 50;
-                                    Wolf w = (Wolf) p.getWorld().spawnEntity(p.getLocation(), EntityType.WOLF);
-                                    w.setOwner(p);
-                                    w.setCollarColor(DyeColor.GREEN);
-                                } else {
-                                    p.sendMessage(getMsg("insufficient-gold"));
-                                }
-                            } else if (yellowPlayers.contains(p.getUniqueId())) {
-                                if (yellow_gold >= 50) {
-                                    yellow_gold -= 50;
-                                    Wolf w = (Wolf) p.getWorld().spawnEntity(p.getLocation(), EntityType.WOLF);
-                                    w.setOwner(p);
-                                    w.setCollarColor(DyeColor.YELLOW);
-                                } else {
-                                    p.sendMessage(getMsg("insufficient-gold"));
-                                }
-                            } else if (redPlayers.contains(p.getUniqueId())) {
-                                if (red_gold >= 50) {
-                                    red_gold -= 50;
-                                    Wolf w = (Wolf) p.getWorld().spawnEntity(p.getLocation(), EntityType.WOLF);
-                                    w.setOwner(p);
-                                    w.setCollarColor(DyeColor.RED);
-                                } else {
-                                    p.sendMessage(getMsg("insufficient-gold"));
-                                }
+                        if (e.getSlot() == 0) {
+                            if (gold.get(p.getUniqueId()) >= 50) {
+                                gold.replace(p.getUniqueId(), gold.get(p.getUniqueId()) - 50);
+                                Wolf w = (Wolf) p.getWorld().spawnEntity(p.getLocation(), EntityType.WOLF);
+                                w.setOwner(p);
+                                w.setCollarColor(DyeColor.BLUE);
+                            } else {
+                                p.sendMessage(getMsg("insufficient-gold"));
                             }
-                        } else if (e.getSlot() == 1){
-                            if (bluePlayers.contains(p.getUniqueId())) {
-                                if (blue_gold >= 75) {
-                                    blue_gold -= 75;
-                                    Wolf w = (Wolf) p.getWorld().spawnEntity(p.getLocation(), EntityType.WOLF);
-                                    w.setOwner(p);
-                                    w.setCollarColor(DyeColor.BLUE);
-                                    Wolf w2 = (Wolf) p.getWorld().spawnEntity(p.getLocation(), EntityType.WOLF);
-                                    w2.setOwner(p);
-                                    w2.setCollarColor(DyeColor.BLUE);
-                                } else {
-                                    p.sendMessage(getMsg("insufficient-gold"));
-                                }
-                            } else if (greenPlayers.contains(p.getUniqueId())) {
-                                if (green_gold >= 75) {
-                                    green_gold -= 75;
-                                    Wolf w = (Wolf) p.getWorld().spawnEntity(p.getLocation(), EntityType.WOLF);
-                                    w.setOwner(p);
-                                    w.setCollarColor(DyeColor.GREEN);
-                                    Wolf w2 = (Wolf) p.getWorld().spawnEntity(p.getLocation(), EntityType.WOLF);
-                                    w2.setOwner(p);
-                                    w2.setCollarColor(DyeColor.GREEN);
-                                } else {
-                                    p.sendMessage(getMsg("insufficient-gold"));
-                                }
-                            } else if (yellowPlayers.contains(p.getUniqueId())) {
-                                if (yellow_gold >= 75) {
-                                    yellow_gold -= 75;
-                                    Wolf w = (Wolf) p.getWorld().spawnEntity(p.getLocation(), EntityType.WOLF);
-                                    w.setOwner(p);
-                                    w.setCollarColor(DyeColor.YELLOW);
-                                    Wolf w2 = (Wolf) p.getWorld().spawnEntity(p.getLocation(), EntityType.WOLF);
-                                    w2.setOwner(p);
-                                    w2.setCollarColor(DyeColor.YELLOW);
-                                } else {
-                                    p.sendMessage(getMsg("insufficient-gold"));
-                                }
-                            } else if (redPlayers.contains(p.getUniqueId())) {
-                                if (red_gold >= 75) {
-                                    red_gold -= 75;
-                                    Wolf w = (Wolf) p.getWorld().spawnEntity(p.getLocation(), EntityType.WOLF);
-                                    w.setOwner(p);
-                                    w.setCollarColor(DyeColor.RED);
-                                    Wolf w2 = (Wolf) p.getWorld().spawnEntity(p.getLocation(), EntityType.WOLF);
-                                    w2.setOwner(p);
-                                    w2.setCollarColor(DyeColor.RED);
-                                } else {
-                                    p.sendMessage(getMsg("insufficient-gold"));
-                                }
+                        } else if (e.getSlot() == 1) {
+                            if (gold.get(p.getUniqueId()) >= 75) {
+                                gold.replace(p.getUniqueId(), gold.get(p.getUniqueId()) - 75);
+                                Wolf w = (Wolf) p.getWorld().spawnEntity(p.getLocation(), EntityType.WOLF);
+                                w.setOwner(p);
+                                w.setCollarColor(DyeColor.BLUE);
+                                Wolf w2 = (Wolf) p.getWorld().spawnEntity(p.getLocation(), EntityType.WOLF);
+                                w2.setOwner(p);
+                                w2.setCollarColor(DyeColor.BLUE);
+                            } else {
+                                p.sendMessage(getMsg("insufficient-gold"));
                             }
-                        } else if (e.getSlot() == 2){
-                            if (bluePlayers.contains(p.getUniqueId())) {
-                                if (blue_gold >= 100) {
-                                    blue_gold -= 100;
-                                    Wolf w = (Wolf) p.getWorld().spawnEntity(p.getLocation(), EntityType.WOLF);
-                                    w.setOwner(p);
-                                    w.setCollarColor(DyeColor.BLUE);
-                                    Wolf w2 = (Wolf) p.getWorld().spawnEntity(p.getLocation(), EntityType.WOLF);
-                                    w2.setOwner(p);
-                                    w2.setCollarColor(DyeColor.BLUE);
-                                    Wolf w3 = (Wolf) p.getWorld().spawnEntity(p.getLocation(), EntityType.WOLF);
-                                    w3.setOwner(p);
-                                    w3.setCollarColor(DyeColor.BLUE);
-                                } else {
-                                    p.sendMessage(getMsg("insufficient-gold"));
-                                }
-                            } else if (greenPlayers.contains(p.getUniqueId())) {
-                                if (green_gold >= 100) {
-                                    green_gold -= 100;
-                                    Wolf w = (Wolf) p.getWorld().spawnEntity(p.getLocation(), EntityType.WOLF);
-                                    w.setOwner(p);
-                                    w.setCollarColor(DyeColor.GREEN);
-                                    Wolf w2 = (Wolf) p.getWorld().spawnEntity(p.getLocation(), EntityType.WOLF);
-                                    w2.setOwner(p);
-                                    w2.setCollarColor(DyeColor.GREEN);
-                                    Wolf w3 = (Wolf) p.getWorld().spawnEntity(p.getLocation(), EntityType.WOLF);
-                                    w3.setOwner(p);
-                                    w3.setCollarColor(DyeColor.GREEN);
-                                } else {
-                                    p.sendMessage(getMsg("insufficient-gold"));
-                                }
-                            } else if (yellowPlayers.contains(p.getUniqueId())) {
-                                if (yellow_gold >= 100) {
-                                    yellow_gold -= 100;
-                                    Wolf w = (Wolf) p.getWorld().spawnEntity(p.getLocation(), EntityType.WOLF);
-                                    w.setOwner(p);
-                                    w.setCollarColor(DyeColor.YELLOW);
-                                    Wolf w2 = (Wolf) p.getWorld().spawnEntity(p.getLocation(), EntityType.WOLF);
-                                    w2.setOwner(p);
-                                    w2.setCollarColor(DyeColor.YELLOW);
-                                    Wolf w3 = (Wolf) p.getWorld().spawnEntity(p.getLocation(), EntityType.WOLF);
-                                    w3.setOwner(p);
-                                    w3.setCollarColor(DyeColor.YELLOW);
-                                } else {
-                                    p.sendMessage(getMsg("insufficient-gold"));
-                                }
-                            } else if (redPlayers.contains(p.getUniqueId())) {
-                                if (red_gold >= 100) {
-                                    red_gold -= 100;
-                                    Wolf w = (Wolf) p.getWorld().spawnEntity(p.getLocation(), EntityType.WOLF);
-                                    w.setOwner(p);
-                                    w.setCollarColor(DyeColor.RED);
-                                    Wolf w2 = (Wolf) p.getWorld().spawnEntity(p.getLocation(), EntityType.WOLF);
-                                    w2.setOwner(p);
-                                    w2.setCollarColor(DyeColor.RED);
-                                    Wolf w3 = (Wolf) p.getWorld().spawnEntity(p.getLocation(), EntityType.WOLF);
-                                    w3.setOwner(p);
-                                    w3.setCollarColor(DyeColor.RED);
-                                } else {
-                                    p.sendMessage(getMsg("insufficient-gold"));
-                                }
+                        } else if (e.getSlot() == 2) {
+                            if (gold.get(p.getUniqueId()) >= 100) {
+                                gold.replace(p.getUniqueId(), gold.get(p.getUniqueId()) - 100);
+                                Wolf w = (Wolf) p.getWorld().spawnEntity(p.getLocation(), EntityType.WOLF);
+                                w.setOwner(p);
+                                w.setCollarColor(DyeColor.BLUE);
+                                Wolf w2 = (Wolf) p.getWorld().spawnEntity(p.getLocation(), EntityType.WOLF);
+                                w2.setOwner(p);
+                                w2.setCollarColor(DyeColor.BLUE);
+                                Wolf w3 = (Wolf) p.getWorld().spawnEntity(p.getLocation(), EntityType.WOLF);
+                                w3.setOwner(p);
+                                w3.setCollarColor(DyeColor.BLUE);
+                            } else {
+                                p.sendMessage(getMsg("insufficient-gold"));
                             }
                         }
                     }
@@ -485,34 +290,11 @@ public class InventoryClickListener implements Listener {
                         ItemMeta im = i.getItemMeta();
                         im.setDisplayName("§cExplosive");
                         i.setItemMeta(im);
-                        if (bluePlayers.contains(p.getUniqueId())){
-                            if (blue_gold >= 20){
-                                blue_gold-=20;
-                                p.getInventory().addItem(i);
-                            } else {
-                                p.sendMessage(getMsg("insufficient-gold"));
-                            }
-                        } else if (greenPlayers.contains(p.getUniqueId())){
-                            if (green_gold >= 20){
-                                green_gold-=20;
-                                p.getInventory().addItem(i);
-                            } else {
-                                p.sendMessage(getMsg("insufficient-gold"));
-                            }
-                        } else if (yellowPlayers.contains(p.getUniqueId())){
-                            if (yellow_gold >= 20){
-                                yellow_gold-=20;
-                                p.getInventory().addItem(new ItemStack(i));
-                            } else {
-                                p.sendMessage(getMsg("insufficient-gold"));
-                            }
-                        } else if (redPlayers.contains(p.getUniqueId())){
-                            if (red_gold >= 20){
-                                red_gold-=20;
-                                p.getInventory().addItem(new ItemStack(i));
-                            } else {
-                                p.sendMessage(getMsg("insufficient-gold"));
-                            }
+                        if (gold.get(p.getUniqueId()) >= 20) {
+                            gold.replace(p.getUniqueId(), gold.get(p.getUniqueId()) - 20);
+                            p.getInventory().addItem(i);
+                        } else {
+                            p.sendMessage(getMsg("insufficient-gold"));
                         }
                     } else if (e.getInventory().getName().equalsIgnoreCase("Archery Store")){
                         if (e.getSlot() == 1 && e.getCurrentItem().getType() == Material.ARROW){
@@ -540,8 +322,32 @@ public class InventoryClickListener implements Listener {
                     stuff(e.getWhoClicked(), laboratory, 300, 150, false, true, false);
                     break;
                 case ENCHANTED_BOOK:
-                    e.setCancelled(true);
-                    stuff(e.getWhoClicked(), guild, 600, 300, false, false, true);
+                    if (e.getInventory().getName().equalsIgnoreCase("Forum")) {
+                        e.setCancelled(true);
+                        stuff(e.getWhoClicked(), guild, 600, 300, false, false, true);
+                    } else if (e.getInventory().getName().equalsIgnoreCase("Guild")){
+                        e.setCancelled(true);
+                        String name = e.getCurrentItem().getItemMeta().getDisplayName();
+                        if (name.equalsIgnoreCase(getMsg("guild.sharpness.name"))){
+                            enchant(p.getUniqueId(), Enchantment.DAMAGE_ALL, 20);
+                        } else if (name.equalsIgnoreCase(getMsg("guild.knockback.name"))){
+                            enchant(p.getUniqueId(), Enchantment.KNOCKBACK, 10);
+                        } else if (name.equalsIgnoreCase(getMsg("guild.protection.name"))){
+                            enchant(p.getUniqueId(), Enchantment.PROTECTION_ENVIRONMENTAL, 20);
+                        } else if (name.equalsIgnoreCase(getMsg("guild.thorns.name"))){
+                            enchant(p.getUniqueId(), Enchantment.THORNS, 10);
+                        } else if (name.equalsIgnoreCase(getMsg("guild.featherfalling.name"))){
+                            enchant(p.getUniqueId(), Enchantment.LURE, 10);
+                        } else if (name.equalsIgnoreCase(getMsg("guild.projectileprotection.name"))){
+                            enchant(p.getUniqueId(), Enchantment.PROTECTION_PROJECTILE, 10);
+                        } else if (name.equalsIgnoreCase(getMsg("guild.fireprotection.name"))){
+                            enchant(p.getUniqueId(), Enchantment.PROTECTION_FIRE, 10);
+                        } else if (name.equalsIgnoreCase(getMsg("guild.power.name"))){
+                            enchant(p.getUniqueId(), Enchantment.ARROW_DAMAGE, 20);
+                        } else if (name.equalsIgnoreCase(getMsg("guild.power.name"))){
+                            enchant(p.getUniqueId(), Enchantment.ARROW_KNOCKBACK, 10);
+                        }
+                    }
                     break;
                 case EXP_BOTTLE:
                     e.setCancelled(true);
@@ -594,162 +400,61 @@ public class InventoryClickListener implements Listener {
         }
     }
 
+    //personal gold done
+    private static void enchant(UUID u, Enchantment enchantment, Integer price){
+        ItemStack i = new ItemStack(Material.ENCHANTED_BOOK);
+        EnchantmentStorageMeta m = (EnchantmentStorageMeta) i.getItemMeta();
+        m.addStoredEnchant(enchantment,1,true);
+        i.setItemMeta(m);
+        if (gold.get(u) > price){
+            Bukkit.getPlayer(u).getInventory().addItem(i);
+            gold.replace(u, gold.get(u)-price);
+        } else {
+            Bukkit.getPlayer(u).sendMessage(getMsg("insufficient-gold"));
+        }
+    }
+
     private static void buyPotion(Player p, Integer price, PotionType potionType, boolean splash){
-        if (bluePlayers.contains(p.getUniqueId())) {
-            if (blue_gold >= price) {
+            if (gold.get(p.getUniqueId()) >= price) {
                 Potion potion = new Potion(potionType);
                 potion.setSplash(splash);
                 p.getInventory().addItem(potion.toItemStack(1));
-                blue_gold -= price;
+                gold.replace(p.getUniqueId(), gold.get(p.getUniqueId())-price);
             } else {
                 p.sendMessage(getMsg("insufficient-gold"));
             }
-        } else if (greenPlayers.contains(p.getUniqueId())) {
-            if (green_gold >= price) {
-                Potion potion = new Potion(potionType);
-                potion.setSplash(splash);
-                p.getInventory().addItem(potion.toItemStack(1));
-                green_gold  -= price;
-            } else {
-                p.sendMessage(getMsg("insufficient-gold"));
-            }
-        } else if (yellowPlayers.contains(p.getUniqueId())) {
-            if (yellow_gold >= price) {
-                Potion potion = new Potion(potionType);
-                potion.setSplash(splash);
-                p.getInventory().addItem(potion.toItemStack(1));
-                yellow_gold  -= price;
-            } else {
-                p.sendMessage(getMsg("insufficient-gold"));
-            }
-        } else if (redPlayers.contains(p.getUniqueId())) {
-            if (red_gold >= price) {
-                Potion potion = new Potion(potionType);
-                potion.setSplash(splash);
-                p.getInventory().addItem(potion.toItemStack(1));
-                red_gold  -= price;
-            } else {
-                p.sendMessage(getMsg("insufficient-gold"));
-            }
+    }
+
+    private static void buy(Player p, Material material, Integer cantitate, Short sh, Integer price) {
+        if (gold.get(p.getUniqueId()) >= price) {
+            p.getInventory().addItem(new ItemStack(material, cantitate, sh));
+            gold.replace(p.getUniqueId(), gold.get(p.getUniqueId())-price);
+        } else {
+            p.sendMessage(getMsg("insufficient-gold"));
         }
     }
 
-    private static void buy(Player p, Material material, Integer cantitate, Short sh, Integer price){
-        if (bluePlayers.contains(p.getUniqueId())){
-            if (blue_gold >= price){
-                blue_gold-=price;
-                p.getInventory().addItem(new ItemStack(material, cantitate, sh));
-            } else {
-                p.sendMessage(getMsg("insufficient-gold"));
-            }
-        } else if (greenPlayers.contains(p.getUniqueId())){
-            if (green_gold >= price){
-                green_gold-=price;
-                p.getInventory().addItem(new ItemStack(material, cantitate, sh));
-            } else {
-                p.sendMessage(getMsg("insufficient-gold"));
-            }
-        } else if (yellowPlayers.contains(p.getUniqueId())){
-            if (yellow_gold >= price){
-                yellow_gold-=price;
-                p.getInventory().addItem(new ItemStack(material, cantitate, sh));
-            } else {
-                p.sendMessage(getMsg("insufficient-gold"));
-            }
-        } else if (redPlayers.contains(p.getUniqueId())){
-            if (red_gold >= price){
-                red_gold-=price;
-                p.getInventory().addItem(new ItemStack(material, cantitate, sh));
-            } else {
-                p.sendMessage(getMsg("insufficient-gold"));
-            }
+    private static void buyIronArmor(Player p) {
+        if (gold.get(p.getUniqueId()) >= 40) {
+            gold.replace(p.getUniqueId(), gold.get(p.getUniqueId()) - 40);
+            buy(p, Material.IRON_HELMET, 1, (short) 0, 0);
+            buy(p, Material.IRON_CHESTPLATE, 1, (short) 0, 0);
+            buy(p, Material.IRON_LEGGINGS, 1, (short) 0, 0);
+            buy(p, Material.IRON_BOOTS, 1, (short) 0, 0);
+        } else {
+            p.sendMessage(getMsg("insufficient-gold"));
         }
     }
 
-    private static void buyIronArmor(Player p){
-        if (bluePlayers.contains(p.getUniqueId())){
-            if (blue_gold >= 40){
-                blue_gold-=40;
-                buy(p, Material.IRON_HELMET, 1, (short) 0, 0);
-                buy(p, Material.IRON_CHESTPLATE, 1, (short) 0, 0);
-                buy(p, Material.IRON_LEGGINGS, 1, (short) 0, 0);
-                buy(p, Material.IRON_BOOTS, 1, (short) 0, 0);
-            } else {
-                p.sendMessage(getMsg("insufficient-gold"));
-            }
-        } else if (greenPlayers.contains(p.getUniqueId())){
-            if (green_gold >= 40){
-                green_gold-=40;
-                buy(p, Material.IRON_HELMET, 1, (short) 0, 0);
-                buy(p, Material.IRON_CHESTPLATE, 1, (short) 0, 0);
-                buy(p, Material.IRON_LEGGINGS, 1, (short) 0, 0);
-                buy(p, Material.IRON_BOOTS, 1, (short) 0, 0);
-            } else {
-                p.sendMessage(getMsg("insufficient-gold"));
-            }
-        } else if (yellowPlayers.contains(p.getUniqueId())){
-            if (yellow_gold >= 40){
-                yellow_gold-=40;
-                buy(p, Material.IRON_HELMET, 1, (short) 0, 0);
-                buy(p, Material.IRON_CHESTPLATE, 1, (short) 0, 0);
-                buy(p, Material.IRON_LEGGINGS, 1, (short) 0, 0);
-                buy(p, Material.IRON_BOOTS, 1, (short) 0, 0);
-            } else {
-                p.sendMessage(getMsg("insufficient-gold"));
-            }
-        } else if (redPlayers.contains(p.getUniqueId())){
-            if (red_gold >= 40){
-                red_gold-=40;
-                buy(p, Material.IRON_HELMET, 1, (short) 0, 0);
-                buy(p, Material.IRON_CHESTPLATE, 1, (short) 0, 0);
-                buy(p, Material.IRON_LEGGINGS, 1, (short) 0, 0);
-                buy(p, Material.IRON_BOOTS, 1, (short) 0, 0);
-            } else {
-                p.sendMessage(getMsg("insufficient-gold"));
-            }
-        }
-    }
-    private static void buyDiamondArmor(Player p){
-        if (bluePlayers.contains(p.getUniqueId())){
-            if (blue_gold >= 80){
-                blue_gold-=80;
-                buy(p, Material.IRON_HELMET, 1, (short) 0, 0);
-                buy(p, Material.DIAMOND_CHESTPLATE, 1, (short) 0, 0);
-                buy(p, Material.IRON_LEGGINGS, 1, (short) 0, 0);
-                buy(p, Material.DIAMOND_BOOTS, 1, (short) 0, 0);
-            } else {
-                p.sendMessage(getMsg("insufficient-gold"));
-            }
-        } else if (greenPlayers.contains(p.getUniqueId())){
-            if (green_gold >= 80){
-                green_gold-=80;
-                buy(p, Material.IRON_HELMET, 1, (short) 0, 0);
-                buy(p, Material.DIAMOND_CHESTPLATE, 1, (short) 0, 0);
-                buy(p, Material.IRON_LEGGINGS, 1, (short) 0, 0);
-                buy(p, Material.DIAMOND_BOOTS, 1, (short) 0, 0);
-            } else {
-                p.sendMessage(getMsg("insufficient-gold"));
-            }
-        } else if (yellowPlayers.contains(p.getUniqueId())){
-            if (yellow_gold >= 80){
-                yellow_gold-=80;
-                buy(p, Material.IRON_HELMET, 1, (short) 0, 0);
-                buy(p, Material.DIAMOND_CHESTPLATE, 1, (short) 0, 0);
-                buy(p, Material.IRON_LEGGINGS, 1, (short) 0, 0);
-                buy(p, Material.DIAMOND_BOOTS, 1, (short) 0, 0);
-            } else {
-                p.sendMessage(getMsg("insufficient-gold"));
-            }
-        } else if (redPlayers.contains(p.getUniqueId())){
-            if (red_gold >= 80){
-                red_gold-=80;
-                buy(p, Material.IRON_HELMET, 1, (short) 0, 0);
-                buy(p, Material.DIAMOND_CHESTPLATE, 1, (short) 0, 0);
-                buy(p, Material.IRON_LEGGINGS, 1, (short) 0, 0);
-                buy(p, Material.DIAMOND_BOOTS, 1, (short) 0, 0);
-            } else {
-                p.sendMessage(getMsg("insufficient-gold"));
-            }
+    private static void buyDiamondArmor(Player p) {
+        if (gold.get(p.getUniqueId()) >= 80) {
+            gold.replace(p.getUniqueId(), gold.get(p.getUniqueId()) - 80);
+            buy(p, Material.IRON_HELMET, 1, (short) 0, 0);
+            buy(p, Material.DIAMOND_CHESTPLATE, 1, (short) 0, 0);
+            buy(p, Material.IRON_LEGGINGS, 1, (short) 0, 0);
+            buy(p, Material.DIAMOND_BOOTS, 1, (short) 0, 0);
+        } else {
+            p.sendMessage(getMsg("insufficient-gold"));
         }
     }
 

@@ -1,6 +1,5 @@
 package com.andrei1058.ageofempire.listeners;
 
-import com.andrei1058.ageofempire.configuration.Settings;
 import com.andrei1058.ageofempire.game.Action;
 import com.andrei1058.ageofempire.game.Status;
 import com.andrei1058.ageofempire.game.Titles;
@@ -14,7 +13,6 @@ import org.bukkit.event.player.PlayerQuitEvent;
 import static com.andrei1058.ageofempire.Main.*;
 import static com.andrei1058.ageofempire.configuration.Messages.getMsg;
 import static com.andrei1058.ageofempire.game.Buildings.construct_in_inv;
-import static com.andrei1058.ageofempire.game.Buildings.forge;
 
 public class PlayerQuitListener implements Listener {
 
@@ -39,34 +37,35 @@ public class PlayerQuitListener implements Listener {
     }
 
     public static void checkWinner(){
-        if (STATUS == Status.LOBBY || STATUS == Status.STARTING) return;
-        Bukkit.getScheduler().runTaskLater(plugin, new Runnable() {
-            @Override
-            public void run() {
-                if (!bluePlayers.isEmpty() && greenPlayers.isEmpty() && redPlayers.isEmpty() && yellowPlayers.isEmpty()){
-                    for (Player p : Bukkit.getOnlinePlayers()) {
-                        Titles.sendFullTitle(p, 0, 100, 0, getMsg("victory.blue"), "");
-                    }
-                    stopserver();
-                } else if (redPlayers.isEmpty() && !greenPlayers.isEmpty() && bluePlayers.isEmpty() && yellowPlayers.isEmpty()) {
-                    for (Player p : Bukkit.getOnlinePlayers()) {
-                        Titles.sendFullTitle(p, 0, 100, 0, getMsg("victory.green"), "");
-                    }
-                    stopserver();
-                } else if (bluePlayers.isEmpty() && greenPlayers.isEmpty() && !redPlayers.isEmpty() && yellowPlayers.isEmpty()) {
-                    for (Player p : Bukkit.getOnlinePlayers()) {
-                        Titles.sendFullTitle(p, 0, 100, 0, getMsg("victory.red"), "");
-                    }
-                    stopserver();
-                } else if (bluePlayers.isEmpty() && greenPlayers.isEmpty() && redPlayers.isEmpty() && !yellowPlayers.isEmpty()) {
-                    for (Player p : Bukkit.getOnlinePlayers()) {
-                        Titles.sendFullTitle(p, 0, 100, 0, getMsg("victory.yellow"), "");
-                    }
-                    stopserver();
-                } else {
-                    if (Bukkit.getOnlinePlayers().isEmpty())
-                        stopserver();
+        if (STATUS == Status.LOBBY || STATUS == Status.STARTING || STATUS == Status.PRE_GAME) return;
+        Bukkit.getScheduler().runTaskLater(plugin, () -> {
+            if (!bluePlayers.isEmpty() && greenPlayers.isEmpty() && redPlayers.isEmpty() && yellowPlayers.isEmpty()){
+                for (Player p : Bukkit.getOnlinePlayers()) {
+                    Titles.sendFullTitle(p, 0, 100, 0, getMsg("victory.blue"), "");
                 }
+                Bukkit.broadcastMessage(PREFIX+" "+getMsg("victory.blue"));
+                stopserver();
+            } else if (redPlayers.isEmpty() && !greenPlayers.isEmpty() && bluePlayers.isEmpty() && yellowPlayers.isEmpty()) {
+                for (Player p : Bukkit.getOnlinePlayers()) {
+                    Titles.sendFullTitle(p, 0, 100, 0, getMsg("victory.green"), "");
+                }
+                Bukkit.broadcastMessage(PREFIX+" "+getMsg("victory.blue"));
+                stopserver();
+            } else if (bluePlayers.isEmpty() && greenPlayers.isEmpty() && !redPlayers.isEmpty() && yellowPlayers.isEmpty()) {
+                for (Player p : Bukkit.getOnlinePlayers()) {
+                    Titles.sendFullTitle(p, 0, 100, 0, getMsg("victory.red"), "");
+                }
+                Bukkit.broadcastMessage(PREFIX+" "+getMsg("victory.blue"));
+                stopserver();
+            } else if (bluePlayers.isEmpty() && greenPlayers.isEmpty() && redPlayers.isEmpty() && !yellowPlayers.isEmpty()) {
+                for (Player p : Bukkit.getOnlinePlayers()) {
+                    Titles.sendFullTitle(p, 0, 100, 0, getMsg("victory.yellow"), "");
+                }
+                Bukkit.broadcastMessage(PREFIX+" "+getMsg("victory.blue"));
+                stopserver();
+            } else {
+                if (Bukkit.getOnlinePlayers().isEmpty())
+                    stopserver();
             }
         }, 5L);
     }

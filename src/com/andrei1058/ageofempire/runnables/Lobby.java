@@ -2,22 +2,13 @@ package com.andrei1058.ageofempire.runnables;
 
 import com.andrei1058.ageofempire.configuration.Settings;
 import com.andrei1058.ageofempire.game.Status;
-import com.andrei1058.ageofempire.locations.Locations;
-import com.andrei1058.ageofempire.locations.Region;
-import com.andrei1058.ageofempire.nms.RegisterNMS;
-import com.andrei1058.ageofempire.nms.VillagerNMS;
-import net.minecraft.server.v1_8_R3.EntityVillager;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.Sound;
-import org.bukkit.WorldCreator;
-import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.scheduler.BukkitRunnable;
-
-import java.util.Random;
 
 import static com.andrei1058.ageofempire.Main.*;
 import static com.andrei1058.ageofempire.configuration.Messages.getMsg;

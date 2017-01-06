@@ -47,6 +47,7 @@ public class ItemDropListener implements Listener {
                 }
                 construct_in_inv.remove(e.getPlayer().getUniqueId());
                 BuildSchematic.getUUID(e.getPlayer().getUniqueId()).end();
+                e.getItemDrop().remove();
             }
         }
         if (e.getItemDrop().getItemStack().getType() == Material.MOB_SPAWNER){
