@@ -1,8 +1,8 @@
 main: com.andrei1058.ageofempire.Main
 name: Age-Of-Empire
-version: v1.0b3
+version: 1.0b5
 author: andrei1058
-description: parkergames
+description: AgeOfEmpire minigame
 website: http://andrei1058.com
 
 commands:

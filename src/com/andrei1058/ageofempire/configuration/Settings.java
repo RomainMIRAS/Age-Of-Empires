@@ -44,12 +44,13 @@ public class Settings {
         yml.addDefault("plot-radius.small", 9);
         yml.addDefault("plot-radius.medium", 12);
         yml.addDefault("plot-radius.large", 16);
+        /*
         yml.addDefault("Database.enable", false);
         yml.addDefault("Database.host", "localhost");
         yml.addDefault("Database.port", 3306);
         yml.addDefault("Database.database", "AgeOfEmpire");
         yml.addDefault("Database.username", "root");
-        yml.addDefault("Database.password", "pass");
+        yml.addDefault("Database.password", "pass"); */
         yml.addDefault("Arenas", list);
         yml.options().copyDefaults(true);
         try {
@@ -64,7 +65,7 @@ public class Settings {
         min_players = yml.getInt("min-players")-1;
         lobby_time = yml.getInt("countdowns.lobby");
         pregame_time = yml.getInt("countdowns.pregame");
-        mysql = yml.getBoolean("Database.enable");
+        //mysql = yml.getBoolean("Database.enable");
 
         if (Settings.load().get("Arenas") != null && !SETUP){
             RegisterNMS.registerEntity("Villager", 120, EntityVillager.class, VillagerNMS.class);

@@ -66,31 +66,47 @@ public class Region {
     }
 
     public void allowed(UUID player) {
-        switch (name){
+        switch (name) {
             case blue_team:
-                if (bluePlayers.contains(player)){
-                    rightPlot(player);
+                if (bluePlayers.contains(player)) {
+                    if (!hasBuild(construct_in_inv.get(player), blue_team)) {
+                        rightPlot(player);
+                    } else {
+                        Bukkit.getPlayer(player).getInventory().setItem(7, slotlocked());
+                    }
                 } else {
                     Bukkit.getPlayer(player).sendMessage(getMsg("cant-construct-outside"));
                 }
                 break;
             case green_team:
-                if (greenPlayers.contains(player)){
-                    rightPlot(player);
+                if (greenPlayers.contains(player)) {
+                    if (!hasBuild(construct_in_inv.get(player), green_team)) {
+                        rightPlot(player);
+                    } else {
+                        Bukkit.getPlayer(player).getInventory().setItem(7, slotlocked());
+                    }
                 } else {
                     Bukkit.getPlayer(player).sendMessage(getMsg("cant-construct-outside"));
                 }
                 break;
             case yellow_team:
-                if (yellowPlayers.contains(player)){
-                    rightPlot(player);
+                if (yellowPlayers.contains(player)) {
+                    if (!hasBuild(construct_in_inv.get(player), yellow_team)) {
+                        rightPlot(player);
+                    } else {
+                        Bukkit.getPlayer(player).getInventory().setItem(7, slotlocked());
+                    }
                 } else {
                     Bukkit.getPlayer(player).sendMessage(getMsg("cant-construct-outside"));
                 }
                 break;
             case red_team:
-                if (redPlayers.contains(player)){
-                    rightPlot(player);
+                if (redPlayers.contains(player)) {
+                    if (!hasBuild(construct_in_inv.get(player), red_team)) {
+                        rightPlot(player);
+                    } else {
+                        Bukkit.getPlayer(player).getInventory().setItem(7, slotlocked());
+                    }
                 } else {
                     Bukkit.getPlayer(player).sendMessage(getMsg("cant-construct-outside"));
                 }

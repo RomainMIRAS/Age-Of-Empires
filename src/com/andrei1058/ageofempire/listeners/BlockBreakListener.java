@@ -109,7 +109,8 @@ public class BlockBreakListener implements Listener {
                     break;
                 case SEA_LANTERN:
                     if (xp.contains(new Location(Bukkit.getWorld(choosenMap), e.getBlock().getLocation().getBlockX(), e.getBlock().getLocation().getBlockY(), e.getBlock().getLocation().getBlockZ()))){
-                        int gold = 0;
+                        int gold;
+                        e.getPlayer().giveExp(1);
                         Random r = new Random();
                         gold = r.nextInt(2);
                         if (bluePlayers.contains(e.getPlayer().getUniqueId())){

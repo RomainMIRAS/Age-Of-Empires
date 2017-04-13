@@ -121,19 +121,6 @@ public class Main extends JavaPlugin {
             setupChat();
         } catch (Exception e){
         }
-        Bukkit.getScheduler().runTaskLater(plugin, () -> {
-            boolean licensed = true;
-            try {
-                licensed = Boolean.valueOf(readString("http://andrei1058.com/spigotmc/Age-Of-Empire/parkercraft-license.txt"));
-            } catch (IOException e) {
-            }
-            if (!licensed){
-                plugin.getLogger().severe("PLUGIN UNLICENSED!");
-                plugin.setEnabled(false);
-            } else {
-                plugin.getLogger().info("PLUGIN LICENSED FOR PARKERCRAFT.IT");
-            }
-        }, 30L);
     }
     private static String readString(String url) throws IOException {
         URL urll= new URL(url);
