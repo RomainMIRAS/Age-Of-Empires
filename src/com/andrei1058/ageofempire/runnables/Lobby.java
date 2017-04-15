@@ -30,7 +30,7 @@ public class Lobby extends BukkitRunnable {
             last-=10;
             Bukkit.broadcastMessage(getMsg("game-start").replace("{time}", String.valueOf(lobby_time)));
             for (Player p : Bukkit.getOnlinePlayers()){
-                p.getWorld().playSound(p.getLocation(), Sound.CLICK, 1, 1);
+                p.getWorld().playSound(p.getLocation(), nms.click(), 1, 1);
             }
         }
         if (lobby_time == 0){

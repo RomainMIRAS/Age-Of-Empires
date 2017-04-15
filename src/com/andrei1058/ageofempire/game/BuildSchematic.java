@@ -1,7 +1,7 @@
 package com.andrei1058.ageofempire.game;
 
 import com.andrei1058.ageofempire.locations.Schematic;
-import com.andrei1058.ageofempire.nms.VillagerNMS;
+import com.andrei1058.ageofempire.nms.v1_8_R3.VillagerNMS;
 import org.bukkit.*;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Villager;

@@ -5,6 +5,7 @@ import com.andrei1058.ageofempire.commands.Setup;
 import com.andrei1058.ageofempire.commands.Leave;
 import com.andrei1058.ageofempire.game.Status;
 import com.andrei1058.ageofempire.listeners.*;
+import com.andrei1058.ageofempire.nms.NMS;
 import net.milkbowl.vault.chat.Chat;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
@@ -81,6 +82,7 @@ public class Main extends JavaPlugin {
     public static Chat chat = null;
     public static Boolean vaultHook = false;
     public static Boolean mysql = false;
+    public static NMS nms;
 
     @Override
     public void onEnable() {
@@ -88,6 +90,73 @@ public class Main extends JavaPlugin {
         if (!directory.exists()){
             directory.mkdir();
         }
+        String version = Bukkit.getServer().getClass().getPackage().getName().split("\\.")[3];
+        if (version.equalsIgnoreCase("v1_9_R2")){
+            try {
+                nms = com.andrei1058.ageofempire.nms.v1_9_R2.Main.class.newInstance();
+            } catch (InstantiationException e) {
+                this.getLogger().severe("An error occurred!");
+                this.setEnabled(false);
+                return;
+            } catch (IllegalAccessException e) {
+                this.getLogger().severe("An error occurred!");
+                this.setEnabled(false);
+                return;
+            }
+        } else if(version.equalsIgnoreCase("v1_8_R3")){
+            try {
+                nms = com.andrei1058.ageofempire.nms.v1_8_R3.Main.class.newInstance();
+            } catch (InstantiationException e) {
+                this.getLogger().severe("An error occurred!");
+                this.setEnabled(false);
+                return;
+            } catch (IllegalAccessException e) {
+                this.getLogger().severe("An error occurred!");
+                this.setEnabled(false);
+                return;
+            }
+        } else if(version.equalsIgnoreCase("v1_9_R1")){
+            try {
+                nms = com.andrei1058.ageofempire.nms.v1_9_R1.Main.class.newInstance();
+            } catch (InstantiationException e) {
+                this.getLogger().severe("An error occurred!");
+                this.setEnabled(false);
+                return;
+            } catch (IllegalAccessException e) {
+                this.getLogger().severe("An error occurred!");
+                this.setEnabled(false);
+                return;
+            }
+        } else if(version.equalsIgnoreCase("v1_10_R1")){
+            try {
+                nms = com.andrei1058.ageofempire.nms.v1_10_R1.Main.class.newInstance();
+            } catch (InstantiationException e) {
+                this.getLogger().severe("An error occurred!");
+                this.setEnabled(false);
+                return;
+            } catch (IllegalAccessException e) {
+                this.getLogger().severe("An error occurred!");
+                this.setEnabled(false);
+                return;
+            }
+        } else if(version.equalsIgnoreCase("v1_11_R1")){
+            try {
+                nms = com.andrei1058.ageofempire.nms.v1_11_R1.Main.class.newInstance();
+            } catch (InstantiationException e) {
+                this.getLogger().severe("An error occurred!");
+                this.setEnabled(false);
+                return;
+            } catch (IllegalAccessException e) {
+                this.getLogger().severe("An error occurred!");
+                this.setEnabled(false);
+                return;
+            }
+        } else {
+            this.getLogger().severe("Could not find support for your server.");
+            this.setEnabled(false);
+            return;
+        }
+        this.getLogger().info("Loading support for " + version);
         setupSettings();
         getCommand("setup").setExecutor(new Setup());
         getCommand("leave").setExecutor(new Leave());

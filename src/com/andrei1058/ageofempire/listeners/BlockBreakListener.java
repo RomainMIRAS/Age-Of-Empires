@@ -65,7 +65,7 @@ public class BlockBreakListener implements Listener {
                             red_wood += 5;
                             plugin.gold.replace(e.getPlayer().getUniqueId(), plugin.gold.get(e.getPlayer().getUniqueId())+gold);
                         }
-                        e.getPlayer().getWorld().playSound(e.getPlayer().getLocation(), Sound.LEVEL_UP, 1,1);
+                        e.getPlayer().getWorld().playSound(e.getPlayer().getLocation(), nms.levelUp(), 1,1);
                     } else {
                         e.setCancelled(true);
                         e.getPlayer().sendMessage(getMsg("cant-break"));
@@ -101,7 +101,7 @@ public class BlockBreakListener implements Listener {
                             red_stone += 3;
                             plugin.gold.replace(e.getPlayer().getUniqueId(), plugin.gold.get(e.getPlayer().getUniqueId())+gold);
                         }
-                        e.getPlayer().getWorld().playSound(e.getPlayer().getLocation(), Sound.LEVEL_UP, 1,1);
+                        e.getPlayer().getWorld().playSound(e.getPlayer().getLocation(), nms.levelUp(), 1,1);
                     } else {
                         e.setCancelled(true);
                         e.getPlayer().sendMessage(getMsg("cant-break"));

@@ -49,52 +49,72 @@ public class EntityDeathListener implements Listener {
                 }
             if (v == blue_villager){
                 Bukkit.broadcastMessage(getMsg("base-destroyed.blue").replace("{team}", killer));
-                if (!bluePlayers.isEmpty()) {
-                    for (UUID u : bluePlayers) {
-                        if (u == null) continue;
-                        players.remove(u);
-                        bluePlayers.remove(u);
-                        Bukkit.getPlayer(u).getInventory().clear();
-                        Bukkit.getPlayer(u).setGameMode(GameMode.SPECTATOR);
-                    }
-                }
-                checkWinner();
+                Bukkit.getScheduler().runTaskLater(plugin, ()-> {
+                    try {
+                        if (!bluePlayers.isEmpty()) {
+                            for (UUID u : bluePlayers) {
+                                if (u != null) {
+                                    players.remove(u);
+                                    bluePlayers.remove(u);
+                                    Bukkit.getPlayer(u).getInventory().clear();
+                                    Bukkit.getPlayer(u).setGameMode(GameMode.SPECTATOR);
+                                }
+                            }
+                        }
+                    } catch (Exception ex){}
+                    checkWinner();
+                }, 10L);
             } else if (v == green_villager){
                 Bukkit.broadcastMessage(getMsg("base-destroyed.green").replace("{team}", killer));
-                if (!greenPlayers.isEmpty()) {
-                    for (UUID u : greenPlayers) {
-                        if (u == null) continue;
-                        Bukkit.getPlayer(u).getInventory().clear();
-                        Bukkit.getPlayer(u).setGameMode(GameMode.SPECTATOR);
-                        players.remove(u);
-                        greenPlayers.remove(u);
-                    }
-                }
-                checkWinner();
+                Bukkit.getScheduler().runTaskLater(plugin, ()-> {
+                    try {
+                        if (!greenPlayers.isEmpty()) {
+                            for (UUID u : greenPlayers) {
+                                if (u != null) {
+                                    Bukkit.getPlayer(u).getInventory().clear();
+                                    Bukkit.getPlayer(u).setGameMode(GameMode.SPECTATOR);
+                                    players.remove(u);
+                                    greenPlayers.remove(u);
+                                }
+                            }
+                        }
+                    } catch (Exception ex){}
+                    checkWinner();
+                }, 10L);
             } else if (v == yellow_villager){
                 Bukkit.broadcastMessage(getMsg("base-destroyed.yellow").replace("{team}", killer));
-                if (!yellowPlayers.isEmpty()) {
-                    for (UUID u : yellowPlayers) {
-                        if (u == null) continue;
-                        players.remove(u);
-                        yellowPlayers.remove(u);
-                        Bukkit.getPlayer(u).getInventory().clear();
-                        Bukkit.getPlayer(u).setGameMode(GameMode.SPECTATOR);
-                    }
-                }
-                checkWinner();
+                Bukkit.getScheduler().runTaskLater(plugin, ()-> {
+                    try {
+                        if (!yellowPlayers.isEmpty()) {
+                            for (UUID u : yellowPlayers) {
+                                if (u != null) {
+                                    players.remove(u);
+                                    yellowPlayers.remove(u);
+                                    Bukkit.getPlayer(u).getInventory().clear();
+                                    Bukkit.getPlayer(u).setGameMode(GameMode.SPECTATOR);
+                                }
+                            }
+                        }
+                    } catch (Exception ex){}
+                    checkWinner();
+                }, 10L);
             } else if (v == red_villager) {
                 Bukkit.broadcastMessage(getMsg("base-destroyed.red").replace("{team}", killer));
-                if (!redPlayers.isEmpty()) {
-                    for (UUID u : redPlayers) {
-                        if (u == null) continue;
-                        players.remove(u);
-                        redPlayers.remove(u);
-                        Bukkit.getPlayer(u).getInventory().clear();
-                        Bukkit.getPlayer(u).setGameMode(GameMode.SPECTATOR);
-                    }
-                }
-                checkWinner();
+                Bukkit.getScheduler().runTaskLater(plugin, ()-> {
+                    try {
+                        if (!redPlayers.isEmpty()) {
+                            for (UUID u : redPlayers) {
+                                if (u != null) {
+                                    players.remove(u);
+                                    redPlayers.remove(u);
+                                    Bukkit.getPlayer(u).getInventory().clear();
+                                    Bukkit.getPlayer(u).setGameMode(GameMode.SPECTATOR);
+                                }
+                            }
+                        }
+                    } catch (Exception ex){}
+                    checkWinner();
+                }, 10L);
             } else {
                 if (v == blue_forge) {
                     Bukkit.broadcastMessage(getMsg("blue-building-explode").replace("{building}", getMsg("forum." + forge + ".displayname")));

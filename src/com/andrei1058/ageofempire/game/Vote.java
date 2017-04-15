@@ -55,7 +55,7 @@ public class Vote {
         if (time == 0 || time < 0){
             if (player_votes >(team.size()/2)){
                 for (UUID u : team){
-                    Action.actionMsg(Bukkit.getPlayer(u), getMsg("vote-accepted").replace("{player}", Bukkit.getPlayer(requester).getName()));
+                    nms.actionMsg(Bukkit.getPlayer(u), getMsg("vote-accepted").replace("{player}", Bukkit.getPlayer(requester).getName()));
                     Bukkit.getPlayer(u).getInventory().setItem(8, slotlocked());
                 }
                 if (teamname == blue_team){
@@ -100,7 +100,7 @@ public class Vote {
                 }
             } else {
                 for (UUID u : team){
-                    Action.actionMsg(Bukkit.getPlayer(u), getMsg("vote-denied").replace("{player}", Bukkit.getPlayer(requester).getName()));
+                    nms.actionMsg(Bukkit.getPlayer(u), getMsg("vote-denied").replace("{player}", Bukkit.getPlayer(requester).getName()));
                     Bukkit.getPlayer(u).getInventory().setItem(8, slotlocked());
                 }
             }
@@ -112,10 +112,10 @@ public class Vote {
         for (UUID u : team){
             switch (build){
                 case age_string:
-                    Action.actionMsg(Bukkit.getPlayer(u), getMsg("vote-age").replace("{player}", Bukkit.getPlayer(requester).getName()).replace("{votes}", String.valueOf(player_votes)).replace("{team}", String.valueOf(team.size())));
+                    nms.actionMsg(Bukkit.getPlayer(u), getMsg("vote-age").replace("{player}", Bukkit.getPlayer(requester).getName()).replace("{votes}", String.valueOf(player_votes)).replace("{team}", String.valueOf(team.size())));
                     break;
                 default:
-                    Action.actionMsg(Bukkit.getPlayer(u), getMsg("new-vote").replace("{player}", Bukkit.getPlayer(requester).getName()).replace("{building}", build).replace("{votes}", String.valueOf(player_votes)).replace("{team}", String.valueOf(team.size())));
+                    nms.actionMsg(Bukkit.getPlayer(u), getMsg("new-vote").replace("{player}", Bukkit.getPlayer(requester).getName()).replace("{building}", build).replace("{votes}", String.valueOf(player_votes)).replace("{team}", String.valueOf(team.size())));
                     break;
             }
         }

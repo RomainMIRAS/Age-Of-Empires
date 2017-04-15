@@ -1,6 +1,5 @@
 package com.andrei1058.ageofempire.listeners;
 
-import com.andrei1058.ageofempire.game.Action;
 import com.andrei1058.ageofempire.game.Status;
 import com.andrei1058.ageofempire.locations.Locations;
 import com.andrei1058.ageofempire.runnables.Lobby;
@@ -32,13 +31,13 @@ public class PlayerJoinListener implements Listener {
                     new Lobby().runTaskTimer(plugin, 0, 20);
                 }
                 for (Player p2 : Bukkit.getOnlinePlayers()){
-                    Action.actionMsg(p2, getMsg("action-player-join").replace("{player}", p.getName()));
+                    nms.actionMsg(p2, getMsg("action-player-join").replace("{player}", p.getName()));
                 }
                 break;
             case STARTING:
                 lobbyItems(p);
                 for (Player p2 : Bukkit.getOnlinePlayers()){
-                    Action.actionMsg(p2, getMsg("action-player-join").replace("{player}", p.getName()));
+                    nms.actionMsg(p2, getMsg("action-player-join").replace("{player}", p.getName()));
                 }
                 break;
         }

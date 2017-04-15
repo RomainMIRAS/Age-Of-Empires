@@ -1,6 +1,6 @@
-package com.andrei1058.ageofempire.nms;
+package com.andrei1058.ageofempire.nms.v1_9_R2;
 
-import net.minecraft.server.v1_8_R3.EntityTypes;
+import net.minecraft.server.v1_9_R2.EntityTypes;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.Map;
 
 public class RegisterNMS {
-    public static void registerEntity(String name, int id, Class nmsClass, Class customClass){
+    public static void registerEntity(String name, int id, Class customClass){
         try {
 
             List<Map<?, ?>> dataMap = new ArrayList<Map<?, ?>>();

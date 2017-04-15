@@ -87,7 +87,7 @@ public class Game extends BukkitRunnable {
                     pvp = true;
                     pvp_assault = 60000 * Settings.load().getInt("countdowns.assault");
                     for (UUID u : players) {
-                        Bukkit.getPlayer(u).playSound(Bukkit.getPlayer(u).getLocation(), Sound.WOLF_DEATH, 1, 1);
+                        Bukkit.getPlayer(u).playSound(Bukkit.getPlayer(u).getLocation(), nms.wolfDeath(), 1, 1);
                         Bukkit.getPlayer(u).getScoreboard().getTeam("pvp_assault").setPrefix(getMsg("scoreboard.3_2"));
                     }
                     for (String st : Locations.load().getConfigurationSection("xp."+choosenMap).getKeys(false)){

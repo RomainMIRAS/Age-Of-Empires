@@ -1,10 +1,10 @@
-package com.andrei1058.ageofempire.nms;
+package com.andrei1058.ageofempire.nms.v1_11_R1;
 
-import net.minecraft.server.v1_8_R3.*;
+import net.minecraft.server.v1_11_R1.*;
 import org.bukkit.Location;
-import org.bukkit.craftbukkit.v1_8_R3.CraftWorld;
-import org.bukkit.craftbukkit.v1_8_R3.entity.CraftLivingEntity;
-import org.bukkit.craftbukkit.v1_8_R3.util.UnsafeList;
+import org.bukkit.craftbukkit.v1_11_R1.CraftWorld;
+import org.bukkit.craftbukkit.v1_11_R1.entity.CraftLivingEntity;
+import org.bukkit.craftbukkit.v1_11_R1.util.UnsafeList;
 import org.bukkit.entity.Villager;
 import org.bukkit.event.entity.CreatureSpawnEvent;
 
@@ -33,10 +33,6 @@ public class VillagerNMS extends EntityVillager {
         this.goalSelector.a(10, new PathfinderGoalLookAtPlayer(this, EntityHuman.class, 8.0F));
     }
 
-    @Override
-    public void move(double d0, double d1, double d2) {
-
-    }
 
     @Override
     public void collide(Entity entity) {
@@ -46,10 +42,6 @@ public class VillagerNMS extends EntityVillager {
     public boolean damageEntity(DamageSource damagesource, float f) {
         return false;
     }*/
-
-    @Override
-    public void g(double d0, double d1, double d2) {
-    }
 
     public static Villager spawnVillager(Location loc, Integer health){
         World mcWorld = ((CraftWorld) loc.getWorld()).getHandle();
@@ -61,6 +53,6 @@ public class VillagerNMS extends EntityVillager {
         customEnt.setCustomNameVisible(true);
         customEnt.setHealth(health);
         mcWorld.addEntity(customEnt, CreatureSpawnEvent.SpawnReason.CUSTOM);
-        return (org.bukkit.entity.Villager) customEnt.getBukkitEntity();
+        return (Villager) customEnt.getBukkitEntity();
     }
 }

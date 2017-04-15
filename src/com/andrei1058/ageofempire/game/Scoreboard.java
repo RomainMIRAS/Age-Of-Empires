@@ -131,7 +131,7 @@ public class Scoreboard {
                         blue_change_age = false;
                         Bukkit.broadcastMessage(getMsg("blue-changed-age").replace("{age}", String.valueOf(blue_age)));
                         for (Player on : Bukkit.getOnlinePlayers()){
-                            on.getWorld().playSound(on.getLocation(), Sound.WITHER_DEATH, 1, 1);
+                            on.getWorld().playSound(on.getLocation(), nms.witherDeath(), 1, 1);
                         }
                     }
                 } else {
@@ -153,7 +153,7 @@ public class Scoreboard {
                         green_change_age = false;
                         Bukkit.broadcastMessage(getMsg("green-changed-age").replace("{age}", String.valueOf(green_age)));
                         for (Player on : Bukkit.getOnlinePlayers()){
-                            on.getWorld().playSound(on.getLocation(), Sound.WITHER_DEATH, 1, 1);
+                            on.getWorld().playSound(on.getLocation(), nms.witherDeath(), 1, 1);
                         }
                     }
                 } else {
@@ -175,7 +175,7 @@ public class Scoreboard {
                         yellow_change_age = false;
                         Bukkit.broadcastMessage(getMsg("yellow-changed-age").replace("{age}", String.valueOf(yellow_age)));
                         for (Player on : Bukkit.getOnlinePlayers()){
-                            on.getWorld().playSound(on.getLocation(), Sound.WITHER_DEATH, 1, 1);
+                            on.getWorld().playSound(on.getLocation(), nms.witherDeath(), 1, 1);
                         }
                     }
                 } else {
@@ -197,7 +197,7 @@ public class Scoreboard {
                         red_change_age = false;
                         Bukkit.broadcastMessage(getMsg("red-changed-age").replace("{age}", String.valueOf(red_age)));
                         for (Player on : Bukkit.getOnlinePlayers()){
-                            on.getWorld().playSound(on.getLocation(), Sound.WITHER_DEATH, 1, 1);
+                            on.getWorld().playSound(on.getLocation(), nms.witherDeath(), 1, 1);
                         }
                     }
                 } else {

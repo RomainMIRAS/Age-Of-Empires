@@ -1,16 +1,12 @@
 package com.andrei1058.ageofempire.configuration;
 import com.andrei1058.ageofempire.locations.Locations;
 import com.andrei1058.ageofempire.locations.Region;
-import com.andrei1058.ageofempire.nms.RegisterNMS;
-import com.andrei1058.ageofempire.nms.VillagerNMS;
-import net.minecraft.server.v1_8_R3.EntityVillager;
 import org.bukkit.Bukkit;
 import org.bukkit.WorldCreator;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Entity;
 
 import java.io.*;
-import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -65,10 +61,9 @@ public class Settings {
         min_players = yml.getInt("min-players")-1;
         lobby_time = yml.getInt("countdowns.lobby");
         pregame_time = yml.getInt("countdowns.pregame");
-        //mysql = yml.getBoolean("Database.enable");
 
         if (Settings.load().get("Arenas") != null && !SETUP){
-            RegisterNMS.registerEntity("Villager", 120, EntityVillager.class, VillagerNMS.class);
+            nms.registerVillagers();
             Random r = new Random();
             int a = Settings.load().getStringList("Arenas").size();
             int mapid = r.nextInt(a);
