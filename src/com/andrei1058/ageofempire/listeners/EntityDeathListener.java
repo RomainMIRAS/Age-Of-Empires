@@ -48,6 +48,7 @@ public class EntityDeathListener implements Listener {
                     killer = "§cRed";
                 }
             if (v == blue_villager){
+                addKingKill(p);
                 Bukkit.broadcastMessage(getMsg("base-destroyed.blue").replace("{team}", killer));
                 Bukkit.getScheduler().runTaskLater(plugin, ()-> {
                     try {
@@ -65,6 +66,7 @@ public class EntityDeathListener implements Listener {
                     checkWinner();
                 }, 10L);
             } else if (v == green_villager){
+                addKingKill(p);
                 Bukkit.broadcastMessage(getMsg("base-destroyed.green").replace("{team}", killer));
                 Bukkit.getScheduler().runTaskLater(plugin, ()-> {
                     try {
@@ -82,6 +84,7 @@ public class EntityDeathListener implements Listener {
                     checkWinner();
                 }, 10L);
             } else if (v == yellow_villager){
+                addKingKill(p);
                 Bukkit.broadcastMessage(getMsg("base-destroyed.yellow").replace("{team}", killer));
                 Bukkit.getScheduler().runTaskLater(plugin, ()-> {
                     try {
@@ -99,6 +102,7 @@ public class EntityDeathListener implements Listener {
                     checkWinner();
                 }, 10L);
             } else if (v == red_villager) {
+                addKingKill(p);
                 Bukkit.broadcastMessage(getMsg("base-destroyed.red").replace("{team}", killer));
                 Bukkit.getScheduler().runTaskLater(plugin, ()-> {
                     try {

@@ -5,6 +5,7 @@ import com.mojang.authlib.properties.Property;
 import org.apache.commons.codec.binary.Base64;
 import org.bukkit.Color;
 import org.bukkit.Material;
+import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.inventory.meta.LeatherArmorMeta;
@@ -77,6 +78,15 @@ public class Misc {
         im.setDisplayName(getMsg("constructor.displayname"));
         im.setLore(getArray("constructor.lore").stream().map(s -> s.replace('&', '§')).collect(Collectors.toCollection(ArrayList::new)));
         i.setItemMeta(im);
+        return i;
+    }
+
+    public static ItemStack statsItem(Player p){
+        ItemStack i = new ItemStack(Material.SKULL_ITEM, 1, (short) 3);
+        SkullMeta sm = (SkullMeta) i.getItemMeta();
+        sm.setDisplayName(getMsg("stats.displayname"));
+        sm.setOwner(p.getName());
+        i.setItemMeta(sm);
         return i;
     }
 }

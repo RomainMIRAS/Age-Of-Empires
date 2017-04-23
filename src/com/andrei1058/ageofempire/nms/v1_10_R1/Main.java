@@ -9,6 +9,7 @@ import org.bukkit.Sound;
 import org.bukkit.craftbukkit.v1_10_R1.entity.CraftPlayer;
 import org.bukkit.entity.Player;
 import org.bukkit.entity.Villager;
+import org.bukkit.inventory.ItemStack;
 
 /**
  * Copyright Andrei Dascalu - andrei1058 @spigotmc.org
@@ -52,5 +53,10 @@ public class Main implements NMS {
     @Override
     public Villager spawnVillager(Location loc, Integer health) {
         return VillagerNMS.spawnVillager(loc, health);
+    }
+
+    @Override
+    public ItemStack itemInHand(Player p) {
+        return p.getInventory().getItemInMainHand();
     }
 }

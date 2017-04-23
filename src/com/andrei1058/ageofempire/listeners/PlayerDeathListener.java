@@ -40,11 +40,16 @@ public class PlayerDeathListener implements Listener {
         }
         if (e.getEntity().getKiller() instanceof Player) {
             e.setDeathMessage(getMsg("new-kill").replace("{player}", e.getEntity().getName()).replace("{killer}", e.getEntity().getKiller().getName()));
+            addKill(e.getEntity().getKiller());
+            addDeath(e.getEntity());
         } else if (e.getEntity().getKiller() instanceof Projectile) {
             Projectile proj = (Projectile) e.getEntity().getKiller();
             Player pl = (Player) proj.getShooter();
             e.setDeathMessage(getMsg("new-kill").replace("{player}", e.getEntity().getName()).replace("{killer}", pl.getName()));
+            addKill(pl);
+            addDeath(e.getEntity());
         } else {
+            addDeath(e.getEntity());
             e.setDeathMessage(getMsg("player-died").replace("{player}", e.getEntity().getDisplayName()));
         }
         Bukkit.getScheduler().runTaskLater(plugin, () -> p.spigot().respawn(), 2L);

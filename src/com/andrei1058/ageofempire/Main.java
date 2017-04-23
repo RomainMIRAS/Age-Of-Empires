@@ -6,10 +6,12 @@ import com.andrei1058.ageofempire.commands.Leave;
 import com.andrei1058.ageofempire.game.Status;
 import com.andrei1058.ageofempire.listeners.*;
 import com.andrei1058.ageofempire.nms.NMS;
+import com.mysql.fabric.xmlrpc.base.Array;
 import net.milkbowl.vault.chat.Chat;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.block.Block;
+import org.bukkit.entity.Player;
 import org.bukkit.entity.Villager;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.RegisteredServiceProvider;
@@ -24,6 +26,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.UUID;
 
+import static com.andrei1058.ageofempire.configuration.MySQL.setupDatabase;
 import static com.andrei1058.ageofempire.configuration.Settings.setupSettings;
 
 public class Main extends JavaPlugin {
@@ -38,6 +41,9 @@ public class Main extends JavaPlugin {
     public static ArrayList<UUID> help = new ArrayList<>();
     public static ArrayList<UUID> players = new ArrayList<>();
     public static ArrayList<Location> xp = new ArrayList<>();
+    public static HashMap<Player, Integer> kills = new HashMap<>();
+    public static HashMap<Player, Integer> deaths = new HashMap<>();
+    public static HashMap<Player, Integer> kingskilled = new HashMap<>();
     public static String choosenMap = "";
     public static boolean SETUP = false;
     public static Status STATUS = Status.LOBBY;
@@ -190,19 +196,7 @@ public class Main extends JavaPlugin {
             setupChat();
         } catch (Exception e){
         }
-    }
-    private static String readString(String url) throws IOException {
-        URL urll= new URL(url);
-        BufferedReader in = new BufferedReader(
-                new InputStreamReader(urll.openStream()));
-
-        String inputLine;
-        while ((inputLine = in.readLine()) != null){
-            return inputLine;
-        }
-        in.close();
-
-        return null;
+        new bStats(this);
     }
 
     private boolean setupChat() {
@@ -218,5 +212,26 @@ public class Main extends JavaPlugin {
         vaultHook = true;
         plugin.getLogger().info("Loaded Vault support!");
         return chat != null;
+    }
+    public static void addKill(Player p){
+        if (kills.containsKey(p)){
+            kills.replace(p, kills.get(p)+1);
+        } else {
+            kills.put(p, 1);
+        }
+    }
+    public static void addDeath(Player p){
+        if (deaths.containsKey(p)){
+            deaths.replace(p, deaths.get(p)+1);
+        } else {
+            deaths.put(p, 1);
+        }
+    }
+    public static void addKingKill(Player p){
+        if (kingskilled.containsKey(p)){
+            kingskilled.replace(p, kingskilled.get(p)+1);
+        } else {
+            kingskilled.put(p, 1);
+        }
     }
 }

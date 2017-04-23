@@ -1,6 +1,7 @@
 package com.andrei1058.ageofempire.configuration;
 import com.andrei1058.ageofempire.locations.Locations;
 import com.andrei1058.ageofempire.locations.Region;
+import com.sun.org.apache.bcel.internal.generic.IF_ACMPEQ;
 import org.bukkit.Bukkit;
 import org.bukkit.WorldCreator;
 import org.bukkit.configuration.file.YamlConfiguration;
@@ -13,6 +14,7 @@ import java.util.Random;
 import static com.andrei1058.ageofempire.Main.*;
 import static com.andrei1058.ageofempire.configuration.Messages.getMsg;
 import static com.andrei1058.ageofempire.configuration.Messages.setupMessages;
+import static com.andrei1058.ageofempire.configuration.MySQL.setupDatabase;
 
 public class Settings {
 
@@ -40,13 +42,39 @@ public class Settings {
         yml.addDefault("plot-radius.small", 9);
         yml.addDefault("plot-radius.medium", 12);
         yml.addDefault("plot-radius.large", 16);
-        /*
         yml.addDefault("Database.enable", false);
         yml.addDefault("Database.host", "localhost");
         yml.addDefault("Database.port", 3306);
         yml.addDefault("Database.database", "AgeOfEmpire");
+        yml.addDefault("Database.table", "stats_");
         yml.addDefault("Database.username", "root");
-        yml.addDefault("Database.password", "pass"); */
+        yml.addDefault("Database.password", "pass");
+        yml.options().header("Age Of Empire plugin by andrei1058 | https://www.spigotmc.org/members/andrei1058.39904/\n---------------------------------------------\n" +
+                "Well, read this if you need help...\n" +
+                "Setup-Mode: false |  Set this to true if you're setting up the server.\n" +
+                "lobby-server: ageofempire | Set this to false if you want a multi-arena server.\n" +
+                "max-in-team: 2 | How may players can join a team?\n" +
+                "min-players: 2 | How may players should be connected to start the lobby countdown?\n" +
+                "countdowns: | Various countdowns.\n" +
+                "  lobby: 40\n" +
+                "  pregame: 10\n" +
+                "  pvp: 5\n" +
+                "  assault: 5\n" +
+                "restart-cmd: restart | Which command should be executed when the game is over?\n" +
+                "plot-radius: | Various plots radius. Dimensions 9 x 9 etc." +
+                "  small: 9\n" +
+                "  medium: 12\n" +
+                "  large: 16\n" +
+                "Database: | Database credentials. Needed for stats." +
+                "  enable: true\n" +
+                "  host: localhost\n" +
+                "  port: 3306\n" +
+                "  database: AOE\n" +
+                "  table: stats_\n" +
+                "  username: root\n" +
+                "  password: p4ss2\n" +
+                "Arenas: | This is the maps list.\n" +
+                "- mappav2\n");
         yml.addDefault("Arenas", list);
         yml.options().copyDefaults(true);
         try {
@@ -110,6 +138,9 @@ public class Settings {
         saveschem("TRAINING_CENTER");
         saveschem("TRIFARROW");
         saveschem("WORKSHOP");
+        if (yml.getBoolean("Database.enable")){
+            setupDatabase(yml.getString("Database.host"), yml.getInt("Database.port"), yml.getString("Database.database"), yml.getString("Database.username"), yml.getString("Database.password"), yml.getString("Database.table"));
+        }
     }
 
     public static void addMap(String name){

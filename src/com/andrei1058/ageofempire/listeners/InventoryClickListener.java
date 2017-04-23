@@ -17,12 +17,9 @@ import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.potion.Potion;
 import org.bukkit.potion.PotionType;
 
-import java.util.ArrayList;
 import java.util.UUID;
-import java.util.stream.Collectors;
 
 import static com.andrei1058.ageofempire.Main.*;
-import static com.andrei1058.ageofempire.configuration.Messages.getArray;
 import static com.andrei1058.ageofempire.configuration.Messages.getMsg;
 import static com.andrei1058.ageofempire.game.Buildings.*;
 import static com.andrei1058.ageofempire.runnables.Game.*;
@@ -37,6 +34,10 @@ public class InventoryClickListener implements Listener {
             e.setCancelled(true);
         }
         if (e.getCurrentItem() == null) return;
+        if (e.getInventory().getName().equalsIgnoreCase(getMsg("stats.displayname"))){
+            e.setCancelled(true);
+            return;
+        }
         if (e.getCurrentItem().hasItemMeta() && e.getCurrentItem().getItemMeta().getDisplayName() != null) {
             switch (e.getCurrentItem().getType()) {
                 case SKULL_ITEM:

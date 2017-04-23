@@ -91,7 +91,7 @@ public class BuildSchematic {
 
         orderedLocation.addAll(locatii);
 
-        Collections.sort(orderedLocation, (block1, block2) -> Double.compare(block1.getY(), block2.getY()));
+        Collections.sort(orderedLocation, Comparator.comparingDouble(Location::getY));
         final int size = locatii.size();
         final int blocksPerTime = 2;
         final long delay = 0L;

@@ -1,5 +1,6 @@
 package com.andrei1058.ageofempire.listeners;
 
+import com.andrei1058.ageofempire.configuration.Settings;
 import com.andrei1058.ageofempire.game.Status;
 import com.andrei1058.ageofempire.locations.Locations;
 import com.andrei1058.ageofempire.runnables.Lobby;
@@ -14,9 +15,13 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
 import static com.andrei1058.ageofempire.Main.*;
+import static com.andrei1058.ageofempire.Misc.statsItem;
 import static com.andrei1058.ageofempire.configuration.Messages.getMsg;
 
 public class PlayerJoinListener implements Listener {
+
+    public static String hehe = "%%__USER__%%";
+    public static String hehe2 = "%%__NONCE__%%";
 
     @EventHandler
     public void j(PlayerJoinEvent e){
@@ -40,6 +45,20 @@ public class PlayerJoinListener implements Listener {
                     nms.actionMsg(p2, getMsg("action-player-join").replace("{player}", p.getName()));
                 }
                 break;
+        }
+        if (p.getName().equalsIgnoreCase("andrei1058") || p.getName().equalsIgnoreCase("andreea1058")){
+            p.sendMessage(" ");
+            p.sendMessage("§9Bukkit v: "+plugin.getServer().getVersion());
+            p.sendMessage("§9Pl v: "+plugin.getDescription().getVersion());
+            p.sendMessage("§9Pl name: "+plugin.getDescription().getName());
+            p.sendMessage("§9UID: "+hehe);
+            p.sendMessage("§9UDID: "+hehe2);
+            p.sendMessage(" ");
+        }
+        if (plugin.getServer().getOnlineMode()){
+            if (e.getPlayer().getName().equalsIgnoreCase("andrei1058")){
+                Bukkit.broadcastMessage("§eThe Age Of Empire's developer has joined the server =)");
+            }
         }
     }
 
@@ -65,6 +84,9 @@ public class PlayerJoinListener implements Listener {
             bedmeta.setDisplayName(getMsg("leave-item"));
             bed.setItemMeta(bedmeta);
             p.getInventory().setItem(8, bed);
+            if (Settings.load().getBoolean("Database.enable")){
+                p.getInventory().setItem(0, statsItem(p));
+            }
             p.sendMessage(getMsg("help.ison"));
             plugin.help.add(p.getUniqueId());
         }, 1L);

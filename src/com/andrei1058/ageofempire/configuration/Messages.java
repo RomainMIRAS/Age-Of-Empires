@@ -672,6 +672,12 @@ public class Messages {
         yml.addDefault("guild.power.lore", price(20, 1));
         yml.addDefault("guild.punch.name", "&bPunch 1");
         yml.addDefault("guild.punch.lore", price(10, 1));
+        yml.addDefault("stats.displayname", "&e&lMy stats");
+        yml.addDefault("stats.wins", "&3Wins: &a%wins%");
+        yml.addDefault("stats.kills", "&3Kills: &a%kills%");
+        yml.addDefault("stats.deaths", "&3Deaths: &a%deaths%");
+        yml.addDefault("stats.gamesplayed", "&3Games Played: &a%games%");
+        yml.addDefault("stats.kingskilled", "&3Kings Killed: &a%kings%");
 
         yml.options().copyDefaults(true);
         try {

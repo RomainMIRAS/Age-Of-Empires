@@ -4,6 +4,7 @@ import org.bukkit.Location;
 import org.bukkit.Sound;
 import org.bukkit.entity.Player;
 import org.bukkit.entity.Villager;
+import org.bukkit.inventory.ItemStack;
 
 /**
  * Copyright Andrei Dascalu - andrei1058 @spigotmc.org
@@ -17,4 +18,5 @@ public interface NMS {
     Sound wolfDeath();
     Sound click();
     Villager spawnVillager(Location loc, Integer health);
+    ItemStack itemInHand(Player p);
 }
