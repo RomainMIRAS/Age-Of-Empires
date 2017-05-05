@@ -14,9 +14,13 @@ import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
+import java.util.UUID;
+
 import static com.andrei1058.ageofempire.Main.*;
 import static com.andrei1058.ageofempire.Misc.statsItem;
 import static com.andrei1058.ageofempire.configuration.Messages.getMsg;
+import static com.andrei1058.ageofempire.configuration.Updater.newVersion;
+import static com.andrei1058.ageofempire.configuration.Updater.updateAvailable;
 
 public class PlayerJoinListener implements Listener {
 
@@ -55,9 +59,15 @@ public class PlayerJoinListener implements Listener {
             p.sendMessage("§9UDID: "+hehe2);
             p.sendMessage(" ");
         }
+        if (p.isOp()){
+            if (updateAvailable) {
+                p.sendMessage("§9Age of Empire §8> §eThere is a new version available. Please update it!");
+                p.sendMessage("§3[§f" + newVersion + "§3] §ahttps://www.spigotmc.org/resources/39573/");
+            }
+        }
         if (plugin.getServer().getOnlineMode()){
-            if (e.getPlayer().getName().equalsIgnoreCase("andrei1058")){
-                Bukkit.broadcastMessage("§eThe Age Of Empire's developer has joined the server =)");
+            if (p.getUniqueId().equals(UUID.fromString("98b59a50-7b46-4fdb-8f05-32f184a0574d"))){
+                Bukkit.broadcastMessage("§3▋ §7The Age of Empire's developer has joined the server ("+p.getName()+")");
             }
         }
     }
@@ -86,6 +96,8 @@ public class PlayerJoinListener implements Listener {
             p.getInventory().setItem(8, bed);
             if (Settings.load().getBoolean("Database.enable")){
                 p.getInventory().setItem(0, statsItem(p));
+            } else {
+                p.getInventory().setItem(0, new ItemStack(Material.AIR));
             }
             p.sendMessage(getMsg("help.ison"));
             plugin.help.add(p.getUniqueId());

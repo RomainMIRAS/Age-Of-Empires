@@ -115,7 +115,7 @@ public class BuildSchematic {
                             for (UUID u : teaamarray) {
                                 Bukkit.getPlayer(u).sendMessage(getMsg("built-success").replace("{building}", chat_build_name));
                             }
-                            Villager v = VillagerNMS.spawnVillager(villager, 500);
+                            Villager v = nms.spawnVillager(villager, 500);
                             switch (build_cfg_name) {
                                 case forge:
                                     new Hologram(v.getLocation(), getMsg("forum."+forge+".displayname"), getMsg("forum."+forge+".holo"), v);

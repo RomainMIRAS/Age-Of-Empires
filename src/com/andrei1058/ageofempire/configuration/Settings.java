@@ -1,7 +1,6 @@
 package com.andrei1058.ageofempire.configuration;
 import com.andrei1058.ageofempire.locations.Locations;
 import com.andrei1058.ageofempire.locations.Region;
-import com.sun.org.apache.bcel.internal.generic.IF_ACMPEQ;
 import org.bukkit.Bukkit;
 import org.bukkit.WorldCreator;
 import org.bukkit.configuration.file.YamlConfiguration;

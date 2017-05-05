@@ -18,7 +18,7 @@ import org.bukkit.inventory.ItemStack;
 public class Main implements NMS {
     @Override
     public void registerVillagers() {
-        RegisterNMS.registerEntity("Villager", 120, VillagerNMS.class);
+        RegisterNMS.registerEntity("Villager_AOE", 120, VillagerNMS.class);
     }
 
     @Override

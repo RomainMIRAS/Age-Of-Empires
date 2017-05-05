@@ -28,6 +28,7 @@ import java.util.UUID;
 
 import static com.andrei1058.ageofempire.configuration.MySQL.setupDatabase;
 import static com.andrei1058.ageofempire.configuration.Settings.setupSettings;
+import static com.andrei1058.ageofempire.configuration.Updater.checkUpdates;
 
 public class Main extends JavaPlugin {
 
@@ -87,7 +88,6 @@ public class Main extends JavaPlugin {
     public static ArrayList<UUID> teamchoose = new ArrayList<>();
     public static Chat chat = null;
     public static Boolean vaultHook = false;
-    public static Boolean mysql = false;
     public static NMS nms;
 
     @Override
@@ -197,6 +197,7 @@ public class Main extends JavaPlugin {
         } catch (Exception e){
         }
         new bStats(this);
+        checkUpdates();
     }
 
     private boolean setupChat() {
