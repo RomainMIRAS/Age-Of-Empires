@@ -135,22 +135,22 @@ public class PreGame extends BukkitRunnable {
             Bukkit.getScheduler().runTaskLater(plugin, () -> {
                 try {
                     if (!bluePlayers.isEmpty()){
-                        blue_villager = nms.spawnVillager(Locations.getLoc("Forums."+choosenMap+".Blue"), 3500);
+                        blue_villager = nms.spawnVillager(Locations.getLoc("Forums."+choosenMap+".Blue"), forum_health);
                         new Hologram(Locations.getLoc("Forums."+choosenMap+".Blue").clone(),
                                 getMsg("villagers.forum"), getMsg("villagers.buy-buildings"), blue_villager);
                     }
                     if (!greenPlayers.isEmpty()){
-                        green_villager = nms.spawnVillager(Locations.getLoc("Forums."+choosenMap+".Green"), 3500);
+                        green_villager = nms.spawnVillager(Locations.getLoc("Forums."+choosenMap+".Green"), forum_health);
                         new Hologram(Locations.getLoc("Forums."+choosenMap+".Green").clone(),
                                 getMsg("villagers.forum"), getMsg("villagers.buy-buildings"), green_villager);
                     }
                     if (!yellowPlayers.isEmpty()){
-                        yellow_villager = nms.spawnVillager(Locations.getLoc("Forums."+choosenMap+".Yellow"), 3500);
+                        yellow_villager = nms.spawnVillager(Locations.getLoc("Forums."+choosenMap+".Yellow"), forum_health);
                         new Hologram(Locations.getLoc("Forums."+choosenMap+".Yellow").clone(),
                                 getMsg("villagers.forum"), getMsg("villagers.buy-buildings"), yellow_villager);
                     }
                     if (!redPlayers.isEmpty()){
-                        red_villager = nms.spawnVillager(Locations.getLoc("Forums."+choosenMap+".Red"), 3500);
+                        red_villager = nms.spawnVillager(Locations.getLoc("Forums."+choosenMap+".Red"), forum_health);
                         new Hologram(Locations.getLoc("Forums."+choosenMap+".Red").clone(),
                                 getMsg("villagers.forum"), getMsg("villagers.buy-buildings"), red_villager);
                     }

@@ -35,7 +35,6 @@ public class VillagerNMS extends EntityVillager {
     public static Villager spawnVillager(Location loc, Integer health){
         World mcWorld = ((CraftWorld) loc.getWorld()).getHandle();
         VillagerNMS customEnt = new VillagerNMS(mcWorld);
-        //customEnt.getAttributeInstance(GenericAttributes.maxHealth).setValue(3524.0);
         customEnt.setLocation(loc.getX(), loc.getY(), loc.getZ(), loc.getYaw(), loc.getPitch());
         ((CraftLivingEntity) customEnt.getBukkitEntity()).setRemoveWhenFarAway(false);
         customEnt.setCustomName("§9"+health);

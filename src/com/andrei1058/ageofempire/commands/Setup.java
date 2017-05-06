@@ -34,18 +34,15 @@ public class Setup implements CommandExecutor {
         if (c.getName().equalsIgnoreCase("setup")){
             if (args.length == 0){
                 if (setup.contains(p)){
-                    //daca este in setup trimite astea
                     p.sendMessage("§9§lAge Of Empire §c§lSetup:");
                     p.sendMessage("§7/s setSpawn <Blue/Red/Green/Yellow>");
-                    //p.sendMessage("§7/s setPos <1/2> <Blue/Red/Green/Yellow>");
-                    p.sendMessage("§7/s addSmallPlot <team> <1/2>");
-                    p.sendMessage("§7/s addMediumPlot <team> <1/2>");
-                    p.sendMessage("§7/s addLargePlot <team> <1/2>");
+                    p.sendMessage("§7/s addSmallPlot <team> <id>");
+                    p.sendMessage("§7/s addMediumPlot <team> <id>");
+                    p.sendMessage("§7/s addLargePlot <team> <id>");
                     p.sendMessage("§7/s setForum <Blue/Red/Green/Yellow>");
                     p.sendMessage("§7/s addXp");
                     p.sendMessage("§e/s saveMap");
                 } else {
-                    //daca nu este in setup trimite astea
                     p.sendMessage("§9§lAge Of Empire §c§lSetup:");
                     p.sendMessage("§7/s setLobby");
                     p.sendMessage("§7/s addMap <worldName>");
@@ -88,17 +85,14 @@ public class Setup implements CommandExecutor {
                             p.teleport(loc.get(p));
                             setup.remove(p);
                         }
-                        else if (args[0].equalsIgnoreCase("setpos")){
-                            p.sendMessage("§eUsage: §7/s setPos <1/2> <Blue/Red/Green/Yellow>");
-                        }
                         else if (args[0].equalsIgnoreCase("addsmallplot")){
-                            p.sendMessage("§cUsage: §7/s addSmallPlot <team> <1/2/>");
+                            p.sendMessage("§cUsage: §7/s addSmallPlot <team> <id>");
                         }
                         else if (args[0].equalsIgnoreCase("addmediumplot")){
-                            p.sendMessage("§cUsage: §7/s addMediumPlot <team> <1/2>");
+                            p.sendMessage("§cUsage: §7/s addMediumPlot <team> <id>");
                         }
                         else if (args[0].equalsIgnoreCase("addlargeplot")){
-                            p.sendMessage("§cUsage: §7/s addLargePlot <team> <1/2>");
+                            p.sendMessage("§cUsage: §7/s addLargePlot <team> <id>");
                         }
                         else if (args[0].equalsIgnoreCase("setforum")){
                             p.sendMessage("§cUsage: §7/s setForum <Blue/Red/Yellow/Green>");
@@ -172,13 +166,13 @@ public class Setup implements CommandExecutor {
                             }
                         }
                         else if (args[0].equalsIgnoreCase("addsmallplot")){
-                            p.sendMessage("§cUsage: §7/s addSmallPlot <team> <1/2>");
+                            p.sendMessage("§cUsage: §7/s addSmallPlot <team> <id>");
                         }
                         else if (args[0].equalsIgnoreCase("addmediumplot")){
-                            p.sendMessage("§cUsage: §7/s addMediumPlot <team> <1/2>");
+                            p.sendMessage("§cUsage: §7/s addMediumPlot <team> <id>");
                         }
                         else if (args[0].equalsIgnoreCase("addlargeplot")){
-                            p.sendMessage("§cUsage: §7/s addLargePlot <team> <1/2>");
+                            p.sendMessage("§cUsage: §7/s addLargePlot <team> <id>");
                         }
                         else if (args[0].equalsIgnoreCase("setforum")){
                             switch (args[1].toLowerCase()){
@@ -213,7 +207,7 @@ public class Setup implements CommandExecutor {
                     if (setup.contains(p));
                     if (args[0].equalsIgnoreCase("setpos")){
                         if (!isInt(args[1])){
-                            p.sendMessage("§cUsage: §7/s setPos <1/2> <Blue/Red/Green/Yellow>");
+                            p.sendMessage("§cUsage: §7/s setPos <id> <Blue/Red/Green/Yellow>");
                             return true;
                         }
                         switch (args[2].toLowerCase()){
@@ -271,7 +265,7 @@ public class Setup implements CommandExecutor {
                         }
                         switch (args[1].toLowerCase()){
                             default:
-                                p.sendMessage("§cUsage: §7/s addMediumPlot <team> <1/2/3>");
+                                p.sendMessage("§cUsage: §7/s addMediumPlot <team> <1/2/3...>");
                                 break;
                             case "blue":
                                 Locations.saveLoc(p.getLocation(), "Plots."+p.getWorld().getName()+".Blue.Medium."+args[2]);

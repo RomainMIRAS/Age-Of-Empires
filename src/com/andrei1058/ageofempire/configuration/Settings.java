@@ -48,6 +48,8 @@ public class Settings {
         yml.addDefault("Database.table", "stats_");
         yml.addDefault("Database.username", "root");
         yml.addDefault("Database.password", "pass");
+        yml.addDefault("health.forum", 1400);
+        yml.addDefault("health.other", 500);
         yml.options().header("Age Of Empire plugin by andrei1058 | https://www.spigotmc.org/members/andrei1058.39904/\n---------------------------------------------\n" +
                 "Well, read this if you need help...\n" +
                 "Setup-Mode: false |  Set this to true if you're setting up the server.\n" +
@@ -72,6 +74,9 @@ public class Settings {
                 "  table: stats_\n" +
                 "  username: root\n" +
                 "  password: p4ss2\n" +
+                "health: | Various health stuff." +
+                "  forum: 1400\n" +
+                "  other:  500"+
                 "Arenas: | This is the maps list.\n" +
                 "- mappav2\n");
         yml.addDefault("Arenas", list);
@@ -88,6 +93,8 @@ public class Settings {
         min_players = yml.getInt("min-players")-1;
         lobby_time = yml.getInt("countdowns.lobby");
         pregame_time = yml.getInt("countdowns.pregame");
+        forum_health = yml.getInt("health.forum");
+        other_health = yml.getInt("health.other");
 
         if (Settings.load().get("Arenas") != null && !SETUP){
             nms.registerVillagers();

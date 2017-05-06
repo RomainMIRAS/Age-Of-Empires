@@ -678,6 +678,7 @@ public class Messages {
         yml.addDefault("stats.deaths", "&3Deaths: &a%deaths%");
         yml.addDefault("stats.gamesplayed", "&3Games Played: &a%games%");
         yml.addDefault("stats.kingskilled", "&3Kings Killed: &a%kings%");
+        yml.addDefault("vip-kick", "§cYou've got kicked because a vip joined the server.");
 
         yml.options().copyDefaults(true);
         try {

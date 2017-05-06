@@ -10,6 +10,8 @@ import org.bukkit.event.entity.CreatureSpawnEvent;
 
 import java.lang.reflect.Field;
 
+import static com.andrei1058.ageofempire.Main.forum_health;
+
 public class VillagerNMS extends EntityVillager {
 
     public VillagerNMS(World world) {
@@ -54,7 +56,6 @@ public class VillagerNMS extends EntityVillager {
     public static Villager spawnVillager(Location loc, Integer health){
         World mcWorld = ((CraftWorld) loc.getWorld()).getHandle();
         final VillagerNMS customEnt = new VillagerNMS(mcWorld);
-        customEnt.getAttributeInstance(GenericAttributes.maxHealth).setValue(3524.0);
         customEnt.setLocation(loc.getX(), loc.getY(), loc.getZ(), loc.getYaw(), loc.getPitch());
         ((CraftLivingEntity) customEnt.getBukkitEntity()).setRemoveWhenFarAway(false);
         customEnt.setCustomName("§9"+health);

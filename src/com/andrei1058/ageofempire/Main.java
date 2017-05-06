@@ -89,6 +89,7 @@ public class Main extends JavaPlugin {
     public static Chat chat = null;
     public static Boolean vaultHook = false;
     public static NMS nms;
+    public static int forum_health = 1400, other_health = 500;
 
     @Override
     public void onEnable() {
