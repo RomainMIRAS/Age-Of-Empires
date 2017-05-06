@@ -59,7 +59,16 @@ public class PlayerInteractListener implements Listener {
                     e.getPlayer().sendPluginMessage(plugin, "BungeeCord", out.toByteArray());
                     return;
                 }
-                if (nms.itemInHand(e.getPlayer()).equals(statsItem(e.getPlayer()))){
+                if (nms.itemInHand(e.getPlayer()).getType() == Material.SKULL_ITEM){
+                    if (!nms.itemInHand(e.getPlayer()).hasItemMeta()){
+                        return;
+                    }
+                    if (!nms.itemInHand(e.getPlayer()).getItemMeta().hasDisplayName()){
+                        return;
+                    }
+                    if (!nms.itemInHand(e.getPlayer()).getItemMeta().getDisplayName().equalsIgnoreCase(getMsg("stats.displayname"))){
+                        return;
+                    }
                     Inventory inv = Bukkit.createInventory(null, InventoryType.HOPPER, getMsg("stats.displayname"));
                     ArrayList stats = new MySQL().getStats(e.getPlayer().getUniqueId());
                     ItemStack i = new ItemStack(Material.GOLDEN_APPLE);
