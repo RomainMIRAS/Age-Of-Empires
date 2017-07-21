@@ -1,5 +1,6 @@
 package com.andrei1058.ageofempire.nms.v1_9_R1;
 
+import com.andrei1058.ageofempire.configuration.Settings;
 import net.minecraft.server.v1_9_R1.*;
 import org.bukkit.Location;
 import org.bukkit.craftbukkit.v1_9_R1.CraftWorld;
@@ -56,6 +57,7 @@ public class VillagerNMS extends EntityVillager {
     public static Villager spawnVillager(Location loc, Integer health){
         World mcWorld = ((CraftWorld) loc.getWorld()).getHandle();
         final VillagerNMS customEnt = new VillagerNMS(mcWorld);
+        customEnt.getAttributeInstance(GenericAttributes.maxHealth).setValue(Settings.load().getInt("health.forum"));
         customEnt.setLocation(loc.getX(), loc.getY(), loc.getZ(), loc.getYaw(), loc.getPitch());
         ((CraftLivingEntity) customEnt.getBukkitEntity()).setRemoveWhenFarAway(false);
         customEnt.setCustomName("§9"+health);

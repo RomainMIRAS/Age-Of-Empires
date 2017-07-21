@@ -2,9 +2,12 @@ package com.andrei1058.ageofempire.configuration;
 import com.andrei1058.ageofempire.locations.Locations;
 import com.andrei1058.ageofempire.locations.Region;
 import org.bukkit.Bukkit;
+import org.bukkit.Chunk;
 import org.bukkit.WorldCreator;
 import org.bukkit.configuration.file.YamlConfiguration;
+import org.bukkit.entity.ArmorStand;
 import org.bukkit.entity.Entity;
+import org.bukkit.entity.Villager;
 
 import java.io.*;
 import java.util.ArrayList;
@@ -89,22 +92,20 @@ public class Settings {
         setupMessages();
         SETUP = yml.getBoolean("Setup-Mode");
         PREFIX = getMsg("prefix");
-        max_in_team = yml.getInt("max-in-team")-1;
-        min_players = yml.getInt("min-players")-1;
+        max_in_team = yml.getInt("max-in-team");
+        min_players = yml.getInt("min-players");
         lobby_time = yml.getInt("countdowns.lobby");
         pregame_time = yml.getInt("countdowns.pregame");
         forum_health = yml.getInt("health.forum");
         other_health = yml.getInt("health.other");
 
         if (Settings.load().get("Arenas") != null && !SETUP){
-            nms.registerVillagers();
             Random r = new Random();
             int a = Settings.load().getStringList("Arenas").size();
             int mapid = r.nextInt(a);
             choosenMap = Settings.load().getStringList("Arenas").get(mapid);
             Bukkit.createWorld(new WorldCreator(choosenMap));
             Locations.getLoc("Spawns.Lobby").getWorld().getEntities().forEach(Entity::remove);
-            Bukkit.getWorld(choosenMap).getEntities().forEach(Entity::remove);
             Bukkit.getWorld(choosenMap).setGameRuleValue("keepInventory", "false");
             Bukkit.getWorld(choosenMap).setAutoSave(false);
                 blue_large_plots = Locations.load().getConfigurationSection("Plots."+choosenMap+".Blue.Large").getKeys(false).size();

@@ -53,16 +53,16 @@ public class BlockBreakListener implements Listener {
                         gold = r.nextInt(2);
                         new OreHologram(e.getBlock().getLocation(), gold, false);
                         if (bluePlayers.contains(e.getPlayer().getUniqueId())){
-                            blue_wood += 5;
+                            blue_wood += 3;
                             plugin.gold.replace(e.getPlayer().getUniqueId(), plugin.gold.get(e.getPlayer().getUniqueId())+gold);
                         } else if (greenPlayers.contains(e.getPlayer().getUniqueId())){
-                            green_wood += 5;
+                            green_wood += 3;
                             plugin.gold.replace(e.getPlayer().getUniqueId(), plugin.gold.get(e.getPlayer().getUniqueId())+gold);
                         } else if (yellowPlayers.contains(e.getPlayer().getUniqueId())){
-                            yellow_wood += 5;
+                            yellow_wood += 3;
                             plugin.gold.replace(e.getPlayer().getUniqueId(), plugin.gold.get(e.getPlayer().getUniqueId())+gold);
                         } else if (redPlayers.contains(e.getPlayer().getUniqueId())){
-                            red_wood += 5;
+                            red_wood += 3;
                             plugin.gold.replace(e.getPlayer().getUniqueId(), plugin.gold.get(e.getPlayer().getUniqueId())+gold);
                         }
                         e.getPlayer().getWorld().playSound(e.getPlayer().getLocation(), nms.levelUp(), 1,1);

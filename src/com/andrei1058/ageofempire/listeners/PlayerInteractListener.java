@@ -112,7 +112,7 @@ public class PlayerInteractListener implements Listener {
                     }
                     if (nms.itemInHand(e.getPlayer()).getItemMeta().getDisplayName().equalsIgnoreCase(getMsg("team-choosing.blue"))){
                         if (bluePlayers.contains(e.getPlayer().getUniqueId())) return;
-                        if (bluePlayers.size() < max_in_team){
+                        if (bluePlayers.size()+1 < max_in_team){
                             if (Bukkit.getOnlinePlayers().size() > max_in_team*3){
                                 if (bluePlayers.size() <= greenPlayers.size() || bluePlayers.size() <= yellowPlayers.size() || bluePlayers.size() <= redPlayers.size()){
                                     if (redPlayers.contains(e.getPlayer().getUniqueId())){

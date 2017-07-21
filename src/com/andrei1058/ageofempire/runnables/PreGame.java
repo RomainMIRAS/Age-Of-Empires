@@ -25,7 +25,7 @@ public class PreGame extends BukkitRunnable {
         if (pregame_time != 0){
             pregame_time--;
         }
-        if (min_players >= Bukkit.getOnlinePlayers().size()){
+        if (min_players > Bukkit.getOnlinePlayers().size()){
             this.cancel();
             new Restart().runTaskTimer(plugin, 0, 20);
             STATUS = Status.RESTARTING;
@@ -36,7 +36,15 @@ public class PreGame extends BukkitRunnable {
                     continue;
                 }
                 if (Bukkit.getOnlinePlayers().size() > max_in_team * 3) {
-                    if (bluePlayers.size() <= max_in_team && bluePlayers.size() <= greenPlayers.size() && bluePlayers.size() <= yellowPlayers.size() && bluePlayers.size() <= redPlayers.size()) {
+                    if (bluePlayers.isEmpty()){
+                        bluePlayers.add(p.getUniqueId());
+                    } else if (greenPlayers.isEmpty()){
+                        greenPlayers.add(p.getUniqueId());
+                    } else if (yellowPlayers.isEmpty()){
+                        yellowPlayers.add(p.getUniqueId());
+                    } else if (redPlayers.isEmpty()){
+                        redPlayers.add(p.getUniqueId());
+                    } else if (bluePlayers.size() <= max_in_team && bluePlayers.size() <= greenPlayers.size() && bluePlayers.size() <= yellowPlayers.size() && bluePlayers.size() <= redPlayers.size()) {
                         bluePlayers.add(p.getUniqueId());
                     } else if (greenPlayers.size() <= max_in_team && greenPlayers.size() < bluePlayers.size() && greenPlayers.size() < yellowPlayers.size() && greenPlayers.size() < redPlayers.size()) {
                         greenPlayers.add(p.getUniqueId());
@@ -48,7 +56,13 @@ public class PreGame extends BukkitRunnable {
                         p.kickPlayer("Teams are full");
                     }
                 } else if (Bukkit.getOnlinePlayers().size() > max_in_team * 2) {
-                    if (bluePlayers.size() <= max_in_team && bluePlayers.size() <= greenPlayers.size() && bluePlayers.size() <= yellowPlayers.size()) {
+                    if (bluePlayers.isEmpty()){
+                        bluePlayers.add(p.getUniqueId());
+                    } else if (greenPlayers.isEmpty()){
+                        greenPlayers.add(p.getUniqueId());
+                    } else if (yellowPlayers.isEmpty()){
+                        yellowPlayers.add(p.getUniqueId());
+                    } else if (bluePlayers.size() <= max_in_team && bluePlayers.size() <= greenPlayers.size() && bluePlayers.size() <= yellowPlayers.size()) {
                         bluePlayers.add(p.getUniqueId());
                     } else if (greenPlayers.size() <= max_in_team && greenPlayers.size() <= bluePlayers.size() && greenPlayers.size() <= yellowPlayers.size()) {
                         greenPlayers.add(p.getUniqueId());
@@ -57,8 +71,12 @@ public class PreGame extends BukkitRunnable {
                     } else {
                         p.kickPlayer("Teams are full");
                     }
-                } else if (Bukkit.getOnlinePlayers().size() >= max_in_team) {
-                    if (bluePlayers.size() <= max_in_team && bluePlayers.size() <= greenPlayers.size()) {
+                } else {
+                    if (bluePlayers.isEmpty()){
+                        bluePlayers.add(p.getUniqueId());
+                    } else if (greenPlayers.isEmpty()){
+                        greenPlayers.add(p.getUniqueId());
+                    } else if (bluePlayers.size() <= max_in_team && bluePlayers.size() <= greenPlayers.size()) {
                         bluePlayers.add(p.getUniqueId());
                     } else if (greenPlayers.size() <= max_in_team && greenPlayers.size() <= bluePlayers.size()) {
                         greenPlayers.add(p.getUniqueId());

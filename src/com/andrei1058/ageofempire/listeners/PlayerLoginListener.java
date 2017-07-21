@@ -17,10 +17,12 @@ public class PlayerLoginListener implements Listener{
     @EventHandler
     public void l(PlayerLoginEvent e){
         if (SETUP) return;
-        if (Bukkit.getOnlinePlayers().size() == min_players){
-            if (e.getPlayer().hasPermission("ageofempire.vipkick")){
+        if (Bukkit.getOnlinePlayers().size() == max_in_team*4){
+            if (e.getPlayer().hasPermission("aoe.vipkick")){
+                boolean allow = false;
                 for (Player p : Bukkit.getOnlinePlayers()){
                     if (!p.hasPermission("ageofempire.vipkick")){
+                        allow = true;
                         p.sendMessage(Messages.getMsg("vip-kick"));
                         ByteArrayDataOutput out = ByteStreams.newDataOutput();
                         out.writeUTF("Connect");
@@ -28,6 +30,9 @@ public class PlayerLoginListener implements Listener{
                         p.sendPluginMessage(plugin, "BungeeCord", out.toByteArray());
                         return;
                     }
+                }
+                if (!allow){
+                    e.disallow(PlayerLoginEvent.Result.KICK_OTHER, "You can't join right now!");
                 }
             } else {
                 e.disallow(PlayerLoginEvent.Result.KICK_OTHER, "You can't join right now!");

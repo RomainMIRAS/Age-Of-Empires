@@ -3,9 +3,10 @@ package com.andrei1058.ageofempire.runnables;
 import com.andrei1058.ageofempire.configuration.Settings;
 import com.andrei1058.ageofempire.game.Status;
 import org.bukkit.Bukkit;
+import org.bukkit.Chunk;
 import org.bukkit.Material;
 import org.bukkit.Sound;
-import org.bukkit.entity.Player;
+import org.bukkit.entity.*;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.scheduler.BukkitRunnable;
@@ -20,7 +21,7 @@ public class Lobby extends BukkitRunnable {
         if (lobby_time != 0){
             lobby_time--;
         }
-        if (min_players >= Bukkit.getOnlinePlayers().size()){
+        if (min_players > Bukkit.getOnlinePlayers().size()){
             this.cancel();
             STATUS = Status.LOBBY;
             lobby_time = Settings.load().getInt("countdowns.lobby");
@@ -64,16 +65,17 @@ public class Lobby extends BukkitRunnable {
                     p.getInventory().setItem(1, green);
                     p.getInventory().setItem(2, yellow);
                     p.getInventory().setItem(3, red);
-                } else if (Bukkit.getOnlinePlayers().size() > max_in_team*2){
+                } else if (Bukkit.getOnlinePlayers().size() >  max_in_team*2){
                     p.getInventory().setItem(0, blue);
                     p.getInventory().setItem(1, green);
                     p.getInventory().setItem(2, yellow);
-                } else if (Bukkit.getOnlinePlayers().size() > max_in_team){
+                } else {
                     p.getInventory().setItem(0, blue);
                     p.getInventory().setItem(1, green);
                 }
             }
             new PreGame().runTaskTimer(plugin, 0, 20);
+            nms.registerVillagers();
         }
     }
 }
