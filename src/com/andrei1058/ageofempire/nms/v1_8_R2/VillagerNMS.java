@@ -1,17 +1,15 @@
-package com.andrei1058.ageofempire.nms.v1_8_R3;
+package com.andrei1058.ageofempire.nms.v1_8_R2;
 
 import com.andrei1058.ageofempire.configuration.Settings;
-import net.minecraft.server.v1_8_R3.*;
+import net.minecraft.server.v1_8_R2.*;
 import org.bukkit.Location;
-import org.bukkit.craftbukkit.v1_8_R3.CraftWorld;
-import org.bukkit.craftbukkit.v1_8_R3.entity.CraftLivingEntity;
-import org.bukkit.craftbukkit.v1_8_R3.util.UnsafeList;
+import org.bukkit.craftbukkit.v1_8_R2.CraftWorld;
+import org.bukkit.craftbukkit.v1_8_R2.entity.CraftLivingEntity;
+import org.bukkit.craftbukkit.v1_8_R2.util.UnsafeList;
 import org.bukkit.entity.Villager;
 import org.bukkit.event.entity.CreatureSpawnEvent;
 
 import java.lang.reflect.Field;
-
-import static com.andrei1058.ageofempire.Main.forum_health;
 
 public class VillagerNMS extends EntityVillager {
 
@@ -64,6 +62,6 @@ public class VillagerNMS extends EntityVillager {
         customEnt.setCustomNameVisible(true);
         customEnt.setHealth(health);
         mcWorld.addEntity(customEnt, CreatureSpawnEvent.SpawnReason.CUSTOM);
-        return (org.bukkit.entity.Villager) customEnt.getBukkitEntity();
+        return (Villager) customEnt.getBukkitEntity();
     }
 }

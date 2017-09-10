@@ -41,9 +41,9 @@ public class VillagerNMS extends EntityVillager {
 
     }
 
-    @Override
+    /*@Override
     public void collide(Entity entity) {
-    }
+    }*/
 
     /*@Override
     public boolean damageEntity(DamageSource damagesource, float f) {

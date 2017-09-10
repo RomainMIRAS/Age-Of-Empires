@@ -33,6 +33,8 @@ public class VillagerNMS extends EntityVillager {
         this.goalSelector.a(10, new PathfinderGoalLookAtPlayer(this, EntityHuman.class, 8.0f));
     }
 
+    public void move(EnumMoveType enummovetype, double d0, double d1, double d2){}
+
     public static Villager spawnVillager(Location loc, Integer health){
         World mcWorld = ((CraftWorld) loc.getWorld()).getHandle();
         VillagerNMS customEnt = new VillagerNMS(mcWorld);

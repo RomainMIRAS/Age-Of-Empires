@@ -35,8 +35,6 @@ public class PlayerJoinListener implements Listener {
         switch (STATUS){
             case LOBBY:
                 lobbyItems(p);
-                Bukkit.broadcastMessage((Bukkit.getOnlinePlayers().size() > min_players-1)+"");
-                Bukkit.broadcastMessage((Bukkit.getOnlinePlayers().size() +""+ (min_players-1))+"");
                 if (Bukkit.getOnlinePlayers().size() == min_players){
                     STATUS = Status.STARTING;
                     new Lobby().runTaskTimer(plugin, 0, 20);

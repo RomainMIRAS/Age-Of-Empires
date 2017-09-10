@@ -158,6 +158,18 @@ public class Main extends JavaPlugin {
                 this.setEnabled(false);
                 return;
             }
+        }  else if(version.equalsIgnoreCase("v1_12_R1")){
+            try {
+                nms = com.andrei1058.ageofempire.nms.v1_12_R1.Main.class.newInstance();
+            } catch (InstantiationException e) {
+                this.getLogger().severe("An error occurred!");
+                this.setEnabled(false);
+                return;
+            } catch (IllegalAccessException e) {
+                this.getLogger().severe("An error occurred!");
+                this.setEnabled(false);
+                return;
+            }
         } else {
             this.getLogger().severe("Could not find support for your server.");
             this.setEnabled(false);
