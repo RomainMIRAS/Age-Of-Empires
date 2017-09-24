@@ -1,10 +1,9 @@
 package com.andrei1058.ageofempire.game;
 
-import org.bukkit.Bukkit;
+import org.bukkit.entity.Player;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.UUID;
 
 import static com.andrei1058.ageofempire.Main.*;
 import static com.andrei1058.ageofempire.Misc.constructor;
@@ -21,17 +20,17 @@ public class Vote {
 
     public static ArrayList<Vote> votes = new ArrayList<>();
     public static HashMap<String, Vote> votes_by_team = new HashMap<>();
-    public ArrayList<UUID> team;
+    public ArrayList<Player> team;
     public int time = 9;
     public String build;
     public String teamname;
-    public UUID requester;
+    public Player requester;
     public int player_votes;
     public int wood;
     public int stone;
     public String BUILD_NAME;
 
-    public Vote(ArrayList<UUID> team, String build, UUID requester, String teamname, int wood, int stone, String BUILD_NAME){
+    public Vote(ArrayList<Player> team, String build, Player requester, String teamname, int wood, int stone, String BUILD_NAME){
         this.team = team;
         this.build = build;
         this.requester = requester;
@@ -42,11 +41,11 @@ public class Vote {
         this.teamname = teamname;
         votes_by_team.put(teamname, this);
         vote_in_progress.add(teamname);
-        for (UUID u : team){
+        for (Player u : team){
             if (help.contains(u)){
-                Bukkit.getPlayer(u).sendMessage(getMsg("help.vote"));
+                u.sendMessage(getMsg("help.vote"));
             }
-            Bukkit.getPlayer(u).getInventory().setItem(8, voteitem());
+            u.getInventory().setItem(8, voteitem());
         }
     }
 
@@ -54,9 +53,9 @@ public class Vote {
         time--;
         if (time == 0 || time < 0){
             if (player_votes >(team.size()/2)){
-                for (UUID u : team){
-                    nms.actionMsg(Bukkit.getPlayer(u), getMsg("vote-accepted").replace("{player}", Bukkit.getPlayer(requester).getName()));
-                    Bukkit.getPlayer(u).getInventory().setItem(8, slotlocked());
+                for (Player u : team){
+                    nms.actionMsg(u, getMsg("vote-accepted").replace("{player}", requester.getName()));
+                    u.getInventory().setItem(8, slotlocked());
                 }
                 if (teamname == blue_team){
                     blue_wood-= wood;
@@ -94,14 +93,14 @@ public class Vote {
                         break;
                     default:
                         construct_in_inv.put(requester, BUILD_NAME);
-                        Bukkit.getPlayer(requester).getInventory().setItem(7, constructor());
+                        requester.getInventory().setItem(7, constructor());
                         new BuildSchematic(requester, teamname, build, BUILD_NAME, team);
                         break;
                 }
             } else {
-                for (UUID u : team){
-                    nms.actionMsg(Bukkit.getPlayer(u), getMsg("vote-denied").replace("{player}", Bukkit.getPlayer(requester).getName()));
-                    Bukkit.getPlayer(u).getInventory().setItem(8, slotlocked());
+                for (Player u : team){
+                    nms.actionMsg(u, getMsg("vote-denied").replace("{player}", requester.getName()));
+                    u.getInventory().setItem(8, slotlocked());
                 }
             }
             votes_by_team.remove(teamname, this);
@@ -109,13 +108,13 @@ public class Vote {
             vote_in_progress.remove(teamname);
             return;
         }
-        for (UUID u : team){
+        for (Player u : team){
             switch (build){
                 case age_string:
-                    nms.actionMsg(Bukkit.getPlayer(u), getMsg("vote-age").replace("{player}", Bukkit.getPlayer(requester).getName()).replace("{votes}", String.valueOf(player_votes)).replace("{team}", String.valueOf(team.size())));
+                    nms.actionMsg(u, getMsg("vote-age").replace("{player}", requester.getName()).replace("{votes}", String.valueOf(player_votes)).replace("{team}", String.valueOf(team.size())));
                     break;
                 default:
-                    nms.actionMsg(Bukkit.getPlayer(u), getMsg("new-vote").replace("{player}", Bukkit.getPlayer(requester).getName()).replace("{building}", build).replace("{votes}", String.valueOf(player_votes)).replace("{team}", String.valueOf(team.size())));
+                    nms.actionMsg(u, getMsg("new-vote").replace("{player}", requester.getName()).replace("{building}", build).replace("{votes}", String.valueOf(player_votes)).replace("{team}", String.valueOf(team.size())));
                     break;
             }
         }

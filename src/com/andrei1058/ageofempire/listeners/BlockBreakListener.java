@@ -1,11 +1,13 @@
 package com.andrei1058.ageofempire.listeners;
 
+import com.andrei1058.ageofempire.Main;
 import com.andrei1058.ageofempire.game.OreHologram;
 import com.andrei1058.ageofempire.game.Status;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.Sound;
+import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.BlockBreakEvent;
@@ -20,9 +22,9 @@ import static com.andrei1058.ageofempire.configuration.Messages.getMsg;
 
 public class BlockBreakListener implements Listener {
 
-    private static ArrayList<UUID> woodAnnounced = new ArrayList();
-    private static ArrayList<UUID> goldAnnounced = new ArrayList<>();
-    private static ArrayList<UUID> stoneAnnounced = new ArrayList<>();
+    private static ArrayList<Player> woodAnnounced = new ArrayList();
+    private static ArrayList<Player> goldAnnounced = new ArrayList<>();
+    private static ArrayList<Player> stoneAnnounced = new ArrayList<>();
 
     @EventHandler
     public void b(BlockBreakEvent e){
@@ -38,32 +40,32 @@ public class BlockBreakListener implements Listener {
                     if (e.getBlock().getData() == 13 || e.getBlock().getData() == 1){
                         e.setCancelled(true);
                         e.getBlock().setType(Material.AIR);
-                        if (help.contains(e.getPlayer().getUniqueId())){
-                            if (!(woodAnnounced.contains(e.getPlayer().getUniqueId()))){
+                        if (help.contains(e.getPlayer())){
+                            if (!(woodAnnounced.contains(e.getPlayer()))){
                                 e.getPlayer().sendMessage(getMsg("help.cutting-wood"));
-                                woodAnnounced.add(e.getPlayer().getUniqueId());
+                                woodAnnounced.add(e.getPlayer());
                             }
-                            if (!goldAnnounced.contains(e.getPlayer().getUniqueId())){
+                            if (!goldAnnounced.contains(e.getPlayer())){
                                 e.getPlayer().sendMessage(getMsg("help.gold-stuff"));
-                                goldAnnounced.add(e.getPlayer().getUniqueId());
+                                goldAnnounced.add(e.getPlayer());
                             }
                         }
                         int gold;
                         Random r = new Random();
                         gold = r.nextInt(2);
                         new OreHologram(e.getBlock().getLocation(), gold, false);
-                        if (bluePlayers.contains(e.getPlayer().getUniqueId())){
+                        if (bluePlayers.contains(e.getPlayer())){
                             blue_wood += 3;
-                            plugin.gold.replace(e.getPlayer().getUniqueId(), plugin.gold.get(e.getPlayer().getUniqueId())+gold);
-                        } else if (greenPlayers.contains(e.getPlayer().getUniqueId())){
+                            Main.gold.replace(e.getPlayer(), Main.gold.get(e.getPlayer())+gold);
+                        } else if (greenPlayers.contains(e.getPlayer())){
                             green_wood += 3;
-                            plugin.gold.replace(e.getPlayer().getUniqueId(), plugin.gold.get(e.getPlayer().getUniqueId())+gold);
-                        } else if (yellowPlayers.contains(e.getPlayer().getUniqueId())){
+                            Main.gold.replace(e.getPlayer(), Main.gold.get(e.getPlayer())+gold);
+                        } else if (yellowPlayers.contains(e.getPlayer())){
                             yellow_wood += 3;
-                            plugin.gold.replace(e.getPlayer().getUniqueId(), plugin.gold.get(e.getPlayer().getUniqueId())+gold);
-                        } else if (redPlayers.contains(e.getPlayer().getUniqueId())){
+                            Main.gold.replace(e.getPlayer(), Main.gold.get(e.getPlayer())+gold);
+                        } else if (redPlayers.contains(e.getPlayer())){
                             red_wood += 3;
-                            plugin.gold.replace(e.getPlayer().getUniqueId(), plugin.gold.get(e.getPlayer().getUniqueId())+gold);
+                            Main.gold.replace(e.getPlayer(), Main.gold.get(e.getPlayer())+gold);
                         }
                         e.getPlayer().getWorld().playSound(e.getPlayer().getLocation(), nms.levelUp(), 1,1);
                     } else {
@@ -73,14 +75,14 @@ public class BlockBreakListener implements Listener {
                     break;
                 case STONE:
                     if (e.getBlock().getData() == 5){
-                        if (help.contains(e.getPlayer().getUniqueId())){
-                            if (!stoneAnnounced.contains(e.getPlayer().getUniqueId())){
+                        if (help.contains(e.getPlayer())){
+                            if (!stoneAnnounced.contains(e.getPlayer())){
                                 e.getPlayer().sendMessage(getMsg("help.stone"));
-                                stoneAnnounced.add(e.getPlayer().getUniqueId());
+                                stoneAnnounced.add(e.getPlayer());
                             }
-                            if (!goldAnnounced.contains(e.getPlayer().getUniqueId())){
+                            if (!goldAnnounced.contains(e.getPlayer())){
                                 e.getPlayer().sendMessage(getMsg("help.gold-stuff"));
-                                goldAnnounced.add(e.getPlayer().getUniqueId());
+                                goldAnnounced.add(e.getPlayer());
                             }
                         }
                         e.getBlock().breakNaturally(new ItemStack(Material.STICK));
@@ -88,18 +90,18 @@ public class BlockBreakListener implements Listener {
                         Random r = new Random();
                         gold = r.nextInt(2);
                         new OreHologram(e.getBlock().getLocation(), gold, true);
-                        if (bluePlayers.contains(e.getPlayer().getUniqueId())){
+                        if (bluePlayers.contains(e.getPlayer())){
                             blue_stone += 3;
-                            plugin.gold.replace(e.getPlayer().getUniqueId(), plugin.gold.get(e.getPlayer().getUniqueId())+gold);
-                        } else if (greenPlayers.contains(e.getPlayer().getUniqueId())){
+                            Main.gold.replace(e.getPlayer(), Main.gold.get(e.getPlayer())+gold);
+                        } else if (greenPlayers.contains(e.getPlayer())){
                             green_stone += 3;
-                            plugin.gold.replace(e.getPlayer().getUniqueId(), plugin.gold.get(e.getPlayer().getUniqueId())+gold);
-                        } else if (yellowPlayers.contains(e.getPlayer().getUniqueId())){
+                            Main.gold.replace(e.getPlayer(), Main.gold.get(e.getPlayer())+gold);
+                        } else if (yellowPlayers.contains(e.getPlayer())){
                             yellow_stone += 3;
-                            plugin.gold.replace(e.getPlayer().getUniqueId(), plugin.gold.get(e.getPlayer().getUniqueId())+gold);
-                        } else if (redPlayers.contains(e.getPlayer().getUniqueId())){
+                            Main.gold.replace(e.getPlayer(), Main.gold.get(e.getPlayer())+gold);
+                        } else if (redPlayers.contains(e.getPlayer())){
                             red_stone += 3;
-                            plugin.gold.replace(e.getPlayer().getUniqueId(), plugin.gold.get(e.getPlayer().getUniqueId())+gold);
+                            Main.gold.replace(e.getPlayer(), Main.gold.get(e.getPlayer())+gold);
                         }
                         e.getPlayer().getWorld().playSound(e.getPlayer().getLocation(), nms.levelUp(), 1,1);
                     } else {
@@ -113,21 +115,21 @@ public class BlockBreakListener implements Listener {
                         e.getPlayer().giveExp(1);
                         Random r = new Random();
                         gold = r.nextInt(2);
-                        if (bluePlayers.contains(e.getPlayer().getUniqueId())){
+                        if (bluePlayers.contains(e.getPlayer())){
                             blue_stone += 3;
-                            plugin.gold.replace(e.getPlayer().getUniqueId(), plugin.gold.get(e.getPlayer().getUniqueId())+gold);
+                            Main.gold.replace(e.getPlayer(), Main.gold.get(e.getPlayer())+gold);
                             blue_wood += 3;
-                        } else if (greenPlayers.contains(e.getPlayer().getUniqueId())){
+                        } else if (greenPlayers.contains(e.getPlayer())){
                             green_stone += 3;
-                            plugin.gold.replace(e.getPlayer().getUniqueId(), plugin.gold.get(e.getPlayer().getUniqueId())+gold);
+                            Main.gold.replace(e.getPlayer(), Main.gold.get(e.getPlayer())+gold);
                             green_wood += 3;
-                        } else if (yellowPlayers.contains(e.getPlayer().getUniqueId())){
+                        } else if (yellowPlayers.contains(e.getPlayer())){
                             yellow_stone += 3;
-                            plugin.gold.replace(e.getPlayer().getUniqueId(), plugin.gold.get(e.getPlayer().getUniqueId())+gold);
+                            Main.gold.replace(e.getPlayer(), Main.gold.get(e.getPlayer())+gold);
                             yellow_wood += 3;
-                        } else if (redPlayers.contains(e.getPlayer().getUniqueId())){
+                        } else if (redPlayers.contains(e.getPlayer())){
                             red_stone += 3;
-                            plugin.gold.replace(e.getPlayer().getUniqueId(), plugin.gold.get(e.getPlayer().getUniqueId())+gold);
+                            Main.gold.replace(e.getPlayer(), Main.gold.get(e.getPlayer())+gold);
                             red_wood += 3;
                         }
                         new OreHologram(e.getBlock().getLocation(), gold, true);
@@ -174,43 +176,43 @@ public class BlockBreakListener implements Listener {
                 || e.getBlock().getType() == Material.LOG && e.getBlock().getData() == 1){
             e.setCancelled(true);
             e.getBlock().setType(Material.AIR);
-            if (help.contains(e.getPlayer().getUniqueId())){
-                if (!(woodAnnounced.contains(e.getPlayer().getUniqueId()))){
+            if (help.contains(e.getPlayer())){
+                if (!(woodAnnounced.contains(e.getPlayer()))){
                     e.getPlayer().sendMessage(getMsg("help.cutting-wood"));
-                    woodAnnounced.add(e.getPlayer().getUniqueId());
+                    woodAnnounced.add(e.getPlayer());
                 }
-                if (!goldAnnounced.contains(e.getPlayer().getUniqueId())){
+                if (!goldAnnounced.contains(e.getPlayer())){
                     e.getPlayer().sendMessage(getMsg("help.gold-stuff"));
-                    goldAnnounced.add(e.getPlayer().getUniqueId());
+                    goldAnnounced.add(e.getPlayer());
                 }
             }
             int gold = 0;
             Random r = new Random();
             gold = r.nextInt(2);
             new OreHologram(e.getBlock().getLocation(), gold, false);
-            if (bluePlayers.contains(e.getPlayer().getUniqueId())){
+            if (bluePlayers.contains(e.getPlayer())){
                 blue_wood += 5;
                 blue_gold += gold;
-            } else if (greenPlayers.contains(e.getPlayer().getUniqueId())){
+            } else if (greenPlayers.contains(e.getPlayer())){
                 green_wood += 5;
                 green_gold += gold;
-            } else if (yellowPlayers.contains(e.getPlayer().getUniqueId())){
+            } else if (yellowPlayers.contains(e.getPlayer())){
                 yellow_wood += 5;
                 yellow_gold += gold;
-            } else if (redPlayers.contains(e.getPlayer().getUniqueId())){
+            } else if (redPlayers.contains(e.getPlayer())){
                 red_wood += 5;
                 red_gold += gold;
             }
             e.getPlayer().getWorld().playSound(e.getPlayer().getLocation(), Sound.LEVEL_UP, 1,1);
         } else if (e.getBlock().getType() == Material.STONE && e.getBlock().getData() == 5){
-            if (help.contains(e.getPlayer().getUniqueId())){
-                if (!stoneAnnounced.contains(e.getPlayer().getUniqueId())){
+            if (help.contains(e.getPlayer())){
+                if (!stoneAnnounced.contains(e.getPlayer())){
                     e.getPlayer().sendMessage(getMsg("help.stone"));
-                    stoneAnnounced.add(e.getPlayer().getUniqueId());
+                    stoneAnnounced.add(e.getPlayer());
                 }
-                if (!goldAnnounced.contains(e.getPlayer().getUniqueId())){
+                if (!goldAnnounced.contains(e.getPlayer())){
                     e.getPlayer().sendMessage(getMsg("help.gold-stuff"));
-                    goldAnnounced.add(e.getPlayer().getUniqueId());
+                    goldAnnounced.add(e.getPlayer());
                 }
             }
             e.getBlock().breakNaturally(new ItemStack(Material.STICK));
@@ -218,16 +220,16 @@ public class BlockBreakListener implements Listener {
             Random r = new Random();
             gold = r.nextInt(2);
             new OreHologram(e.getBlock().getLocation(), gold, true);
-            if (bluePlayers.contains(e.getPlayer().getUniqueId())){
+            if (bluePlayers.contains(e.getPlayer())){
                 blue_stone += 3;
                 blue_gold += gold;
-            } else if (greenPlayers.contains(e.getPlayer().getUniqueId())){
+            } else if (greenPlayers.contains(e.getPlayer())){
                 green_stone += 3;
                 green_gold += gold;
-            } else if (yellowPlayers.contains(e.getPlayer().getUniqueId())){
+            } else if (yellowPlayers.contains(e.getPlayer())){
                 yellow_stone += 3;
                 yellow_gold += gold;
-            } else if (redPlayers.contains(e.getPlayer().getUniqueId())){
+            } else if (redPlayers.contains(e.getPlayer())){
                 red_stone += 3;
                 red_gold += gold;
             }
@@ -237,19 +239,19 @@ public class BlockBreakListener implements Listener {
                 int gold = 0;
                 Random r = new Random();
                 gold = r.nextInt(2);
-                if (bluePlayers.contains(e.getPlayer().getUniqueId())){
+                if (bluePlayers.contains(e.getPlayer())){
                     blue_stone += 3;
                     blue_gold += gold;
                     blue_wood += 3;
-                } else if (greenPlayers.contains(e.getPlayer().getUniqueId())){
+                } else if (greenPlayers.contains(e.getPlayer())){
                     green_stone += 3;
                     green_gold += gold;
                     green_wood += 3;
-                } else if (yellowPlayers.contains(e.getPlayer().getUniqueId())){
+                } else if (yellowPlayers.contains(e.getPlayer())){
                     yellow_stone += 3;
                     yellow_gold += gold;
                     yellow_wood += 3;
-                } else if (redPlayers.contains(e.getPlayer().getUniqueId())){
+                } else if (redPlayers.contains(e.getPlayer())){
                     red_stone += 3;
                     red_gold += gold;
                     red_wood += 3;

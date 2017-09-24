@@ -4,6 +4,7 @@ import com.andrei1058.ageofempire.locations.Schematic;
 import com.andrei1058.ageofempire.nms.v1_8_R3.VillagerNMS;
 import org.bukkit.*;
 import org.bukkit.block.Block;
+import org.bukkit.entity.Player;
 import org.bukkit.entity.Villager;
 import org.bukkit.scheduler.BukkitRunnable;
 import org.jnbt.*;
@@ -19,16 +20,16 @@ import static com.andrei1058.ageofempire.game.Buildings.*;
 
 public class BuildSchematic {
 
-    public UUID player;
+    public Player player;
     public String team;
     public String chat_build_name;
     public String build_cfg_name;
     public World world = Bukkit.getWorld(choosenMap);
-    private static HashMap<UUID, BuildSchematic> buildSchematicHashMap = new HashMap<>();
-    public ArrayList<UUID> teaamarray;
+    private static HashMap<Player, BuildSchematic> buildSchematicHashMap = new HashMap<>();
+    public ArrayList<Player> teaamarray;
     public Location villager;
 
-    public BuildSchematic(UUID Player, String team, String chat_build_name, String build_cfg_name, ArrayList<UUID> teamarray) {
+    public BuildSchematic(Player Player, String team, String chat_build_name, String build_cfg_name, ArrayList<Player> teamarray) {
         this.player = Player;
         this.team = team;
         this.chat_build_name = chat_build_name;
@@ -40,8 +41,8 @@ public class BuildSchematic {
     public void ok(Location center) {
         if (!construct_in_inv.containsKey(player)) return;
         addBuild(build_cfg_name, team);
-        for (UUID u : teaamarray) {
-            Bukkit.getPlayer(u).sendMessage(getMsg("build-started").replace("{player}", Bukkit.getPlayer(player).getName()).replace("{building}", chat_build_name));
+        for (Player u : teaamarray) {
+            u.sendMessage(getMsg("build-started").replace("{player}", player.getName()).replace("{building}", chat_build_name));
         }
         try {
             pasteSchematic(center, loadSchematic(new File("plugins/Age-Of-Empire/schematics/" + construct_in_inv.get(player) + ".schematic")));
@@ -56,7 +57,7 @@ public class BuildSchematic {
         construct_in_inv.remove(player);
     }
 
-    public static BuildSchematic getUUID(UUID player) {
+    public static BuildSchematic getPlayer(Player player) {
         return buildSchematicHashMap.get(player);
     }
 
@@ -112,8 +113,8 @@ public class BuildSchematic {
                             index += 1;
                         } else {
                             this.cancel();
-                            for (UUID u : teaamarray) {
-                                Bukkit.getPlayer(u).sendMessage(getMsg("built-success").replace("{building}", chat_build_name));
+                            for (Player u : teaamarray) {
+                                u.sendMessage(getMsg("built-success").replace("{building}", chat_build_name));
                             }
                             Villager v = nms.spawnVillager(villager, other_health);
                             switch (build_cfg_name) {

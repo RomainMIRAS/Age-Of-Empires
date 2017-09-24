@@ -18,8 +18,8 @@ public class BlockPlaceListener implements Listener {
         if (STATUS == Status.PLAYING)
             switch (e.getBlock().getType()){
                 case SPRUCE_DOOR:
-                    if (construct_in_inv.containsKey(e.getPlayer().getUniqueId())){
-                        Region.check(e.getBlock().getLocation(), e.getPlayer().getUniqueId());
+                    if (construct_in_inv.containsKey(e.getPlayer())){
+                        Region.check(e.getBlock().getLocation(), e.getPlayer());
                     }
                     e.setCancelled(true);
                     break;

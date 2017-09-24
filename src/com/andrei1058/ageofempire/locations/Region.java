@@ -2,10 +2,10 @@ package com.andrei1058.ageofempire.locations;
 
 import com.andrei1058.ageofempire.configuration.Settings;
 import com.andrei1058.ageofempire.game.BuildSchematic;
-import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.entity.ArmorStand;
 import org.bukkit.entity.EntityType;
+import org.bukkit.entity.Player;
 
 import java.util.*;
 
@@ -65,17 +65,17 @@ public class Region {
         return loc.getX() <= high.getX() && loc.getX() >= low.getX() && loc.getY() <= high.getY() && loc.getY() >= low.getY() && loc.getZ() <= high.getZ() && loc.getZ() >= low.getZ();
     }
 
-    public void allowed(UUID player) {
+    public void allowed(Player player) {
         switch (name) {
             case blue_team:
                 if (bluePlayers.contains(player)) {
                     if (!hasBuild(construct_in_inv.get(player), blue_team)) {
                         rightPlot(player);
                     } else {
-                        Bukkit.getPlayer(player).getInventory().setItem(7, slotlocked());
+                        player.getInventory().setItem(7, slotlocked());
                     }
                 } else {
-                    Bukkit.getPlayer(player).sendMessage(getMsg("cant-construct-outside"));
+                    player.sendMessage(getMsg("cant-construct-outside"));
                 }
                 break;
             case green_team:
@@ -83,10 +83,10 @@ public class Region {
                     if (!hasBuild(construct_in_inv.get(player), green_team)) {
                         rightPlot(player);
                     } else {
-                        Bukkit.getPlayer(player).getInventory().setItem(7, slotlocked());
+                        player.getInventory().setItem(7, slotlocked());
                     }
                 } else {
-                    Bukkit.getPlayer(player).sendMessage(getMsg("cant-construct-outside"));
+                    player.sendMessage(getMsg("cant-construct-outside"));
                 }
                 break;
             case yellow_team:
@@ -94,10 +94,10 @@ public class Region {
                     if (!hasBuild(construct_in_inv.get(player), yellow_team)) {
                         rightPlot(player);
                     } else {
-                        Bukkit.getPlayer(player).getInventory().setItem(7, slotlocked());
+                        player.getInventory().setItem(7, slotlocked());
                     }
                 } else {
-                    Bukkit.getPlayer(player).sendMessage(getMsg("cant-construct-outside"));
+                    player.sendMessage(getMsg("cant-construct-outside"));
                 }
                 break;
             case red_team:
@@ -105,32 +105,29 @@ public class Region {
                     if (!hasBuild(construct_in_inv.get(player), red_team)) {
                         rightPlot(player);
                     } else {
-                        Bukkit.getPlayer(player).getInventory().setItem(7, slotlocked());
+                        player.getInventory().setItem(7, slotlocked());
                     }
                 } else {
-                    Bukkit.getPlayer(player).sendMessage(getMsg("cant-construct-outside"));
+                    player.sendMessage(getMsg("cant-construct-outside"));
                 }
                 break;
         }
     }
 
-    public static void check(Location loc, UUID player) {
+    public static void check(Location loc, Player player) {
         if (getRegion(loc) != null) {
             if (!getRegion(loc).used) {
                 getRegion(loc).allowed(player);
             } else {
-                Bukkit.getPlayer(player).sendMessage(getMsg("cant-construct-here"));
+                player.sendMessage(getMsg("cant-construct-here"));
             }
         } else {
-            Bukkit.getPlayer(player).sendMessage(getMsg("cant-construct-here"));
+            player.sendMessage(getMsg("cant-construct-here"));
         }
     }
 
     public static boolean place(Location loc){
-        if (getRegion(loc) == null){
-            return true;
-        }
-        return false;
+        return getRegion(loc) == null;
     }
 
     private static Region getRegion(Location loc){
@@ -152,7 +149,7 @@ public class Region {
         return large;
     }
 
-    private void rightPlot(UUID player){
+    private void rightPlot(Player player){
         switch (construct_in_inv.get(player)){
             case forge:
             case mill:
@@ -166,51 +163,51 @@ public class Region {
                 if (isSmall()){
                     if (bluePlayers.contains(player)){
                         if (blue_small_plots > 0){
-                            Bukkit.getPlayer(player).getInventory().setItem(7, slotlocked());
-                            BuildSchematic.getUUID(player).ok(loc1);
+                            player.getInventory().setItem(7, slotlocked());
+                            BuildSchematic.getPlayer(player).ok(loc1);
                             removeHologram();
                             blue_small_plots--;
                             this.used = true;
                         } else {
-                            Bukkit.getPlayer(player).getInventory().setItem(7, slotlocked());
-                            BuildSchematic.getUUID(player).end();
+                            player.getInventory().setItem(7, slotlocked());
+                            BuildSchematic.getPlayer(player).end();
                         }
                     } else if (greenPlayers.contains(player)){
                         if (green_small_plots > 0){
-                            Bukkit.getPlayer(player).getInventory().setItem(7, slotlocked());
-                            BuildSchematic.getUUID(player).ok(loc1);
+                            player.getInventory().setItem(7, slotlocked());
+                            BuildSchematic.getPlayer(player).ok(loc1);
                             removeHologram();
                             green_small_plots--;
                             this.used = true;
                         } else {
-                            Bukkit.getPlayer(player).getInventory().setItem(7, slotlocked());
-                            BuildSchematic.getUUID(player).end();
+                            player.getInventory().setItem(7, slotlocked());
+                            BuildSchematic.getPlayer(player).end();
                         }
                     } else if (yellowPlayers.contains(player)){
                         if (yellow_small_plots > 0){
-                            Bukkit.getPlayer(player).getInventory().setItem(7, slotlocked());
-                            BuildSchematic.getUUID(player).ok(loc1);
+                            player.getInventory().setItem(7, slotlocked());
+                            BuildSchematic.getPlayer(player).ok(loc1);
                             removeHologram();
                             yellow_small_plots--;
                             this.used = true;
                         } else {
-                            Bukkit.getPlayer(player).getInventory().setItem(7, slotlocked());
-                            BuildSchematic.getUUID(player).end();
+                            player.getInventory().setItem(7, slotlocked());
+                            BuildSchematic.getPlayer(player).end();
                         }
                     } else if (redPlayers.contains(player)){
                         if (red_small_plots > 0){
-                            Bukkit.getPlayer(player).getInventory().setItem(7, slotlocked());
-                            BuildSchematic.getUUID(player).ok(loc1);
+                            player.getInventory().setItem(7, slotlocked());
+                            BuildSchematic.getPlayer(player).ok(loc1);
                             removeHologram();
                             red_small_plots--;
                             this.used = true;
                         } else {
-                            Bukkit.getPlayer(player).getInventory().setItem(7, slotlocked());
-                            BuildSchematic.getUUID(player).end();
+                            player.getInventory().setItem(7, slotlocked());
+                            BuildSchematic.getPlayer(player).end();
                         }
                     }
                 } else {
-                    Bukkit.getPlayer(player).sendMessage(getMsg("cant-construct-size"));
+                    player.sendMessage(getMsg("cant-construct-size"));
                 }
                 break;
             case archery:
@@ -221,51 +218,51 @@ public class Region {
                 if (isMedium()){
                     if (bluePlayers.contains(player)){
                         if (blue_medium_plots > 0){
-                            Bukkit.getPlayer(player).getInventory().setItem(7, slotlocked());
-                            BuildSchematic.getUUID(player).ok(loc1);
+                            player.getInventory().setItem(7, slotlocked());
+                            BuildSchematic.getPlayer(player).ok(loc1);
                             removeHologram();
                             blue_medium_plots--;
                             this.used = true;
                         } else {
-                            Bukkit.getPlayer(player).getInventory().setItem(7, slotlocked());
-                            BuildSchematic.getUUID(player).end();
+                            player.getInventory().setItem(7, slotlocked());
+                            BuildSchematic.getPlayer(player).end();
                         }
                     } else if (greenPlayers.contains(player)){
                         if (green_medium_plots > 0){
-                            Bukkit.getPlayer(player).getInventory().setItem(7, slotlocked());
-                            BuildSchematic.getUUID(player).ok(loc1);
+                            player.getInventory().setItem(7, slotlocked());
+                            BuildSchematic.getPlayer(player).ok(loc1);
                             removeHologram();
                             green_medium_plots--;
                             this.used = true;
                         } else {
-                            Bukkit.getPlayer(player).getInventory().setItem(7, slotlocked());
-                            BuildSchematic.getUUID(player).end();
+                            player.getInventory().setItem(7, slotlocked());
+                            BuildSchematic.getPlayer(player).end();
                         }
                     } else if (yellowPlayers.contains(player)){
                         if (yellow_medium_plots > 0){
-                            Bukkit.getPlayer(player).getInventory().setItem(7, slotlocked());
-                            BuildSchematic.getUUID(player).ok(loc1);
+                            player.getInventory().setItem(7, slotlocked());
+                            BuildSchematic.getPlayer(player).ok(loc1);
                             removeHologram();
                             yellow_medium_plots--;
                             this.used = true;
                         } else {
-                            Bukkit.getPlayer(player).getInventory().setItem(7, slotlocked());
-                            BuildSchematic.getUUID(player).end();
+                            player.getInventory().setItem(7, slotlocked());
+                            BuildSchematic.getPlayer(player).end();
                         }
                     } else if (redPlayers.contains(player)){
                         if (red_medium_plots > 0){
-                            Bukkit.getPlayer(player).getInventory().setItem(7, slotlocked());
-                            BuildSchematic.getUUID(player).ok(loc1);
+                            player.getInventory().setItem(7, slotlocked());
+                            BuildSchematic.getPlayer(player).ok(loc1);
                             removeHologram();
                             red_medium_plots--;
                             this.used = true;
                         } else {
-                            Bukkit.getPlayer(player).getInventory().setItem(7, slotlocked());
-                            BuildSchematic.getUUID(player).end();
+                            player.getInventory().setItem(7, slotlocked());
+                            BuildSchematic.getPlayer(player).end();
                         }
                     }
                 } else {
-                    Bukkit.getPlayer(player).sendMessage(getMsg("cant-construct-size"));
+                    player.sendMessage(getMsg("cant-construct-size"));
                 }
                 break;
             case guild:
@@ -273,51 +270,51 @@ public class Region {
                 if (isLarge()){
                     if (bluePlayers.contains(player)){
                         if (blue_large_plots > 0){
-                            Bukkit.getPlayer(player).getInventory().setItem(7, slotlocked());
-                            BuildSchematic.getUUID(player).ok(loc1);
+                            player.getInventory().setItem(7, slotlocked());
+                            BuildSchematic.getPlayer(player).ok(loc1);
                             removeHologram();
                             blue_large_plots--;
                             this.used = true;
                         } else {
-                            Bukkit.getPlayer(player).getInventory().setItem(7, slotlocked());
-                            BuildSchematic.getUUID(player).end();
+                            player.getInventory().setItem(7, slotlocked());
+                            BuildSchematic.getPlayer(player).end();
                         }
                     } else if (greenPlayers.contains(player)){
                         if (green_large_plots > 0){
-                            Bukkit.getPlayer(player).getInventory().setItem(7, slotlocked());
-                            BuildSchematic.getUUID(player).ok(loc1);
+                            player.getInventory().setItem(7, slotlocked());
+                            BuildSchematic.getPlayer(player).ok(loc1);
                             removeHologram();
                             green_large_plots--;
                             this.used = true;
                         } else {
-                            Bukkit.getPlayer(player).getInventory().setItem(7, slotlocked());
-                            BuildSchematic.getUUID(player).end();
+                            player.getInventory().setItem(7, slotlocked());
+                            BuildSchematic.getPlayer(player).end();
                         }
                     } else if (yellowPlayers.contains(player)){
                         if (yellow_large_plots > 0){
-                            Bukkit.getPlayer(player).getInventory().setItem(7, slotlocked());
-                            BuildSchematic.getUUID(player).ok(loc1);
+                            player.getInventory().setItem(7, slotlocked());
+                            BuildSchematic.getPlayer(player).ok(loc1);
                             removeHologram();
                             yellow_large_plots--;
                             this.used = true;
                         } else {
-                            Bukkit.getPlayer(player).getInventory().setItem(7, slotlocked());
-                            BuildSchematic.getUUID(player).end();
+                            player.getInventory().setItem(7, slotlocked());
+                            BuildSchematic.getPlayer(player).end();
                         }
                     } else if (redPlayers.contains(player)){
                         if (red_large_plots > 0){
-                            Bukkit.getPlayer(player).getInventory().setItem(7, slotlocked());
-                            BuildSchematic.getUUID(player).ok(loc1);
+                            player.getInventory().setItem(7, slotlocked());
+                            BuildSchematic.getPlayer(player).ok(loc1);
                             removeHologram();
                             red_large_plots--;
                             this.used = true;
                         } else {
-                            Bukkit.getPlayer(player).getInventory().setItem(7, slotlocked());
-                            BuildSchematic.getUUID(player).end();
+                            player.getInventory().setItem(7, slotlocked());
+                            BuildSchematic.getPlayer(player).end();
                         }
                     }
                 } else {
-                    Bukkit.getPlayer(player).sendMessage(getMsg("cant-construct-size"));
+                    player.sendMessage(getMsg("cant-construct-size"));
                 }
                 break;
         }

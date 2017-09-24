@@ -11,7 +11,6 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerQuitEvent;
 
 import java.util.ArrayList;
-import java.util.UUID;
 
 import static com.andrei1058.ageofempire.Main.*;
 import static com.andrei1058.ageofempire.configuration.Messages.getMsg;
@@ -41,7 +40,7 @@ public class PlayerQuitListener implements Listener {
                 }
                 new MySQL().addStats(e.getPlayer().getUniqueId(), 0, 1, k, d, kd);
             } else {
-                if (!winner.contains(e.getPlayer().getUniqueId())){
+                if (!winner.contains(e.getPlayer())){
                     int k = 0;
                     int d = 0;
                     int kd = 0;
@@ -61,13 +60,13 @@ public class PlayerQuitListener implements Listener {
         Player p = e.getPlayer();
         if (SETUP) return;
         e.setQuitMessage(null);
-        players.remove(p.getUniqueId());
-        bluePlayers.remove(p.getUniqueId());
-        greenPlayers.remove(p.getUniqueId());
-        yellowPlayers.remove(p.getUniqueId());
-        redPlayers.remove(p.getUniqueId());
-        construct_in_inv.remove(p.getUniqueId());
-        help.remove(p.getUniqueId());
+        players.remove(p);
+        bluePlayers.remove(p);
+        greenPlayers.remove(p);
+        yellowPlayers.remove(p);
+        redPlayers.remove(p);
+        construct_in_inv.remove(p);
+        help.remove(p);
         checkWinner();
     }
     public static ArrayList winner = null;
@@ -79,21 +78,20 @@ public class PlayerQuitListener implements Listener {
                 for (Player p : Bukkit.getOnlinePlayers()) {
                     Titles.sendFullTitle(p, 0, 100, 0, getMsg("victory.blue"), "");
                 }
-                for (UUID p : bluePlayers){
-                    Player p2 = Bukkit.getPlayer(p);
+                for (Player p : bluePlayers){
                     int k = 0;
                     int d = 0;
                     int kd = 0;
-                    if (kills.containsKey(p2)){
-                        k = kills.get(p2);
+                    if (kills.containsKey(p)){
+                        k = kills.get(p);
                     }
-                    if (deaths.containsKey(p2)){
-                        d = deaths.get(p2);
+                    if (deaths.containsKey(p)){
+                        d = deaths.get(p);
                     }
-                    if (kingskilled.containsKey(p2)){
-                        kd = kingskilled.get(p2);
+                    if (kingskilled.containsKey(p)){
+                        kd = kingskilled.get(p);
                     }
-                    new MySQL().addStats(p, 1, 1, k, d, kd);
+                    new MySQL().addStats(p.getUniqueId(), 1, 1, k, d, kd);
                 }
                 winner = bluePlayers;
                 Bukkit.broadcastMessage(PREFIX+" "+getMsg("victory.blue"));
@@ -102,21 +100,20 @@ public class PlayerQuitListener implements Listener {
                 for (Player p : Bukkit.getOnlinePlayers()) {
                     Titles.sendFullTitle(p, 0, 100, 0, getMsg("victory.green"), "");
                 }
-                for (UUID p : greenPlayers){
-                    Player p2 = Bukkit.getPlayer(p);
+                for (Player p : greenPlayers){
                     int k = 0;
                     int d = 0;
                     int kd = 0;
-                    if (kills.containsKey(p2)){
-                        k = kills.get(p2);
+                    if (kills.containsKey(p)){
+                        k = kills.get(p);
                     }
-                    if (deaths.containsKey(p2)){
-                        d = deaths.get(p2);
+                    if (deaths.containsKey(p)){
+                        d = deaths.get(p);
                     }
-                    if (kingskilled.containsKey(p2)){
-                        kd = kingskilled.get(p2);
+                    if (kingskilled.containsKey(p)){
+                        kd = kingskilled.get(p);
                     }
-                    new MySQL().addStats(p, 1, 1, k, d, kd);
+                    new MySQL().addStats(p.getUniqueId(), 1, 1, k, d, kd);
                 }
                 winner = greenPlayers;
                 Bukkit.broadcastMessage(PREFIX+" "+getMsg("victory.green"));
@@ -125,21 +122,20 @@ public class PlayerQuitListener implements Listener {
                 for (Player p : Bukkit.getOnlinePlayers()) {
                     Titles.sendFullTitle(p, 0, 100, 0, getMsg("victory.red"), "");
                 }
-                for (UUID p : redPlayers){
-                    Player p2 = Bukkit.getPlayer(p);
+                for (Player p : redPlayers){
                     int k = 0;
                     int d = 0;
                     int kd = 0;
-                    if (kills.containsKey(p2)){
-                        k = kills.get(p2);
+                    if (kills.containsKey(p)){
+                        k = kills.get(p);
                     }
-                    if (deaths.containsKey(p2)){
-                        d = deaths.get(p2);
+                    if (deaths.containsKey(p)){
+                        d = deaths.get(p);
                     }
-                    if (kingskilled.containsKey(p2)){
-                        kd = kingskilled.get(p2);
+                    if (kingskilled.containsKey(p)){
+                        kd = kingskilled.get(p);
                     }
-                    new MySQL().addStats(p, 1, 1, k, d, kd);
+                    new MySQL().addStats(p.getUniqueId(), 1, 1, k, d, kd);
                 }
                 winner = greenPlayers;
                 Bukkit.broadcastMessage(PREFIX+" "+getMsg("victory.red"));
@@ -148,21 +144,20 @@ public class PlayerQuitListener implements Listener {
                 for (Player p : Bukkit.getOnlinePlayers()) {
                     Titles.sendFullTitle(p, 0, 100, 0, getMsg("victory.yellow"), "");
                 }
-                for (UUID p : yellowPlayers){
-                    Player p2 = Bukkit.getPlayer(p);
+                for (Player p : yellowPlayers){
                     int k = 0;
                     int d = 0;
                     int kd = 0;
-                    if (kills.containsKey(p2)){
-                        k = kills.get(p2);
+                    if (kills.containsKey(p)){
+                        k = kills.get(p);
                     }
-                    if (deaths.containsKey(p2)){
-                        d = deaths.get(p2);
+                    if (deaths.containsKey(p)){
+                        d = deaths.get(p);
                     }
-                    if (kingskilled.containsKey(p2)){
-                        kd = kingskilled.get(p2);
+                    if (kingskilled.containsKey(p)){
+                        kd = kingskilled.get(p);
                     }
-                    new MySQL().addStats(p, 1, 1, k, d, kd);
+                    new MySQL().addStats(p.getUniqueId(), 1, 1, k, d, kd);
                 }
                 winner = yellowPlayers;
                 Bukkit.broadcastMessage(PREFIX+" "+getMsg("victory.yellow"));

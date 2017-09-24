@@ -1,5 +1,6 @@
 package com.andrei1058.ageofempire.listeners;
 
+import com.andrei1058.ageofempire.Main;
 import com.andrei1058.ageofempire.configuration.Settings;
 import com.andrei1058.ageofempire.game.Status;
 import com.andrei1058.ageofempire.locations.Locations;
@@ -100,7 +101,7 @@ public class PlayerJoinListener implements Listener {
                 p.getInventory().setItem(0, new ItemStack(Material.AIR));
             }
             p.sendMessage(getMsg("help.ison"));
-            plugin.help.add(p.getUniqueId());
+            help.add(p);
         }, 1L);
 
     }

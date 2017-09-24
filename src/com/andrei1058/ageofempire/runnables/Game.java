@@ -8,9 +8,8 @@ import com.andrei1058.ageofempire.game.Hologram;
 import com.andrei1058.ageofempire.locations.Locations;
 import org.bukkit.*;
 import org.bukkit.block.Block;
+import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitRunnable;
-
-import java.util.UUID;
 
 import static com.andrei1058.ageofempire.Main.*;
 import static com.andrei1058.ageofempire.configuration.Messages.getMsg;
@@ -27,10 +26,10 @@ public class Game extends BukkitRunnable {
     public void run() {
         secPlayed++;
         if (secPlayed == 2){
-            for (UUID u : help){
-                Bukkit.getPlayer(u).sendMessage(getMsg("help.start-guide"));
-                Bukkit.getPlayer(u).sendMessage(getMsg("help.start-buildings"));
-                Bukkit.getPlayer(u).sendMessage(getMsg("help.start-resources"));
+            for (Player u : help){
+                u.sendMessage(getMsg("help.start-guide"));
+                u.sendMessage(getMsg("help.start-buildings"));
+                u.sendMessage(getMsg("help.start-resources"));
             }
         }
         if (secPlayed == stonecheck){
@@ -48,22 +47,22 @@ public class Game extends BukkitRunnable {
                 green_stone+=3;
 
             if (blue_goldmine)
-                for (UUID u : bluePlayers){
+                for (Player u : bluePlayers){
                     gold.replace(u, gold.get(u)+3);
                 }
 
             if (yellow_goldmine)
-                for (UUID u : yellowPlayers){
+                for (Player u : yellowPlayers){
                     gold.replace(u, gold.get(u)+3);
                 }
 
             if (green_goldmine)
-                for (UUID u : greenPlayers){
+                for (Player u : greenPlayers){
                     gold.replace(u, gold.get(u)+3);
                 }
 
             if (red_goldmine)
-                for (UUID u : redPlayers){
+                for (Player u : redPlayers){
                     gold.replace(u, gold.get(u)+3);
                 }
 
@@ -86,9 +85,9 @@ public class Game extends BukkitRunnable {
                     Bukkit.broadcastMessage(getMsg("pvp-on"));
                     pvp = true;
                     pvp_assault = 60000 * Settings.load().getInt("countdowns.assault");
-                    for (UUID u : players) {
-                        Bukkit.getPlayer(u).playSound(Bukkit.getPlayer(u).getLocation(), nms.wolfDeath(), 1, 1);
-                        Bukkit.getPlayer(u).getScoreboard().getTeam("pvp_assault").setPrefix(getMsg("scoreboard.3_2"));
+                    for (Player u : players) {
+                        u.playSound(u.getLocation(), nms.wolfDeath(), 1, 1);
+                        u.getScoreboard().getTeam("pvp_assault").setPrefix(getMsg("scoreboard.3_2"));
                     }
                     for (String st : Locations.load().getConfigurationSection("xp."+choosenMap).getKeys(false)){
                         Block b = Bukkit.getWorld(choosenMap).getBlockAt(Locations.getLoc("xp."+choosenMap+"."+st));
@@ -99,9 +98,9 @@ public class Game extends BukkitRunnable {
                     if (!assualt) {
                         assualt = true;
                         Bukkit.broadcastMessage(getMsg("assaults-on"));
-                        for (UUID u : players) {
-                            Bukkit.getPlayer(u).getScoreboard().resetScores(getMsg("scoreboard.4"));
-                            Bukkit.getPlayer(u).getScoreboard().resetScores(ChatColor.MAGIC.toString()+ChatColor.RESET.toString());
+                        for (Player u : players) {
+                            u.getScoreboard().resetScores(getMsg("scoreboard.4"));
+                            u.getScoreboard().resetScores(ChatColor.MAGIC.toString()+ChatColor.RESET.toString());
                         }
                     }
                 }

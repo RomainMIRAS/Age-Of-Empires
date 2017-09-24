@@ -40,211 +40,211 @@ public class PlayerInteractEntityListener implements Listener {
                 if (v.getCustomName() == null) return;
                 e.setCancelled(true);
                 if (v == blue_villager) {
-                    if (bluePlayers.contains(e.getPlayer().getUniqueId())) {
+                    if (bluePlayers.contains(e.getPlayer())) {
                         e.getPlayer().openInventory(forum(blue_team));
                     }
                 } else if (v == yellow_villager) {
-                    if (yellowPlayers.contains(e.getPlayer().getUniqueId())) {
+                    if (yellowPlayers.contains(e.getPlayer())) {
                         e.getPlayer().openInventory(forum(yellow_team));
                     }
                 } else if (v == green_villager) {
-                    if (greenPlayers.contains(e.getPlayer().getUniqueId())) {
+                    if (greenPlayers.contains(e.getPlayer())) {
                         e.getPlayer().openInventory(forum(green_team));
                     }
                 } else if (v == red_villager) {
-                    if (redPlayers.contains(e.getPlayer().getUniqueId())) {
+                    if (redPlayers.contains(e.getPlayer())) {
                         e.getPlayer().openInventory(forum(red_team));
                     }
                 } else if (blue_forge != null && v == blue_forge){
-                    if (bluePlayers.contains(p.getUniqueId())) {
+                    if (bluePlayers.contains(p)) {
                         p.openInventory(forge(p));
                     }
                 } else if (green_forge != null && v == green_forge){
-                    if (greenPlayers.contains(p.getUniqueId())) {
+                    if (greenPlayers.contains(p)) {
                         p.openInventory(forge(p));
                     }
                 } else if (yellow_forge != null && v == yellow_forge){
-                    if (yellowPlayers.contains(p.getUniqueId())){
+                    if (yellowPlayers.contains(p)){
                         p.openInventory(forge(p));
                     }
                 } else if (red_forge != null && v == red_forge) {
-                    if (redPlayers.contains(p.getUniqueId())) {
+                    if (redPlayers.contains(p)) {
                         p.openInventory(forge(p));
                     }
                 } else if (v == blue_mill){
-                    if (bluePlayers.contains(p.getUniqueId())){
+                    if (bluePlayers.contains(p)){
                         p.openInventory(mill());
                     }
                 } else if (v == green_mill){
-                    if (greenPlayers.contains(p.getUniqueId())){
+                    if (greenPlayers.contains(p)){
                         p.openInventory(mill());
                     }
                 } else if (v == yellow_mill){
-                    if (yellowPlayers.contains(p.getUniqueId())){
+                    if (yellowPlayers.contains(p)){
                         p.openInventory(mill());
                     }
                 } else if (v == red_mill){
-                    if (redPlayers.contains(p.getUniqueId())){
+                    if (redPlayers.contains(p)){
                         p.openInventory(mill());
                     }
                 } else if (v == blue_workshop){
-                    if (bluePlayers.contains(p.getUniqueId())){
+                    if (bluePlayers.contains(p)){
                         p.openInventory(workshop());
                     }
                 } else if (v == green_workshop){
-                    if (greenPlayers.contains(p.getUniqueId())){
+                    if (greenPlayers.contains(p)){
                         p.openInventory(workshop());
                     }
                 } else if (v == yellow_workshop){
-                    if (yellowPlayers.contains(p.getUniqueId())){
+                    if (yellowPlayers.contains(p)){
                         p.openInventory(workshop());
                     }
                 } else if (v == red_workshop){
-                    if (redPlayers.contains(p.getUniqueId())){
+                    if (redPlayers.contains(p)){
                         p.openInventory(workshop());
                     }
                 } else if (v == blue_market){
-                    if (bluePlayers.contains(p.getUniqueId())){
+                    if (bluePlayers.contains(p)){
                         p.openInventory(market());
                     }
                 } else if (v == green_market){
-                    if (greenPlayers.contains(p.getUniqueId())){
+                    if (greenPlayers.contains(p)){
                         p.openInventory(market());
                     }
                 } else if (v == yellow_market){
-                    if (yellowPlayers.contains(p.getUniqueId())){
+                    if (yellowPlayers.contains(p)){
                         p.openInventory(market());
                     }
                 } else if (v == red_market){
-                    if (redPlayers.contains(p.getUniqueId())){
+                    if (redPlayers.contains(p)){
                         p.openInventory(market());
                     }
                 } else if (v == blue_sabotage){
-                    if (bluePlayers.contains(p.getUniqueId())){
+                    if (bluePlayers.contains(p)){
                         p.openInventory(sabotage());
                     }
                 } else if (v == green_sabotage){
-                    if (greenPlayers.contains(p.getUniqueId())){
+                    if (greenPlayers.contains(p)){
                         p.openInventory(sabotage());
                     }
                 } else if (v == yellow_sabotage){
-                    if (yellowPlayers.contains(p.getUniqueId())){
+                    if (yellowPlayers.contains(p)){
                         p.openInventory(sabotage());
                     }
                 } else if (v == red_sabotage){
-                    if (redPlayers.contains(p.getUniqueId())){
+                    if (redPlayers.contains(p)){
                         p.openInventory(sabotage());
                     }
                 } else if (v == blue_kennel){
-                    if (bluePlayers.contains(p.getUniqueId())){
-                        p.openInventory(kennel(p.getUniqueId()));
+                    if (bluePlayers.contains(p)){
+                        p.openInventory(kennel(p));
                     }
                 } else if (v == green_kennel){
-                    if (greenPlayers.contains(p.getUniqueId())){
-                        p.openInventory(kennel(p.getUniqueId()));
+                    if (greenPlayers.contains(p)){
+                        p.openInventory(kennel(p));
                     }
                 } else if (v == yellow_kennel){
-                    if (yellowPlayers.contains(p.getUniqueId())){
-                        p.openInventory(kennel(p.getUniqueId()));
+                    if (yellowPlayers.contains(p)){
+                        p.openInventory(kennel(p));
                     }
                 } else if (v == red_kennel){
-                    if (redPlayers.contains(p.getUniqueId())){
-                        p.openInventory(kennel(p.getUniqueId()));
+                    if (redPlayers.contains(p)){
+                        p.openInventory(kennel(p));
                     }
                 } else if (v == blue_archery){
-                    if (bluePlayers.contains(p.getUniqueId())){
+                    if (bluePlayers.contains(p)){
                         p.openInventory(archeryInv());
                     }
                 } else if (v == green_archery){
-                    if (greenPlayers.contains(p.getUniqueId())){
+                    if (greenPlayers.contains(p)){
                         p.openInventory(archeryInv());
                     }
                 } else if (v == yellow_archery){
-                    if (yellowPlayers.contains(p.getUniqueId())){
+                    if (yellowPlayers.contains(p)){
                         p.openInventory(archeryInv());
                     }
                 } else if (v == red_archery){
-                    if (redPlayers.contains(p.getUniqueId())){
+                    if (redPlayers.contains(p)){
                         p.openInventory(archeryInv());
                     }
                 } else if (v == blue_trifarrow){
-                    if (bluePlayers.contains(p.getUniqueId())){
+                    if (bluePlayers.contains(p)){
                         p.openInventory(trifarrowInv());
                     }
                 } else if (v == green_trifarrow){
-                    if (greenPlayers.contains(p.getUniqueId())){
+                    if (greenPlayers.contains(p)){
                         p.openInventory(trifarrowInv());
                     }
                 } else if (v == yellow_trifarrow){
-                    if (yellowPlayers.contains(p.getUniqueId())){
+                    if (yellowPlayers.contains(p)){
                         p.openInventory(trifarrowInv());
                     }
                 } else if (v == red_trifarrow){
-                    if (redPlayers.contains(p.getUniqueId())){
+                    if (redPlayers.contains(p)){
                         p.openInventory(trifarrowInv());
                     }
                 } else if (v == blue_stable){
-                    if (bluePlayers.contains(p.getUniqueId())){
+                    if (bluePlayers.contains(p)){
                         p.openInventory(stableInv());
                     }
                 } else if (v == green_stable){
-                    if (greenPlayers.contains(p.getUniqueId())){
+                    if (greenPlayers.contains(p)){
                         p.openInventory(stableInv());
                     }
                 } else if (v == yellow_stable){
-                    if (yellowPlayers.contains(p.getUniqueId())){
+                    if (yellowPlayers.contains(p)){
                         p.openInventory(stableInv());
                     }
                 } else if (v == red_stable){
-                    if (redPlayers.contains(p.getUniqueId())){
+                    if (redPlayers.contains(p)){
                         p.openInventory(stableInv());
                     }
                 } else if (v == blue_armory){
-                    if (bluePlayers.contains(p.getUniqueId())){
-                        p.openInventory(armoryInv(p.getUniqueId()));
+                    if (bluePlayers.contains(p)){
+                        p.openInventory(armoryInv(p));
                     }
                 } else if (v == green_armory){
-                    if (greenPlayers.contains(p.getUniqueId())){
-                        p.openInventory(armoryInv(p.getUniqueId()));
+                    if (greenPlayers.contains(p)){
+                        p.openInventory(armoryInv(p));
                     }
                 } else if (v == yellow_armory){
-                    if (yellowPlayers.contains(p.getUniqueId())){
-                        p.openInventory(armoryInv(p.getUniqueId()));
+                    if (yellowPlayers.contains(p)){
+                        p.openInventory(armoryInv(p));
                     }
                 } else if (v == red_armory){
-                    if (redPlayers.contains(p.getUniqueId())){
-                        p.openInventory(armoryInv(p.getUniqueId()));
+                    if (redPlayers.contains(p)){
+                        p.openInventory(armoryInv(p));
                     }
                 } else if (v == blue_lab){
-                    if (bluePlayers.contains(p.getUniqueId())){
+                    if (bluePlayers.contains(p)){
                         p.openInventory(lab());
                     }
                 } else if (v == green_lab){
-                    if (greenPlayers.contains(p.getUniqueId())){
+                    if (greenPlayers.contains(p)){
                         p.openInventory(lab());
                     }
                 } else if (v == yellow_lab){
-                    if (yellowPlayers.contains(p.getUniqueId())){
+                    if (yellowPlayers.contains(p)){
                         p.openInventory(lab());
                     }
                 } else if (v == red_lab){
-                    if (redPlayers.contains(p.getUniqueId())){
+                    if (redPlayers.contains(p)){
                         p.openInventory(lab());
                     }
                 } else if (v == blue_guild){
-                    if (bluePlayers.contains(p.getUniqueId())){
+                    if (bluePlayers.contains(p)){
                         p.openInventory(guild());
                     }
                 } else if (v == green_guild){
-                    if (greenPlayers.contains(p.getUniqueId())){
+                    if (greenPlayers.contains(p)){
                         p.openInventory(guild());
                     }
                 } else if (v == yellow_guild){
-                    if (yellowPlayers.contains(p.getUniqueId())){
+                    if (yellowPlayers.contains(p)){
                         p.openInventory(guild());
                     }
                 } else if (v == red_guild){
-                    if (redPlayers.contains(p.getUniqueId())){
+                    if (redPlayers.contains(p)){
                         p.openInventory(guild());
                     }
                 } else {
@@ -482,22 +482,22 @@ public class PlayerInteractEntityListener implements Listener {
         inv.addItem(forgeItem(Material.IRON_SWORD, getMsg("forge.ironsword.displayname"), getArray("forge.ironsword.lore")));
         inv.addItem(forgeItem(Material.STONE_AXE,getMsg("forge.stoneaxe.displayname"), getArray("forge.stoneaxe.lore")));
         inv.addItem(forgeItem(Material.IRON_AXE, getMsg("forge.ironaxe.displayname"), getArray("forge.ironaxe.lore")));
-        if (bluePlayers.contains(p.getUniqueId())) {
+        if (bluePlayers.contains(p)) {
             if (blue_age > 2) {
                 inv.addItem(forgeItem(Material.DIAMOND_SWORD, getMsg("forge.diamondsword.displayname"), getArray("forge.diamondsword.lore")));
                 inv.addItem(forgeItem(Material.DIAMOND_AXE, getMsg("forge.diamondaxe.displayname"), getArray("forge.diamondaxe.lore")));
             }
-        } else if (greenPlayers.contains(p.getUniqueId())){
+        } else if (greenPlayers.contains(p)){
             if (green_age > 2){
                 inv.addItem(forgeItem(Material.DIAMOND_SWORD, getMsg("forge.diamondsword.displayname"), getArray("forge.diamondsword.lore")));
                 inv.addItem(forgeItem(Material.DIAMOND_AXE, getMsg("forge.diamondaxe.displayname"), getArray("forge.diamondaxe.lore")));
             }
-        } else if (yellowPlayers.contains(p.getUniqueId())){
+        } else if (yellowPlayers.contains(p)){
             if (yellow_age > 2){
                 inv.addItem(forgeItem(Material.DIAMOND_SWORD, getMsg("forge.diamondsword.displayname"), getArray("forge.diamondsword.lore")));
                 inv.addItem(forgeItem(Material.DIAMOND_AXE, getMsg("forge.diamondaxe.displayname"), getArray("forge.diamondaxe.lore")));
             }
-        } else if (redPlayers.contains(p.getUniqueId())){
+        } else if (redPlayers.contains(p)){
             if (red_age > 2){
                 inv.addItem(forgeItem(Material.DIAMOND_SWORD, getMsg("forge.diamondsword.displayname"), getArray("forge.diamondsword.lore")));
                 inv.addItem(forgeItem(Material.DIAMOND_AXE, getMsg("forge.diamondaxe.displayname"), getArray("forge.diamondaxe.lore")));
@@ -515,7 +515,7 @@ public class PlayerInteractEntityListener implements Listener {
         return inv;
     }
 
-    public static Inventory armoryInv(UUID u){
+    public static Inventory armoryInv(Player u){
         Inventory inv = Bukkit.createInventory(null, 54, "Armory");
         ItemStack ia = new ItemStack(Material.IRON_CHESTPLATE);
         ItemMeta iam = ia.getItemMeta();
@@ -559,7 +559,7 @@ public class PlayerInteractEntityListener implements Listener {
         return inv;
     }
 
-    public static Inventory kennel(UUID u){
+    public static Inventory kennel(Player u){
         Inventory inv = Bukkit.createInventory(null, 54, "Kennel");
         inv.addItem(forgeItem(Material.MONSTER_EGG, getMsg("kennel.dog.displayname"), getArray("kennel.dog.lore")));
         if (bluePlayers.contains(u)){

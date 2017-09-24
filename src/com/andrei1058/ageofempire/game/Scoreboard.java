@@ -27,7 +27,7 @@ public class Scoreboard {
 
     public static void register() {
         if (SETUP) return;
-        for (UUID u : players) {
+        for (Player u : players) {
             board = Bukkit.getScoreboardManager().getNewScoreboard();
             objective = board.registerNewObjective("Test", "Test2");
             objective.setDisplayName(getMsg("scoreboard.title").replace('&', '§'));
@@ -96,32 +96,32 @@ public class Scoreboard {
             objective.getScore(getMsg("scoreboard.2")).setScore(2);
             objective.getScore(getMsg("scoreboard.1")).setScore(1);
 
-            for (UUID blue2 : bluePlayers) {
-                blue.addEntry(Bukkit.getPlayer(blue2).getName());
+            for (Player blue2 : bluePlayers) {
+                blue.addEntry(blue2.getName());
             }
-            for (UUID green2 : greenPlayers) {
-                green.addEntry(Bukkit.getPlayer(green2).getName());
+            for (Player green2 : greenPlayers) {
+                green.addEntry(green2.getName());
             }
-            for (UUID yellow2 : yellowPlayers) {
-                yellow.addEntry(Bukkit.getPlayer(yellow2).getName());
+            for (Player yellow2 : yellowPlayers) {
+                yellow.addEntry(yellow2.getName());
             }
-            for (UUID red2 : redPlayers) {
-                red.addEntry(Bukkit.getPlayer(red2).getName());
+            for (Player red2 : redPlayers) {
+                red.addEntry(red2.getName());
             }
-            Bukkit.getPlayer(u).setScoreboard(board);
+            u.setScoreboard(board);
         }
     }
 
     public static void Refresh(){
-        for (UUID p : players){
-            Team a = Bukkit.getPlayer(p).getScoreboard().getTeam("age");
-            Team w = Bukkit.getPlayer(p).getScoreboard().getTeam("wood");
-            Team s = Bukkit.getPlayer(p).getScoreboard().getTeam("stone");
-            Team g = Bukkit.getPlayer(p).getScoreboard().getTeam("gold");
-            Team sm = Bukkit.getPlayer(p).getScoreboard().getTeam("small");
-            Team m = Bukkit.getPlayer(p).getScoreboard().getTeam("medium");
-            Team l = Bukkit.getPlayer(p).getScoreboard().getTeam("large");
-            Team pvp = Bukkit.getPlayer(p).getScoreboard().getTeam("pvp_assault");
+        for (Player p : players){
+            Team a = p.getScoreboard().getTeam("age");
+            Team w = p.getScoreboard().getTeam("wood");
+            Team s = p.getScoreboard().getTeam("stone");
+            Team g = p.getScoreboard().getTeam("gold");
+            Team sm = p.getScoreboard().getTeam("small");
+            Team m = p.getScoreboard().getTeam("medium");
+            Team l = p.getScoreboard().getTeam("large");
+            Team pvp = p.getScoreboard().getTeam("pvp_assault");
             if (bluePlayers.contains(p)){
                 if (blue_change_age){
                     a.setSuffix(String.valueOf(df.format(new Date(blue_age_long))));
@@ -143,7 +143,7 @@ public class Scoreboard {
                 m.setSuffix(String.valueOf(blue_medium_plots));
                 l.setSuffix(String.valueOf(blue_large_plots));
                 if (blue_xp)
-                    Bukkit.getPlayer(p).giveExp(1);
+                    p.giveExp(1);
             } else if (greenPlayers.contains(p)){
                 if (green_change_age){
                     a.setSuffix(String.valueOf(df.format(new Date(green_age_long))));
@@ -165,7 +165,7 @@ public class Scoreboard {
                 m.setSuffix(String.valueOf(green_medium_plots));
                 l.setSuffix(String.valueOf(green_large_plots));
                 if (green_xp)
-                    Bukkit.getPlayer(p).giveExp(1);
+                    p.giveExp(1);
             } else if (yellowPlayers.contains(p)){
                 if (yellow_change_age){
                     a.setPrefix(String.valueOf(df.format(new Date(yellow_age_long))));
@@ -187,7 +187,7 @@ public class Scoreboard {
                 m.setSuffix(String.valueOf(yellow_medium_plots));
                 l.setSuffix(String.valueOf(yellow_large_plots));
                 if (yellow_xp)
-                    Bukkit.getPlayer(p).giveExp(1);
+                    p.giveExp(1);
             } else if (redPlayers.contains(p)){
                 if (red_change_age){
                     a.setPrefix(String.valueOf(df.format(new Date(red_age_long))));
@@ -209,10 +209,10 @@ public class Scoreboard {
                 m.setSuffix(String.valueOf(red_medium_plots));
                 l.setSuffix(String.valueOf(red_large_plots));
                 if (red_xp)
-                    Bukkit.getPlayer(p).giveExp(1);
+                    p.giveExp(1);
             }
             pvp.setSuffix(String.valueOf(df.format(new Date(Main.pvp_assault))));
-            g.setSuffix(String.valueOf(plugin.gold.get(p)));
+            g.setSuffix(String.valueOf(Main.gold.get(p)));
         }
     }
 

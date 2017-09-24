@@ -17,8 +17,8 @@ public class Help implements CommandExecutor{
     public boolean onCommand(CommandSender s, Command c, String st, String[] args) {
         if (c.getName().equalsIgnoreCase("help")){
             Player p = (Player) s;
-            if (help.contains(p.getUniqueId())){
-                help.remove(p.getUniqueId());
+            if (help.contains(p)){
+                help.remove(p);
                 p.sendMessage(PREFIX+" "+getMsg("help-item-off"));
                 ItemStack i = new ItemStack(Material.STAINED_GLASS_PANE, 1, (short)14);
                 ItemMeta itemMeta = i.getItemMeta();
@@ -26,7 +26,7 @@ public class Help implements CommandExecutor{
                 i.setItemMeta(itemMeta);
                 p.getInventory().setItem(4, i);
             } else {
-                help.add(p.getUniqueId());
+                help.add(p);
                 p.sendMessage(PREFIX+" "+getMsg("help-item-on"));
                 ItemStack i = new ItemStack(Material.STAINED_GLASS_PANE, 1, (short)5);
                 ItemMeta itemMeta = i.getItemMeta();

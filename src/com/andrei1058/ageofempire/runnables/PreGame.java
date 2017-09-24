@@ -25,61 +25,61 @@ public class PreGame extends BukkitRunnable {
         if (pregame_time != 0){
             pregame_time--;
         }
-        if (min_players > Bukkit.getOnlinePlayers().size()){
+        if (Bukkit.getOnlinePlayers().size() < 2){
             this.cancel();
             new Restart().runTaskTimer(plugin, 0, 20);
             STATUS = Status.RESTARTING;
         }
         if (pregame_time == 2) {
             for (Player p : Bukkit.getOnlinePlayers()) {
-                if (bluePlayers.contains(p.getUniqueId()) || yellowPlayers.contains(p.getUniqueId()) || redPlayers.contains(p.getUniqueId()) || greenPlayers.contains(p.getUniqueId())){
+                if (bluePlayers.contains(p) || yellowPlayers.contains(p) || redPlayers.contains(p) || greenPlayers.contains(p)){
                     continue;
                 }
                 if (Bukkit.getOnlinePlayers().size() > max_in_team * 3) {
                     if (bluePlayers.isEmpty()){
-                        bluePlayers.add(p.getUniqueId());
+                        bluePlayers.add(p);
                     } else if (greenPlayers.isEmpty()){
-                        greenPlayers.add(p.getUniqueId());
+                        greenPlayers.add(p);
                     } else if (yellowPlayers.isEmpty()){
-                        yellowPlayers.add(p.getUniqueId());
+                        yellowPlayers.add(p);
                     } else if (redPlayers.isEmpty()){
-                        redPlayers.add(p.getUniqueId());
+                        redPlayers.add(p);
                     } else if (bluePlayers.size() <= max_in_team && bluePlayers.size() <= greenPlayers.size() && bluePlayers.size() <= yellowPlayers.size() && bluePlayers.size() <= redPlayers.size()) {
-                        bluePlayers.add(p.getUniqueId());
+                        bluePlayers.add(p);
                     } else if (greenPlayers.size() <= max_in_team && greenPlayers.size() < bluePlayers.size() && greenPlayers.size() < yellowPlayers.size() && greenPlayers.size() < redPlayers.size()) {
-                        greenPlayers.add(p.getUniqueId());
+                        greenPlayers.add(p);
                     } else if (yellowPlayers.size() <= max_in_team && yellowPlayers.size() <= bluePlayers.size() && yellowPlayers.size() <= greenPlayers.size() && yellowPlayers.size() <= redPlayers.size()) {
-                        yellowPlayers.add(p.getUniqueId());
+                        yellowPlayers.add(p);
                     } else if (redPlayers.size() <= max_in_team && redPlayers.size() <= bluePlayers.size() && redPlayers.size() <= greenPlayers.size() && redPlayers.size() <= yellowPlayers.size()) {
-                        redPlayers.add(p.getUniqueId());
+                        redPlayers.add(p);
                     } else {
                         p.kickPlayer("Teams are full");
                     }
                 } else if (Bukkit.getOnlinePlayers().size() > max_in_team * 2) {
                     if (bluePlayers.isEmpty()){
-                        bluePlayers.add(p.getUniqueId());
+                        bluePlayers.add(p);
                     } else if (greenPlayers.isEmpty()){
-                        greenPlayers.add(p.getUniqueId());
+                        greenPlayers.add(p);
                     } else if (yellowPlayers.isEmpty()){
-                        yellowPlayers.add(p.getUniqueId());
+                        yellowPlayers.add(p);
                     } else if (bluePlayers.size() <= max_in_team && bluePlayers.size() <= greenPlayers.size() && bluePlayers.size() <= yellowPlayers.size()) {
-                        bluePlayers.add(p.getUniqueId());
+                        bluePlayers.add(p);
                     } else if (greenPlayers.size() <= max_in_team && greenPlayers.size() <= bluePlayers.size() && greenPlayers.size() <= yellowPlayers.size()) {
-                        greenPlayers.add(p.getUniqueId());
+                        greenPlayers.add(p);
                     } else if (yellowPlayers.size() <= max_in_team && yellowPlayers.size() <= bluePlayers.size() && yellowPlayers.size() <= greenPlayers.size()) {
-                        yellowPlayers.add(p.getUniqueId());
+                        yellowPlayers.add(p);
                     } else {
                         p.kickPlayer("Teams are full");
                     }
                 } else {
                     if (bluePlayers.isEmpty()){
-                        bluePlayers.add(p.getUniqueId());
+                        bluePlayers.add(p);
                     } else if (greenPlayers.isEmpty()){
-                        greenPlayers.add(p.getUniqueId());
+                        greenPlayers.add(p);
                     } else if (bluePlayers.size() <= max_in_team && bluePlayers.size() <= greenPlayers.size()) {
-                        bluePlayers.add(p.getUniqueId());
+                        bluePlayers.add(p);
                     } else if (greenPlayers.size() <= max_in_team && greenPlayers.size() <= bluePlayers.size()) {
-                        greenPlayers.add(p.getUniqueId());
+                        greenPlayers.add(p);
                     } else {
                         p.kickPlayer("Teams are full");
                     }
@@ -98,33 +98,33 @@ public class PreGame extends BukkitRunnable {
             cancel();
             STATUS = Status.PLAYING;
             for (Player p : Bukkit.getOnlinePlayers()) {
-                players.add(p.getUniqueId());
+                players.add(p);
                 p.getInventory().clear();
                 p.setHealth(20);
                 p.setFoodLevel(20);
                 p.setGameMode(GameMode.SURVIVAL);
-                if (bluePlayers.contains(p.getUniqueId())){
+                if (bluePlayers.contains(p)){
                     p.teleport(Locations.getLoc("Spawns."+choosenMap+".Blue"));
                     p.getInventory().setHelmet(leatherArmor(Material.LEATHER_HELMET, Color.BLUE));
                     p.getInventory().setChestplate(leatherArmor(Material.LEATHER_CHESTPLATE, Color.BLUE));
                     p.getInventory().setBoots(leatherArmor(Material.LEATHER_BOOTS, Color.BLUE));
                     p.getInventory().setLeggings(leatherArmor(Material.LEATHER_LEGGINGS, Color.BLUE));
                     p.setDisplayName("§9"+p.getName());
-                } else if (greenPlayers.contains(p.getUniqueId())){
+                } else if (greenPlayers.contains(p)){
                     p.teleport(Locations.getLoc("Spawns."+choosenMap+".Green"));
                     p.getInventory().setHelmet(leatherArmor(Material.LEATHER_HELMET, Color.GREEN));
                     p.getInventory().setChestplate(leatherArmor(Material.LEATHER_CHESTPLATE, Color.GREEN));
                     p.getInventory().setBoots(leatherArmor(Material.LEATHER_BOOTS, Color.GREEN));
                     p.getInventory().setLeggings(leatherArmor(Material.LEATHER_LEGGINGS, Color.GREEN));
                     p.setDisplayName("§a"+p.getDisplayName());
-                } else if (yellowPlayers.contains(p.getUniqueId())){
+                } else if (yellowPlayers.contains(p)){
                     p.teleport(Locations.getLoc("Spawns."+choosenMap+".Yellow"));
                     p.getInventory().setHelmet(leatherArmor(Material.LEATHER_HELMET, Color.YELLOW));
                     p.getInventory().setChestplate(leatherArmor(Material.LEATHER_CHESTPLATE, Color.YELLOW));
                     p.getInventory().setBoots(leatherArmor(Material.LEATHER_BOOTS, Color.YELLOW));
                     p.getInventory().setLeggings(leatherArmor(Material.LEATHER_LEGGINGS, Color.YELLOW));
                     p.setDisplayName("§e"+p.getName());
-                } else if (redPlayers.contains(p.getUniqueId())){
+                } else if (redPlayers.contains(p)){
                     p.teleport(Locations.getLoc("Spawns."+choosenMap+".Red"));
                     p.getInventory().setHelmet(leatherArmor(Material.LEATHER_HELMET, Color.RED));
                     p.getInventory().setChestplate(leatherArmor(Material.LEATHER_CHESTPLATE, Color.RED));
@@ -147,7 +147,7 @@ public class PreGame extends BukkitRunnable {
                 p.getInventory().setItem(8, slotlocked());
                 p.getInventory().setItem(7, slotlocked());
                 p.getInventory().setItem(6, forumPaper());
-                gold.put(p.getUniqueId(), 100);
+                gold.put(p, 100);
             }
             Scoreboard.register();
             Bukkit.getScheduler().runTaskLater(plugin, () -> {

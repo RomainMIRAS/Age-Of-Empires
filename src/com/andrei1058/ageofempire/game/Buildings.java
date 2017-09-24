@@ -1,14 +1,15 @@
 package com.andrei1058.ageofempire.game;
 
+import org.bukkit.entity.Player;
+
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.UUID;
 
 import static com.andrei1058.ageofempire.Main.*;
 
 public class Buildings {
     public static ArrayList<String> vote_in_progress = new ArrayList<>();
-    public static HashMap<UUID, String> construct_in_inv = new HashMap<>();
+    public static HashMap<Player, String> construct_in_inv = new HashMap<>();
     public static ArrayList blue_built = new ArrayList();
     public static ArrayList green_built = new ArrayList();
     public static ArrayList yellow_built = new ArrayList();

@@ -2,13 +2,10 @@ package com.andrei1058.ageofempire.listeners;
 
 import com.andrei1058.ageofempire.game.Status;
 import com.andrei1058.ageofempire.game.Titles;
-import org.bukkit.Bukkit;
 import org.bukkit.entity.*;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
-
-import java.util.UUID;
 
 import static com.andrei1058.ageofempire.Main.*;
 import static com.andrei1058.ageofempire.configuration.Messages.getMsg;
@@ -29,13 +26,13 @@ public class EntityDamageByEntityListener implements Listener {
             return;
         }
         if (e.getEntity() instanceof Player && e.getDamager() instanceof Player){
-            if (bluePlayers.contains(e.getEntity().getUniqueId()) && bluePlayers.contains(e.getDamager().getUniqueId())){
+            if (bluePlayers.contains(e.getEntity()) && bluePlayers.contains(e.getDamager())){
                 e.setCancelled(true);
-            } else if (greenPlayers.contains(e.getEntity().getUniqueId()) && greenPlayers.contains(e.getDamager().getUniqueId())){
+            } else if (greenPlayers.contains(e.getEntity()) && greenPlayers.contains(e.getDamager())){
                 e.setCancelled(true);
-            } else if (yellowPlayers.contains(e.getEntity().getUniqueId()) && yellowPlayers.contains(e.getDamager().getUniqueId())){
+            } else if (yellowPlayers.contains(e.getEntity()) && yellowPlayers.contains(e.getDamager())){
                 e.setCancelled(true);
-            } else if (redPlayers.contains(e.getEntity().getUniqueId()) && redPlayers.contains(e.getDamager().getUniqueId())){
+            } else if (redPlayers.contains(e.getEntity()) && redPlayers.contains(e.getDamager())){
                 e.setCancelled(true);
             }
         }
@@ -62,616 +59,616 @@ public class EntityDamageByEntityListener implements Listener {
                 v.setCustomName("§9"+(int)v.getHealth());
             }
             if (v == yellow_villager){
-                if (yellowPlayers.contains(p.getUniqueId())){
+                if (yellowPlayers.contains(p)){
                     e.setCancelled(true);
                     p.sendMessage(getMsg("forum.violence"));
                     return;
                 }
-                for (UUID u : yellowPlayers){
-                    Titles.sendFullTitle(Bukkit.getPlayer(u), 0, 20, 0, "",getMsg("villager.forum-attacked"));
+                for (Player u : yellowPlayers){
+                    Titles.sendFullTitle(u, 0, 20, 0, "",getMsg("villager.forum-attacked"));
                 }
             } else if (v == blue_villager){
-                if (bluePlayers.contains(p.getUniqueId())){
+                if (bluePlayers.contains(p)){
                     e.setCancelled(true);
                     p.sendMessage(getMsg("forum.violence"));
                     return;
                 }
-                for (UUID u : bluePlayers){
-                    Titles.sendFullTitle(Bukkit.getPlayer(u), 0, 20, 0, "",getMsg("villager.forum-attacked"));
+                for (Player u : bluePlayers){
+                    Titles.sendFullTitle(u, 0, 20, 0, "",getMsg("villager.forum-attacked"));
                 }
             } else if (v == green_villager){
-                if (greenPlayers.contains(p.getUniqueId())){
+                if (greenPlayers.contains(p)){
                     e.setCancelled(true);
                     p.sendMessage(getMsg("forum.violence"));
                     return;
                 }
-                for (UUID u : greenPlayers){
-                    Titles.sendFullTitle(Bukkit.getPlayer(u), 0, 20, 0, "",getMsg("villager.forum-attacked"));
+                for (Player u : greenPlayers){
+                    Titles.sendFullTitle(u, 0, 20, 0, "",getMsg("villager.forum-attacked"));
                 }
             } else if (v == red_villager){
-                if (redPlayers.contains(p.getUniqueId())){
+                if (redPlayers.contains(p)){
                     e.setCancelled(true);
                     p.sendMessage(getMsg("forum.violence"));
                     return;
                 }
-                for (UUID u : redPlayers){
-                    Titles.sendFullTitle(Bukkit.getPlayer(u), 0, 20, 0, "",getMsg("villager.forum-attacked"));
+                for (Player u : redPlayers){
+                    Titles.sendFullTitle(u, 0, 20, 0, "",getMsg("villager.forum-attacked"));
                 }
             } else if (v == blue_forge){
-                if (bluePlayers.contains(p.getUniqueId())){
+                if (bluePlayers.contains(p)){
                     p.sendMessage(getMsg("forum.violence"));
                     e.setCancelled(true);
                     return;
                 }
-                for (UUID u : bluePlayers){
-                    Titles.sendFullTitle(Bukkit.getPlayer(u), 0, 20, 0, "", getMsg("x-attacked").replace("{villager}", getMsg("forum."+forge+".displayname")));
+                for (Player u : bluePlayers){
+                    Titles.sendFullTitle(u, 0, 20, 0, "", getMsg("x-attacked").replace("{villager}", getMsg("forum."+forge+".displayname")));
                 }
             } else if (v == green_forge){
-                if (greenPlayers.contains(p.getUniqueId())){
+                if (greenPlayers.contains(p)){
                     p.sendMessage(getMsg("forum.violence"));
                     e.setCancelled(true);
                     return;
                 }
-                for (UUID u : greenPlayers){
-                    Titles.sendFullTitle(Bukkit.getPlayer(u), 0, 20, 0, "", getMsg("x-attacked").replace("{villager}", getMsg("forum."+forge+".displayname")));
+                for (Player u : greenPlayers){
+                    Titles.sendFullTitle(u, 0, 20, 0, "", getMsg("x-attacked").replace("{villager}", getMsg("forum."+forge+".displayname")));
                 }
             } else if (v == yellow_forge){
-                if (yellowPlayers.contains(p.getUniqueId())){
+                if (yellowPlayers.contains(p)){
                     p.sendMessage(getMsg("forum.violence"));
                     e.setCancelled(true);
                     return;
                 }
-                for (UUID u : yellowPlayers){
-                    Titles.sendFullTitle(Bukkit.getPlayer(u), 0, 20, 0, "", getMsg("x-attacked").replace("{villager}", getMsg("forum."+forge+".displayname")));
+                for (Player u : yellowPlayers){
+                    Titles.sendFullTitle(u, 0, 20, 0, "", getMsg("x-attacked").replace("{villager}", getMsg("forum."+forge+".displayname")));
                 }
             } else if (v == red_forge){
-                if (redPlayers.contains(p.getUniqueId())){
+                if (redPlayers.contains(p)){
                     p.sendMessage(getMsg("forum.violence"));
                     e.setCancelled(true);
                     return;
                 }
-                for (UUID u : redPlayers){
-                    Titles.sendFullTitle(Bukkit.getPlayer(u), 0, 20, 0, "", getMsg("x-attacked").replace("{villager}", getMsg("forum."+forge+".displayname")));
+                for (Player u : redPlayers){
+                    Titles.sendFullTitle(u, 0, 20, 0, "", getMsg("x-attacked").replace("{villager}", getMsg("forum."+forge+".displayname")));
                 }
             } else if (v == blue_smine){
-                if (bluePlayers.contains(p.getUniqueId())){
+                if (bluePlayers.contains(p)){
                     p.sendMessage(getMsg("forum.violence"));
                     e.setCancelled(true);
                     return;
                 }
-                for (UUID u : bluePlayers){
-                    Titles.sendFullTitle(Bukkit.getPlayer(u), 0, 20, 0, "", getMsg("x-attacked").replace("{villager}", getMsg("forum."+stone_mine+".displayname")));
+                for (Player u : bluePlayers){
+                    Titles.sendFullTitle(u, 0, 20, 0, "", getMsg("x-attacked").replace("{villager}", getMsg("forum."+stone_mine+".displayname")));
                 }
             } else if (v == green_smine){
-                if (greenPlayers.contains(p.getUniqueId())){
+                if (greenPlayers.contains(p)){
                     p.sendMessage(getMsg("forum.violence"));
                     e.setCancelled(true);
                     return;
                 }
-                for (UUID u : greenPlayers){
-                    Titles.sendFullTitle(Bukkit.getPlayer(u), 0, 20, 0, "", getMsg("x-attacked").replace("{villager}", getMsg("forum."+stone_mine+".displayname")));
+                for (Player u : greenPlayers){
+                    Titles.sendFullTitle(u, 0, 20, 0, "", getMsg("x-attacked").replace("{villager}", getMsg("forum."+stone_mine+".displayname")));
                 }
             } else if (v == yellow_smine){
-                if (yellowPlayers.contains(p.getUniqueId())){
+                if (yellowPlayers.contains(p)){
                     p.sendMessage(getMsg("forum.violence"));
                     e.setCancelled(true);
                     return;
                 }
-                for (UUID u : yellowPlayers){
-                    Titles.sendFullTitle(Bukkit.getPlayer(u), 0, 20, 0, "", getMsg("x-attacked").replace("{villager}", getMsg("forum."+stone_mine+".displayname")));
+                for (Player u : yellowPlayers){
+                    Titles.sendFullTitle(u, 0, 20, 0, "", getMsg("x-attacked").replace("{villager}", getMsg("forum."+stone_mine+".displayname")));
                 }
             } else if (v == red_smine){
-                if (redPlayers.contains(p.getUniqueId())){
+                if (redPlayers.contains(p)){
                     p.sendMessage(getMsg("forum.violence"));
                     e.setCancelled(true);
                     return;
                 }
-                for (UUID u : redPlayers){
-                    Titles.sendFullTitle(Bukkit.getPlayer(u), 0, 20, 0, "", getMsg("x-attacked").replace("{villager}", getMsg("forum."+stone_mine+".displayname")));
+                for (Player u : redPlayers){
+                    Titles.sendFullTitle(u, 0, 20, 0, "", getMsg("x-attacked").replace("{villager}", getMsg("forum."+stone_mine+".displayname")));
                 }
             } else if (v == blue_gmine){
-                if (bluePlayers.contains(p.getUniqueId())){
+                if (bluePlayers.contains(p)){
                     p.sendMessage(getMsg("forum.violence"));
                     e.setCancelled(true);
                     return;
                 }
-                for (UUID u : bluePlayers){
-                    Titles.sendFullTitle(Bukkit.getPlayer(u), 0, 20, 0, "", getMsg("x-attacked").replace("{villager}", getMsg("forum."+gold_mine+".displayname")));
+                for (Player u : bluePlayers){
+                    Titles.sendFullTitle(u, 0, 20, 0, "", getMsg("x-attacked").replace("{villager}", getMsg("forum."+gold_mine+".displayname")));
                 }
             } else if (v == green_gmine){
-                if (greenPlayers.contains(p.getUniqueId())){
+                if (greenPlayers.contains(p)){
                     p.sendMessage(getMsg("forum.violence"));
                     e.setCancelled(true);
                     return;
                 }
-                for (UUID u : greenPlayers){
-                    Titles.sendFullTitle(Bukkit.getPlayer(u), 0, 20, 0, "", getMsg("x-attacked").replace("{villager}", getMsg("forum."+gold_mine+".displayname")));
+                for (Player u : greenPlayers){
+                    Titles.sendFullTitle(u, 0, 20, 0, "", getMsg("x-attacked").replace("{villager}", getMsg("forum."+gold_mine+".displayname")));
                 }
             } else if (v == yellow_gmine){
-                if (yellowPlayers.contains(p.getUniqueId())){
+                if (yellowPlayers.contains(p)){
                     p.sendMessage(getMsg("forum.violence"));
                     e.setCancelled(true);
                     return;
                 }
-                for (UUID u : yellowPlayers){
-                    Titles.sendFullTitle(Bukkit.getPlayer(u), 0, 20, 0, "", getMsg("x-attacked").replace("{villager}", getMsg("forum."+gold_mine+".displayname")));
+                for (Player u : yellowPlayers){
+                    Titles.sendFullTitle(u, 0, 20, 0, "", getMsg("x-attacked").replace("{villager}", getMsg("forum."+gold_mine+".displayname")));
                 }
             } else if (v == red_gmine){
-                if (redPlayers.contains(p.getUniqueId())){
+                if (redPlayers.contains(p)){
                     p.sendMessage(getMsg("forum.violence"));
                     e.setCancelled(true);
                     return;
                 }
-                for (UUID u : redPlayers){
-                    Titles.sendFullTitle(Bukkit.getPlayer(u), 0, 20, 0, "", getMsg("x-attacked").replace("{villager}", getMsg("forum."+gold_mine+".displayname")));
+                for (Player u : redPlayers){
+                    Titles.sendFullTitle(u, 0, 20, 0, "", getMsg("x-attacked").replace("{villager}", getMsg("forum."+gold_mine+".displayname")));
                 }
             } else if (v == blue_mill){
-                if (bluePlayers.contains(p.getUniqueId())){
+                if (bluePlayers.contains(p)){
                     p.sendMessage(getMsg("forum.violence"));
                     e.setCancelled(true);
                     return;
                 }
-                for (UUID u : bluePlayers){
-                    Titles.sendFullTitle(Bukkit.getPlayer(u), 0, 20, 0, "", getMsg("x-attacked").replace("{villager}", getMsg("forum."+mill+".displayname")));
+                for (Player u : bluePlayers){
+                    Titles.sendFullTitle(u, 0, 20, 0, "", getMsg("x-attacked").replace("{villager}", getMsg("forum."+mill+".displayname")));
                 }
             } else if (v == green_mill){
-                if (greenPlayers.contains(p.getUniqueId())){
+                if (greenPlayers.contains(p)){
                     p.sendMessage(getMsg("forum.violence"));
                     e.setCancelled(true);
                     return;
                 }
-                for (UUID u : greenPlayers){
-                    Titles.sendFullTitle(Bukkit.getPlayer(u), 0, 20, 0, "", getMsg("x-attacked").replace("{villager}", getMsg("forum."+mill+".displayname")));
+                for (Player u : greenPlayers){
+                    Titles.sendFullTitle(u, 0, 20, 0, "", getMsg("x-attacked").replace("{villager}", getMsg("forum."+mill+".displayname")));
                 }
             } else if (v == yellow_mill){
-                if (yellowPlayers.contains(p.getUniqueId())){
+                if (yellowPlayers.contains(p)){
                     p.sendMessage(getMsg("forum.violence"));
                     e.setCancelled(true);
                     return;
                 }
-                for (UUID u : yellowPlayers){
-                    Titles.sendFullTitle(Bukkit.getPlayer(u), 0, 20, 0, "", getMsg("x-attacked").replace("{villager}", getMsg("forum."+mill+".displayname")));
+                for (Player u : yellowPlayers){
+                    Titles.sendFullTitle(u, 0, 20, 0, "", getMsg("x-attacked").replace("{villager}", getMsg("forum."+mill+".displayname")));
                 }
             } else if (v == red_mill){
-                if (redPlayers.contains(p.getUniqueId())){
+                if (redPlayers.contains(p)){
                     p.sendMessage(getMsg("forum.violence"));
                     e.setCancelled(true);
                     return;
                 }
-                for (UUID u : redPlayers){
-                    Titles.sendFullTitle(Bukkit.getPlayer(u), 0, 20, 0, "", getMsg("x-attacked").replace("{villager}", getMsg("forum."+mill+".displayname")));
+                for (Player u : redPlayers){
+                    Titles.sendFullTitle(u, 0, 20, 0, "", getMsg("x-attacked").replace("{villager}", getMsg("forum."+mill+".displayname")));
                 }
             } else if (v == blue_vsawmill){
-                if (bluePlayers.contains(p.getUniqueId())){
+                if (bluePlayers.contains(p)){
                     p.sendMessage(getMsg("forum.violence"));
                     e.setCancelled(true);
                     return;
                 }
-                for (UUID u : bluePlayers){
-                    Titles.sendFullTitle(Bukkit.getPlayer(u), 0, 20, 0, "", getMsg("x-attacked").replace("{villager}", getMsg("forum."+sawmill+".displayname")));
+                for (Player u : bluePlayers){
+                    Titles.sendFullTitle(u, 0, 20, 0, "", getMsg("x-attacked").replace("{villager}", getMsg("forum."+sawmill+".displayname")));
                 }
             } else if (v == green_vsawmill){
-                if (greenPlayers.contains(p.getUniqueId())){
+                if (greenPlayers.contains(p)){
                     p.sendMessage(getMsg("forum.violence"));
                     e.setCancelled(true);
                     return;
                 }
-                for (UUID u : greenPlayers){
-                    Titles.sendFullTitle(Bukkit.getPlayer(u), 0, 20, 0, "", getMsg("x-attacked").replace("{villager}", getMsg("forum."+sawmill+".displayname")));
+                for (Player u : greenPlayers){
+                    Titles.sendFullTitle(u, 0, 20, 0, "", getMsg("x-attacked").replace("{villager}", getMsg("forum."+sawmill+".displayname")));
                 }
             } else if (v == yellow_vsawmill){
-                if (yellowPlayers.contains(p.getUniqueId())){
+                if (yellowPlayers.contains(p)){
                     p.sendMessage(getMsg("forum.violence"));
                     e.setCancelled(true);
                     return;
                 }
-                for (UUID u : yellowPlayers){
-                    Titles.sendFullTitle(Bukkit.getPlayer(u), 0, 20, 0, "", getMsg("x-attacked").replace("{villager}", getMsg("forum."+sawmill+".displayname")));
+                for (Player u : yellowPlayers){
+                    Titles.sendFullTitle(u, 0, 20, 0, "", getMsg("x-attacked").replace("{villager}", getMsg("forum."+sawmill+".displayname")));
                 }
             } else if (v == red_vsawmill){
-                if (redPlayers.contains(p.getUniqueId())){
+                if (redPlayers.contains(p)){
                     p.sendMessage(getMsg("forum.violence"));
                     e.setCancelled(true);
                     return;
                 }
-                for (UUID u : redPlayers){
-                    Titles.sendFullTitle(Bukkit.getPlayer(u), 0, 20, 0, "", getMsg("x-attacked").replace("{villager}", getMsg("forum."+sawmill+".displayname")));
+                for (Player u : redPlayers){
+                    Titles.sendFullTitle(u, 0, 20, 0, "", getMsg("x-attacked").replace("{villager}", getMsg("forum."+sawmill+".displayname")));
                 }
             } else if (v == blue_workshop){
-                if (bluePlayers.contains(p.getUniqueId())){
+                if (bluePlayers.contains(p)){
                     p.sendMessage(getMsg("forum.violence"));
                     e.setCancelled(true);
                     return;
                 }
-                for (UUID u : bluePlayers){
-                    Titles.sendFullTitle(Bukkit.getPlayer(u), 0, 20, 0, "", getMsg("x-attacked").replace("{villager}", getMsg("forum."+workshop+".displayname")));
+                for (Player u : bluePlayers){
+                    Titles.sendFullTitle(u, 0, 20, 0, "", getMsg("x-attacked").replace("{villager}", getMsg("forum."+workshop+".displayname")));
                 }
             } else if (v == green_workshop){
-                if (greenPlayers.contains(p.getUniqueId())){
+                if (greenPlayers.contains(p)){
                     p.sendMessage(getMsg("forum.violence"));
                     e.setCancelled(true);
                     return;
                 }
-                for (UUID u : greenPlayers){
-                    Titles.sendFullTitle(Bukkit.getPlayer(u), 0, 20, 0, "", getMsg("x-attacked").replace("{villager}", getMsg("forum."+workshop+".displayname")));
+                for (Player u : greenPlayers){
+                    Titles.sendFullTitle(u, 0, 20, 0, "", getMsg("x-attacked").replace("{villager}", getMsg("forum."+workshop+".displayname")));
                 }
             } else if (v == yellow_workshop){
-                if (yellowPlayers.contains(p.getUniqueId())){
+                if (yellowPlayers.contains(p)){
                     p.sendMessage(getMsg("forum.violence"));
                     e.setCancelled(true);
                     return;
                 }
-                for (UUID u : yellowPlayers){
-                    Titles.sendFullTitle(Bukkit.getPlayer(u), 0, 20, 0, "", getMsg("x-attacked").replace("{villager}", getMsg("forum."+workshop+".displayname")));
+                for (Player u : yellowPlayers){
+                    Titles.sendFullTitle(u, 0, 20, 0, "", getMsg("x-attacked").replace("{villager}", getMsg("forum."+workshop+".displayname")));
                 }
             } else if (v == red_workshop){
-                if (redPlayers.contains(p.getUniqueId())){
+                if (redPlayers.contains(p)){
                     p.sendMessage(getMsg("forum.violence"));
                     e.setCancelled(true);
                     return;
                 }
-                for (UUID u : redPlayers){
-                    Titles.sendFullTitle(Bukkit.getPlayer(u), 0, 20, 0, "", getMsg("x-attacked").replace("{villager}", getMsg("forum."+workshop+".displayname")));
+                for (Player u : redPlayers){
+                    Titles.sendFullTitle(u, 0, 20, 0, "", getMsg("x-attacked").replace("{villager}", getMsg("forum."+workshop+".displayname")));
                 }
             } else if (v == blue_market){
-                if (bluePlayers.contains(p.getUniqueId())){
+                if (bluePlayers.contains(p)){
                     p.sendMessage(getMsg("forum.violence"));
                     e.setCancelled(true);
                     return;
                 }
-                for (UUID u : bluePlayers){
-                    Titles.sendFullTitle(Bukkit.getPlayer(u), 0, 20, 0, "", getMsg("x-attacked").replace("{villager}", getMsg("forum."+market+".displayname")));
+                for (Player u : bluePlayers){
+                    Titles.sendFullTitle(u, 0, 20, 0, "", getMsg("x-attacked").replace("{villager}", getMsg("forum."+market+".displayname")));
                 }
             } else if (v == green_market){
-                if (greenPlayers.contains(p.getUniqueId())){
+                if (greenPlayers.contains(p)){
                     p.sendMessage(getMsg("forum.violence"));
                     e.setCancelled(true);
                     return;
                 }
-                for (UUID u : greenPlayers){
-                    Titles.sendFullTitle(Bukkit.getPlayer(u), 0, 20, 0, "", getMsg("x-attacked").replace("{villager}", getMsg("forum."+market+".displayname")));
+                for (Player u : greenPlayers){
+                    Titles.sendFullTitle(u, 0, 20, 0, "", getMsg("x-attacked").replace("{villager}", getMsg("forum."+market+".displayname")));
                 }
             } else if (v == yellow_market){
-                if (yellowPlayers.contains(p.getUniqueId())){
+                if (yellowPlayers.contains(p)){
                     p.sendMessage(getMsg("forum.violence"));
                     e.setCancelled(true);
                     return;
                 }
-                for (UUID u : yellowPlayers){
-                    Titles.sendFullTitle(Bukkit.getPlayer(u), 0, 20, 0, "", getMsg("x-attacked").replace("{villager}", getMsg("forum."+market+".displayname")));
+                for (Player u : yellowPlayers){
+                    Titles.sendFullTitle(u, 0, 20, 0, "", getMsg("x-attacked").replace("{villager}", getMsg("forum."+market+".displayname")));
                 }
             } else if (v == red_market){
-                if (redPlayers.contains(p.getUniqueId())){
+                if (redPlayers.contains(p)){
                     p.sendMessage(getMsg("forum.violence"));
                     e.setCancelled(true);
                     return;
                 }
-                for (UUID u : redPlayers){
-                    Titles.sendFullTitle(Bukkit.getPlayer(u), 0, 20, 0, "", getMsg("x-attacked").replace("{villager}", getMsg("forum."+market+".displayname")));
+                for (Player u : redPlayers){
+                    Titles.sendFullTitle(u, 0, 20, 0, "", getMsg("x-attacked").replace("{villager}", getMsg("forum."+market+".displayname")));
                 }
             } else if (v == blue_sabotage){
-                if (bluePlayers.contains(p.getUniqueId())){
+                if (bluePlayers.contains(p)){
                     p.sendMessage(getMsg("forum.violence"));
                     e.setCancelled(true);
                     return;
                 }
-                for (UUID u : bluePlayers){
-                    Titles.sendFullTitle(Bukkit.getPlayer(u), 0, 20, 0, "", getMsg("x-attacked").replace("{villager}", getMsg("forum."+sabotage+".displayname")));
+                for (Player u : bluePlayers){
+                    Titles.sendFullTitle(u, 0, 20, 0, "", getMsg("x-attacked").replace("{villager}", getMsg("forum."+sabotage+".displayname")));
                 }
             } else if (v == green_sabotage){
-                if (greenPlayers.contains(p.getUniqueId())){
+                if (greenPlayers.contains(p)){
                     p.sendMessage(getMsg("forum.violence"));
                     e.setCancelled(true);
                     return;
                 }
-                for (UUID u : greenPlayers){
-                    Titles.sendFullTitle(Bukkit.getPlayer(u), 0, 20, 0, "", getMsg("x-attacked").replace("{villager}", getMsg("forum."+sabotage+".displayname")));
+                for (Player u : greenPlayers){
+                    Titles.sendFullTitle(u, 0, 20, 0, "", getMsg("x-attacked").replace("{villager}", getMsg("forum."+sabotage+".displayname")));
                 }
             } else if (v == yellow_sabotage){
-                if (yellowPlayers.contains(p.getUniqueId())){
+                if (yellowPlayers.contains(p)){
                     p.sendMessage(getMsg("forum.violence"));
                     e.setCancelled(true);
                     return;
                 }
-                for (UUID u : yellowPlayers){
-                    Titles.sendFullTitle(Bukkit.getPlayer(u), 0, 20, 0, "", getMsg("x-attacked").replace("{villager}", getMsg("forum."+sabotage+".displayname")));
+                for (Player u : yellowPlayers){
+                    Titles.sendFullTitle(u, 0, 20, 0, "", getMsg("x-attacked").replace("{villager}", getMsg("forum."+sabotage+".displayname")));
                 }
             } else if (v == red_sabotage){
-                if (redPlayers.contains(p.getUniqueId())){
+                if (redPlayers.contains(p)){
                     p.sendMessage(getMsg("forum.violence"));
                     e.setCancelled(true);
                     return;
                 }
-                for (UUID u : redPlayers){
-                    Titles.sendFullTitle(Bukkit.getPlayer(u), 0, 20, 0, "", getMsg("x-attacked").replace("{villager}", getMsg("forum."+sabotage+".displayname")));
+                for (Player u : redPlayers){
+                    Titles.sendFullTitle(u, 0, 20, 0, "", getMsg("x-attacked").replace("{villager}", getMsg("forum."+sabotage+".displayname")));
                 }
             } else if (v == blue_kennel){
-                if (bluePlayers.contains(p.getUniqueId())){
+                if (bluePlayers.contains(p)){
                     p.sendMessage(getMsg("forum.violence"));
                     e.setCancelled(true);
                     return;
                 }
-                for (UUID u : bluePlayers){
-                    Titles.sendFullTitle(Bukkit.getPlayer(u), 0, 20, 0, "", getMsg("x-attacked").replace("{villager}", getMsg("forum."+kennel+".displayname")));
+                for (Player u : bluePlayers){
+                    Titles.sendFullTitle(u, 0, 20, 0, "", getMsg("x-attacked").replace("{villager}", getMsg("forum."+kennel+".displayname")));
                 }
             } else if (v == yellow_kennel){
-                if (yellowPlayers.contains(p.getUniqueId())){
+                if (yellowPlayers.contains(p)){
                     p.sendMessage(getMsg("forum.violence"));
                     e.setCancelled(true);
                     return;
                 }
-                for (UUID u : yellowPlayers){
-                    Titles.sendFullTitle(Bukkit.getPlayer(u), 0, 20, 0, "", getMsg("x-attacked").replace("{villager}", getMsg("forum."+kennel+".displayname")));
+                for (Player u : yellowPlayers){
+                    Titles.sendFullTitle(u, 0, 20, 0, "", getMsg("x-attacked").replace("{villager}", getMsg("forum."+kennel+".displayname")));
                 }
             } else if (v == green_kennel){
-                if (greenPlayers.contains(p.getUniqueId())){
+                if (greenPlayers.contains(p)){
                     p.sendMessage(getMsg("forum.violence"));
                     e.setCancelled(true);
                     return;
                 }
-                for (UUID u : greenPlayers){
-                    Titles.sendFullTitle(Bukkit.getPlayer(u), 0, 20, 0, "", getMsg("x-attacked").replace("{villager}", getMsg("forum."+kennel+".displayname")));
+                for (Player u : greenPlayers){
+                    Titles.sendFullTitle(u, 0, 20, 0, "", getMsg("x-attacked").replace("{villager}", getMsg("forum."+kennel+".displayname")));
                 }
             } else if (v == red_kennel){
-                if (redPlayers.contains(p.getUniqueId())){
+                if (redPlayers.contains(p)){
                     p.sendMessage(getMsg("forum.violence"));
                     e.setCancelled(true);
                     return;
                 }
-                for (UUID u : redPlayers){
-                    Titles.sendFullTitle(Bukkit.getPlayer(u), 0, 20, 0, "", getMsg("x-attacked").replace("{villager}", getMsg("forum."+kennel+".displayname")));
+                for (Player u : redPlayers){
+                    Titles.sendFullTitle(u, 0, 20, 0, "", getMsg("x-attacked").replace("{villager}", getMsg("forum."+kennel+".displayname")));
                 }
             } else if (v == blue_archery){
-                if (bluePlayers.contains(p.getUniqueId())){
+                if (bluePlayers.contains(p)){
                     p.sendMessage(getMsg("forum.violence"));
                     e.setCancelled(true);
                     return;
                 }
-                for (UUID u : bluePlayers){
-                    Titles.sendFullTitle(Bukkit.getPlayer(u), 0, 20, 0, "", getMsg("x-attacked").replace("{villager}", getMsg("forum."+archery+".displayname")));
+                for (Player u : bluePlayers){
+                    Titles.sendFullTitle(u, 0, 20, 0, "", getMsg("x-attacked").replace("{villager}", getMsg("forum."+archery+".displayname")));
                 }
             } else if (v == green_archery){
-                if (greenPlayers.contains(p.getUniqueId())){
+                if (greenPlayers.contains(p)){
                     p.sendMessage(getMsg("forum.violence"));
                     e.setCancelled(true);
                     return;
                 }
-                for (UUID u : greenPlayers){
-                    Titles.sendFullTitle(Bukkit.getPlayer(u), 0, 20, 0, "", getMsg("x-attacked").replace("{villager}", getMsg("forum."+archery+".displayname")));
+                for (Player u : greenPlayers){
+                    Titles.sendFullTitle(u, 0, 20, 0, "", getMsg("x-attacked").replace("{villager}", getMsg("forum."+archery+".displayname")));
                 }
             } else if (v == yellow_archery){
-                if (yellowPlayers.contains(p.getUniqueId())){
+                if (yellowPlayers.contains(p)){
                     p.sendMessage(getMsg("forum.violence"));
                     e.setCancelled(true);
                     return;
                 }
-                for (UUID u : yellowPlayers){
-                    Titles.sendFullTitle(Bukkit.getPlayer(u), 0, 20, 0, "", getMsg("x-attacked").replace("{villager}", getMsg("forum."+archery+".displayname")));
+                for (Player u : yellowPlayers){
+                    Titles.sendFullTitle(u, 0, 20, 0, "", getMsg("x-attacked").replace("{villager}", getMsg("forum."+archery+".displayname")));
                 }
             } else if (v == red_archery){
-                if (redPlayers.contains(p.getUniqueId())){
+                if (redPlayers.contains(p)){
                     p.sendMessage(getMsg("forum.violence"));
                     e.setCancelled(true);
                     return;
                 }
-                for (UUID u : redPlayers){
-                    Titles.sendFullTitle(Bukkit.getPlayer(u), 0, 20, 0, "", getMsg("x-attacked").replace("{villager}", getMsg("forum."+archery+".displayname")));
+                for (Player u : redPlayers){
+                    Titles.sendFullTitle(u, 0, 20, 0, "", getMsg("x-attacked").replace("{villager}", getMsg("forum."+archery+".displayname")));
                 }
             } else if (v == blue_trifarrow){
-                if (bluePlayers.contains(p.getUniqueId())){
+                if (bluePlayers.contains(p)){
                     p.sendMessage(getMsg("forum.violence"));
                     e.setCancelled(true);
                     return;
                 }
-                for (UUID u : bluePlayers){
-                    Titles.sendFullTitle(Bukkit.getPlayer(u), 0, 20, 0, "", getMsg("x-attacked").replace("{villager}", getMsg("forum."+trifarrow+".displayname")));
+                for (Player u : bluePlayers){
+                    Titles.sendFullTitle(u, 0, 20, 0, "", getMsg("x-attacked").replace("{villager}", getMsg("forum."+trifarrow+".displayname")));
                 }
             } else if (v == green_trifarrow){
-                if (greenPlayers.contains(p.getUniqueId())){
+                if (greenPlayers.contains(p)){
                     p.sendMessage(getMsg("forum.violence"));
                     e.setCancelled(true);
                     return;
                 }
-                for (UUID u : greenPlayers){
-                    Titles.sendFullTitle(Bukkit.getPlayer(u), 0, 20, 0, "", getMsg("x-attacked").replace("{villager}", getMsg("forum."+trifarrow+".displayname")));
+                for (Player u : greenPlayers){
+                    Titles.sendFullTitle(u, 0, 20, 0, "", getMsg("x-attacked").replace("{villager}", getMsg("forum."+trifarrow+".displayname")));
                 }
             } else if (v == yellow_trifarrow){
-                if (yellowPlayers.contains(p.getUniqueId())){
+                if (yellowPlayers.contains(p)){
                     p.sendMessage(getMsg("forum.violence"));
                     e.setCancelled(true);
                     return;
                 }
-                for (UUID u : yellowPlayers){
-                    Titles.sendFullTitle(Bukkit.getPlayer(u), 0, 20, 0, "", getMsg("x-attacked").replace("{villager}", getMsg("forum."+trifarrow+".displayname")));
+                for (Player u : yellowPlayers){
+                    Titles.sendFullTitle(u, 0, 20, 0, "", getMsg("x-attacked").replace("{villager}", getMsg("forum."+trifarrow+".displayname")));
                 }
             } else if (v == red_trifarrow){
-                if (redPlayers.contains(p.getUniqueId())){
+                if (redPlayers.contains(p)){
                     p.sendMessage(getMsg("forum.violence"));
                     e.setCancelled(true);
                     return;
                 }
-                for (UUID u : redPlayers){
-                    Titles.sendFullTitle(Bukkit.getPlayer(u), 0, 20, 0, "", getMsg("x-attacked").replace("{villager}", getMsg("forum."+trifarrow+".displayname")));
+                for (Player u : redPlayers){
+                    Titles.sendFullTitle(u, 0, 20, 0, "", getMsg("x-attacked").replace("{villager}", getMsg("forum."+trifarrow+".displayname")));
                 }
             } else if (v == blue_stable){
-                if (bluePlayers.contains(p.getUniqueId())){
+                if (bluePlayers.contains(p)){
                     p.sendMessage(getMsg("forum.violence"));
                     e.setCancelled(true);
                     return;
                 }
-                for (UUID u : bluePlayers){
-                    Titles.sendFullTitle(Bukkit.getPlayer(u), 0, 20, 0, "", getMsg("x-attacked").replace("{villager}", getMsg("forum."+stable+".displayname")));
+                for (Player u : bluePlayers){
+                    Titles.sendFullTitle(u, 0, 20, 0, "", getMsg("x-attacked").replace("{villager}", getMsg("forum."+stable+".displayname")));
                 }
             } else if (v == green_stable){
-                if (greenPlayers.contains(p.getUniqueId())){
+                if (greenPlayers.contains(p)){
                     p.sendMessage(getMsg("forum.violence"));
                     e.setCancelled(true);
                     return;
                 }
-                for (UUID u : greenPlayers){
-                    Titles.sendFullTitle(Bukkit.getPlayer(u), 0, 20, 0, "", getMsg("x-attacked").replace("{villager}", getMsg("forum."+stable+".displayname")));
+                for (Player u : greenPlayers){
+                    Titles.sendFullTitle(u, 0, 20, 0, "", getMsg("x-attacked").replace("{villager}", getMsg("forum."+stable+".displayname")));
                 }
             } else if (v == yellow_stable){
-                if (yellowPlayers.contains(p.getUniqueId())){
+                if (yellowPlayers.contains(p)){
                     p.sendMessage(getMsg("forum.violence"));
                     e.setCancelled(true);
                     return;
                 }
-                for (UUID u : yellowPlayers){
-                    Titles.sendFullTitle(Bukkit.getPlayer(u), 0, 20, 0, "", getMsg("x-attacked").replace("{villager}", getMsg("forum."+stable+".displayname")));
+                for (Player u : yellowPlayers){
+                    Titles.sendFullTitle(u, 0, 20, 0, "", getMsg("x-attacked").replace("{villager}", getMsg("forum."+stable+".displayname")));
                 }
             } else if (v == red_stable){
-                if (redPlayers.contains(p.getUniqueId())){
+                if (redPlayers.contains(p)){
                     p.sendMessage(getMsg("forum.violence"));
                     e.setCancelled(true);
                     return;
                 }
-                for (UUID u : redPlayers){
-                    Titles.sendFullTitle(Bukkit.getPlayer(u), 0, 20, 0, "", getMsg("x-attacked").replace("{villager}", getMsg("forum."+stable+".displayname")));
+                for (Player u : redPlayers){
+                    Titles.sendFullTitle(u, 0, 20, 0, "", getMsg("x-attacked").replace("{villager}", getMsg("forum."+stable+".displayname")));
                 }
             } else if (v == blue_armory){
-                if (bluePlayers.contains(p.getUniqueId())){
+                if (bluePlayers.contains(p)){
                     p.sendMessage(getMsg("forum.violence"));
                     e.setCancelled(true);
                     return;
                 }
-                for (UUID u : bluePlayers){
-                    Titles.sendFullTitle(Bukkit.getPlayer(u), 0, 20, 0, "", getMsg("x-attacked").replace("{villager}", getMsg("forum."+armory+".displayname")));
+                for (Player u : bluePlayers){
+                    Titles.sendFullTitle(u, 0, 20, 0, "", getMsg("x-attacked").replace("{villager}", getMsg("forum."+armory+".displayname")));
                 }
             } else if (v == green_archery){
-                if (greenPlayers.contains(p.getUniqueId())){
+                if (greenPlayers.contains(p)){
                     p.sendMessage(getMsg("forum.violence"));
                     e.setCancelled(true);
                     return;
                 }
-                for (UUID u : greenPlayers){
-                    Titles.sendFullTitle(Bukkit.getPlayer(u), 0, 20, 0, "", getMsg("x-attacked").replace("{villager}", getMsg("forum."+armory+".displayname")));
+                for (Player u : greenPlayers){
+                    Titles.sendFullTitle(u, 0, 20, 0, "", getMsg("x-attacked").replace("{villager}", getMsg("forum."+armory+".displayname")));
                 }
             } else if (v == yellow_armory){
-                if (yellowPlayers.contains(p.getUniqueId())){
+                if (yellowPlayers.contains(p)){
                     p.sendMessage(getMsg("forum.violence"));
                     e.setCancelled(true);
                     return;
                 }
-                for (UUID u : yellowPlayers){
-                    Titles.sendFullTitle(Bukkit.getPlayer(u), 0, 20, 0, "", getMsg("x-attacked").replace("{villager}", getMsg("forum."+armory+".displayname")));
+                for (Player u : yellowPlayers){
+                    Titles.sendFullTitle(u, 0, 20, 0, "", getMsg("x-attacked").replace("{villager}", getMsg("forum."+armory+".displayname")));
                 }
             } else if (v == red_armory){
-                if (redPlayers.contains(p.getUniqueId())){
+                if (redPlayers.contains(p)){
                     p.sendMessage(getMsg("forum.violence"));
                     e.setCancelled(true);
                     return;
                 }
-                for (UUID u : redPlayers){
-                    Titles.sendFullTitle(Bukkit.getPlayer(u), 0, 20, 0, "", getMsg("x-attacked").replace("{villager}", getMsg("forum."+armory+".displayname")));
+                for (Player u : redPlayers){
+                    Titles.sendFullTitle(u, 0, 20, 0, "", getMsg("x-attacked").replace("{villager}", getMsg("forum."+armory+".displayname")));
                 }
             } else if (v == blue_lab){
-                if (bluePlayers.contains(p.getUniqueId())){
+                if (bluePlayers.contains(p)){
                     p.sendMessage(getMsg("forum.violence"));
                     e.setCancelled(true);
                     return;
                 }
-                for (UUID u : bluePlayers){
-                    Titles.sendFullTitle(Bukkit.getPlayer(u), 0, 20, 0, "", getMsg("x-attacked").replace("{villager}", getMsg("forum."+laboratory+".displayname")));
+                for (Player u : bluePlayers){
+                    Titles.sendFullTitle(u, 0, 20, 0, "", getMsg("x-attacked").replace("{villager}", getMsg("forum."+laboratory+".displayname")));
                 }
             }  else if (v == green_lab){
-                if (greenPlayers.contains(p.getUniqueId())){
+                if (greenPlayers.contains(p)){
                     p.sendMessage(getMsg("forum.violence"));
                     e.setCancelled(true);
                     return;
                 }
-                for (UUID u : greenPlayers){
-                    Titles.sendFullTitle(Bukkit.getPlayer(u), 0, 20, 0, "", getMsg("x-attacked").replace("{villager}", getMsg("forum."+laboratory+".displayname")));
+                for (Player u : greenPlayers){
+                    Titles.sendFullTitle(u, 0, 20, 0, "", getMsg("x-attacked").replace("{villager}", getMsg("forum."+laboratory+".displayname")));
                 }
             }  else if (v == yellow_lab){
-                if (yellowPlayers.contains(p.getUniqueId())){
+                if (yellowPlayers.contains(p)){
                     p.sendMessage(getMsg("forum.violence"));
                     e.setCancelled(true);
                     return;
                 }
-                for (UUID u : yellowPlayers){
-                    Titles.sendFullTitle(Bukkit.getPlayer(u), 0, 20, 0, "", getMsg("x-attacked").replace("{villager}", getMsg("forum."+laboratory+".displayname")));
+                for (Player u : yellowPlayers){
+                    Titles.sendFullTitle(u, 0, 20, 0, "", getMsg("x-attacked").replace("{villager}", getMsg("forum."+laboratory+".displayname")));
                 }
             }  else if (v == red_lab){
-                if (redPlayers.contains(p.getUniqueId())){
+                if (redPlayers.contains(p)){
                     p.sendMessage(getMsg("forum.violence"));
                     e.setCancelled(true);
                     return;
                 }
-                for (UUID u : redPlayers){
-                    Titles.sendFullTitle(Bukkit.getPlayer(u), 0, 20, 0, "", getMsg("x-attacked").replace("{villager}", getMsg("forum."+laboratory+".displayname")));
+                for (Player u : redPlayers){
+                    Titles.sendFullTitle(u, 0, 20, 0, "", getMsg("x-attacked").replace("{villager}", getMsg("forum."+laboratory+".displayname")));
                 }
             }  else if (v == blue_guild){
-                if (bluePlayers.contains(p.getUniqueId())){
+                if (bluePlayers.contains(p)){
                     p.sendMessage(getMsg("forum.violence"));
                     e.setCancelled(true);
                     return;
                 }
-                for (UUID u : bluePlayers){
-                    Titles.sendFullTitle(Bukkit.getPlayer(u), 0, 20, 0, "", getMsg("x-attacked").replace("{villager}", getMsg("forum."+guild+".displayname")));
+                for (Player u : bluePlayers){
+                    Titles.sendFullTitle(u, 0, 20, 0, "", getMsg("x-attacked").replace("{villager}", getMsg("forum."+guild+".displayname")));
                 }
             }  else if (v == green_guild){
-                if (greenPlayers.contains(p.getUniqueId())){
+                if (greenPlayers.contains(p)){
                     p.sendMessage(getMsg("forum.violence"));
                     e.setCancelled(true);
                     return;
                 }
-                for (UUID u : greenPlayers){
-                    Titles.sendFullTitle(Bukkit.getPlayer(u), 0, 20, 0, "", getMsg("x-attacked").replace("{villager}", getMsg("forum."+guild+".displayname")));
+                for (Player u : greenPlayers){
+                    Titles.sendFullTitle(u, 0, 20, 0, "", getMsg("x-attacked").replace("{villager}", getMsg("forum."+guild+".displayname")));
                 }
             }  else if (v == yellow_guild){
-                if (yellowPlayers.contains(p.getUniqueId())){
+                if (yellowPlayers.contains(p)){
                     p.sendMessage(getMsg("forum.violence"));
                     e.setCancelled(true);
                     return;
                 }
-                for (UUID u : yellowPlayers){
-                    Titles.sendFullTitle(Bukkit.getPlayer(u), 0, 20, 0, "", getMsg("x-attacked").replace("{villager}", getMsg("forum."+guild+".displayname")));
+                for (Player u : yellowPlayers){
+                    Titles.sendFullTitle(u, 0, 20, 0, "", getMsg("x-attacked").replace("{villager}", getMsg("forum."+guild+".displayname")));
                 }
             }  else if (v == red_guild){
-                if (redPlayers.contains(p.getUniqueId())){
+                if (redPlayers.contains(p)){
                     p.sendMessage(getMsg("forum.violence"));
                     e.setCancelled(true);
                     return;
                 }
-                for (UUID u : redPlayers){
-                    Titles.sendFullTitle(Bukkit.getPlayer(u), 0, 20, 0, "", getMsg("x-attacked").replace("{villager}", getMsg("forum."+guild+".displayname")));
+                for (Player u : redPlayers){
+                    Titles.sendFullTitle(u, 0, 20, 0, "", getMsg("x-attacked").replace("{villager}", getMsg("forum."+guild+".displayname")));
                 }
             }  else if (v == blue_tcenter){
-                if (bluePlayers.contains(p.getUniqueId())){
+                if (bluePlayers.contains(p)){
                     p.sendMessage(getMsg("forum.violence"));
                     e.setCancelled(true);
                     return;
                 }
-                for (UUID u : bluePlayers){
-                    Titles.sendFullTitle(Bukkit.getPlayer(u), 0, 20, 0, "", getMsg("x-attacked").replace("{villager}", getMsg("forum."+training_center+".displayname")));
+                for (Player u : bluePlayers){
+                    Titles.sendFullTitle(u, 0, 20, 0, "", getMsg("x-attacked").replace("{villager}", getMsg("forum."+training_center+".displayname")));
                 }
             }  else if (v == green_tcenter){
-                if (greenPlayers.contains(p.getUniqueId())){
+                if (greenPlayers.contains(p)){
                     p.sendMessage(getMsg("forum.violence"));
                     e.setCancelled(true);
                     return;
                 }
-                for (UUID u : greenPlayers){
-                    Titles.sendFullTitle(Bukkit.getPlayer(u), 0, 20, 0, "", getMsg("x-attacked").replace("{villager}", getMsg("forum."+training_center+".displayname")));
+                for (Player u : greenPlayers){
+                    Titles.sendFullTitle(u, 0, 20, 0, "", getMsg("x-attacked").replace("{villager}", getMsg("forum."+training_center+".displayname")));
                 }
             }  else if (v == yellow_tcenter){
-                if (yellowPlayers.contains(p.getUniqueId())){
+                if (yellowPlayers.contains(p)){
                     p.sendMessage(getMsg("forum.violence"));
                     e.setCancelled(true);
                     return;
                 }
-                for (UUID u : yellowPlayers){
-                    Titles.sendFullTitle(Bukkit.getPlayer(u), 0, 20, 0, "", getMsg("x-attacked").replace("{villager}", getMsg("forum."+training_center+".displayname")));
+                for (Player u : yellowPlayers){
+                    Titles.sendFullTitle(u, 0, 20, 0, "", getMsg("x-attacked").replace("{villager}", getMsg("forum."+training_center+".displayname")));
                 }
             }  else if (v == red_tcenter){
-                if (redPlayers.contains(p.getUniqueId())){
+                if (redPlayers.contains(p)){
                     p.sendMessage(getMsg("forum.violence"));
                     e.setCancelled(true);
                     return;
                 }
-                for (UUID u : redPlayers){
-                    Titles.sendFullTitle(Bukkit.getPlayer(u), 0, 20, 0, "", getMsg("x-attacked").replace("{villager}", getMsg("forum."+training_center+".displayname")));
+                for (Player u : redPlayers){
+                    Titles.sendFullTitle(u, 0, 20, 0, "", getMsg("x-attacked").replace("{villager}", getMsg("forum."+training_center+".displayname")));
                 }
             }
         }

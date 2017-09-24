@@ -38,13 +38,13 @@ public class EntityDeathListener implements Listener {
             } else {
                 return;
             }
-                if (bluePlayers.contains(p.getUniqueId())) {
+                if (bluePlayers.contains(p)) {
                     killer = "§9Blue";
-                } else if (greenPlayers.contains(p.getUniqueId())) {
+                } else if (greenPlayers.contains(p)) {
                     killer = "§aGreen";
-                } else if (yellowPlayers.contains(p.getUniqueId())) {
+                } else if (yellowPlayers.contains(p)) {
                     killer = "§eYellow";
-                } else if (redPlayers.contains(p.getUniqueId())) {
+                } else if (redPlayers.contains(p)) {
                     killer = "§cRed";
                 }
             if (v == blue_villager){
@@ -53,12 +53,12 @@ public class EntityDeathListener implements Listener {
                 Bukkit.getScheduler().runTaskLater(plugin, ()-> {
                     try {
                         if (!bluePlayers.isEmpty()) {
-                            for (UUID u : bluePlayers) {
+                            for (Player u : bluePlayers) {
                                 if (u != null) {
                                     players.remove(u);
                                     bluePlayers.remove(u);
-                                    Bukkit.getPlayer(u).getInventory().clear();
-                                    Bukkit.getPlayer(u).setGameMode(GameMode.SPECTATOR);
+                                    u.getInventory().clear();
+                                    u.setGameMode(GameMode.SPECTATOR);
                                 }
                             }
                         }
@@ -71,10 +71,10 @@ public class EntityDeathListener implements Listener {
                 Bukkit.getScheduler().runTaskLater(plugin, ()-> {
                     try {
                         if (!greenPlayers.isEmpty()) {
-                            for (UUID u : greenPlayers) {
+                            for (Player u : greenPlayers) {
                                 if (u != null) {
-                                    Bukkit.getPlayer(u).getInventory().clear();
-                                    Bukkit.getPlayer(u).setGameMode(GameMode.SPECTATOR);
+                                    u.getInventory().clear();
+                                    u.setGameMode(GameMode.SPECTATOR);
                                     players.remove(u);
                                     greenPlayers.remove(u);
                                 }
@@ -89,12 +89,12 @@ public class EntityDeathListener implements Listener {
                 Bukkit.getScheduler().runTaskLater(plugin, ()-> {
                     try {
                         if (!yellowPlayers.isEmpty()) {
-                            for (UUID u : yellowPlayers) {
+                            for (Player u : yellowPlayers) {
                                 if (u != null) {
                                     players.remove(u);
                                     yellowPlayers.remove(u);
-                                    Bukkit.getPlayer(u).getInventory().clear();
-                                    Bukkit.getPlayer(u).setGameMode(GameMode.SPECTATOR);
+                                    u.getInventory().clear();
+                                    u.setGameMode(GameMode.SPECTATOR);
                                 }
                             }
                         }
@@ -107,12 +107,12 @@ public class EntityDeathListener implements Listener {
                 Bukkit.getScheduler().runTaskLater(plugin, ()-> {
                     try {
                         if (!redPlayers.isEmpty()) {
-                            for (UUID u : redPlayers) {
+                            for (Player u : redPlayers) {
                                 if (u != null) {
                                     players.remove(u);
                                     redPlayers.remove(u);
-                                    Bukkit.getPlayer(u).getInventory().clear();
-                                    Bukkit.getPlayer(u).setGameMode(GameMode.SPECTATOR);
+                                    u.getInventory().clear();
+                                    u.setGameMode(GameMode.SPECTATOR);
                                 }
                             }
                         }

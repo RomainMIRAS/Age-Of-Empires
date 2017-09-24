@@ -680,6 +680,9 @@ public class Messages {
         yml.addDefault("stats.kingskilled", "&3Kings Killed: &a%kings%");
         yml.addDefault("vip-kick", "§cYou've got kicked because a vip joined the server.");
 
+        yml.addDefault("cantDo", "{prefix} &cYou can't do this!");
+        yml.addDefault("cantDoNow", "{prefix} &cYou can't do this right now!");
+
         yml.options().copyDefaults(true);
         try {
             yml.save(file);

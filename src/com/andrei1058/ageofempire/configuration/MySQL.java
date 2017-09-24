@@ -37,10 +37,7 @@ public class MySQL {
     }
 
     public boolean isConnected(){
-        if (this.connection != null){
-            return true;
-        }
-        return false;
+        return this.connection != null;
     }
     public boolean connect(){
         if (!isConnected()){

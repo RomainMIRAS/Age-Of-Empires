@@ -24,80 +24,77 @@ public class PlayerRespawnListener implements Listener {
         e.setRespawnLocation(p.getLocation());
         p.setGameMode(GameMode.SPECTATOR);
 
-        Bukkit.getScheduler().runTaskLater(plugin, new Runnable() {
-            @Override
-            public void run() {
-                if (bluePlayers.contains(p.getUniqueId())){
-                    p.teleport(Locations.getLoc("Spawns."+choosenMap+".Blue"));
-                    p.setGameMode(GameMode.SURVIVAL);
-                    p.getInventory().setHelmet(leatherArmor(Material.LEATHER_HELMET, Color.BLUE));
-                    p.getInventory().setChestplate(leatherArmor(Material.LEATHER_CHESTPLATE, Color.BLUE));
-                    p.getInventory().setBoots(leatherArmor(Material.LEATHER_BOOTS, Color.BLUE));
-                    p.getInventory().setLeggings(leatherArmor(Material.LEATHER_LEGGINGS, Color.BLUE));
-                    p.getInventory().addItem(new ItemStack(Material.STONE_PICKAXE));
-                    p.getInventory().addItem(new ItemStack(Material.STONE_AXE));
-                    p.getInventory().setItem(8, slotlocked());
-                    if (constructor.contains(p)){
-                        constructor.remove(p);
-                        p.getInventory().setItem(7, constructor());
-                    } else {
-                        p.getInventory().setItem(7, slotlocked());
-                    }
-                    p.getInventory().setItem(6, forumPaper());
-                } else if (greenPlayers.contains(p.getUniqueId())){
-                    p.teleport(Locations.getLoc("Spawns."+choosenMap+".Green"));
-                    p.setGameMode(GameMode.SURVIVAL);
-                    p.getInventory().setHelmet(leatherArmor(Material.LEATHER_HELMET, Color.GREEN));
-                    p.getInventory().setChestplate(leatherArmor(Material.LEATHER_CHESTPLATE, Color.GREEN));
-                    p.getInventory().setBoots(leatherArmor(Material.LEATHER_BOOTS, Color.GREEN));
-                    p.getInventory().setLeggings(leatherArmor(Material.LEATHER_LEGGINGS, Color.GREEN));
-                    p.getInventory().addItem(new ItemStack(Material.STONE_PICKAXE));
-                    p.getInventory().addItem(new ItemStack(Material.STONE_AXE));
-                    p.getInventory().setItem(8, slotlocked());
-                    if (constructor.contains(p)){
-                        constructor.remove(p);
-                        p.getInventory().setItem(7, constructor());
-                    } else {
-                        p.getInventory().setItem(7, slotlocked());
-                    }
-                    p.getInventory().setItem(6, forumPaper());
-                } else if (yellowPlayers.contains(p.getUniqueId())){
-                    p.teleport(Locations.getLoc("Spawns."+choosenMap+".Yellow"));
-                    p.setGameMode(GameMode.SURVIVAL);
-                    p.getInventory().setHelmet(leatherArmor(Material.LEATHER_HELMET, Color.YELLOW));
-                    p.getInventory().setChestplate(leatherArmor(Material.LEATHER_CHESTPLATE, Color.YELLOW));
-                    p.getInventory().setBoots(leatherArmor(Material.LEATHER_BOOTS, Color.YELLOW));
-                    p.getInventory().setLeggings(leatherArmor(Material.LEATHER_LEGGINGS, Color.YELLOW));
-                    p.getInventory().addItem(new ItemStack(Material.STONE_PICKAXE));
-                    p.getInventory().addItem(new ItemStack(Material.STONE_AXE));
-                    p.getInventory().setItem(8, slotlocked());
-                    if (constructor.contains(p)){
-                        constructor.remove(p);
-                        p.getInventory().setItem(7, constructor());
-                    } else {
-                        p.getInventory().setItem(7, slotlocked());
-                    }
-                    p.getInventory().setItem(6, forumPaper());
-                } else if (redPlayers.contains(p.getUniqueId())){
-                    p.teleport(Locations.getLoc("Spawns."+choosenMap+".Red"));
-                    p.setGameMode(GameMode.SURVIVAL);
-                    p.getInventory().setHelmet(leatherArmor(Material.LEATHER_HELMET, Color.RED));
-                    p.getInventory().setChestplate(leatherArmor(Material.LEATHER_CHESTPLATE, Color.RED));
-                    p.getInventory().setBoots(leatherArmor(Material.LEATHER_BOOTS, Color.RED));
-                    p.getInventory().setLeggings(leatherArmor(Material.LEATHER_LEGGINGS, Color.RED));
-                    p.getInventory().addItem(new ItemStack(Material.STONE_PICKAXE));
-                    p.getInventory().addItem(new ItemStack(Material.STONE_AXE));
-                    p.getInventory().setItem(8, slotlocked());
-                    if (constructor.contains(p)){
-                        constructor.remove(p);
-                        p.getInventory().setItem(7, constructor());
-                    } else {
-                        p.getInventory().setItem(7, slotlocked());
-                    }
-                    p.getInventory().setItem(6, forumPaper());
+        Bukkit.getScheduler().runTaskLater(plugin, () -> {
+            if (bluePlayers.contains(p)){
+                p.teleport(Locations.getLoc("Spawns."+choosenMap+".Blue"));
+                p.setGameMode(GameMode.SURVIVAL);
+                p.getInventory().setHelmet(leatherArmor(Material.LEATHER_HELMET, Color.BLUE));
+                p.getInventory().setChestplate(leatherArmor(Material.LEATHER_CHESTPLATE, Color.BLUE));
+                p.getInventory().setBoots(leatherArmor(Material.LEATHER_BOOTS, Color.BLUE));
+                p.getInventory().setLeggings(leatherArmor(Material.LEATHER_LEGGINGS, Color.BLUE));
+                p.getInventory().addItem(new ItemStack(Material.STONE_PICKAXE));
+                p.getInventory().addItem(new ItemStack(Material.STONE_AXE));
+                p.getInventory().setItem(8, slotlocked());
+                if (constructor.contains(p)){
+                    constructor.remove(p);
+                    p.getInventory().setItem(7, constructor());
                 } else {
-                    players.remove(p.getUniqueId());
+                    p.getInventory().setItem(7, slotlocked());
                 }
+                p.getInventory().setItem(6, forumPaper());
+            } else if (greenPlayers.contains(p)){
+                p.teleport(Locations.getLoc("Spawns."+choosenMap+".Green"));
+                p.setGameMode(GameMode.SURVIVAL);
+                p.getInventory().setHelmet(leatherArmor(Material.LEATHER_HELMET, Color.GREEN));
+                p.getInventory().setChestplate(leatherArmor(Material.LEATHER_CHESTPLATE, Color.GREEN));
+                p.getInventory().setBoots(leatherArmor(Material.LEATHER_BOOTS, Color.GREEN));
+                p.getInventory().setLeggings(leatherArmor(Material.LEATHER_LEGGINGS, Color.GREEN));
+                p.getInventory().addItem(new ItemStack(Material.STONE_PICKAXE));
+                p.getInventory().addItem(new ItemStack(Material.STONE_AXE));
+                p.getInventory().setItem(8, slotlocked());
+                if (constructor.contains(p)){
+                    constructor.remove(p);
+                    p.getInventory().setItem(7, constructor());
+                } else {
+                    p.getInventory().setItem(7, slotlocked());
+                }
+                p.getInventory().setItem(6, forumPaper());
+            } else if (yellowPlayers.contains(p)){
+                p.teleport(Locations.getLoc("Spawns."+choosenMap+".Yellow"));
+                p.setGameMode(GameMode.SURVIVAL);
+                p.getInventory().setHelmet(leatherArmor(Material.LEATHER_HELMET, Color.YELLOW));
+                p.getInventory().setChestplate(leatherArmor(Material.LEATHER_CHESTPLATE, Color.YELLOW));
+                p.getInventory().setBoots(leatherArmor(Material.LEATHER_BOOTS, Color.YELLOW));
+                p.getInventory().setLeggings(leatherArmor(Material.LEATHER_LEGGINGS, Color.YELLOW));
+                p.getInventory().addItem(new ItemStack(Material.STONE_PICKAXE));
+                p.getInventory().addItem(new ItemStack(Material.STONE_AXE));
+                p.getInventory().setItem(8, slotlocked());
+                if (constructor.contains(p)){
+                    constructor.remove(p);
+                    p.getInventory().setItem(7, constructor());
+                } else {
+                    p.getInventory().setItem(7, slotlocked());
+                }
+                p.getInventory().setItem(6, forumPaper());
+            } else if (redPlayers.contains(p)){
+                p.teleport(Locations.getLoc("Spawns."+choosenMap+".Red"));
+                p.setGameMode(GameMode.SURVIVAL);
+                p.getInventory().setHelmet(leatherArmor(Material.LEATHER_HELMET, Color.RED));
+                p.getInventory().setChestplate(leatherArmor(Material.LEATHER_CHESTPLATE, Color.RED));
+                p.getInventory().setBoots(leatherArmor(Material.LEATHER_BOOTS, Color.RED));
+                p.getInventory().setLeggings(leatherArmor(Material.LEATHER_LEGGINGS, Color.RED));
+                p.getInventory().addItem(new ItemStack(Material.STONE_PICKAXE));
+                p.getInventory().addItem(new ItemStack(Material.STONE_AXE));
+                p.getInventory().setItem(8, slotlocked());
+                if (constructor.contains(p)){
+                    constructor.remove(p);
+                    p.getInventory().setItem(7, constructor());
+                } else {
+                    p.getInventory().setItem(7, slotlocked());
+                }
+                p.getInventory().setItem(6, forumPaper());
+            } else {
+                players.remove(p);
             }
         }, 100);
     }

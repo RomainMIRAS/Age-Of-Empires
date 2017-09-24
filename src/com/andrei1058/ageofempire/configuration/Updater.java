@@ -17,22 +17,20 @@ public class Updater {
     public static void checkUpdates() {
         Bukkit.getScheduler().runTaskLater(plugin, () -> {
             try {
-                HttpURLConnection checkUpdate = (HttpURLConnection)new URL("http://www.spigotmc.org/api/general.php").openConnection();
+                HttpURLConnection checkUpdate = (HttpURLConnection)new URL("https://api.spigotmc.org/legacy/update.php?resource=39573").openConnection();
                 checkUpdate.setDoOutput(true);
-                checkUpdate.setRequestMethod("POST");
-                checkUpdate.getOutputStream().write("key=98BE0FE67F88AB82B4C197FAF1DC3B69206EFDCC4D3B80FC83A00037510B99B4&resource=39573".getBytes());
                 String old = plugin.getDescription().getVersion();
-                String newV = new BufferedReader(new InputStreamReader(checkUpdate.getInputStream())).readLine().replaceAll("[a-zA-Z ]", "");
+                String newV = new BufferedReader(new InputStreamReader(checkUpdate.getInputStream())).readLine();
                 if (!newV.equalsIgnoreCase(old)) {
                     updateAvailable = true;
                     newVersion = newV;
-                    plugin.getLogger().info("--------------------------------------------");
-                    plugin.getLogger().info("");
+                    plugin.getLogger().info("------------------------------------");
+                    plugin.getLogger().info(" ");
                     plugin.getLogger().info("There is a nev version available!");
-                    plugin.getLogger().info("Please update it! =)");
+                    plugin.getLogger().info("Version: "+newVersion);
+                    plugin.getLogger().info(" ");
                     plugin.getLogger().info("https://www.spigotmc.org/resources/39573/");
-                    plugin.getLogger().info("");
-                    plugin.getLogger().info("--------------------------------------------");
+                    plugin.getLogger().info("------------------------------------");
                 }
             }
             catch (IOException e) {

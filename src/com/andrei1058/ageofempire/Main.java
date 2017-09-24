@@ -3,6 +3,7 @@ package com.andrei1058.ageofempire;
 import com.andrei1058.ageofempire.commands.Help;
 import com.andrei1058.ageofempire.commands.Setup;
 import com.andrei1058.ageofempire.commands.Leave;
+import com.andrei1058.ageofempire.commands.Start;
 import com.andrei1058.ageofempire.game.Status;
 import com.andrei1058.ageofempire.listeners.*;
 import com.andrei1058.ageofempire.nms.NMS;
@@ -35,12 +36,14 @@ public class Main extends JavaPlugin {
     public static Main plugin;
     public static String PREFIX = "§9[§7AOE§9]";
     private static File directory = new File("plugins/Age-Of-Empire");
-    public static ArrayList<UUID> bluePlayers = new ArrayList<>();
-    public static ArrayList<UUID> greenPlayers = new ArrayList<>();
-    public static ArrayList<UUID> yellowPlayers = new ArrayList<>();
-    public static ArrayList<UUID> redPlayers = new ArrayList<>();
-    public static ArrayList<UUID> help = new ArrayList<>();
-    public static ArrayList<UUID> players = new ArrayList<>();
+
+    public static ArrayList<Player> bluePlayers = new ArrayList<>();
+    public static ArrayList<Player> greenPlayers = new ArrayList<>();
+    public static ArrayList<Player> yellowPlayers = new ArrayList<>();
+    public static ArrayList<Player> redPlayers = new ArrayList<>();
+    public static ArrayList<Player> help = new ArrayList<>();
+    public static ArrayList<Player> players = new ArrayList<>();
+
     public static ArrayList<Location> xp = new ArrayList<>();
     public static HashMap<Player, Integer> kills = new HashMap<>();
     public static HashMap<Player, Integer> deaths = new HashMap<>();
@@ -84,8 +87,8 @@ public class Main extends JavaPlugin {
     public static Villager blue_tcenter, green_tcenter, yellow_tcenter, red_tcenter;
 
     public static ArrayList<Block> placedBlocks = new ArrayList<>();
-    public static HashMap<UUID, Integer> gold = new HashMap<>();
-    public static ArrayList<UUID> teamchoose = new ArrayList<>();
+    public static HashMap<Player, Integer> gold = new HashMap<>();
+    public static ArrayList<Player> teamchoose = new ArrayList<>();
     public static Chat chat = null;
     public static Boolean vaultHook = false;
     public static NMS nms;
@@ -170,6 +173,30 @@ public class Main extends JavaPlugin {
                 this.setEnabled(false);
                 return;
             }
+        } else if(version.equalsIgnoreCase("v1_8_R1")){
+            try {
+                nms = com.andrei1058.ageofempire.nms.v1_8_R1.Main.class.newInstance();
+            } catch (InstantiationException e) {
+                this.getLogger().severe("An error occurred!");
+                this.setEnabled(false);
+                return;
+            } catch (IllegalAccessException e) {
+                this.getLogger().severe("An error occurred!");
+                this.setEnabled(false);
+                return;
+            }
+        } else if(version.equalsIgnoreCase("v1_8_R2")){
+            try {
+                nms = com.andrei1058.ageofempire.nms.v1_8_R2.Main.class.newInstance();
+            } catch (InstantiationException e) {
+                this.getLogger().severe("An error occurred!");
+                this.setEnabled(false);
+                return;
+            } catch (IllegalAccessException e) {
+                this.getLogger().severe("An error occurred!");
+                this.setEnabled(false);
+                return;
+            }
         } else {
             this.getLogger().severe("Could not find support for your server.");
             this.setEnabled(false);
@@ -180,6 +207,7 @@ public class Main extends JavaPlugin {
         getCommand("setup").setExecutor(new Setup());
         getCommand("leave").setExecutor(new Leave());
         getCommand("help").setExecutor(new Help());
+        getCommand("start").setExecutor(new Start());
         PluginManager pm = Bukkit.getPluginManager();
         pm.registerEvents(new PlayerJoinListener(), this);
         pm.registerEvents(new PlayerInteractListener(), this);

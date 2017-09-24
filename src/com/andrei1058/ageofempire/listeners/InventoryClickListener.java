@@ -3,7 +3,6 @@ package com.andrei1058.ageofempire.listeners;
 import com.andrei1058.ageofempire.game.Status;
 import com.andrei1058.ageofempire.game.Vote;
 
-import org.bukkit.Bukkit;
 import org.bukkit.DyeColor;
 import org.bukkit.Material;
 import org.bukkit.enchantments.Enchantment;
@@ -16,8 +15,6 @@ import org.bukkit.inventory.meta.EnchantmentStorageMeta;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.potion.Potion;
 import org.bukkit.potion.PotionType;
-
-import java.util.UUID;
 
 import static com.andrei1058.ageofempire.Main.*;
 import static com.andrei1058.ageofempire.configuration.Messages.getMsg;
@@ -62,24 +59,24 @@ public class InventoryClickListener implements Listener {
                     break;
                 case ANVIL:
                     e.setCancelled(true);
-                       stuff(e.getWhoClicked(), forge, 150, 75, true, false, false);
+                       stuff((Player) e.getWhoClicked(), forge, 150, 75, true, false, false);
                     break;
                 case WHEAT:
                     e.setCancelled(true);
-                    stuff(e.getWhoClicked(), mill, 150, 75, true, false, false);
+                    stuff((Player) e.getWhoClicked(), mill, 150, 75, true, false, false);
                     break;
                 case DIAMOND_PICKAXE:
                     e.setCancelled(true);
-                    stuff(e.getWhoClicked(), stone_mine, 150, 75, true, false, false);
+                    stuff((Player) e.getWhoClicked(), stone_mine, 150, 75, true, false, false);
                     break;
                 case GOLD_ORE:
                     e.setCancelled(true);
-                    stuff(e.getWhoClicked(), gold_mine, 150, 100, true, false, false);
+                    stuff((Player) e.getWhoClicked(), gold_mine, 150, 100, true, false, false);
                     break;
                 case DIAMOND_AXE:
                     e.setCancelled(true);
                     if (e.getInventory().getName().equalsIgnoreCase("Forum")) {
-                        stuff(e.getWhoClicked(), sawmill, 150, 75, true, false, false);
+                        stuff((Player) e.getWhoClicked(), sawmill, 150, 75, true, false, false);
                     } else {
                         buy(p, Material.DIAMOND_AXE, 1, (short) 0, 25);
                     }
@@ -90,20 +87,20 @@ public class InventoryClickListener implements Listener {
                     break;
                 case WORKBENCH:
                     e.setCancelled(true);
-                    stuff(e.getWhoClicked(), workshop, 100, 50, true, false, false);
+                    stuff((Player) e.getWhoClicked(), workshop, 100, 50, true, false, false);
                     break;
                 case EMERALD:
                     e.setCancelled(true);
-                    stuff(e.getWhoClicked(), market, 100, 50, true, false, false);
+                    stuff((Player) e.getWhoClicked(), market, 100, 50, true, false, false);
                     break;
                 case BONE:
                     e.setCancelled(true);
-                    stuff(e.getWhoClicked(), kennel, 100, 50, true, false, false);
+                    stuff((Player) e.getWhoClicked(), kennel, 100, 50, true, false, false);
                     break;
                 case TNT:
                     e.setCancelled(true);
                     if (e.getInventory().getName().equalsIgnoreCase("Forum")){
-                        stuff(e.getWhoClicked(), sabotage, 100, 50, true, false, false);
+                        stuff((Player) e.getWhoClicked(), sabotage, 100, 50, true, false, false);
                     } else {
                         buy(p, Material.TNT, 1, (short) 0, 5);
                     }
@@ -207,8 +204,8 @@ public class InventoryClickListener implements Listener {
                 case MONSTER_EGG:
                     e.setCancelled(true);
                     if (e.getInventory().getName().equalsIgnoreCase("Stable")) {
-                        if (gold.get(p.getUniqueId()) >= 30) {
-                            gold.replace(p.getUniqueId(), gold.get(p.getUniqueId()) - 30);
+                        if (gold.get(p) >= 30) {
+                            gold.replace(p, gold.get(p) - 30);
                             Horse h = (Horse) p.getWorld().spawnEntity(p.getLocation(), EntityType.HORSE);
                             h.setOwner(p);
                             h.getInventory().setSaddle(new ItemStack(Material.SADDLE));
@@ -217,8 +214,8 @@ public class InventoryClickListener implements Listener {
                         }
                     } else {
                         if (e.getSlot() == 0) {
-                            if (gold.get(p.getUniqueId()) >= 50) {
-                                gold.replace(p.getUniqueId(), gold.get(p.getUniqueId()) - 50);
+                            if (gold.get(p) >= 50) {
+                                gold.replace(p, gold.get(p) - 50);
                                 Wolf w = (Wolf) p.getWorld().spawnEntity(p.getLocation(), EntityType.WOLF);
                                 w.setOwner(p);
                                 w.setCollarColor(DyeColor.BLUE);
@@ -226,8 +223,8 @@ public class InventoryClickListener implements Listener {
                                 p.sendMessage(getMsg("insufficient-gold"));
                             }
                         } else if (e.getSlot() == 1) {
-                            if (gold.get(p.getUniqueId()) >= 75) {
-                                gold.replace(p.getUniqueId(), gold.get(p.getUniqueId()) - 75);
+                            if (gold.get(p) >= 75) {
+                                gold.replace(p, gold.get(p) - 75);
                                 Wolf w = (Wolf) p.getWorld().spawnEntity(p.getLocation(), EntityType.WOLF);
                                 w.setOwner(p);
                                 w.setCollarColor(DyeColor.BLUE);
@@ -238,8 +235,8 @@ public class InventoryClickListener implements Listener {
                                 p.sendMessage(getMsg("insufficient-gold"));
                             }
                         } else if (e.getSlot() == 2) {
-                            if (gold.get(p.getUniqueId()) >= 100) {
-                                gold.replace(p.getUniqueId(), gold.get(p.getUniqueId()) - 100);
+                            if (gold.get(p) >= 100) {
+                                gold.replace(p, gold.get(p) - 100);
                                 Wolf w = (Wolf) p.getWorld().spawnEntity(p.getLocation(), EntityType.WOLF);
                                 w.setOwner(p);
                                 w.setCollarColor(DyeColor.BLUE);
@@ -273,7 +270,7 @@ public class InventoryClickListener implements Listener {
                 case BOW:
                     e.setCancelled(true);
                     if (e.getInventory().getName().equalsIgnoreCase("Forum")) {
-                        stuff(e.getWhoClicked(), archery, 300, 150, false, true, false);
+                        stuff((Player) e.getWhoClicked(), archery, 300, 150, false, true, false);
                     } else {
                         buy(p, Material.BOW, 1, (short) 0, 30);
                     }
@@ -285,14 +282,14 @@ public class InventoryClickListener implements Listener {
                     }
                     e.setCancelled(true);
                     if (e.getInventory().getName().equalsIgnoreCase("Forum")) {
-                        stuff(e.getWhoClicked(), trifarrow, 375, 175, false, true, false);
+                        stuff((Player) e.getWhoClicked(), trifarrow, 375, 175, false, true, false);
                     } else if (e.getInventory().getName().equalsIgnoreCase("TrifArrow")) {
                         ItemStack i = new ItemStack(Material.ARROW);
                         ItemMeta im = i.getItemMeta();
                         im.setDisplayName("§cExplosive");
                         i.setItemMeta(im);
-                        if (gold.get(p.getUniqueId()) >= 20) {
-                            gold.replace(p.getUniqueId(), gold.get(p.getUniqueId()) - 20);
+                        if (gold.get(p) >= 20) {
+                            gold.replace(p, gold.get(p) - 20);
                             p.getInventory().addItem(i);
                         } else {
                             p.sendMessage(getMsg("insufficient-gold"));
@@ -307,12 +304,12 @@ public class InventoryClickListener implements Listener {
                     break;
                 case SADDLE:
                     e.setCancelled(true);
-                    stuff(e.getWhoClicked(), stable, 200, 100, false, true, false);
+                    stuff((Player) e.getWhoClicked(), stable, 200, 100, false, true, false);
                     break;
                 case DIAMOND_CHESTPLATE:
                     if (e.getInventory().getName().equalsIgnoreCase("Forum")) {
                         e.setCancelled(true);
-                        stuff(e.getWhoClicked(), armory, 300, 150, false, true, false);
+                        stuff((Player) e.getWhoClicked(), armory, 300, 150, false, true, false);
                     } else if (e.getInventory().getName().equalsIgnoreCase("Armory")){
                         e.setCancelled(true);
                         buyDiamondArmor(p);
@@ -320,39 +317,39 @@ public class InventoryClickListener implements Listener {
                     break;
                 case BREWING_STAND_ITEM:
                     e.setCancelled(true);
-                    stuff(e.getWhoClicked(), laboratory, 300, 150, false, true, false);
+                    stuff((Player) e.getWhoClicked(), laboratory, 300, 150, false, true, false);
                     break;
                 case ENCHANTED_BOOK:
                     if (e.getInventory().getName().equalsIgnoreCase("Forum")) {
                         e.setCancelled(true);
-                        stuff(e.getWhoClicked(), guild, 600, 300, false, false, true);
+                        stuff((Player) e.getWhoClicked(), guild, 600, 300, false, false, true);
                     } else if (e.getInventory().getName().equalsIgnoreCase("Guild")){
                         e.setCancelled(true);
                         String name = e.getCurrentItem().getItemMeta().getDisplayName();
                         if (name.equalsIgnoreCase(getMsg("guild.sharpness.name"))){
-                            enchant(p.getUniqueId(), Enchantment.DAMAGE_ALL, 20);
+                            enchant(p, Enchantment.DAMAGE_ALL, 20);
                         } else if (name.equalsIgnoreCase(getMsg("guild.knockback.name"))){
-                            enchant(p.getUniqueId(), Enchantment.KNOCKBACK, 10);
+                            enchant(p, Enchantment.KNOCKBACK, 10);
                         } else if (name.equalsIgnoreCase(getMsg("guild.protection.name"))){
-                            enchant(p.getUniqueId(), Enchantment.PROTECTION_ENVIRONMENTAL, 20);
+                            enchant(p, Enchantment.PROTECTION_ENVIRONMENTAL, 20);
                         } else if (name.equalsIgnoreCase(getMsg("guild.thorns.name"))){
-                            enchant(p.getUniqueId(), Enchantment.THORNS, 10);
+                            enchant(p, Enchantment.THORNS, 10);
                         } else if (name.equalsIgnoreCase(getMsg("guild.featherfalling.name"))){
-                            enchant(p.getUniqueId(), Enchantment.LURE, 10);
+                            enchant(p, Enchantment.LURE, 10);
                         } else if (name.equalsIgnoreCase(getMsg("guild.projectileprotection.name"))){
-                            enchant(p.getUniqueId(), Enchantment.PROTECTION_PROJECTILE, 10);
+                            enchant(p, Enchantment.PROTECTION_PROJECTILE, 10);
                         } else if (name.equalsIgnoreCase(getMsg("guild.fireprotection.name"))){
-                            enchant(p.getUniqueId(), Enchantment.PROTECTION_FIRE, 10);
+                            enchant(p, Enchantment.PROTECTION_FIRE, 10);
                         } else if (name.equalsIgnoreCase(getMsg("guild.power.name"))){
-                            enchant(p.getUniqueId(), Enchantment.ARROW_DAMAGE, 20);
+                            enchant(p, Enchantment.ARROW_DAMAGE, 20);
                         } else if (name.equalsIgnoreCase(getMsg("guild.power.name"))){
-                            enchant(p.getUniqueId(), Enchantment.ARROW_KNOCKBACK, 10);
+                            enchant(p, Enchantment.ARROW_KNOCKBACK, 10);
                         }
                     }
                     break;
                 case EXP_BOTTLE:
                     e.setCancelled(true);
-                    stuff(e.getWhoClicked(), training_center, 500, 250, false, false, true);
+                    stuff((Player) e.getWhoClicked(), training_center, 500, 250, false, false, true);
                     break;
                 case IRON_CHESTPLATE:
                     if (e.getInventory().getName().equalsIgnoreCase("Armory")){
@@ -402,42 +399,42 @@ public class InventoryClickListener implements Listener {
     }
 
     //personal gold done
-    private static void enchant(UUID u, Enchantment enchantment, Integer price){
+    private static void enchant(Player u, Enchantment enchantment, Integer price){
         ItemStack i = new ItemStack(Material.ENCHANTED_BOOK);
         EnchantmentStorageMeta m = (EnchantmentStorageMeta) i.getItemMeta();
         m.addStoredEnchant(enchantment,1,true);
         i.setItemMeta(m);
         if (gold.get(u) > price){
-            Bukkit.getPlayer(u).getInventory().addItem(i);
+            u.getInventory().addItem(i);
             gold.replace(u, gold.get(u)-price);
         } else {
-            Bukkit.getPlayer(u).sendMessage(getMsg("insufficient-gold"));
+            u.sendMessage(getMsg("insufficient-gold"));
         }
     }
 
     private static void buyPotion(Player p, Integer price, PotionType potionType, boolean splash){
-            if (gold.get(p.getUniqueId()) >= price) {
+            if (gold.get(p) >= price) {
                 Potion potion = new Potion(potionType);
                 potion.setSplash(splash);
                 p.getInventory().addItem(potion.toItemStack(1));
-                gold.replace(p.getUniqueId(), gold.get(p.getUniqueId())-price);
+                gold.replace(p, gold.get(p)-price);
             } else {
                 p.sendMessage(getMsg("insufficient-gold"));
             }
     }
 
     private static void buy(Player p, Material material, Integer cantitate, Short sh, Integer price) {
-        if (gold.get(p.getUniqueId()) >= price) {
+        if (gold.get(p) >= price) {
             p.getInventory().addItem(new ItemStack(material, cantitate, sh));
-            gold.replace(p.getUniqueId(), gold.get(p.getUniqueId())-price);
+            gold.replace(p, gold.get(p)-price);
         } else {
             p.sendMessage(getMsg("insufficient-gold"));
         }
     }
 
     private static void buyIronArmor(Player p) {
-        if (gold.get(p.getUniqueId()) >= 40) {
-            gold.replace(p.getUniqueId(), gold.get(p.getUniqueId()) - 40);
+        if (gold.get(p) >= 40) {
+            gold.replace(p, gold.get(p) - 40);
             buy(p, Material.IRON_HELMET, 1, (short) 0, 0);
             buy(p, Material.IRON_CHESTPLATE, 1, (short) 0, 0);
             buy(p, Material.IRON_LEGGINGS, 1, (short) 0, 0);
@@ -448,8 +445,8 @@ public class InventoryClickListener implements Listener {
     }
 
     private static void buyDiamondArmor(Player p) {
-        if (gold.get(p.getUniqueId()) >= 80) {
-            gold.replace(p.getUniqueId(), gold.get(p.getUniqueId()) - 80);
+        if (gold.get(p) >= 80) {
+            gold.replace(p, gold.get(p) - 80);
             buy(p, Material.IRON_HELMET, 1, (short) 0, 0);
             buy(p, Material.DIAMOND_CHESTPLATE, 1, (short) 0, 0);
             buy(p, Material.IRON_LEGGINGS, 1, (short) 0, 0);
@@ -460,16 +457,16 @@ public class InventoryClickListener implements Listener {
     }
 
 
-    private static void voteAge(HumanEntity p, Integer wood, Integer stone, Integer age){
+    private static void voteAge(Player p, Integer wood, Integer stone, Integer age){
         if (age > 4) return;
-        if (bluePlayers.contains(p.getUniqueId())){
+        if (bluePlayers.contains(p)){
             if (blue_change_age) return;
             if (vote_in_progress.contains(blue_team)) {
                 p.sendMessage(getMsg("cant-vote"));
                 return;
             }
             if (blue_wood >= wood && blue_stone >= stone) {
-                new Vote(bluePlayers, age_string, p.getUniqueId(), blue_team, wood, stone, age_string);
+                new Vote(bluePlayers, age_string, p, blue_team, wood, stone, age_string);
             } else {
                 String miss_wood = "0";
                 String miss_stone = "0";
@@ -481,14 +478,14 @@ public class InventoryClickListener implements Listener {
                 }
                 p.sendMessage(getMsg("insufficient-resources").replace("{wood}", miss_wood).replace("{stone}", miss_stone));
             }
-        } else if (greenPlayers.contains(p.getUniqueId())){
+        } else if (greenPlayers.contains(p)){
             if (green_change_age) return;
             if (vote_in_progress.contains(green_team)) {
                 p.sendMessage(getMsg("cant-vote"));
                 return;
             }
             if (green_wood >= wood && green_stone >= stone) {
-                new Vote(greenPlayers, age_string, p.getUniqueId(), green_team, wood, stone, age_string);
+                new Vote(greenPlayers, age_string, p, green_team, wood, stone, age_string);
             } else {
                 String miss_wood = "0";
                 String miss_stone = "0";
@@ -500,14 +497,14 @@ public class InventoryClickListener implements Listener {
                 }
                 p.sendMessage(getMsg("insufficient-resources").replace("{wood}", miss_wood).replace("{stone}", miss_stone));
             }
-        } else if (yellowPlayers.contains(p.getUniqueId())){
+        } else if (yellowPlayers.contains(p)){
             if (yellow_change_age) return;
             if (vote_in_progress.contains(yellow_team)) {
                 p.sendMessage(getMsg("cant-vote"));
                 return;
             }
             if (yellow_wood >= wood && yellow_stone >= stone) {
-                new Vote(yellowPlayers, age_string, p.getUniqueId(), yellow_team, wood, stone, age_string);
+                new Vote(yellowPlayers, age_string, p, yellow_team, wood, stone, age_string);
             } else {
                 String miss_wood = "0";
                 String miss_stone = "0";
@@ -519,14 +516,14 @@ public class InventoryClickListener implements Listener {
                 }
                 p.sendMessage(getMsg("insufficient-resources").replace("{wood}", miss_wood).replace("{stone}", miss_stone));
             }
-        } else if (redPlayers.contains(p.getUniqueId())){
+        } else if (redPlayers.contains(p)){
             if (red_change_age) return;
             if (vote_in_progress.contains(red_team)) {
                 p.sendMessage(getMsg("cant-vote"));
                 return;
             }
             if (red_wood >= wood && red_stone >= stone) {
-                new Vote(redPlayers, age_string, p.getUniqueId(), red_team, wood, stone, age_string);
+                new Vote(redPlayers, age_string, p, red_team, wood, stone, age_string);
             } else {
                 String miss_wood = "0";
                 String miss_stone = "0";
@@ -541,12 +538,12 @@ public class InventoryClickListener implements Listener {
         }
     }
 
-    private static void stuff(HumanEntity p, String building, Integer wood, Integer stone, boolean small, boolean medium, boolean large) {
-        if (construct_in_inv.containsKey(p.getUniqueId())) {
+    private static void stuff(Player p, String building, Integer wood, Integer stone, boolean small, boolean medium, boolean large) {
+        if (construct_in_inv.containsKey(p)) {
             p.sendMessage(getMsg("having-construct"));
             return;
         }
-        if (bluePlayers.contains(p.getUniqueId())) {
+        if (bluePlayers.contains(p)) {
             if (blue_built.contains(building)) {
                 p.sendMessage(getMsg("already-built"));
                 return;
@@ -568,7 +565,7 @@ public class InventoryClickListener implements Listener {
                 return;
             }
             if (blue_wood >= wood && blue_stone >= stone) {
-                new Vote(bluePlayers, getMsg("forum." + building + ".displayname"), p.getUniqueId(), blue_team, wood, stone, building);
+                new Vote(bluePlayers, getMsg("forum." + building + ".displayname"), p, blue_team, wood, stone, building);
             } else {
                 String miss_wood = "0";
                 String miss_stone = "0";
@@ -580,7 +577,7 @@ public class InventoryClickListener implements Listener {
                 }
                 p.sendMessage(getMsg("insufficient-resources").replace("{wood}", miss_wood).replace("{stone}", miss_stone));
             }
-        } else if (greenPlayers.contains(p.getUniqueId())) {
+        } else if (greenPlayers.contains(p)) {
             if (green_built.contains(building)) {
                 p.sendMessage(getMsg("already-built"));
                 return;
@@ -602,7 +599,7 @@ public class InventoryClickListener implements Listener {
                 return;
             }
             if (green_wood >= wood && green_stone >= stone) {
-                new Vote(greenPlayers, getMsg("forum." + building + ".displayname"), p.getUniqueId(), green_team, wood, stone, building);
+                new Vote(greenPlayers, getMsg("forum." + building + ".displayname"), p, green_team, wood, stone, building);
             } else {
                 String miss_wood = "0";
                 String miss_stone = "0";
@@ -614,7 +611,7 @@ public class InventoryClickListener implements Listener {
                 }
                 p.sendMessage(getMsg("insufficient-resources").replace("{wood}", miss_wood).replace("{stone}", miss_stone));
             }
-        } else if (yellowPlayers.contains(p.getUniqueId())) {
+        } else if (yellowPlayers.contains(p)) {
             if (yellow_built.contains(building)) {
                 p.sendMessage(getMsg("already-built"));
                 return;
@@ -636,7 +633,7 @@ public class InventoryClickListener implements Listener {
                 return;
             }
             if (yellow_wood >= wood && yellow_stone >= stone) {
-                new Vote(yellowPlayers, getMsg("forum." + building + ".displayname"), p.getUniqueId(), yellow_team, wood, stone, building);
+                new Vote(yellowPlayers, getMsg("forum." + building + ".displayname"), p, yellow_team, wood, stone, building);
             } else {
                 String miss_wood = "0";
                 String miss_stone = "0";
@@ -648,7 +645,7 @@ public class InventoryClickListener implements Listener {
                 }
                 p.sendMessage(getMsg("insufficient-resources").replace("{wood}", miss_wood).replace("{stone}", miss_stone));
             }
-        } else if (redPlayers.contains(p.getUniqueId())) {
+        } else if (redPlayers.contains(p)) {
             if (red_built.contains(building)) {
                 p.sendMessage(getMsg("already-built"));
                 return;
@@ -670,7 +667,7 @@ public class InventoryClickListener implements Listener {
                 return;
             }
             if (red_wood >= wood && red_stone >= stone) {
-                new Vote(redPlayers, getMsg("forum." + building + ".displayname"), p.getUniqueId(), red_team, wood, stone, building);
+                new Vote(redPlayers, getMsg("forum." + building + ".displayname"), p, red_team, wood, stone, building);
             } else {
                 String miss_wood = "0";
                 String miss_stone = "0";
