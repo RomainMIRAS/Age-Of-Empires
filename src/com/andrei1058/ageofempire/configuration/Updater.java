@@ -26,7 +26,7 @@ public class Updater {
                     newVersion = newV;
                     plugin.getLogger().info("------------------------------------");
                     plugin.getLogger().info(" ");
-                    plugin.getLogger().info("There is a nev version available!");
+                    plugin.getLogger().info("There is a new version available!");
                     plugin.getLogger().info("Version: "+newVersion);
                     plugin.getLogger().info(" ");
                     plugin.getLogger().info("https://www.spigotmc.org/resources/39573/");

@@ -52,7 +52,7 @@ public class BlockBreakListener implements Listener {
                         }
                         int gold;
                         Random r = new Random();
-                        gold = r.nextInt(2);
+                        gold = r.nextInt(2)+1;
                         new OreHologram(e.getBlock().getLocation(), gold, false);
                         if (bluePlayers.contains(e.getPlayer())){
                             blue_wood += 3;
@@ -88,7 +88,7 @@ public class BlockBreakListener implements Listener {
                         e.getBlock().breakNaturally(new ItemStack(Material.STICK));
                         int gold = 0;
                         Random r = new Random();
-                        gold = r.nextInt(2);
+                        gold = r.nextInt(2)+1;
                         new OreHologram(e.getBlock().getLocation(), gold, true);
                         if (bluePlayers.contains(e.getPlayer())){
                             blue_stone += 3;
@@ -114,7 +114,7 @@ public class BlockBreakListener implements Listener {
                         int gold;
                         e.getPlayer().giveExp(1);
                         Random r = new Random();
-                        gold = r.nextInt(2);
+                        gold = r.nextInt(2)+1;
                         if (bluePlayers.contains(e.getPlayer())){
                             blue_stone += 3;
                             Main.gold.replace(e.getPlayer(), Main.gold.get(e.getPlayer())+gold);

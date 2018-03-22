@@ -11,7 +11,10 @@ import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitRunnable;
 
+import java.util.Map;
+
 import static com.andrei1058.ageofempire.Main.*;
+import static com.andrei1058.ageofempire.commands.Stuck.stuck;
 import static com.andrei1058.ageofempire.configuration.Messages.getMsg;
 
 public class Game extends BukkitRunnable {
@@ -113,6 +116,20 @@ public class Game extends BukkitRunnable {
             if (secPlayed == holo){
                 holo +=30;
                 Hologram.list().stream().forEach(Hologram::stuff);
+            }
+            for (Map.Entry<Player, Long> l : stuck.entrySet()){
+                if (System.currentTimeMillis()-l.getValue()>=5000){
+                    stuck.remove(l.getKey());
+                    if (bluePlayers.contains(l.getKey())){
+                        l.getKey().teleport(Locations.getLoc("Spawns."+choosenMap+".Blue"));
+                    } else if (redPlayers.contains(l.getKey())){
+                        l.getKey().teleport(Locations.getLoc("Spawns."+choosenMap+".Red"));
+                    } else if (yellowPlayers.contains(l.getKey())){
+                        l.getKey().teleport(Locations.getLoc("Spawns."+choosenMap+".Yellow"));
+                    } else if (greenPlayers.contains(l.getKey())){
+                        l.getKey().teleport(Locations.getLoc("Spawns."+choosenMap+".Green"));
+                    }
+                }
             }
         } catch (Exception e){
         }

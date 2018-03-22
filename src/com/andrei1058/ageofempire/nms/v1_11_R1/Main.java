@@ -32,22 +32,22 @@ public class Main implements NMS {
 
     @Override
     public Sound witherDeath() {
-        return Sound.ENTITY_WITHER_DEATH;
+        return Sound.valueOf("ENTITY_WITHER_DEATH");
     }
 
     @Override
     public Sound levelUp() {
-        return Sound.ENTITY_PLAYER_LEVELUP;
+        return Sound.valueOf("ENTITY_PLAYER_LEVELUP");
     }
 
     @Override
     public Sound wolfDeath() {
-        return Sound.ENTITY_WOLF_DEATH;
+        return Sound.valueOf("ENTITY_WOLF_DEATH");
     }
 
     @Override
     public Sound click() {
-        return Sound.UI_BUTTON_CLICK;
+        return Sound.valueOf("UI_BUTTON_CLICK");
     }
 
     @Override

@@ -682,6 +682,9 @@ public class Messages {
 
         yml.addDefault("cantDo", "{prefix} &cYou can't do this!");
         yml.addDefault("cantDoNow", "{prefix} &cYou can't do this right now!");
+        yml.addDefault("notInGame", "{prefix} &cYou are not playing!");
+        yml.addDefault("stuckTp", "{prefix} &7Teleporting in 5 seconds. Don't move!");
+        yml.addDefault("stuckMove", "{prefix} &cYou moved! Teleport cancelled!");
 
         yml.options().copyDefaults(true);
         try {

@@ -3,6 +3,7 @@ import com.andrei1058.ageofempire.locations.Locations;
 import com.andrei1058.ageofempire.locations.Region;
 import org.bukkit.Bukkit;
 import org.bukkit.Chunk;
+import org.bukkit.Location;
 import org.bukkit.WorldCreator;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.ArmorStand;
@@ -38,8 +39,8 @@ public class Settings {
         yml.addDefault("min-players", 6);
         yml.addDefault("countdowns.lobby", 60);
         yml.addDefault("countdowns.pregame", 20);
-        yml.addDefault("countdowns.pvp", 14);
-        yml.addDefault("countdowns.assault", 12);
+        yml.addDefault("countdowns.pvp", 6);
+        yml.addDefault("countdowns.assault", 6);
         yml.addDefault("restart-cmd", "restart");
         yml.addDefault("plot-radius.small", 9);
         yml.addDefault("plot-radius.medium", 12);
@@ -105,7 +106,14 @@ public class Settings {
             int mapid = r.nextInt(a);
             choosenMap = Settings.load().getStringList("Arenas").get(mapid);
             Bukkit.createWorld(new WorldCreator(choosenMap));
-            Locations.getLoc("Spawns.Lobby").getWorld().getEntities().forEach(Entity::remove);
+            Location lobby = Locations.getLoc("Spawns.Lobby");
+            if (lobby != null){
+                try {
+                    lobby.getWorld().getEntities().forEach(Entity::remove);
+                } catch (Exception ex){}
+            } else {
+                plugin.getLogger().severe("LOBBY LOCATION IS NOT SET!");
+            }
             Bukkit.getWorld(choosenMap).setGameRuleValue("keepInventory", "false");
             Bukkit.getWorld(choosenMap).setAutoSave(false);
                 blue_large_plots = Locations.load().getConfigurationSection("Plots."+choosenMap+".Blue.Large").getKeys(false).size();

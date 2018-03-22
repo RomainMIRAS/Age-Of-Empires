@@ -1,9 +1,6 @@
 package com.andrei1058.ageofempire;
 
-import com.andrei1058.ageofempire.commands.Help;
-import com.andrei1058.ageofempire.commands.Setup;
-import com.andrei1058.ageofempire.commands.Leave;
-import com.andrei1058.ageofempire.commands.Start;
+import com.andrei1058.ageofempire.commands.*;
 import com.andrei1058.ageofempire.game.Status;
 import com.andrei1058.ageofempire.listeners.*;
 import com.andrei1058.ageofempire.nms.NMS;
@@ -208,6 +205,7 @@ public class Main extends JavaPlugin {
         getCommand("leave").setExecutor(new Leave());
         getCommand("help").setExecutor(new Help());
         getCommand("start").setExecutor(new Start());
+        getCommand("stuck").setExecutor(new Stuck());
         PluginManager pm = Bukkit.getPluginManager();
         pm.registerEvents(new PlayerJoinListener(), this);
         pm.registerEvents(new PlayerInteractListener(), this);

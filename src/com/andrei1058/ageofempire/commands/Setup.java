@@ -110,15 +110,12 @@ public class Setup implements CommandExecutor {
                             }
                             p.sendMessage("§ePlease wait!");
                             Bukkit.createWorld(new WorldCreator(args[1]));
-                            Bukkit.getScheduler().runTaskLater(plugin, new Runnable() {
-                                @Override
-                                public void run() {
-                                    loc.put(p, p.getLocation());
-                                    p.teleport(Bukkit.getWorld(args[1]).getSpawnLocation());
-                                    p.sendMessage("§eTeleported to §7" + args[1] + "§e's spawn!");
-                                    setup.add(p);
-                                    Settings.addMap(args[1]);
-                                }
+                            Bukkit.getScheduler().runTaskLater(plugin, () -> {
+                                loc.put(p, p.getLocation());
+                                p.teleport(Bukkit.getWorld(args[1]).getSpawnLocation());
+                                p.sendMessage("§eTeleported to §7" + args[1] + "§e's spawn!");
+                                setup.add(p);
+                                Settings.addMap(args[1]);
                             }, 100L);
                         } else {
                             p.sendMessage("§cI can't find this map!");

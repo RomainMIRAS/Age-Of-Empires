@@ -17,21 +17,23 @@ public class Hologram {
     public boolean shown = false;
 
     public Hologram(Location location2, String text, String text2, Villager villager){
-        ArmorStand as = (ArmorStand) location2.getWorld().spawnEntity(location2.clone().add(0, 0.2, 0), EntityType.ARMOR_STAND);
+        ArmorStand as = (ArmorStand) location2.getWorld().spawnEntity(location2.clone().add(0, 2.7, 0), EntityType.ARMOR_STAND);
         as.setGravity(false);
         as.setCanPickupItems(false);
         as.setCustomName(text);
         as.setCustomNameVisible(true);
         as.setVisible(false);
         as.setSmall(true);
+        as.setMarker(true);
         this.as = as;
 
-        ArmorStand as2 = (ArmorStand) location2.getWorld().spawnEntity(location2, EntityType.ARMOR_STAND);
+        ArmorStand as2 = (ArmorStand) location2.getWorld().spawnEntity(location2.clone().add(0, 2.4, 0), EntityType.ARMOR_STAND);
         as2.setGravity(false);
         as2.setCanPickupItems(false);
         as2.setCustomName(text2);
         as2.setCustomNameVisible(true);
         as2.setVisible(false);
+        as2.setMarker(true);
         this.as2 = as2;
 
         holograms.add(this);

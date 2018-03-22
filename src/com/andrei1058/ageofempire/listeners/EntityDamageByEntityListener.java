@@ -1,5 +1,6 @@
 package com.andrei1058.ageofempire.listeners;
 
+import com.andrei1058.ageofempire.configuration.Messages;
 import com.andrei1058.ageofempire.game.Status;
 import com.andrei1058.ageofempire.game.Titles;
 import org.bukkit.entity.*;
@@ -8,6 +9,7 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 
 import static com.andrei1058.ageofempire.Main.*;
+import static com.andrei1058.ageofempire.commands.Stuck.stuck;
 import static com.andrei1058.ageofempire.configuration.Messages.getMsg;
 import static com.andrei1058.ageofempire.game.Buildings.*;
 
@@ -35,9 +37,17 @@ public class EntityDamageByEntityListener implements Listener {
             } else if (redPlayers.contains(e.getEntity()) && redPlayers.contains(e.getDamager())){
                 e.setCancelled(true);
             }
+            if (stuck.containsKey(e.getEntity())) {
+                stuck.remove(e.getEntity());
+                e.getEntity().sendMessage(Messages.getMsg("stuckMove"));
+            }
+        }
+        if (stuck.containsKey(e.getDamager())) {
+            stuck.remove(e.getDamager());
+            e.getDamager().sendMessage(Messages.getMsg("stuckMove"));
         }
         if (e.getEntity().getType() == EntityType.VILLAGER){
-            Player p = null;
+            Player p;
             if (e.getDamager() instanceof Player){
                 p = (Player) e.getDamager();
             } else if (e.getDamager() instanceof Projectile){
