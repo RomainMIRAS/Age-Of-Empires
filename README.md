@@ -1,0 +1,1 @@
+I won't work on this Minigame anymore. Feel free to continue this project :) Don't forget to give me credits.
