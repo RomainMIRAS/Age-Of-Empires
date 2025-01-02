@@ -16,6 +16,12 @@ commands:
   help:
     description: Enable/Disable the guide
     aliases: [h]
+  start:
+    description: Start the game
+    permission: aoe.setup
+  stuck:
+    description: Teleport to the spawn
+    permission: aoe.setup
 
 permissions:
   aoe.setup:
