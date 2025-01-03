@@ -84,7 +84,7 @@ public class Main extends JavaPlugin {
     public static Villager blue_tcenter, green_tcenter, yellow_tcenter, red_tcenter;
 
     public static ArrayList<Block> placedBlocks = new ArrayList<>();
-    public static HashMap<Player, Integer> gold = new HashMap<>();
+    public static HashMap<Player, Double> gold = new HashMap<>();
     public static ArrayList<Player> teamchoose = new ArrayList<>();
     public static Chat chat = null;
     public static Boolean vaultHook = false;

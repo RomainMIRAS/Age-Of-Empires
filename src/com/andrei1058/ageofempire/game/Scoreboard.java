@@ -212,7 +212,7 @@ public class Scoreboard {
                     p.giveExp(1);
             }
             pvp.setSuffix(String.valueOf(df.format(new Date(Main.pvp_assault))));
-            g.setSuffix(String.valueOf(Main.gold.get(p)));
+            g.setSuffix(String.format("%.2f", Main.gold.get(p)));
         }
     }
 

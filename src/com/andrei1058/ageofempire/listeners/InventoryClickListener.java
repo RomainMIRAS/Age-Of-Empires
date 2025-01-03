@@ -51,6 +51,11 @@ public class InventoryClickListener implements Listener {
                         p.performCommand("kit " + LUMBERJACK);
                         p.closeInventory();
                         break;
+                    case GOLD_INGOT:
+                        e.setCancelled(true);
+                        p.performCommand("kit " + CUPIDITY);
+                        p.closeInventory();
+                        break;
                 }
             }
         }

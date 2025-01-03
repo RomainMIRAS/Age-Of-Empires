@@ -714,7 +714,6 @@ public class Messages {
         yml.addDefault("kit."+ CUPIDITY +".name", "Cupidité");
         ArrayList<String> cupidity_lore = new ArrayList<>();
         cupidity_lore.add("&3 Vous gagnez &c80% &3d'or en plus");
-        cupidity_lore.add("&c WORK IN PROGRESS");
         yml.addDefault("kit."+ CUPIDITY +".lore", cupidity_lore);
 
         yml.addDefault("none", "&cAucun");

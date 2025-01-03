@@ -147,7 +147,7 @@ public class PreGame extends BukkitRunnable {
                 p.getInventory().setItem(8, slotlocked());
                 p.getInventory().setItem(7, slotlocked());
                 p.getInventory().setItem(6, forumPaper());
-                gold.put(p, 100);
+                gold.put(p, 100.0);
             }
             Scoreboard.register();
             Bukkit.getScheduler().runTaskLater(plugin, () -> {
