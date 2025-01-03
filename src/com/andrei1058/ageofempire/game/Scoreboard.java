@@ -137,8 +137,8 @@ public class Scoreboard {
                 } else {
                     a.setSuffix("§e"+String.valueOf(blue_age));
                 }
-                w.setSuffix(String.valueOf(blue_wood));
-                s.setSuffix(String.valueOf(blue_stone));
+                w.setSuffix(String.format("%.2f", blue_wood));
+                s.setSuffix(String.format("%.2f", blue_stone));
                 sm.setSuffix(String.valueOf(blue_small_plots));
                 m.setSuffix(String.valueOf(blue_medium_plots));
                 l.setSuffix(String.valueOf(blue_large_plots));
@@ -159,8 +159,8 @@ public class Scoreboard {
                 } else {
                     a.setSuffix("§e"+String.valueOf(green_age));
                 }
-                w.setSuffix(String.valueOf(green_wood));
-                s.setSuffix(String.valueOf(green_stone));
+                w.setSuffix(String.format("%.2f", green_wood));
+                s.setSuffix(String.format("%.2f", green_stone));
                 sm.setSuffix(String.valueOf(green_small_plots));
                 m.setSuffix(String.valueOf(green_medium_plots));
                 l.setSuffix(String.valueOf(green_large_plots));
@@ -181,8 +181,8 @@ public class Scoreboard {
                 } else {
                     a.setSuffix("§e"+String.valueOf(yellow_age));
                 }
-                w.setSuffix(String.valueOf(yellow_wood));
-                s.setSuffix(String.valueOf(yellow_stone));
+                w.setSuffix(String.format("%.2f", yellow_wood));
+                s.setSuffix(String.format("%.2f", yellow_stone));
                 sm.setSuffix(String.valueOf(yellow_small_plots));
                 m.setSuffix(String.valueOf(yellow_medium_plots));
                 l.setSuffix(String.valueOf(yellow_large_plots));
@@ -203,8 +203,8 @@ public class Scoreboard {
                 } else {
                     a.setSuffix("§e"+String.valueOf(red_age));
                 }
-                w.setSuffix(String.valueOf(red_wood));
-                s.setSuffix(String.valueOf(red_stone));
+                w.setSuffix(String.format("%.2f", red_wood));
+                s.setSuffix(String.format("%.2f", red_stone));
                 sm.setSuffix(String.valueOf(red_small_plots));
                 m.setSuffix(String.valueOf(red_medium_plots));
                 l.setSuffix(String.valueOf(red_large_plots));

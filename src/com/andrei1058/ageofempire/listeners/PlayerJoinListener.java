@@ -85,20 +85,32 @@ public class PlayerJoinListener implements Listener {
             p.setExp(0);
             p.setLevel(0);
             p.setGameMode(GameMode.ADVENTURE);
+
+            // Help item
             ItemStack help1 = new ItemStack(Material.STAINED_GLASS_PANE, 1, (short)5);
             ItemMeta helpmeta = help1.getItemMeta();
             helpmeta.setDisplayName(getMsg("help-item-on"));
             help1.setItemMeta(helpmeta);
             p.getInventory().setItem(4, help1);
+
+            // Leave item
             ItemStack bed = new ItemStack(Material.BED, 1);
             ItemMeta bedmeta = bed.getItemMeta();
             bedmeta.setDisplayName(getMsg("leave-item"));
             bed.setItemMeta(bedmeta);
             p.getInventory().setItem(8, bed);
+
+            // Kit selector
+            ItemStack kit = new ItemStack(Material.NAME_TAG, 1);
+            ItemMeta kitmeta = kit.getItemMeta();
+            kitmeta.setDisplayName(getMsg("kit-selector"));
+            kit.setItemMeta(kitmeta);
+            p.getInventory().setItem(0, kit);
+
             if (Settings.load().getBoolean("Database.enable")){
-                p.getInventory().setItem(0, statsItem(p));
+                p.getInventory().setItem(2, statsItem(p));
             } else {
-                p.getInventory().setItem(0, new ItemStack(Material.AIR));
+                p.getInventory().setItem(2, new ItemStack(Material.AIR));
             }
             p.sendMessage(getMsg("help.ison"));
             help.add(p);

@@ -5,11 +5,11 @@ import org.bukkit.configuration.file.YamlConfiguration;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.List;
 
 import static com.andrei1058.ageofempire.Main.PREFIX;
 import static com.andrei1058.ageofempire.game.Buildings.*;
 import static com.andrei1058.ageofempire.game.Buildings.archery;
+import static com.andrei1058.ageofempire.game.Kits.*;
 
 public class Messages {
     private static File file = new File("plugins/Age-Of-Empire/messages.yml");
@@ -686,6 +686,38 @@ public class Messages {
         yml.addDefault("stuckTp", "{prefix} &7Téléportation dans 5 secondes. Ne bougez pas !");
         yml.addDefault("stuckMove", "{prefix} &cVous avez bougé ! Téléportation annulée !");
         yml.addDefault("vip-kick", "§cVous avez été expulsé car un VIP a rejoint le serveur.");
+
+        // Kits section
+        yml.addDefault("kit-selector", "&eChoisissez un kit");
+        yml.addDefault("available-kits", "{prefix} &eLes Kits disponibles sont : &a{kits}");
+        yml.addDefault("kit-selected", "{prefix} &eVous avez sélectionné le kit &a{kit}");
+        yml.addDefault("invalid-kit", "{prefix} &cKit invalide !");
+        yml.addDefault("current-kit", "&eVous avez le kit : &a{kit}");
+        yml.addDefault("kit-not-allowed", "{prefix} &cVous ne pouvez pas changer de kit maintenant !");
+
+        // Kits Minor
+        yml.addDefault("kit."+ MINER +".displayname", "&eMineur");
+        yml.addDefault("kit."+ MINER +".name", "Mineur");
+        ArrayList<String> miner_lore = new ArrayList<>();
+        miner_lore.add("&3 Vous gagnez &c50% &3de pierre en plus");
+        yml.addDefault("kit."+ MINER +".lore", miner_lore);
+
+        // Kits Lumberjack
+        yml.addDefault("kit."+ LUMBERJACK +".displayname", "&eBûcheron");
+        yml.addDefault("kit."+ LUMBERJACK +".name", "Bûcheron");
+        ArrayList<String> lumberjack_lore = new ArrayList<>();
+        lumberjack_lore.add("&3 Vous gagnez &c50% &3de bois en plus");
+        yml.addDefault("kit."+ LUMBERJACK +".lore", lumberjack_lore);
+
+        // Kits Cupidity
+        yml.addDefault("kit."+ CUPIDITY +".displayname", "&eCupidité");
+        yml.addDefault("kit."+ CUPIDITY +".name", "Cupidité");
+        ArrayList<String> cupidity_lore = new ArrayList<>();
+        cupidity_lore.add("&3 Vous gagnez &c80% &3d'or en plus");
+        cupidity_lore.add("&c WORK IN PROGRESS");
+        yml.addDefault("kit."+ CUPIDITY +".lore", cupidity_lore);
+
+        yml.addDefault("none", "&cAucun");
 
         yml.options().copyDefaults(true);
         try {

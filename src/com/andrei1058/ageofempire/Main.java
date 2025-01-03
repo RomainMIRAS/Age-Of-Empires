@@ -1,6 +1,7 @@
 package com.andrei1058.ageofempire;
 
 import com.andrei1058.ageofempire.commands.*;
+import com.andrei1058.ageofempire.game.Kits;
 import com.andrei1058.ageofempire.game.Status;
 import com.andrei1058.ageofempire.listeners.*;
 import com.andrei1058.ageofempire.nms.NMS;
@@ -50,8 +51,8 @@ public class Main extends JavaPlugin {
     public static boolean pvp = false, assualt = false;
     public static int max_in_team = 6, min_players = 6;
     public static int lobby_time = 60, restart_time = 15, pregame_time = 20;
-    public static int blue_wood = 100, green_wood = 100, yellow_wood = 100, red_wood = 100;
-    public static int blue_stone = 100, green_stone = 100, yellow_stone = 100, red_stone = 100;
+    public static double blue_wood = 100, green_wood = 100, yellow_wood = 100, red_wood = 100;
+    public static double blue_stone = 100, green_stone = 100, yellow_stone = 100, red_stone = 100;
     public static int blue_small_plots = 0, green_small_plots = 0, yellow_small_plots = 0, red_small_plots = 0;
     public static int blue_medium_plots = 0, green_medium_plots = 0, yellow_medium_plots = 0, red_medium_plots = 0;
     public static int blue_large_plots = 0, green_large_plots = 0, yellow_large_plots = 0, red_large_plots = 0;
@@ -89,6 +90,9 @@ public class Main extends JavaPlugin {
     public static Boolean vaultHook = false;
     public static NMS nms;
     public static int forum_health = 1400, other_health = 500;
+
+    // Kits
+    public static HashMap<Player, Kits> kits = new HashMap<>();
 
     @Override
     public void onEnable() {
@@ -149,6 +153,7 @@ public class Main extends JavaPlugin {
         getCommand("help").setExecutor(new Help());
         getCommand("start").setExecutor(new Start());
         getCommand("stuck").setExecutor(new Stuck());
+        getCommand("kit").setExecutor(new Kit());
         PluginManager pm = Bukkit.getPluginManager();
         pm.registerEvents(new PlayerJoinListener(), this);
         pm.registerEvents(new PlayerInteractListener(), this);

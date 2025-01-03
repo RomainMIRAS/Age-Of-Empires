@@ -22,6 +22,10 @@ commands:
   stuck:
     description: Teleport to the spawn
     permission: aoe.setup
+  kit:
+    description: Get a kit
+    usage: "/kit <kitName>"
+    aliases: [k]
 
 permissions:
   aoe.setup:

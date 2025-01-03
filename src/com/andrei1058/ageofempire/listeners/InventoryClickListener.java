@@ -19,6 +19,7 @@ import org.bukkit.potion.PotionType;
 import static com.andrei1058.ageofempire.Main.*;
 import static com.andrei1058.ageofempire.configuration.Messages.getMsg;
 import static com.andrei1058.ageofempire.game.Buildings.*;
+import static com.andrei1058.ageofempire.game.Kits.*;
 import static com.andrei1058.ageofempire.runnables.Game.*;
 
 public class InventoryClickListener implements Listener {
@@ -35,6 +36,26 @@ public class InventoryClickListener implements Listener {
             e.setCancelled(true);
             return;
         }
+
+        // Use for loop to iterate through all the items in the inventory during the lobby
+        if (STATUS == Status.LOBBY){
+            if (e.getCurrentItem().hasItemMeta() && e.getCurrentItem().getItemMeta().getDisplayName() != null){
+                switch (e.getCurrentItem().getType()){
+                    case DIAMOND_PICKAXE:
+                        e.setCancelled(true);
+                        p.performCommand("kit " + MINER);
+                        p.closeInventory();
+                        break;
+                    case DIAMOND_AXE:
+                        e.setCancelled(true);
+                        p.performCommand("kit " + LUMBERJACK);
+                        p.closeInventory();
+                        break;
+                }
+            }
+        }
+
+        // Use for loop to iterate through all the items in the inventory during party playing
         if (e.getCurrentItem().hasItemMeta() && e.getCurrentItem().getItemMeta().getDisplayName() != null) {
             switch (e.getCurrentItem().getType()) {
                 case SKULL_ITEM:

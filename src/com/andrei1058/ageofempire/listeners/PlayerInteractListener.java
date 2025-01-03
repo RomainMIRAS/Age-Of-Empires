@@ -24,6 +24,7 @@ import static com.andrei1058.ageofempire.Misc.slotlocked;
 import static com.andrei1058.ageofempire.Misc.statsItem;
 import static com.andrei1058.ageofempire.configuration.Messages.getMsg;
 import static com.andrei1058.ageofempire.game.Buildings.vote_in_progress;
+import static com.andrei1058.ageofempire.game.Kits.kitSelector;
 
 public class PlayerInteractListener implements Listener {
     @EventHandler
@@ -101,6 +102,10 @@ public class PlayerInteractListener implements Listener {
                     inv.setItem(4, i5);
 
                     e.getPlayer().openInventory(inv);
+                }
+                // Open Kit Selector
+                if (nms.itemInHand(e.getPlayer()).getType() == Material.NAME_TAG){
+                    e.getPlayer().openInventory(kitSelector(e.getPlayer()));
                 }
             }
         } else if (STATUS == Status.PRE_GAME){
