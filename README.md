@@ -6,6 +6,10 @@
     The game consists of 4 teams but can start with 2 players or the number set in the config.<br/>
 </p>
 
+<p align="center">
+    <b>This project was also used as a base by the Epicube server to create their own minigame.</b>
+</p>
+
 ---
 
 #### Rules 
