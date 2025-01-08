@@ -92,7 +92,7 @@ password: p4ss2
 Arenas: []
 ```
 
-### Screensots
+### Screenshots
 ![](https://i.imgur.com/uROTGuI.jpg)
 ![](https://i.imgur.com/0vMnpA2.jpg)
 ![](https://i.imgur.com/BdK6n7H.png)
