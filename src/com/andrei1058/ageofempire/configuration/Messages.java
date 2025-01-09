@@ -65,7 +65,7 @@ public class Messages {
         yml.addDefault("scoreboard.3", "&7PvP : &f");
         yml.addDefault("scoreboard.3_2", "&7Assaut : &f");
         yml.addDefault("scoreboard.2", "§4");
-        yml.addDefault("scoreboard.1", "&7Grimmjoow Server");
+        yml.addDefault("scoreboard.1", "&7play.ageofempire.me");
         yml.addDefault("villagers.forum", "&c&lForum");
         yml.addDefault("villagers.buy-buildings", "&b&lAcheter des bâtiments pour votre royaume");
         yml.addDefault("pvp-on", "{prefix} &6PvP activé, des minerais rares sont apparus au centre de la carte.");
@@ -262,10 +262,10 @@ public class Messages {
         yml.addDefault("cant-construct-size", "&cVous devez être sur une parcelle de la bonne taille pour construire cette structure.");
         yml.addDefault("cant-vote-full", "&cVous ne pouvez pas voter pour ce bâtiment car vous n'avez pas de parcelle libre de ce type");
         yml.addDefault("built-success", "{prefix} &e&l{building} &aconstruit avec succès.");
-        yml.addDefault("motd.lobby", "&aLobby");
-        yml.addDefault("motd.starting", "&eDémarrage");
-        yml.addDefault("motd.playing", "&cEn jeu");
-        yml.addDefault("motd.restarting", "&4Redémarrage");
+        yml.addDefault("motd.lobby", "§6§l[AoE] §eRejoignez le lobby ! §f(En attente de joueurs...) \n§7Préparez-vous pour la bataille !");
+        yml.addDefault("motd.starting", "§6§l[AoE] §bLa partie commence bientôt ! §f(Rejoignez vite !) \n§ePréparez vos stratégies !");
+        yml.addDefault("motd.playing", "§6§l[AoE] §cUne bataille épique est en cours ! §f(Spectateurs bienvenus) \n§7Préparez-vous pour la bataille !");
+        yml.addDefault("motd.restarting", "§6§l[AoE] §cLa partie est terminée ! §f(Redémarrage en cours...) \n§ePréparez-vous pour la prochaine bataille !");
         yml.addDefault("new-kill", "{prefix} {player} &aa été tué par {killer}");
         yml.addDefault("victory.green", "&aVictoire des Verts");
         yml.addDefault("victory.blue", "&9Victoire des Bleus");

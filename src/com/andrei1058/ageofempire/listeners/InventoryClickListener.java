@@ -38,24 +38,24 @@ public class InventoryClickListener implements Listener {
         }
 
         // Use for loop to iterate through all the items in the inventory during the lobby
-        if (STATUS == Status.LOBBY){
+        if (STATUS == Status.LOBBY || STATUS == Status.STARTING) {
             if (e.getCurrentItem().hasItemMeta() && e.getCurrentItem().getItemMeta().getDisplayName() != null){
                 switch (e.getCurrentItem().getType()){
                     case DIAMOND_PICKAXE:
                         e.setCancelled(true);
                         p.performCommand("kit " + MINER);
                         p.closeInventory();
-                        break;
+                        return;
                     case DIAMOND_AXE:
                         e.setCancelled(true);
                         p.performCommand("kit " + LUMBERJACK);
                         p.closeInventory();
-                        break;
+                        return;
                     case GOLD_INGOT:
                         e.setCancelled(true);
                         p.performCommand("kit " + CUPIDITY);
                         p.closeInventory();
-                        break;
+                        return;
                 }
             }
         }

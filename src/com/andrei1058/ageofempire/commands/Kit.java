@@ -25,7 +25,7 @@ public class Kit implements CommandExecutor {
 
         Player player = (Player) sender;
 
-        if (STATUS != Status.LOBBY) {
+        if (STATUS != Status.LOBBY && STATUS != Status.STARTING) {
             player.sendMessage(getMsg("kit-not-allowed"));
             return true;
         }
