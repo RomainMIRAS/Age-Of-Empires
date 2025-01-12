@@ -107,7 +107,7 @@ Arenas: []
 **Download the map from here:**
 https://www.dropbox.com/sh/0bd7astg3lb0uq0/AAAu9lr5jCJkMM3jysWjANiFa?dl=0
 
-*NB : To avoid setting up the map, you can use the basic configuration in the basic-config folder.*
+*NB : To avoid setting up the map, you can use the [basic location configuration](https://www.mediafire.com/file/pn6ftd9z6w7srzr/locations.yml/file) and put it on the "plugins/Age-Of-Empire" folder. This only work with the following map*
 
 ---
 

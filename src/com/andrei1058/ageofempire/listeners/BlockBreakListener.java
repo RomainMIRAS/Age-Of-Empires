@@ -18,7 +18,7 @@ import java.util.ArrayList;
 import java.util.Random;
 import java.util.UUID;
 
-import static com.andrei1058.ageofempire.Main.*;
+import static com.andrei1058.ageofempire.Main.*;import static com.andrei1058.ageofempire.Main.gold;
 import static com.andrei1058.ageofempire.configuration.Messages.getMsg;
 
 public class BlockBreakListener implements Listener {
@@ -55,34 +55,36 @@ public class BlockBreakListener implements Listener {
                                 goldAnnounced.add(e.getPlayer());
                             }
                         }
-                        int gold;
-                        Random r = new Random();
-                        gold = BASIC_GOLD_GAIN;
-                        new OreHologram(e.getBlock().getLocation(), gold, false);
+                        double gold = BASIC_GOLD_GAIN * ((kits.get(e.getPlayer()) == Kits.CUPIDITY) ? 1.8 : 1);
 
                         double job_multiplier = 1;
                         if (kits.get(e.getPlayer()) == Kits.LUMBERJACK){
                             job_multiplier = 1.5;
                         }
 
+                        double wood = BASIC_WOOD_GAIN * job_multiplier;
+
                         if (bluePlayers.contains(e.getPlayer())){
-                            blue_wood += BASIC_WOOD_GAIN * job_multiplier;
+                            blue_wood += wood;
                             Main.gold.replace(e.getPlayer(), Main.gold.get(e.getPlayer())+gold);
                         } else if (greenPlayers.contains(e.getPlayer())){
-                            green_wood += BASIC_WOOD_GAIN * job_multiplier;
+                            green_wood += wood;
                             Main.gold.replace(e.getPlayer(), Main.gold.get(e.getPlayer())+gold);
                         } else if (yellowPlayers.contains(e.getPlayer())){
-                            yellow_wood += BASIC_WOOD_GAIN * job_multiplier;
+                            yellow_wood += wood;
                             Main.gold.replace(e.getPlayer(), Main.gold.get(e.getPlayer())+gold);
                         } else if (redPlayers.contains(e.getPlayer())){
-                            red_wood += BASIC_WOOD_GAIN * job_multiplier;
+                            red_wood += wood;
                             Main.gold.replace(e.getPlayer(), Main.gold.get(e.getPlayer())+gold);
                         }
                         e.getPlayer().getWorld().playSound(e.getPlayer().getLocation(), nms.levelUp(), 1,1);
+                        new OreHologram(e.getBlock().getLocation(), Material.LOG, gold, 0, wood);
+
                     } else {
                         e.setCancelled(true);
                         e.getPlayer().sendMessage(getMsg("cant-break"));
                     }
+
                     break;
                 case STONE:
                     if (e.getBlock().getData() == 5){
@@ -97,30 +99,31 @@ public class BlockBreakListener implements Listener {
                             }
                         }
                         e.getBlock().breakNaturally(new ItemStack(Material.STICK));
-                        int gold = 0;
-                        Random r = new Random();
-                        gold = BASIC_GOLD_GAIN;
-                        new OreHologram(e.getBlock().getLocation(), gold, true);
+                        double gold = BASIC_GOLD_GAIN * ((kits.get(e.getPlayer()) == Kits.CUPIDITY) ? 1.8 : 1);
 
                         double job_multiplier = 1;
                         if (kits.get(e.getPlayer()) == Kits.MINER){
                             job_multiplier = 1.5;
                         }
 
+                        double stone = BASIC_STONE_GAIN * job_multiplier;
+
                         if (bluePlayers.contains(e.getPlayer())){
-                            blue_stone += BASIC_STONE_GAIN * job_multiplier;
+                            blue_stone += stone;
                             Main.gold.replace(e.getPlayer(), Main.gold.get(e.getPlayer())+gold);
                         } else if (greenPlayers.contains(e.getPlayer())){
-                            green_stone += BASIC_STONE_GAIN * job_multiplier;
+                            green_stone += stone;
                             Main.gold.replace(e.getPlayer(), Main.gold.get(e.getPlayer())+gold);
                         } else if (yellowPlayers.contains(e.getPlayer())){
-                            yellow_stone += BASIC_STONE_GAIN * job_multiplier;
+                            yellow_stone += stone;
                             Main.gold.replace(e.getPlayer(), Main.gold.get(e.getPlayer())+gold);
                         } else if (redPlayers.contains(e.getPlayer())){
-                            red_stone += BASIC_STONE_GAIN * job_multiplier;
+                            red_stone += stone;
                             Main.gold.replace(e.getPlayer(), Main.gold.get(e.getPlayer())+gold);
                         }
                         e.getPlayer().getWorld().playSound(e.getPlayer().getLocation(), nms.levelUp(), 1,1);
+                        new OreHologram(e.getBlock().getLocation(), Material.STONE, gold, stone, 0);
+
                     } else {
                         e.setCancelled(true);
                         e.getPlayer().sendMessage(getMsg("cant-break"));
@@ -128,10 +131,8 @@ public class BlockBreakListener implements Listener {
                     break;
                 case SEA_LANTERN:
                     if (xp.contains(new Location(Bukkit.getWorld(choosenMap), e.getBlock().getLocation().getBlockX(), e.getBlock().getLocation().getBlockY(), e.getBlock().getLocation().getBlockZ()))){
-                        int gold;
                         e.getPlayer().giveExp(1);
-                        Random r = new Random();
-                        gold = BASIC_GOLD_GAIN;
+                        double gold = BASIC_GOLD_GAIN * ((kits.get(e.getPlayer()) == Kits.CUPIDITY) ? 1.8 : 1);
                         if (bluePlayers.contains(e.getPlayer())){
                             blue_stone += BASIC_STONE_GAIN;
                             Main.gold.replace(e.getPlayer(), Main.gold.get(e.getPlayer())+gold);
@@ -149,8 +150,7 @@ public class BlockBreakListener implements Listener {
                             Main.gold.replace(e.getPlayer(), Main.gold.get(e.getPlayer())+gold);
                             red_wood += BASIC_WOOD_GAIN;
                         }
-                        new OreHologram(e.getBlock().getLocation(), gold, true);
-                        new OreHologram(e.getBlock().getLocation(), gold, false);
+                        new OreHologram(e.getBlock().getLocation(), Material.SEA_LANTERN, gold, BASIC_STONE_GAIN, BASIC_WOOD_GAIN);
                     }
                     e.setCancelled(true);
                     break;

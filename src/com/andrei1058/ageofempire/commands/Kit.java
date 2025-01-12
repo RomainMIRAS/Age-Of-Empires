@@ -40,10 +40,8 @@ public class Kit implements CommandExecutor {
         }
 
         String kitName = args[0].toUpperCase();
-        System.out.println("Kit name: " + kitName);
         try {
             Kits selectedKit = Kits.valueOf(kitName);
-            System.out.println("Selected kit: " + selectedKit);
 
             String translatedKitName = getMsg("kit." + selectedKit + ".name");
 

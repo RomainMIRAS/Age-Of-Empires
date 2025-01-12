@@ -13,7 +13,7 @@ public class ServerPingListener implements Listener {
     @EventHandler
     public void ping(ServerListPingEvent e){
         if (SETUP){
-            e.setMotd("§cMAINTENANCE");
+            e.setMotd(getMsg("motd.setup"));
             return;
         }else
         if (STATUS == Status.STARTING ){

@@ -112,7 +112,6 @@ public class Game extends BukkitRunnable {
         Scoreboard.Refresh();
         try {
             Vote.votes.stream().forEach(Vote::stuff);
-            OreHologram.list().stream().forEach(OreHologram::remove);
             if (secPlayed == holo){
                 holo +=30;
                 Hologram.list().stream().forEach(Hologram::stuff);

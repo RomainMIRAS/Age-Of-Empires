@@ -4,6 +4,7 @@ import com.andrei1058.ageofempire.configuration.MySQL;
 import com.andrei1058.ageofempire.configuration.Settings;
 import com.andrei1058.ageofempire.game.Status;
 import com.andrei1058.ageofempire.game.Vote;
+import com.andrei1058.ageofempire.utils.TeamSelector;
 import com.google.common.io.ByteArrayDataOutput;
 import com.google.common.io.ByteStreams;
 import org.bukkit.Bukkit;
@@ -25,6 +26,8 @@ import static com.andrei1058.ageofempire.Misc.statsItem;
 import static com.andrei1058.ageofempire.configuration.Messages.getMsg;
 import static com.andrei1058.ageofempire.game.Buildings.vote_in_progress;
 import static com.andrei1058.ageofempire.game.Kits.kitSelector;
+import static com.andrei1058.ageofempire.utils.TeamSelector.*;
+import static org.bukkit.Bukkit.broadcastMessage;
 
 public class PlayerInteractListener implements Listener {
     @EventHandler
@@ -111,171 +114,18 @@ public class PlayerInteractListener implements Listener {
         } else if (STATUS == Status.PRE_GAME){
             if (e.getAction() == Action.RIGHT_CLICK_BLOCK || e.getAction() == Action.RIGHT_CLICK_AIR) {
                 if (nms.itemInHand(e.getPlayer()).getType() == Material.STAINED_GLASS_PANE){
-                    if (teamchoose.contains(e.getPlayer())){
-                        return;
-                    }
-                    if (nms.itemInHand(e.getPlayer()).getItemMeta().getDisplayName().equalsIgnoreCase(getMsg("team-choosing.blue"))){
-                        if (bluePlayers.contains(e.getPlayer())) return;
-                        if (bluePlayers.size()+1 < max_in_team){
-                            if (Bukkit.getOnlinePlayers().size() > max_in_team*3){
-                                if (bluePlayers.size() <= greenPlayers.size() || bluePlayers.size() <= yellowPlayers.size() || bluePlayers.size() <= redPlayers.size()){
-                                    if (redPlayers.contains(e.getPlayer())){
-                                        redPlayers.remove(e.getPlayer());
-                                    } else if (yellowPlayers.contains(e.getPlayer())){
-                                        yellowPlayers.remove(e.getPlayer());
-                                    } else if (greenPlayers.contains(e.getPlayer())){
-                                        greenPlayers.remove(e.getPlayer());
-                                    }
-                                    teamchoose.add(e.getPlayer());
-                                    Bukkit.getScheduler().runTaskLater(plugin, () -> {teamchoose.remove(e.getPlayer());}, 100L);
-                                    bluePlayers.add(e.getPlayer());
-                                    e.getPlayer().sendMessage(getMsg("team-choosing.blue-join"));
-                                } else {
-                                    e.getPlayer().sendMessage(getMsg("team-choosing.unbalanced-teams"));
-                                }
-                            } else if (Bukkit.getOnlinePlayers().size() > max_in_team*2){
-                                if (bluePlayers.size() <= greenPlayers.size() || bluePlayers.size() <= yellowPlayers.size()){
-                                    if (yellowPlayers.contains(e.getPlayer())){
-                                        yellowPlayers.remove(e.getPlayer());
-                                    } else if (greenPlayers.contains(e.getPlayer())){
-                                        greenPlayers.remove(e.getPlayer());
-                                    }
-                                    teamchoose.add(e.getPlayer());
-                                    Bukkit.getScheduler().runTaskLater(plugin, () -> {teamchoose.remove(e.getPlayer());}, 100L);
-                                    bluePlayers.add(e.getPlayer());
-                                    e.getPlayer().sendMessage(getMsg("team-choosing.blue-join"));
-                                } else {
-                                    e.getPlayer().sendMessage(getMsg("team-choosing.unbalanced-teams"));
-                                }
-                            } else if (Bukkit.getOnlinePlayers().size() >= max_in_team){
-                                if (bluePlayers.size() <= greenPlayers.size()){
-                                    if (redPlayers.contains(e.getPlayer())){
-                                        redPlayers.remove(e.getPlayer());
-                                    } else if (yellowPlayers.contains(e.getPlayer())){
-                                        yellowPlayers.remove(e.getPlayer());
-                                    } else if (greenPlayers.contains(e.getPlayer())){
-                                        greenPlayers.remove(e.getPlayer());
-                                    }
-                                    teamchoose.add(e.getPlayer());
-                                    Bukkit.getScheduler().runTaskLater(plugin, () -> {teamchoose.remove(e.getPlayer());}, 100L);
-                                    bluePlayers.add(e.getPlayer());
-                                    e.getPlayer().sendMessage(getMsg("team-choosing.blue-join"));
-                                } else {
-                                    e.getPlayer().sendMessage(getMsg("team-choosing.unbalanced-teams"));
-                                }
-                            }
-                        } else {
-                            e.getPlayer().sendMessage(getMsg("team-choosing.unbalanced-teams"));
-                        }
-                    } else if (nms.itemInHand(e.getPlayer()).getItemMeta().getDisplayName().equalsIgnoreCase(getMsg("team-choosing.red"))){
-                        if (redPlayers.contains(e.getPlayer())) return;
-                        if (redPlayers.size() < max_in_team){
-                            if (Bukkit.getOnlinePlayers().size() > max_in_team*3){
-                                if (redPlayers.size() <= greenPlayers.size() || redPlayers.size() <= yellowPlayers.size() || redPlayers.size() <= bluePlayers.size()){
-                                    if (bluePlayers.contains(e.getPlayer())){
-                                        bluePlayers.remove(e.getPlayer());
-                                    } else if (yellowPlayers.contains(e.getPlayer())){
-                                        yellowPlayers.remove(e.getPlayer());
-                                    } else if (greenPlayers.contains(e.getPlayer())){
-                                        greenPlayers.remove(e.getPlayer());
-                                    }
-                                    teamchoose.add(e.getPlayer());
-                                    Bukkit.getScheduler().runTaskLater(plugin, () -> {teamchoose.remove(e.getPlayer());}, 100L);
-                                    redPlayers.add(e.getPlayer());
-                                    e.getPlayer().sendMessage(getMsg("team-choosing.red-join"));
-                                } else {
-                                    e.getPlayer().sendMessage(getMsg("team-choosing.unbalanced-teams"));
-                                }
-                            }
-                        } else {
-                            e.getPlayer().sendMessage(getMsg("team-choosing.unbalanced-teams"));
-                        }
-                    } else if (nms.itemInHand(e.getPlayer()).getItemMeta().getDisplayName().equalsIgnoreCase(getMsg("team-choosing.yellow"))){
-                        if (yellowPlayers.contains(e.getPlayer())) return;
-                        if (yellowPlayers.size() < max_in_team){
-                            if (Bukkit.getOnlinePlayers().size() > max_in_team*3){
-                                if (yellowPlayers.size() <= greenPlayers.size() || yellowPlayers.size() <= bluePlayers.size() || yellowPlayers.size() <= redPlayers.size()){
-                                    if (redPlayers.contains(e.getPlayer())){
-                                        redPlayers.remove(e.getPlayer());
-                                    } else if (bluePlayers.contains(e.getPlayer())){
-                                        bluePlayers.remove(e.getPlayer());
-                                    } else if (greenPlayers.contains(e.getPlayer())){
-                                        greenPlayers.remove(e.getPlayer());
-                                    }
-                                    teamchoose.add(e.getPlayer());
-                                    Bukkit.getScheduler().runTaskLater(plugin, () -> teamchoose.remove(e.getPlayer()), 100L);
-                                    yellowPlayers.add(e.getPlayer());
-                                    e.getPlayer().sendMessage(getMsg("team-choosing.yellow-join"));
-                                } else {
-                                    e.getPlayer().sendMessage(getMsg("team-choosing.unbalanced-teams"));
-                                }
-                            } else if (Bukkit.getOnlinePlayers().size() > max_in_team*2){
-                                if (yellowPlayers.size() <= greenPlayers.size() || yellowPlayers.size() <= bluePlayers.size()){
-                                    if (bluePlayers.contains(e.getPlayer())){
-                                        bluePlayers.remove(e.getPlayer());
-                                    } else if (greenPlayers.contains(e.getPlayer())){
-                                        greenPlayers.remove(e.getPlayer());
-                                    }
-                                    teamchoose.add(e.getPlayer());
-                                    Bukkit.getScheduler().runTaskLater(plugin, () -> teamchoose.remove(e.getPlayer()), 100L);
-                                    yellowPlayers.add(e.getPlayer());
-                                    e.getPlayer().sendMessage(getMsg("team-choosing.yellow-join"));
-                                } else {
-                                    e.getPlayer().sendMessage(getMsg("team-choosing.unbalanced-teams"));
-                                }
-                            }
-                        } else {
-                            e.getPlayer().sendMessage(getMsg("team-choosing.unbalanced-teams"));
-                        }
-                    } else if (nms.itemInHand(e.getPlayer()).getItemMeta().getDisplayName().equalsIgnoreCase(getMsg("team-choosing.green"))){
-                        if (greenPlayers.contains(e.getPlayer())) return;
-                        if (greenPlayers.size() < max_in_team){
-                            if (Bukkit.getOnlinePlayers().size() > max_in_team*3){
-                                if (greenPlayers.size() <= bluePlayers.size() || greenPlayers.size() <= yellowPlayers.size() || greenPlayers.size() <= redPlayers.size()){
-                                    if (redPlayers.contains(e.getPlayer())){
-                                        redPlayers.remove(e.getPlayer());
-                                    } else if (yellowPlayers.contains(e.getPlayer())){
-                                        yellowPlayers.remove(e.getPlayer());
-                                    } else if (bluePlayers.contains(e.getPlayer())){
-                                        bluePlayers.remove(e.getPlayer());
-                                    }
-                                    teamchoose.add(e.getPlayer());
-                                    Bukkit.getScheduler().runTaskLater(plugin, () -> teamchoose.remove(e.getPlayer()), 100L);
-                                    greenPlayers.add(e.getPlayer());
-                                    e.getPlayer().sendMessage(getMsg("team-choosing.green-join"));
-                                } else {
-                                    e.getPlayer().sendMessage(getMsg("team-choosing.unbalanced-teams"));
-                                }
-                            } else if (Bukkit.getOnlinePlayers().size() > max_in_team*2){
-                                if (greenPlayers.size() <= bluePlayers.size() || greenPlayers.size() <= yellowPlayers.size()){
-                                    if (bluePlayers.contains(e.getPlayer())){
-                                        bluePlayers.remove(e.getPlayer());
-                                    } else if (yellowPlayers.contains(e.getPlayer())) {
-                                        yellowPlayers.remove(e.getPlayer());
-                                    }
-                                    teamchoose.add(e.getPlayer());
-                                    Bukkit.getScheduler().runTaskLater(plugin, () -> teamchoose.remove(e.getPlayer()), 100L);
-                                    greenPlayers.add(e.getPlayer());
-                                    e.getPlayer().sendMessage(getMsg("team-choosing.green-join"));
-                                } else {
-                                    e.getPlayer().sendMessage(getMsg("team-choosing.unbalanced-teams"));
-                                }
-                            } else if (Bukkit.getOnlinePlayers().size() >= max_in_team){
-                                if (greenPlayers.size() <= bluePlayers.size()){
-                                    if (bluePlayers.contains(e.getPlayer())){
-                                        bluePlayers.remove(e.getPlayer());
-                                    }
-                                    teamchoose.add(e.getPlayer());
-                                    Bukkit.getScheduler().runTaskLater(plugin, () -> teamchoose.remove(e.getPlayer()), 100L);
-                                    greenPlayers.add(e.getPlayer());
-                                    e.getPlayer().sendMessage(getMsg("team-choosing.green-join"));
-                                } else {
-                                    e.getPlayer().sendMessage(getMsg("team-choosing.unbalanced-teams"));
-                                }
-                            }
-                        } else {
-                            e.getPlayer().sendMessage(getMsg("team-choosing.unbalanced-teams"));
-                        }
+                    String displayName = nms.itemInHand(e.getPlayer()).getItemMeta().getDisplayName();
+
+                    if (displayName.equals(getMsg("team-choosing.blue"))) {
+                        joinTeam(e.getPlayer(), Team.BLUE);
+                    } else if (displayName.equals(getMsg("team-choosing.red"))) {
+                        joinTeam(e.getPlayer(), Team.RED);
+                    } else if (displayName.equals(getMsg("team-choosing.green"))) {
+                        joinTeam(e.getPlayer(), Team.GREEN);
+                    } else if (displayName.equals(getMsg("team-choosing.yellow"))) {
+                        joinTeam(e.getPlayer(), Team.YELLOW);
+                    } else {
+                        broadcastMessage(PREFIX+" "+getMsg("team-choosing.unbalanced-teams"));
                     }
                 }
             }

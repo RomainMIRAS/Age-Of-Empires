@@ -266,6 +266,7 @@ public class Messages {
         yml.addDefault("motd.starting", "§6§l[AoE] §bLa partie commence bientôt ! §f(Rejoignez vite !) \n§ePréparez vos stratégies !");
         yml.addDefault("motd.playing", "§6§l[AoE] §cUne bataille épique est en cours ! §f(Spectateurs bienvenus) \n§7Préparez-vous pour la bataille !");
         yml.addDefault("motd.restarting", "§6§l[AoE] §cLa partie est terminée ! §f(Redémarrage en cours...) \n§ePréparez-vous pour la prochaine bataille !");
+        yml.addDefault("motd.setup", "§6§l[AoE] §cMaintenance en cours... §f(Accès restreint) \n§ePréparez-vous pour la bataille !");
         yml.addDefault("new-kill", "{prefix} {player} &aa été tué par {killer}");
         yml.addDefault("victory.green", "&aVictoire des Verts");
         yml.addDefault("victory.blue", "&9Victoire des Bleus");
