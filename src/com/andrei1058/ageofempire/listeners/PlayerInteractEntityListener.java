@@ -73,51 +73,51 @@ public class PlayerInteractEntityListener implements Listener {
                     }
                 } else if (v == blue_mill){
                     if (bluePlayers.contains(p)){
-                        p.openInventory(mill());
+                        p.openInventory(mill(p));
                     }
                 } else if (v == green_mill){
                     if (greenPlayers.contains(p)){
-                        p.openInventory(mill());
+                        p.openInventory(mill(p));
                     }
                 } else if (v == yellow_mill){
                     if (yellowPlayers.contains(p)){
-                        p.openInventory(mill());
+                        p.openInventory(mill(p));
                     }
                 } else if (v == red_mill){
                     if (redPlayers.contains(p)){
-                        p.openInventory(mill());
+                        p.openInventory(mill(p));
                     }
                 } else if (v == blue_workshop){
                     if (bluePlayers.contains(p)){
-                        p.openInventory(workshop());
+                        p.openInventory(workshop(p));
                     }
                 } else if (v == green_workshop){
                     if (greenPlayers.contains(p)){
-                        p.openInventory(workshop());
+                        p.openInventory(workshop(p));
                     }
                 } else if (v == yellow_workshop){
                     if (yellowPlayers.contains(p)){
-                        p.openInventory(workshop());
+                        p.openInventory(workshop(p));
                     }
                 } else if (v == red_workshop){
                     if (redPlayers.contains(p)){
-                        p.openInventory(workshop());
+                        p.openInventory(workshop(p));
                     }
                 } else if (v == blue_market){
                     if (bluePlayers.contains(p)){
-                        p.openInventory(market());
+                        p.openInventory(market(p));
                     }
                 } else if (v == green_market){
                     if (greenPlayers.contains(p)){
-                        p.openInventory(market());
+                        p.openInventory(market(p));
                     }
                 } else if (v == yellow_market){
                     if (yellowPlayers.contains(p)){
-                        p.openInventory(market());
+                        p.openInventory(market(p));
                     }
                 } else if (v == red_market){
                     if (redPlayers.contains(p)){
-                        p.openInventory(market());
+                        p.openInventory(market(p));
                     }
                 } else if (v == blue_sabotage){
                     if (bluePlayers.contains(p)){
@@ -153,19 +153,19 @@ public class PlayerInteractEntityListener implements Listener {
                     }
                 } else if (v == blue_archery){
                     if (bluePlayers.contains(p)){
-                        p.openInventory(archeryInv());
+                        p.openInventory(archeryInv(p));
                     }
                 } else if (v == green_archery){
                     if (greenPlayers.contains(p)){
-                        p.openInventory(archeryInv());
+                        p.openInventory(archeryInv(p));
                     }
                 } else if (v == yellow_archery){
                     if (yellowPlayers.contains(p)){
-                        p.openInventory(archeryInv());
+                        p.openInventory(archeryInv(p));
                     }
                 } else if (v == red_archery){
                     if (redPlayers.contains(p)){
-                        p.openInventory(archeryInv());
+                        p.openInventory(archeryInv(p));
                     }
                 } else if (v == blue_trifarrow){
                     if (bluePlayers.contains(p)){
@@ -217,19 +217,19 @@ public class PlayerInteractEntityListener implements Listener {
                     }
                 } else if (v == blue_lab){
                     if (bluePlayers.contains(p)){
-                        p.openInventory(lab());
+                        p.openInventory(lab(p));
                     }
                 } else if (v == green_lab){
                     if (greenPlayers.contains(p)){
-                        p.openInventory(lab());
+                        p.openInventory(lab(p));
                     }
                 } else if (v == yellow_lab){
                     if (yellowPlayers.contains(p)){
-                        p.openInventory(lab());
+                        p.openInventory(lab(p));
                     }
                 } else if (v == red_lab){
                     if (redPlayers.contains(p)){
-                        p.openInventory(lab());
+                        p.openInventory(lab(p));
                     }
                 } else if (v == blue_guild){
                     if (bluePlayers.contains(p)){
@@ -506,12 +506,60 @@ public class PlayerInteractEntityListener implements Listener {
         return inv;
     }
 
-    public static Inventory mill(){
+    public static Inventory mill(Player p){
         Inventory inv = Bukkit.createInventory(null, 54, "Mill");
         inv.addItem(forgeItem(Material.BREAD, getMsg("mill.bread.displayname"), getArray("mill.bread.lore")));
         inv.addItem(forgeItem(Material.POTATO, getMsg("mill.potato.displayname"), getArray("mill.potato.lore")));
         inv.addItem(forgeItem(Material.COOKED_BEEF, getMsg("mill.steak.displayname"), getArray("mill.steak.lore")));
         inv.addItem(forgeItem(Material.COOKED_CHICKEN, getMsg("mill.chicken.displayname"), getArray("mill.chicken.lore")));
+        
+        // Age-based progression for premium food items
+        if (bluePlayers.contains(p)) {
+            if (blue_age >= 2) {
+                inv.addItem(forgeItem(Material.GOLDEN_APPLE, getMsg("mill.goldenapple.displayname"), getArray("mill.goldenapple.lore")));
+                inv.addItem(forgeItem(Material.CAKE, getMsg("mill.cake.displayname"), getArray("mill.cake.lore")));
+            }
+            if (blue_age >= 3) {
+                inv.addItem(forgeItem(Material.SPECKLED_MELON, getMsg("mill.enchantedgoldenapple.displayname"), getArray("mill.enchantedgoldenapple.lore")));
+            }
+            if (blue_age >= 4) {
+                inv.addItem(forgeItem(Material.RABBIT_STEW, getMsg("mill.rabbitstew.displayname"), getArray("mill.rabbitstew.lore")));
+            }
+        } else if (greenPlayers.contains(p)){
+            if (green_age >= 2){
+                inv.addItem(forgeItem(Material.GOLDEN_APPLE, getMsg("mill.goldenapple.displayname"), getArray("mill.goldenapple.lore")));
+                inv.addItem(forgeItem(Material.CAKE, getMsg("mill.cake.displayname"), getArray("mill.cake.lore")));
+            }
+            if (green_age >= 3) {
+                inv.addItem(forgeItem(Material.SPECKLED_MELON, getMsg("mill.enchantedgoldenapple.displayname"), getArray("mill.enchantedgoldenapple.lore")));
+            }
+            if (green_age >= 4) {
+                inv.addItem(forgeItem(Material.RABBIT_STEW, getMsg("mill.rabbitstew.displayname"), getArray("mill.rabbitstew.lore")));
+            }
+        } else if (yellowPlayers.contains(p)){
+            if (yellow_age >= 2){
+                inv.addItem(forgeItem(Material.GOLDEN_APPLE, getMsg("mill.goldenapple.displayname"), getArray("mill.goldenapple.lore")));
+                inv.addItem(forgeItem(Material.CAKE, getMsg("mill.cake.displayname"), getArray("mill.cake.lore")));
+            }
+            if (yellow_age >= 3) {
+                inv.addItem(forgeItem(Material.SPECKLED_MELON, getMsg("mill.enchantedgoldenapple.displayname"), getArray("mill.enchantedgoldenapple.lore")));
+            }
+            if (yellow_age >= 4) {
+                inv.addItem(forgeItem(Material.RABBIT_STEW, getMsg("mill.rabbitstew.displayname"), getArray("mill.rabbitstew.lore")));
+            }
+        } else if (redPlayers.contains(p)){
+            if (red_age >= 2){
+                inv.addItem(forgeItem(Material.GOLDEN_APPLE, getMsg("mill.goldenapple.displayname"), getArray("mill.goldenapple.lore")));
+                inv.addItem(forgeItem(Material.CAKE, getMsg("mill.cake.displayname"), getArray("mill.cake.lore")));
+            }
+            if (red_age >= 3) {
+                inv.addItem(forgeItem(Material.SPECKLED_MELON, getMsg("mill.enchantedgoldenapple.displayname"), getArray("mill.enchantedgoldenapple.lore")));
+            }
+            if (red_age >= 4) {
+                inv.addItem(forgeItem(Material.RABBIT_STEW, getMsg("mill.rabbitstew.displayname"), getArray("mill.rabbitstew.lore")));
+            }
+        }
+        
         return inv;
     }
 
@@ -598,7 +646,7 @@ public class PlayerInteractEntityListener implements Listener {
         return inv;
     }
 
-    private static Inventory lab(){
+    private static Inventory lab(Player p){
         Inventory inv = Bukkit.createInventory(null, 54, "Laboratory");
         inv.addItem(labItem(PotionType.SPEED, "lab.swiftness.name", "lab.swiftness.lore", false));
         inv.addItem(labItem(PotionType.FIRE_RESISTANCE, "lab.fireresistance.name", "lab.fireresistance.lore", false));
@@ -609,6 +657,58 @@ public class PlayerInteractEntityListener implements Listener {
         inv.addItem(labItem(PotionType.SPEED, "lab.splashswiftness.name", "lab.splashswiftness.lore", true));
         inv.addItem(labItem(PotionType.REGEN, "lab.regeneration.name", "lab.regeneration.lore", false));
         inv.addItem(labItem(PotionType.JUMP, "lab.splashleaping.name", "lab.splashleaping.lore", true));
+        
+        // Age-based progression for combat potions
+        if (bluePlayers.contains(p)) {
+            if (blue_age >= 2) {
+                inv.addItem(labItem(PotionType.STRENGTH, "lab.strength.name", "lab.strength.lore", false));
+                inv.addItem(labItem(PotionType.POISON, "lab.poison.name", "lab.poison.lore", false));
+            }
+            if (blue_age >= 3) {
+                inv.addItem(labItem(PotionType.INVISIBILITY, "lab.invisibility.name", "lab.invisibility.lore", false));
+                inv.addItem(labItem(PotionType.WEAKNESS, "lab.weakness.name", "lab.weakness.lore", true));
+            }
+            if (blue_age >= 4) {
+                inv.addItem(labItem(PotionType.SLOWNESS, "lab.slowness.name", "lab.slowness.lore", true));
+            }
+        } else if (greenPlayers.contains(p)){
+            if (green_age >= 2){
+                inv.addItem(labItem(PotionType.STRENGTH, "lab.strength.name", "lab.strength.lore", false));
+                inv.addItem(labItem(PotionType.POISON, "lab.poison.name", "lab.poison.lore", false));
+            }
+            if (green_age >= 3) {
+                inv.addItem(labItem(PotionType.INVISIBILITY, "lab.invisibility.name", "lab.invisibility.lore", false));
+                inv.addItem(labItem(PotionType.WEAKNESS, "lab.weakness.name", "lab.weakness.lore", true));
+            }
+            if (green_age >= 4) {
+                inv.addItem(labItem(PotionType.SLOWNESS, "lab.slowness.name", "lab.slowness.lore", true));
+            }
+        } else if (yellowPlayers.contains(p)){
+            if (yellow_age >= 2){
+                inv.addItem(labItem(PotionType.STRENGTH, "lab.strength.name", "lab.strength.lore", false));
+                inv.addItem(labItem(PotionType.POISON, "lab.poison.name", "lab.poison.lore", false));
+            }
+            if (yellow_age >= 3) {
+                inv.addItem(labItem(PotionType.INVISIBILITY, "lab.invisibility.name", "lab.invisibility.lore", false));
+                inv.addItem(labItem(PotionType.WEAKNESS, "lab.weakness.name", "lab.weakness.lore", true));
+            }
+            if (yellow_age >= 4) {
+                inv.addItem(labItem(PotionType.SLOWNESS, "lab.slowness.name", "lab.slowness.lore", true));
+            }
+        } else if (redPlayers.contains(p)){
+            if (red_age >= 2){
+                inv.addItem(labItem(PotionType.STRENGTH, "lab.strength.name", "lab.strength.lore", false));
+                inv.addItem(labItem(PotionType.POISON, "lab.poison.name", "lab.poison.lore", false));
+            }
+            if (red_age >= 3) {
+                inv.addItem(labItem(PotionType.INVISIBILITY, "lab.invisibility.name", "lab.invisibility.lore", false));
+                inv.addItem(labItem(PotionType.WEAKNESS, "lab.weakness.name", "lab.weakness.lore", true));
+            }
+            if (red_age >= 4) {
+                inv.addItem(labItem(PotionType.SLOWNESS, "lab.slowness.name", "lab.slowness.lore", true));
+            }
+        }
+        
         return inv;
     }
 
@@ -623,12 +723,60 @@ public class PlayerInteractEntityListener implements Listener {
         return i;
     }
 
-    public static Inventory market(){
+    public static Inventory market(Player p){
         Inventory inv = Bukkit.createInventory(null, 54, "Market");
         inv.addItem(forgeItem(Material.FLINT_AND_STEEL, getMsg("market.flintandsteel.displayname"), getArray("market.flintandsteel.lore")));
         inv.addItem(forgeItem(Material.WEB, getMsg("market.cobweb.displayname"), getArray("market.cobweb.lore")));
         inv.addItem(forgeItem(Material.TORCH, getMsg("market.torches.displayname"), getArray("market.torches.lore")));
         inv.addItem(forgeItem(Material.BOAT, getMsg("market.boat.displayname"), getArray("market.boat.lore")));
+        
+        // Age-based progression for utility items
+        if (bluePlayers.contains(p)) {
+            if (blue_age >= 2) {
+                inv.addItem(forgeItem(Material.ENDER_PEARL, getMsg("market.enderpearl.displayname"), getArray("market.enderpearl.lore")));
+                inv.addItem(forgeItem(Material.FISHING_ROD, getMsg("market.fishingrod.displayname"), getArray("market.fishingrod.lore")));
+            }
+            if (blue_age >= 3) {
+                inv.addItem(forgeItem(Material.EYE_OF_ENDER, getMsg("market.eyeofender.displayname"), getArray("market.eyeofender.lore")));
+            }
+            if (blue_age >= 4) {
+                inv.addItem(forgeItem(Material.ELYTRA, getMsg("market.elytra.displayname"), getArray("market.elytra.lore")));
+            }
+        } else if (greenPlayers.contains(p)){
+            if (green_age >= 2){
+                inv.addItem(forgeItem(Material.ENDER_PEARL, getMsg("market.enderpearl.displayname"), getArray("market.enderpearl.lore")));
+                inv.addItem(forgeItem(Material.FISHING_ROD, getMsg("market.fishingrod.displayname"), getArray("market.fishingrod.lore")));
+            }
+            if (green_age >= 3) {
+                inv.addItem(forgeItem(Material.EYE_OF_ENDER, getMsg("market.eyeofender.displayname"), getArray("market.eyeofender.lore")));
+            }
+            if (green_age >= 4) {
+                inv.addItem(forgeItem(Material.ELYTRA, getMsg("market.elytra.displayname"), getArray("market.elytra.lore")));
+            }
+        } else if (yellowPlayers.contains(p)){
+            if (yellow_age >= 2){
+                inv.addItem(forgeItem(Material.ENDER_PEARL, getMsg("market.enderpearl.displayname"), getArray("market.enderpearl.lore")));
+                inv.addItem(forgeItem(Material.FISHING_ROD, getMsg("market.fishingrod.displayname"), getArray("market.fishingrod.lore")));
+            }
+            if (yellow_age >= 3) {
+                inv.addItem(forgeItem(Material.EYE_OF_ENDER, getMsg("market.eyeofender.displayname"), getArray("market.eyeofender.lore")));
+            }
+            if (yellow_age >= 4) {
+                inv.addItem(forgeItem(Material.ELYTRA, getMsg("market.elytra.displayname"), getArray("market.elytra.lore")));
+            }
+        } else if (redPlayers.contains(p)){
+            if (red_age >= 2){
+                inv.addItem(forgeItem(Material.ENDER_PEARL, getMsg("market.enderpearl.displayname"), getArray("market.enderpearl.lore")));
+                inv.addItem(forgeItem(Material.FISHING_ROD, getMsg("market.fishingrod.displayname"), getArray("market.fishingrod.lore")));
+            }
+            if (red_age >= 3) {
+                inv.addItem(forgeItem(Material.EYE_OF_ENDER, getMsg("market.eyeofender.displayname"), getArray("market.eyeofender.lore")));
+            }
+            if (red_age >= 4) {
+                inv.addItem(forgeItem(Material.ELYTRA, getMsg("market.elytra.displayname"), getArray("market.elytra.lore")));
+            }
+        }
+        
         return inv;
     }
 
@@ -643,7 +791,7 @@ public class PlayerInteractEntityListener implements Listener {
         return inv;
     }
 
-    public static Inventory workshop(){
+    public static Inventory workshop(Player p){
         Inventory inv = Bukkit.createInventory(null, 54, "Workshop");
         inv.addItem(forgeItem(Material.GRASS, getMsg("workshop.grass.displayname"), getArray("workshop.grass.lore")));
         inv.addItem(forgeItem(Material.DIRT, getMsg("workshop.dirt.displayname"), getArray("workshop.dirt.lore")));
@@ -671,6 +819,58 @@ public class PlayerInteractEntityListener implements Listener {
         inv.addItem(forgeItem(Material.BRICK, getMsg("workshop.bricks.displayname"), getArray("workshop.bricks.lore")));
         inv.addItem(forgeItem(Material.MOSSY_COBBLESTONE, getMsg("workshop.mossstone.displayname"), getArray("workshop.mossstone.lore")));
         inv.addItem(forgeItem(Material.LEAVES, getMsg("workshop.leaves.displayname"), getArray("workshop.leaves.lore")));
+        
+        // Age-based progression for premium building materials
+        if (bluePlayers.contains(p)) {
+            if (blue_age >= 2) {
+                inv.addItem(forgeItem(Material.QUARTZ_BLOCK, getMsg("workshop.quartz.displayname"), getArray("workshop.quartz.lore")));
+                inv.addItem(forgeItem(Material.PRISMARINE, getMsg("workshop.prismarine.displayname"), getArray("workshop.prismarine.lore")));
+            }
+            if (blue_age >= 3) {
+                inv.addItem(forgeItem(Material.OBSIDIAN, getMsg("workshop.obsidian.displayname"), getArray("workshop.obsidian.lore")));
+                inv.addItem(forgeItem(Material.EMERALD_BLOCK, getMsg("workshop.emeraldblock.displayname"), getArray("workshop.emeraldblock.lore")));
+            }
+            if (blue_age >= 4) {
+                inv.addItem(forgeItem(Material.BEACON, getMsg("workshop.beacon.displayname"), getArray("workshop.beacon.lore")));
+            }
+        } else if (greenPlayers.contains(p)){
+            if (green_age >= 2){
+                inv.addItem(forgeItem(Material.QUARTZ_BLOCK, getMsg("workshop.quartz.displayname"), getArray("workshop.quartz.lore")));
+                inv.addItem(forgeItem(Material.PRISMARINE, getMsg("workshop.prismarine.displayname"), getArray("workshop.prismarine.lore")));
+            }
+            if (green_age >= 3) {
+                inv.addItem(forgeItem(Material.OBSIDIAN, getMsg("workshop.obsidian.displayname"), getArray("workshop.obsidian.lore")));
+                inv.addItem(forgeItem(Material.EMERALD_BLOCK, getMsg("workshop.emeraldblock.displayname"), getArray("workshop.emeraldblock.lore")));
+            }
+            if (green_age >= 4) {
+                inv.addItem(forgeItem(Material.BEACON, getMsg("workshop.beacon.displayname"), getArray("workshop.beacon.lore")));
+            }
+        } else if (yellowPlayers.contains(p)){
+            if (yellow_age >= 2){
+                inv.addItem(forgeItem(Material.QUARTZ_BLOCK, getMsg("workshop.quartz.displayname"), getArray("workshop.quartz.lore")));
+                inv.addItem(forgeItem(Material.PRISMARINE, getMsg("workshop.prismarine.displayname"), getArray("workshop.prismarine.lore")));
+            }
+            if (yellow_age >= 3) {
+                inv.addItem(forgeItem(Material.OBSIDIAN, getMsg("workshop.obsidian.displayname"), getArray("workshop.obsidian.lore")));
+                inv.addItem(forgeItem(Material.EMERALD_BLOCK, getMsg("workshop.emeraldblock.displayname"), getArray("workshop.emeraldblock.lore")));
+            }
+            if (yellow_age >= 4) {
+                inv.addItem(forgeItem(Material.BEACON, getMsg("workshop.beacon.displayname"), getArray("workshop.beacon.lore")));
+            }
+        } else if (redPlayers.contains(p)){
+            if (red_age >= 2){
+                inv.addItem(forgeItem(Material.QUARTZ_BLOCK, getMsg("workshop.quartz.displayname"), getArray("workshop.quartz.lore")));
+                inv.addItem(forgeItem(Material.PRISMARINE, getMsg("workshop.prismarine.displayname"), getArray("workshop.prismarine.lore")));
+            }
+            if (red_age >= 3) {
+                inv.addItem(forgeItem(Material.OBSIDIAN, getMsg("workshop.obsidian.displayname"), getArray("workshop.obsidian.lore")));
+                inv.addItem(forgeItem(Material.EMERALD_BLOCK, getMsg("workshop.emeraldblock.displayname"), getArray("workshop.emeraldblock.lore")));
+            }
+            if (red_age >= 4) {
+                inv.addItem(forgeItem(Material.BEACON, getMsg("workshop.beacon.displayname"), getArray("workshop.beacon.lore")));
+            }
+        }
+        
         return inv;
     }
 
@@ -694,7 +894,7 @@ public class PlayerInteractEntityListener implements Listener {
         return i;
     }
 
-    private static Inventory archeryInv(){
+    private static Inventory archeryInv(Player p){
         Inventory inv = Bukkit.createInventory(null, 54, "Archery Store");
 
         ItemStack bow = new ItemStack(Material.BOW);
@@ -717,6 +917,133 @@ public class PlayerInteractEntityListener implements Listener {
         aMeta.setLore(getArray("archery.arrows10.lore").stream().map(s -> s.replace('&', '§')).collect(Collectors.toCollection(ArrayList::new)));
         a10.setItemMeta(aMeta);
         inv.addItem(a10);
+
+        // Age-based progression for enhanced weapons
+        if (bluePlayers.contains(p)) {
+            if (blue_age >= 2) {
+                ItemStack enchantedBow = new ItemStack(Material.BOW);
+                ItemMeta enchantedBowMeta = enchantedBow.getItemMeta();
+                enchantedBowMeta.setDisplayName(getMsg("archery.enchantedbow.displayname"));
+                enchantedBowMeta.setLore(getArray("archery.enchantedbow.lore").stream().map(s -> s.replace('&', '§')).collect(Collectors.toCollection(ArrayList::new)));
+                enchantedBowMeta.addEnchant(Enchantment.ARROW_DAMAGE, 1, true);
+                enchantedBow.setItemMeta(enchantedBowMeta);
+                inv.addItem(enchantedBow);
+            }
+            if (blue_age >= 3) {
+                ItemStack powerBow = new ItemStack(Material.BOW);
+                ItemMeta powerBowMeta = powerBow.getItemMeta();
+                powerBowMeta.setDisplayName(getMsg("archery.powerbow.displayname"));
+                powerBowMeta.setLore(getArray("archery.powerbow.lore").stream().map(s -> s.replace('&', '§')).collect(Collectors.toCollection(ArrayList::new)));
+                powerBowMeta.addEnchant(Enchantment.ARROW_DAMAGE, 2, true);
+                powerBowMeta.addEnchant(Enchantment.ARROW_KNOCKBACK, 1, true);
+                powerBow.setItemMeta(powerBowMeta);
+                inv.addItem(powerBow);
+            }
+            if (blue_age >= 4) {
+                ItemStack masterBow = new ItemStack(Material.BOW);
+                ItemMeta masterBowMeta = masterBow.getItemMeta();
+                masterBowMeta.setDisplayName(getMsg("archery.masterbow.displayname"));
+                masterBowMeta.setLore(getArray("archery.masterbow.lore").stream().map(s -> s.replace('&', '§')).collect(Collectors.toCollection(ArrayList::new)));
+                masterBowMeta.addEnchant(Enchantment.ARROW_DAMAGE, 3, true);
+                masterBowMeta.addEnchant(Enchantment.ARROW_KNOCKBACK, 2, true);
+                masterBowMeta.addEnchant(Enchantment.ARROW_INFINITE, 1, true);
+                masterBow.setItemMeta(masterBowMeta);
+                inv.addItem(masterBow);
+            }
+        } else if (greenPlayers.contains(p)){
+            if (green_age >= 2){
+                ItemStack enchantedBow = new ItemStack(Material.BOW);
+                ItemMeta enchantedBowMeta = enchantedBow.getItemMeta();
+                enchantedBowMeta.setDisplayName(getMsg("archery.enchantedbow.displayname"));
+                enchantedBowMeta.setLore(getArray("archery.enchantedbow.lore").stream().map(s -> s.replace('&', '§')).collect(Collectors.toCollection(ArrayList::new)));
+                enchantedBowMeta.addEnchant(Enchantment.ARROW_DAMAGE, 1, true);
+                enchantedBow.setItemMeta(enchantedBowMeta);
+                inv.addItem(enchantedBow);
+            }
+            if (green_age >= 3) {
+                ItemStack powerBow = new ItemStack(Material.BOW);
+                ItemMeta powerBowMeta = powerBow.getItemMeta();
+                powerBowMeta.setDisplayName(getMsg("archery.powerbow.displayname"));
+                powerBowMeta.setLore(getArray("archery.powerbow.lore").stream().map(s -> s.replace('&', '§')).collect(Collectors.toCollection(ArrayList::new)));
+                powerBowMeta.addEnchant(Enchantment.ARROW_DAMAGE, 2, true);
+                powerBowMeta.addEnchant(Enchantment.ARROW_KNOCKBACK, 1, true);
+                powerBow.setItemMeta(powerBowMeta);
+                inv.addItem(powerBow);
+            }
+            if (green_age >= 4) {
+                ItemStack masterBow = new ItemStack(Material.BOW);
+                ItemMeta masterBowMeta = masterBow.getItemMeta();
+                masterBowMeta.setDisplayName(getMsg("archery.masterbow.displayname"));
+                masterBowMeta.setLore(getArray("archery.masterbow.lore").stream().map(s -> s.replace('&', '§')).collect(Collectors.toCollection(ArrayList::new)));
+                masterBowMeta.addEnchant(Enchantment.ARROW_DAMAGE, 3, true);
+                masterBowMeta.addEnchant(Enchantment.ARROW_KNOCKBACK, 2, true);
+                masterBowMeta.addEnchant(Enchantment.ARROW_INFINITE, 1, true);
+                masterBow.setItemMeta(masterBowMeta);
+                inv.addItem(masterBow);
+            }
+        } else if (yellowPlayers.contains(p)){
+            if (yellow_age >= 2){
+                ItemStack enchantedBow = new ItemStack(Material.BOW);
+                ItemMeta enchantedBowMeta = enchantedBow.getItemMeta();
+                enchantedBowMeta.setDisplayName(getMsg("archery.enchantedbow.displayname"));
+                enchantedBowMeta.setLore(getArray("archery.enchantedbow.lore").stream().map(s -> s.replace('&', '§')).collect(Collectors.toCollection(ArrayList::new)));
+                enchantedBowMeta.addEnchant(Enchantment.ARROW_DAMAGE, 1, true);
+                enchantedBow.setItemMeta(enchantedBowMeta);
+                inv.addItem(enchantedBow);
+            }
+            if (yellow_age >= 3) {
+                ItemStack powerBow = new ItemStack(Material.BOW);
+                ItemMeta powerBowMeta = powerBow.getItemMeta();
+                powerBowMeta.setDisplayName(getMsg("archery.powerbow.displayname"));
+                powerBowMeta.setLore(getArray("archery.powerbow.lore").stream().map(s -> s.replace('&', '§')).collect(Collectors.toCollection(ArrayList::new)));
+                powerBowMeta.addEnchant(Enchantment.ARROW_DAMAGE, 2, true);
+                powerBowMeta.addEnchant(Enchantment.ARROW_KNOCKBACK, 1, true);
+                powerBow.setItemMeta(powerBowMeta);
+                inv.addItem(powerBow);
+            }
+            if (yellow_age >= 4) {
+                ItemStack masterBow = new ItemStack(Material.BOW);
+                ItemMeta masterBowMeta = masterBow.getItemMeta();
+                masterBowMeta.setDisplayName(getMsg("archery.masterbow.displayname"));
+                masterBowMeta.setLore(getArray("archery.masterbow.lore").stream().map(s -> s.replace('&', '§')).collect(Collectors.toCollection(ArrayList::new)));
+                masterBowMeta.addEnchant(Enchantment.ARROW_DAMAGE, 3, true);
+                masterBowMeta.addEnchant(Enchantment.ARROW_KNOCKBACK, 2, true);
+                masterBowMeta.addEnchant(Enchantment.ARROW_INFINITE, 1, true);
+                masterBow.setItemMeta(masterBowMeta);
+                inv.addItem(masterBow);
+            }
+        } else if (redPlayers.contains(p)){
+            if (red_age >= 2){
+                ItemStack enchantedBow = new ItemStack(Material.BOW);
+                ItemMeta enchantedBowMeta = enchantedBow.getItemMeta();
+                enchantedBowMeta.setDisplayName(getMsg("archery.enchantedbow.displayname"));
+                enchantedBowMeta.setLore(getArray("archery.enchantedbow.lore").stream().map(s -> s.replace('&', '§')).collect(Collectors.toCollection(ArrayList::new)));
+                enchantedBowMeta.addEnchant(Enchantment.ARROW_DAMAGE, 1, true);
+                enchantedBow.setItemMeta(enchantedBowMeta);
+                inv.addItem(enchantedBow);
+            }
+            if (red_age >= 3) {
+                ItemStack powerBow = new ItemStack(Material.BOW);
+                ItemMeta powerBowMeta = powerBow.getItemMeta();
+                powerBowMeta.setDisplayName(getMsg("archery.powerbow.displayname"));
+                powerBowMeta.setLore(getArray("archery.powerbow.lore").stream().map(s -> s.replace('&', '§')).collect(Collectors.toCollection(ArrayList::new)));
+                powerBowMeta.addEnchant(Enchantment.ARROW_DAMAGE, 2, true);
+                powerBowMeta.addEnchant(Enchantment.ARROW_KNOCKBACK, 1, true);
+                powerBow.setItemMeta(powerBowMeta);
+                inv.addItem(powerBow);
+            }
+            if (red_age >= 4) {
+                ItemStack masterBow = new ItemStack(Material.BOW);
+                ItemMeta masterBowMeta = masterBow.getItemMeta();
+                masterBowMeta.setDisplayName(getMsg("archery.masterbow.displayname"));
+                masterBowMeta.setLore(getArray("archery.masterbow.lore").stream().map(s -> s.replace('&', '§')).collect(Collectors.toCollection(ArrayList::new)));
+                masterBowMeta.addEnchant(Enchantment.ARROW_DAMAGE, 3, true);
+                masterBowMeta.addEnchant(Enchantment.ARROW_KNOCKBACK, 2, true);
+                masterBowMeta.addEnchant(Enchantment.ARROW_INFINITE, 1, true);
+                masterBow.setItemMeta(masterBowMeta);
+                inv.addItem(masterBow);
+            }
+        }
 
         return inv;
     }
