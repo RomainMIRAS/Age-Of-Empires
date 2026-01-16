@@ -1,0 +1,45 @@
+{
+  "prefix": "§9[§7AOE§9]",
+  
+  "game": {
+    "join": "§a{player} has joined the game! ({current}/{max})",
+    "leave": "§c{player} has left the game!",
+    "start": "§a§lGAME STARTED!",
+    "end": "§e§lGame ended!",
+    "countdown": "§eGame starting in §6{seconds}§e seconds!",
+    "team_assigned": "§aYou have been assigned to team {team}!"
+  },
+  
+  "teams": {
+    "blue": "§9§lBLUE",
+    "red": "§c§lRED",
+    "green": "§a§lGREEN",
+    "yellow": "§e§lYELLOW"
+  },
+  
+  "resources": {
+    "collected": "§a+{amount} {resource}",
+    "insufficient": "§cInsufficient {resource}! Need: {needed}, Have: {current}"
+  },
+  
+  "buildings": {
+    "purchased": "§aBuilding purchased: {building}",
+    "vote_started": "§eVote started for {building}! Vote: /vote yes or /vote no",
+    "vote_passed": "§aVote passed! Building will be placed.",
+    "vote_failed": "§cVote failed. Building not purchased."
+  },
+  
+  "commands": {
+    "no_permission": "§cYou don't have permission to use this command!",
+    "not_in_game": "§cYou are not in a game!",
+    "player_only": "§cThis command can only be used by players!",
+    "usage": "§cUsage: {usage}"
+  },
+  
+  "errors": {
+    "generic": "§cAn error occurred. Please contact an administrator.",
+    "arena_not_found": "§cArena not found!",
+    "game_full": "§cThis game is full!",
+    "already_in_game": "§cYou are already in a game!"
+  }
+}

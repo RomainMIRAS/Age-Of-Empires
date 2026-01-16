@@ -1,0 +1,173 @@
+{
+  "buildings": [
+    {
+      "id": "forum",
+      "name": "Forum",
+      "description": "The heart of your empire",
+      "age": 1,
+      "cost": {
+        "wood": 0,
+        "stone": 0
+      },
+      "health": 1400,
+      "plot_size": "large",
+      "schematic": "FORUM.schematic"
+    },
+    {
+      "id": "forge",
+      "name": "Forge",
+      "description": "Craft weapons and armor",
+      "age": 1,
+      "cost": {
+        "wood": 50,
+        "stone": 30
+      },
+      "health": 500,
+      "plot_size": "small",
+      "schematic": "FORGE.schematic"
+    },
+    {
+      "id": "stone_mine",
+      "name": "Stone Mine",
+      "description": "Increases stone gathering rate",
+      "age": 1,
+      "cost": {
+        "wood": 30,
+        "stone": 20
+      },
+      "health": 500,
+      "plot_size": "small",
+      "schematic": "STONE_MINE.schematic"
+    },
+    {
+      "id": "gold_mine",
+      "name": "Gold Mine",
+      "description": "Increases gold gathering rate",
+      "age": 1,
+      "cost": {
+        "wood": 40,
+        "stone": 30
+      },
+      "health": 500,
+      "plot_size": "small",
+      "schematic": "GOLD_MINE.schematic"
+    },
+    {
+      "id": "sawmill",
+      "name": "Sawmill",
+      "description": "Increases wood gathering rate",
+      "age": 1,
+      "cost": {
+        "wood": 30,
+        "stone": 20
+      },
+      "health": 500,
+      "plot_size": "small",
+      "schematic": "SAWMILL.schematic"
+    },
+    {
+      "id": "mill",
+      "name": "Mill",
+      "description": "Provides food and resources",
+      "age": 1,
+      "cost": {
+        "wood": 40,
+        "stone": 40
+      },
+      "health": 500,
+      "plot_size": "medium",
+      "schematic": "MILL.schematic"
+    },
+    {
+      "id": "workshop",
+      "name": "Workshop",
+      "description": "Craft special items",
+      "age": 2,
+      "cost": {
+        "wood": 60,
+        "stone": 60
+      },
+      "health": 500,
+      "plot_size": "medium",
+      "schematic": "WORKSHOP.schematic"
+    },
+    {
+      "id": "market",
+      "name": "Market",
+      "description": "Trade resources",
+      "age": 2,
+      "cost": {
+        "wood": 50,
+        "stone": 50
+      },
+      "health": 500,
+      "plot_size": "medium",
+      "schematic": "MARKET.schematic"
+    },
+    {
+      "id": "archery_store",
+      "name": "Archery Store",
+      "description": "Purchase bows and arrows",
+      "age": 3,
+      "cost": {
+        "wood": 80,
+        "stone": 80
+      },
+      "health": 500,
+      "plot_size": "medium",
+      "schematic": "ARCHERY_STORE.schematic"
+    },
+    {
+      "id": "stable",
+      "name": "Stable",
+      "description": "Horses and cavalry equipment",
+      "age": 3,
+      "cost": {
+        "wood": 100,
+        "stone": 100
+      },
+      "health": 500,
+      "plot_size": "large",
+      "schematic": "STABLE.schematic"
+    },
+    {
+      "id": "armory",
+      "name": "Armory",
+      "description": "Advanced weapons and armor",
+      "age": 3,
+      "cost": {
+        "wood": 90,
+        "stone": 90
+      },
+      "health": 500,
+      "plot_size": "medium",
+      "schematic": "ARMORY.schematic"
+    },
+    {
+      "id": "guild",
+      "name": "Guild",
+      "description": "Elite equipment",
+      "age": 4,
+      "cost": {
+        "wood": 150,
+        "stone": 150
+      },
+      "health": 500,
+      "plot_size": "large",
+      "schematic": "GUILD.schematic"
+    },
+    {
+      "id": "training_center",
+      "name": "Training Center",
+      "description": "Train elite units",
+      "age": 4,
+      "cost": {
+        "wood": 120,
+        "stone": 120
+      },
+      "health": 500,
+      "plot_size": "large",
+      "schematic": "TRAINING_CENTER.schematic"
+    }
+  ]
+}

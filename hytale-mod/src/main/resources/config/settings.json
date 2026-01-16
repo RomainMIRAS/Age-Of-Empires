@@ -1,0 +1,37 @@
+{
+  "game": {
+    "min_players": 2,
+    "max_players": 16,
+    "max_players_per_team": 4
+  },
+  
+  "countdowns": {
+    "lobby": 40,
+    "pregame": 10,
+    "pvp_time": 600,
+    "assault_time": 600,
+    "restart": 15
+  },
+  
+  "resources": {
+    "starting_wood": 100.0,
+    "starting_stone": 100.0,
+    "starting_gold": 0.0
+  },
+  
+  "buildings": {
+    "forum_health": 1400,
+    "building_health": 500
+  },
+  
+  "plots": {
+    "small_radius": 9,
+    "medium_radius": 12,
+    "large_radius": 16
+  },
+  
+  "misc": {
+    "enable_stats": true,
+    "lobby_server": "ageofempire"
+  }
+}

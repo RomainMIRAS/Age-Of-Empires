@@ -1,0 +1,52 @@
+plugins {
+    id 'java'
+}
+
+group = 'com.ageofempires'
+version = '2.0.0-HYTALE'
+
+java {
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(21)
+    }
+}
+
+repositories {
+    mavenCentral()
+    flatDir {
+        // Pour le JAR du serveur Hytale
+        dirs 'libs'
+    }
+}
+
+dependencies {
+    // Le JAR du serveur Hytale doit être placé dans le dossier libs/
+    compileOnly files('libs/HytaleServer.jar')
+    
+    // Optionnel : pour les tests
+    testImplementation 'org.junit.jupiter:junit-jupiter:5.10.1'
+}
+
+jar {
+    from('src/main/resources') {
+        include 'manifest.json'
+        include 'config/**'
+    }
+    
+    archiveBaseName = 'AgeOfEmpires-Hytale'
+    archiveVersion = version
+}
+
+tasks.named('test') {
+    useJUnitPlatform()
+}
+
+// Task pour copier le JAR dans le dossier mods du serveur
+task deployToServer(type: Copy, dependsOn: jar) {
+    from jar.archiveFile
+    into "${projectDir}/../server/mods"
+    
+    doLast {
+        println "✅ Mod déployé dans le serveur Hytale!"
+    }
+}

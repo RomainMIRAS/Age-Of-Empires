@@ -1,0 +1,53 @@
+{
+  "format_version": 1,
+  "group": "com.ageofempires",
+  "name": "AgeOfEmpires",
+  "version": "2.0.0",
+  "description": "Age of Empires minigame for Hytale - A team-based PvP game inspired by the classic RTS",
+  "authors": ["RomainMiras", "andrei1058"],
+  "website": "https://github.com/yourrepo/hytale-age-of-empires",
+  
+  "entrypoint": "com.ageofempires.AgeOfEmpiresPlugin",
+  
+  "dependencies": [],
+  
+  "permissions": {
+    "aoe.admin": {
+      "description": "Full access to Age of Empires admin commands",
+      "default": "op"
+    },
+    "aoe.setup": {
+      "description": "Access to setup commands for configuring arenas",
+      "default": "op"
+    },
+    "aoe.play": {
+      "description": "Allows players to join and play Age of Empires",
+      "default": "true"
+    },
+    "aoe.vip": {
+      "description": "VIP privileges (join full games, priority queue)",
+      "default": "false"
+    },
+    "aoe.command.leave": {
+      "description": "Allows using /leave command",
+      "default": "true"
+    },
+    "aoe.command.kit": {
+      "description": "Allows using /kit command",
+      "default": "true"
+    },
+    "aoe.command.stuck": {
+      "description": "Allows using /stuck command",
+      "default": "true"
+    },
+    "aoe.command.forcestart": {
+      "description": "Allows forcing game start",
+      "default": "op"
+    }
+  },
+  
+  "metadata": {
+    "min_hytale_version": "1.0.0",
+    "tags": ["minigame", "pvp", "team-based", "strategy", "rts"]
+  }
+}
