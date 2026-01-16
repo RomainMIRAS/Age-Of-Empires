@@ -1,6 +1,7 @@
 package com.ageofempires.events;
 
 import com.ageofempires.AgeOfEmpiresPlugin;
+import com.ageofempires.core.game.GameSession;
 import com.ageofempires.data.PlayerSession;
 import com.ageofempires.core.team.Team;
 import com.ageofempires.core.resources.ResourceType;

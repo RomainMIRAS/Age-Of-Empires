@@ -1,6 +1,7 @@
 package com.ageofempires.core.team;
 
 import com.ageofempires.core.game.GameConfig;
+import com.ageofempires.core.resources.ResourceType;
 import com.ageofempires.gameplay.resources.ResourceType;
 
 import java.util.*;

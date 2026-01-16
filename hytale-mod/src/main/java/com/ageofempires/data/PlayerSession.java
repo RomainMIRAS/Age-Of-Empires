@@ -1,5 +1,6 @@
 package com.ageofempires.data;
 
+import com.ageofempires.core.game.GameSession;
 import com.ageofempires.core.kits.Kit;
 import com.ageofempires.core.team.Team;
 import com.ageofempires.core.resources.ResourceType;

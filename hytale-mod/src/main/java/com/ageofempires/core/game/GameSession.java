@@ -5,7 +5,7 @@ import com.ageofempires.core.arena.Arena;
 import com.ageofempires.core.team.Team;
 import com.ageofempires.core.team.TeamManager;
 import com.ageofempires.core.team.TeamData;
-import com.ageofempires.data.player.PlayerSession;
+import com.ageofempires.data.PlayerSession;
 import com.hypixel.hytale.server.core.universe.PlayerRef;
 
 import java.util.*;
@@ -148,7 +148,7 @@ public class GameSession {
             return false;
         }
         
-        PlayerSession session = new PlayerSession(player);
+        PlayerSession session = new PlayerSession(player, this);
         players.put(player.getUuid(), session);
         
         // Auto-assign to smallest team

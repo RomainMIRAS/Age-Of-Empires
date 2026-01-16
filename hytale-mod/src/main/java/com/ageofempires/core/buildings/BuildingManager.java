@@ -1,6 +1,7 @@
 package com.ageofempires.core.buildings;
 
 import com.ageofempires.AgeOfEmpiresPlugin;
+import com.ageofempires.core.game.GameSession;
 import com.ageofempires.core.team.Team;
 import com.ageofempires.core.team.TeamData;
 import com.ageofempires.core.resources.ResourceType;

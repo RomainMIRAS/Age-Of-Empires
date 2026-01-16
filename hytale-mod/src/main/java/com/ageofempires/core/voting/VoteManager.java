@@ -1,5 +1,6 @@
 package com.ageofempires.core.voting;
 
+import com.ageofempires.core.game.GameSession;
 import com.hypixel.hytale.server.core.entity.PlayerRef;
 
 import java.util.*;
